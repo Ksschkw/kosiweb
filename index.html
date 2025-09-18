@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kosisochukwu Okafor | AI/ML Engineer</title>
-    <meta name="description" content="Portfolio of Kosisochukwu Okafor - AI/ML Engineer specializing in RAG systems, neural networks, and interactive applications">
-    <meta name="keywords" content="AI, ML, RAG, Python, TensorFlow, Neural Networks, Portfolio, Developer, AWS">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="manifest" href="/manifest.json">
     <style>
         :root {
             --primary-bg: #000000;
@@ -105,6 +102,32 @@
             background: linear-gradient(to bottom, var(--primary-bg), var(--secondary-bg));
         }
 
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4rem;
+            text-align: left;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+
+        .profile-photo {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 20px rgba(255, 119, 0, 0.3);
+            object-fit: cover;
+        }
+
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 1rem;
@@ -166,18 +189,6 @@
 
         .about-text {
             font-size: 1.1rem;
-        }
-
-        .about-image {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(255, 119, 0, 0.2);
-        }
-
-        .about-image img {
-            width: 100%;
-            height: auto;
-            display: block;
         }
 
         /* Skills Section */
@@ -454,8 +465,77 @@
             color: #ccc;
         }
 
+        /* Piano */
+        .piano-container {
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .piano {
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            position: relative;
+            height: 200px;
+        }
+
+        .key {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .white-key {
+            width: 60px;
+            height: 180px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 0 0 5px 5px;
+            z-index: 1;
+        }
+
+        .black-key {
+            width: 40px;
+            height: 110px;
+            background: black;
+            border-radius: 0 0 5px 5px;
+            margin-left: -20px;
+            margin-right: -20px;
+            z-index: 2;
+        }
+
+        .white-key.active {
+            background: #ffd9b3;
+        }
+
+        .black-key.active {
+            background: #734d26;
+        }
+
+        /* Notification System */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem;
+            background: var(--card-bg);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            transform: translateX(100%);
+            transition: transform 0.3s;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
         /* Responsive Design */
         @media (max-width: 968px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
             .about-content,
             .contact-grid {
                 grid-template-columns: 1fr;
@@ -467,6 +547,11 @@
 
             .hero p {
                 font-size: 1.2rem;
+            }
+            
+            .profile-photo {
+                width: 250px;
+                height: 250px;
             }
         }
 
@@ -534,9 +619,16 @@
     <main>
         <section class="hero">
             <div class="container">
-                <h1 class="fade-in">Kosisochukwu Okafor</h1>
-                <p class="fade-in delay-1">AI/ML Engineer & Software Developer</p>
-                <a href="#projects" class="btn fade-in delay-2">View My Work</a>
+                <div class="hero-content">
+                    <div class="hero-text">
+                        <h1 class="fade-in">Kosisochukwu Okafor</h1>
+                        <p class="fade-in delay-1">AI/ML Engineer & Software Developer</p>
+                        <a href="#projects" class="btn fade-in delay-2">View My Work</a>
+                    </div>
+                    <div class="hero-image fade-in delay-3">
+                        <img src="IMG-20250309-WA0013.jpg" alt="Kosisochukwu Okafor" class="profile-photo">
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -549,8 +641,10 @@
                         <p>When I'm not deep into coding or studying, I enjoy solving puzzles like Sudoku, watching anime, and exploring new technologies. I believe in the relentless pursuit of excellence and constantly strive to push my boundaries.</p>
                         <p>My technical focus includes RAG (Retrieval-Augmented Generation) systems, neural networks, natural language processing, and developing scalable AI solutions. I'm passionate about creating innovative solutions that solve real-world problems.</p>
                     </div>
-                    <div class="about-image fade-in delay-1">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Kosisochukwu Okafor">
+                    <div class="about-text fade-in delay-1">
+                        <p>I have experience with various technologies including Python, TensorFlow, PyTorch, and multiple AWS services. I hold several AWS certifications including Cloud Practitioner, Partner Accredited, and Technical Essentials.</p>
+                        <p>My projects range from AI-powered chatbots and RAG systems to web applications and data analysis tools. I enjoy working on challenging problems and creating solutions that have real impact.</p>
+                        <p>Feel free to explore my portfolio and get in touch if you'd like to collaborate or learn more about my work!</p>
                     </div>
                 </div>
             </div>
@@ -620,14 +714,38 @@
             <div class="container">
                 <h2 class="section-title">Projects</h2>
                 <div class="projects-grid">
-                    <!-- MYRAGAGENT -->
+                    <!-- Real-Time Object Detection -->
                     <div class="project-card fade-in">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1589652717521-10c0d092dea9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="MYRAGAGENT">
+                            <img src="imagesnshii/object-detection-thumb.png" alt="Real-Time Object Detection">
+                        </div>
+                        <div class="project-content">
+                            <h3>Real-Time Object Detection</h3>
+                            <p>Interactive AI model detecting 80+ objects (powered by TensorFlow.js)</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI/ML</span>
+                                <span class="project-tag">TensorFlow.js</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/myWebsite" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="#" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MYRAGAGENT -->
+                    <div class="project-card fade-in delay-1">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENT" alt="MYRAGAGENT">
                         </div>
                         <div class="project-content">
                             <h3>MYRAGAGENT</h3>
-                            <p>Advanced RAG system with custom retrieval capabilities and intelligent response generation.</p>
+                            <p>A Retrieval-Augmented Generation (RAG) Agent that provides intelligent responses.</p>
                             <div class="project-tags">
                                 <span class="project-tag">AI</span>
                                 <span class="project-tag">RAG</span>
@@ -644,101 +762,86 @@
                         </div>
                     </div>
 
-                    <!-- kssrag PyPI Package -->
-                    <div class="project-card fade-in delay-1">
-                        <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1527474305487-b87b222841cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" alt="kssrag">
-                        </div>
-                        <div class="project-content">
-                            <h3>kssrag PyPI Package</h3>
-                            <p>RAG framework for Python developers available on PyPI for easy integration into AI projects.</p>
-                            <div class="project-tags">
-                                <span class="project-tag">Python</span>
-                                <span class="project-tag">PyPI</span>
-                                <span class="project-tag">RAG</span>
-                            </div>
-                            <div class="project-links">
-                                <a href="https://github.com/Ksschkw/kssrag" class="project-link">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                                <a href="https://pypi.org/project/kssrag/0.1.2/" class="project-link">
-                                    <i class="fab fa-python"></i> PyPI
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- HomeCredit Data Alchemy -->
+                    <!-- AI Copilot Agent -->
                     <div class="project-card fade-in delay-2">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="HomeCredit Data Alchemy">
+                            <img src="imagesnshii/image.png" alt="AI Copilot Agent">
                         </div>
                         <div class="project-content">
-                            <h3>HomeCredit Data Alchemy</h3>
-                            <p>Financial data analysis with machine learning for credit risk assessment and prediction.</p>
+                            <h3>AI Copilot Agent</h3>
+                            <p>FastAPI-based AI Copilot Agent for defining structured innovation challenges.</p>
                             <div class="project-tags">
-                                <span class="project-tag">ML</span>
-                                <span class="project-tag">Finance</span>
+                                <span class="project-tag">AI</span>
+                                <span class="project-tag">FastAPI</span>
                                 <span class="project-tag">Python</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/Ksschkw/HomeCredit-Data-Alchemy" class="project-link">
+                                <a href="https://github.com/Ksschkw/AI-Copilot-Agent" class="project-link">
                                     <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://ai-copilot-agent-1.onrender.com/" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- ScrapeddashiiAlchemy -->
+                    <!-- Vybe Analytics Telegram Bot -->
                     <div class="project-card fade-in">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80" alt="ScrapeddashiiAlchemy">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/vybe-telegram-bot" alt="Vybe Analytics Telegram Bot">
                         </div>
                         <div class="project-content">
-                            <h3>ScrapeddashiiAlchemy</h3>
-                            <p>Web scraping and data processing framework for extracting and transforming web data.</p>
+                            <h3>Vybe Analytics Telegram Bot</h3>
+                            <p>Provides real-time on-chain insights using Vybe Network APIs.</p>
                             <div class="project-tags">
-                                <span class="project-tag">Web Scraping</span>
-                                <span class="project-tag">Data Processing</span>
+                                <span class="project-tag">Telegram</span>
+                                <span class="project-tag">API</span>
                                 <span class="project-tag">Python</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/Ksschkw/ScrapeddashiiAlchemy" class="project-link">
+                                <a href="https://github.com/Ksschkw/vybe-telegram-bot" class="project-link">
                                     <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://t.me/VybeVigil_bot" class="project-link">
+                                    <i class="fab fa-telegram"></i> Try Bot
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- LexAI -->
+                    <!-- FPS Gamers Event Website -->
                     <div class="project-card fade-in delay-1">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1148&q=80" alt="LexAI">
+                            <img src="imagesnshii/gaming.png" alt="FPS Gamers Event Website">
                         </div>
                         <div class="project-content">
-                            <h3>LexAI</h3>
-                            <p>Natural language processing tool for semantic analysis and language understanding.</p>
+                            <h3>FPS Gamers Event Website (GRPGHT)</h3>
+                            <p>Platform for FPS gamers to compete in real-world events.</p>
                             <div class="project-tags">
-                                <span class="project-tag">NLP</span>
-                                <span class="project-tag">AI</span>
-                                <span class="project-tag">Python</span>
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">JavaScript</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/Ksschkw/LexAI" class="project-link">
+                                <a href="https://github.com/Ksschkw/GRPGHT" class="project-link">
                                     <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://grpght.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
                                 </a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- TheBubbleSnitchBot -->
+                    <!-- Bubblemaps Telegram Bot -->
                     <div class="project-card fade-in delay-2">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1640836014099-c6ed4cdf67b5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1172&q=80" alt="TheBubbleSnitchBot">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/TheBubbleSnitchBot-2" alt="Bubblemaps Telegram Bot">
                         </div>
                         <div class="project-content">
-                            <h3>TheBubbleSnitchBot</h3>
-                            <p>Telegram bot for analyzing crypto tokens using Bubblemaps data with market insights.</p>
+                            <h3>Bubblemaps Telegram Bot</h3>
+                            <p>Analyzes crypto tokens using Bubblemaps data with market insights.</p>
                             <div class="project-tags">
                                 <span class="project-tag">Telegram</span>
                                 <span class="project-tag">Crypto</span>
@@ -758,7 +861,7 @@
                     <!-- Previous Portfolio -->
                     <div class="project-card fade-in">
                         <div class="project-image">
-                            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80" alt="Previous Portfolio">
+                            <img src="imagesnshii/first.png" alt="Previous Portfolio">
                         </div>
                         <div class="project-content">
                             <h3>Previous Portfolio</h3>
@@ -769,11 +872,152 @@
                                 <span class="project-tag">JavaScript</span>
                             </div>
                             <div class="project-links">
-                                <a href="https://github.com/Ksschkw/myWebsite" class="project-link">
+                                <a href="https://github.com/Ksschkw/kosip" class="project-link">
                                     <i class="fab fa-github"></i> Code
                                 </a>
-                                <a href="https://okaforkosisochukwu.onrender.com" class="project-link">
+                                <a href="http://okaforkosisochukwu.onrender.com" class="project-link">
                                     <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- School Lab Project -->
+                    <div class="project-card fade-in delay-1">
+                        <div class="project-image">
+                            <img src="imagesnshii/lab.png" alt="School Lab Project">
+                        </div>
+                        <div class="project-content">
+                            <h3>School Lab Project</h3>
+                            <p>A school project hosted online to demonstrate web development skills.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">HTML/CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/Nigeria.net" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://nigeria-net-justaschoollabproject-hostit.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kosi Weather -->
+                    <div class="project-card fade-in delay-2">
+                        <div class="project-image">
+                            <img src="imagesnshii/weather.png" alt="Kosi Weather">
+                        </div>
+                        <div class="project-content">
+                            <h3>Kosi Weather</h3>
+                            <p>Weather forecast application allowing users to search by city.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/weatherkosi" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://kosi-weather.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Krypto-Kosi -->
+                    <div class="project-card fade-in">
+                        <div class="project-image">
+                            <img src="imagesnshii/kryptokosi.png" alt="Krypto-Kosi">
+                        </div>
+                        <div class="project-content">
+                            <h3>Krypto-Kosi</h3>
+                            <p>Displays crypto prices with ranking by price and trend.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/KryptoKosi" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://krypto-kosi.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multi-Feature Telegram Bot -->
+                    <div class="project-card fade-in delay-1">
+                        <div class="project-image">
+                            <img src="imagesnshii/telegram-bot-thumb2.jpg" alt="Multi-Feature Telegram Bot">
+                        </div>
+                        <div class="project-content">
+                            <h3>Multi-Feature Telegram Bot</h3>
+                            <p>Telegram bot with integrated mini-apps for various functionalities.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Telegram</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/KosiTGBot" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://t.me/k0s1bot" class="project-link">
+                                    <i class="fab fa-telegram"></i> Try Bot
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolaborasi-Kosi -->
+                    <div class="project-card fade-in delay-2">
+                        <div class="project-image">
+                            <img src="imagesnshii/kolabrasi.png" alt="Kolaborasi-Kosi">
+                        </div>
+                        <div class="project-content">
+                            <h3>Kolaborasi-Kosi</h3>
+                            <p>Collaborative drawing canvas for real-time artwork.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/collab-draw" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://kolaborasi-kosi.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Chat Assistant -->
+                    <div class="project-card fade-in">
+                        <div class="project-image">
+                            <img src="imagesnshii/aiassistant.png" alt="AI Chat Assistant">
+                        </div>
+                        <div class="project-content">
+                            <h3>AI Chat Assistant</h3>
+                            <p>Custom-built chatbot leveraging PyTorch with OpenRouter fallback.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI</span>
+                                <span class="project-tag">NLP</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/chatbot_and_backendformywebsite" class="project-link">
+                                    <i class="fab fa-github"></i> Code
                                 </a>
                             </div>
                         </div>
@@ -781,6 +1025,28 @@
                 </div>
             </div>
         </section>
+
+        <!-- Piano Section -->
+        <div class="container piano-container">
+            <h2 class="section-title">Interactive Piano</h2>
+            <div class="piano" id="piano">
+                <!-- White keys -->
+                <div class="key white-key" data-note="C"></div>
+                <div class="key white-key" data-note="D"></div>
+                <div class="key white-key" data-note="E"></div>
+                <div class="key white-key" data-note="F"></div>
+                <div class="key white-key" data-note="G"></div>
+                <div class="key white-key" data-note="A"></div>
+                <div class="key white-key" data-note="B"></div>
+                
+                <!-- Black keys -->
+                <div class="key black-key" data-note="C#" style="left: 45px;"></div>
+                <div class="key black-key" data-note="D#" style="left: 105px;"></div>
+                <div class="key black-key" data-note="F#" style="left: 225px;"></div>
+                <div class="key black-key" data-note="G#" style="left: 285px;"></div>
+                <div class="key black-key" data-note="A#" style="left: 345px;"></div>
+            </div>
+        </div>
 
         <!-- Terminal Mode (Hidden by default) -->
         <div class="container">
@@ -885,6 +1151,10 @@
         </div>
     </footer>
 
+    <div class="notification" id="notification">
+        <p>This is a custom notification!</p>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Terminal mode toggle
@@ -905,7 +1175,7 @@
             if (contactForm) {
                 contactForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    alert('Message sent successfully! I will get back to you soon.');
+                    showNotification('Message sent successfully! I will get back to you soon.');
                     contactForm.reset();
                 });
             }
@@ -939,6 +1209,85 @@
                 elem.style.transition = 'opacity 0.5s ease-in-out';
                 observer.observe(elem);
             });
+            
+            // Piano functionality
+            const piano = document.getElementById('piano');
+            const keys = piano.querySelectorAll('.key');
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            
+            keys.forEach(key => {
+                key.addEventListener('mousedown', () => playNote(key));
+                key.addEventListener('mouseup', () => stopNote(key));
+                key.addEventListener('mouseleave', () => stopNote(key));
+            });
+            
+            function playNote(key) {
+                key.classList.add('active');
+                
+                const oscillator = audioContext.createOscillator();
+                const gainNode = audioContext.createGain();
+                
+                oscillator.type = 'sine';
+                oscillator.frequency.setValueAtTime(getFrequency(key.dataset.note), audioContext.currentTime);
+                gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                
+                oscillator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                oscillator.start();
+                key._oscillator = oscillator;
+            }
+            
+            function stopNote(key) {
+                key.classList.remove('active');
+                
+                if (key._oscillator) {
+                    const gainNode = audioContext.createGain();
+                    key._oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    gainNode.gain.setValueAtTime(gainNode.gain.value, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.001, audioContext.currentTime + 0.5);
+                    
+                    key._oscillator.stop(audioContext.currentTime + 0.5);
+                    delete key._oscillator;
+                }
+            }
+            
+            function getFrequency(note) {
+                const frequencies = {
+                    'C': 261.63,
+                    'C#': 277.18,
+                    'D': 293.66,
+                    'D#': 311.13,
+                    'E': 329.63,
+                    'F': 349.23,
+                    'F#': 369.99,
+                    'G': 392.00,
+                    'G#': 415.30,
+                    'A': 440.00,
+                    'A#': 466.16,
+                    'B': 493.88
+                };
+                
+                return frequencies[note] || 440;
+            }
+            
+            // Custom notification system
+            function showNotification(message) {
+                const notification = document.getElementById('notification');
+                notification.querySelector('p').textContent = message;
+                notification.classList.add('show');
+                
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 3000);
+            }
+            
+            // Show welcome notification
+            setTimeout(() => {
+                showNotification('Welcome to my portfolio! Feel free to explore my projects.');
+            }, 2000);
         });
     </script>
 </body>
