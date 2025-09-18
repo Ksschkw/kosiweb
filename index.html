@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kosisochukwu Okafor | AI/ML Engineer</title>
+    <meta name="description" content="Interactive portfolio of Kosisochukwu Okafor - AI/ML Engineer specializing in RAG systems and neural networks">
+    <meta name="keywords" content="AI, ML, RAG, Python, TensorFlow, Neural Networks, Portfolio, Developer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-purple: #a239ea;
+            --neon-blue: #00e5ff;
+            --neon-pink: #ff00ff;
+            --dark-bg: #0a0a1f;
+            --darker-bg: #050510;
+            --terminal-bg: rgba(10, 10, 31, 0.9);
+            --text-color: #e0e0ff;
+            --terminal-text: #00ffcc;
+            --glow-intensity: 4px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        body {
+            background: var(--darker-bg);
+            color: var(--text-color);
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(162, 57, 234, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 229, 255, 0.1) 0%, transparent 20%);
+            position: relative;
+        }
+
+        /* Matrix background effect */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        /* Terminal container */
+        .cyber-terminal {
+            max-width: 1200px;
+            margin: 2rem auto;
+            background: var(--terminal-bg);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(162, 57, 234, 0.5);
+            overflow: hidden;
+            min-height: 80vh;
+        }
+
+        /* Terminal header */
+        .terminal-header {
+            background: rgba(5, 5, 16, 0.8);
+            padding: 1rem;
+            border-bottom: 1px solid var(--neon-purple);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .terminal-title {
+            font-size: 1.2rem;
+            color: var(--neon-blue);
+            text-shadow: 0 0 var(--glow-intensity) var(--neon-blue);
+        }
+
+        .user-mode {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .mode-btn {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--neon-pink);
+            border-radius: 5px;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .mode-btn.active {
+            background: rgba(255, 0, 255, 0.2);
+            color: var(--neon-pink);
+            text-shadow: 0 0 var(--glow-intensity) var(--neon-pink);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+
+        /* Terminal content */
+        .terminal-content {
+            padding: 2rem;
+            height: 65vh;
+            overflow-y: auto;
+        }
+
+        .command-line {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .prompt {
+            color: var(--neon-blue);
+            margin-right: 0.5rem;
+            text-shadow: 0 0 var(--glow-intensity) var(--neon-blue);
+        }
+
+        .command-input {
+            background: transparent;
+            border: none;
+            color: var(--terminal-text);
+            font-size: 1.1rem;
+            width: 100%;
+            outline: none;
+            caret-color: var(--neon-purple);
+        }
+
+        /* Output styling */
+        .output {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .output pre {
+            font-family: 'Courier New', monospace;
+            color: var(--terminal-text);
+            white-space: pre-wrap;
+        }
+
+        .neon-text {
+            color: var(--neon-purple);
+            text-shadow: 0 0 var(--glow-intensity) var(--neon-purple);
+        }
+
+        .blue-text {
+            color: var(--neon-blue);
+            text-shadow: 0 0 var(--glow-intensity) var(--neon-blue);
+        }
+
+        /* Interactive elements */
+        .interactive-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .cyber-card {
+            background: rgba(10, 10, 40, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 8px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .cyber-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(162, 57, 234, 0.4);
+        }
+
+        /* Music section */
+        .music-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(5, 5, 20, 0.6);
+            border: 1px solid var(--neon-blue);
+            border-radius: 8px;
+        }
+
+        .visualizer {
+            height: 100px;
+            margin: 1rem 0;
+            display: flex;
+            align-items: flex-end;
+            gap: 2px;
+        }
+
+        .visualizer-bar {
+            flex: 1;
+            background: var(--neon-purple);
+            border-radius: 2px 2px 0 0;
+            transition: height 0.2s;
+        }
+
+        /* Footer */
+        .terminal-footer {
+            padding: 1rem;
+            text-align: center;
+            border-top: 1px solid var(--neon-purple);
+            background: rgba(5, 5, 16, 0.8);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--neon-blue);
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .cyber-terminal {
+                margin: 1rem;
+                border-radius: 5px;
+            }
+            
+            .terminal-content {
+                padding: 1rem;
+                height: 70vh;
+            }
+            
+            .interactive-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .user-mode {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Animation for matrix background */
+        @keyframes matrixRain {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 0 100vh;
+            }
+        }
+
+        /* Blinking cursor animation */
+        @keyframes blink {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .blinking-cursor {
+            animation: blink 1s infinite;
+            color: var(--neon-blue);
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(5, 5, 16, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--neon-purple);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-blue);
+        }
+    </style>
+</head>
+<body>
+    <!-- Matrix background effect -->
+    <div class="matrix-bg" id="matrixBg"></div>
+
+    <!-- Main terminal interface -->
+    <div class="cyber-terminal">
+        <div class="terminal-header">
+            <div class="terminal-title">
+                <i class="fas fa-terminal"></i> Cybernexus Terminal v2.0
+            </div>
+            <div class="user-mode">
+                <button class="mode-btn active" data-mode="normie">Normie Mode</button>
+                <button class="mode-btn" data-mode="dev">Dev Mode</button>
+                <button class="mode-btn" data-mode="recruiter">Recruiter Mode</button>
+            </div>
+        </div>
+
+        <div class="terminal-content" id="terminalContent">
+            <div class="output">
+                <pre>
+  ██╗  ██╗ ██████╗ ███████╗██╗███████╗██╗  ██╗██╗   ██╗██╗  ██╗██╗   ██╗
+  ██║ ██╔╝██╔═══██╗██╔════╝██║██╔════╝██║  ██║██║   ██║██║ ██╔╝██║   ██║
+  █████╔╝ ██║   ██║███████╗██║███████╗███████║██║   ██║█████╔╝ ██║   ██║
+  ██╔═██╗ ██║   ██║╚════██║██║╚════██║██╔══██║██║   ██║██╔═██╗ ██║   ██║
+  ██║  ██╗╚██████╔╝███████║██║███████║██║  ██║╚██████╔╝██║  ██╗╚██████╔╝
+  ╚═╝  ╚═╝ ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ 
+                </pre>
+                <p class="neon-text">> Welcome to my interactive portfolio terminal.</p>
+                <p class="blue-text">> Type 'help' to see available commands.</p>
+                <p>> Current mode: <span id="currentMode" class="neon-text">Normie</span></p>
+            </div>
+
+            <div class="command-line">
+                <span class="prompt">><span class="blinking-cursor">_</span></span>
+                <input type="text" class="command-input" id="commandInput" autofocus>
+            </div>
+
+            <!-- Interactive content will be added here based on commands -->
+            <div id="interactiveContent">
+                <!-- This is where command outputs will appear -->
+            </div>
+
+            <!-- Music section -->
+            <div class="music-section">
+                <h3><i class="fas fa-music"></i> My Coding Playlists</h3>
+                <div class="visualizer" id="visualizer">
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                    <div class="visualizer-bar"></div>
+                </div>
+                <div class="playlist-container">
+                    <iframe style="border-radius:12px; width: 100%; height: 352px;" src="https://open.spotify.com/embed/playlist/42y3UjRK0Kqafe7W34jZVd?utm_source=generator" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <div class="terminal-footer">
+            <p>Kosisochukwu Okafor © 2023 | AI/ML Engineer & Developer</p>
+            <div class="social-links">
+                <a href="https://github.com/Ksschkw" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="mailto:kookafor893@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://twitter.com/yourprofile" target="_blank"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const commandInput = document.getElementById('commandInput');
+            const interactiveContent = document.getElementById('interactiveContent');
+            const currentModeElement = document.getElementById('currentMode');
+            const modeButtons = document.querySelectorAll('.mode-btn');
+            const visualizerBars = document.querySelectorAll('.visualizer-bar');
+            const matrixBg = document.getElementById('matrixBg');
+            
+            let currentMode = 'normie';
+            
+            // Create matrix background effect
+            function createMatrixEffect() {
+                const canvas = document.createElement('canvas');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                matrixBg.appendChild(canvas);
+                
+                const ctx = canvas.getContext('2d');
+                const characters = '01';
+                const fontSize = 14;
+                const columns = canvas.width / fontSize;
+                const drops = [];
+                
+                for(let i = 0; i < columns; i++) {
+                    drops[i] = 1;
+                }
+                
+                function draw() {
+                    ctx.fillStyle = 'rgba(5, 5, 16, 0.05)';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    
+                    ctx.fillStyle = '#0f0';
+                    ctx.font = `${fontSize}px monospace`;
+                    
+                    for(let i = 0; i < drops.length; i++) {
+                        const text = characters.charAt(Math.floor(Math.random() * characters.length));
+                        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                        
+                        if(drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                            drops[i] = 0;
+                        }
+                        
+                        drops[i]++;
+                    }
+                }
+                
+                setInterval(draw, 33);
+            }
+            
+            // Create audio visualizer effect
+            function createVisualizerEffect() {
+                setInterval(() => {
+                    visualizerBars.forEach(bar => {
+                        const height = Math.floor(Math.random() * 80) + 5;
+                        bar.style.height = `${height}px`;
+                    });
+                }, 100);
+            }
+            
+            // Handle user mode selection
+            modeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    modeButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    currentMode = button.dataset.mode;
+                    currentModeElement.textContent = 
+                        currentMode.charAt(0).toUpperCase() + currentMode.slice(1);
+                    
+                    // Clear previous content
+                    interactiveContent.innerHTML = '';
+                    
+                    // Show welcome message for new mode
+                    const welcomeMsg = document.createElement('div');
+                    welcomeMsg.className = 'output';
+                    welcomeMsg.innerHTML = `<p class="neon-text">> Switched to ${currentMode} mode.</p>`;
+                    interactiveContent.appendChild(welcomeMsg);
+                    
+                    // Scroll to bottom
+                    interactiveContent.scrollTop = interactiveContent.scrollHeight;
+                });
+            });
+            
+            // Handle command input
+            commandInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const command = commandInput.value.trim().toLowerCase();
+                    commandInput.value = '';
+                    
+                    // Display the command
+                    const commandOutput = document.createElement('div');
+                    commandOutput.className = 'output';
+                    commandOutput.innerHTML = `<p>> ${command}</p>`;
+                    interactiveContent.appendChild(commandOutput);
+                    
+                    // Process the command
+                    processCommand(command);
+                    
+                    // Scroll to bottom
+                    interactiveContent.scrollTop = interactiveContent.scrollHeight;
+                }
+            });
+            
+            // Process user commands
+            function processCommand(command) {
+                let response = '';
+                
+                switch(command) {
+                    case 'help':
+                        response = `
+<p class="neon-text">Available commands:</p>
+<p><span class="blue-text">'about'</span> - Learn about me</p>
+<p><span class="blue-text">'projects'</span> - View my projects</p>
+<p><span class="blue-text">'skills'</span> - View my technical skills</p>
+<p><span class="blue-text">'contact'</span> - Get my contact information</p>
+<p><span class="blue-text">'clear'</span> - Clear the terminal</p>
+                        `;
+                        break;
+                        
+                    case 'about':
+                        response = `
+<p class="neon-text">> About Me:</p>
+<p>I'm Kosisochukwu, a passionate AI/ML Engineer with expertise in:</p>
+<p>- RAG (Retrieval-Augmented Generation) systems</p>
+<p>- Neural networks and deep learning</p>
+<p>- Natural Language Processing (NLP)</p>
+<p>- Building intelligent applications</p>
+<p>I love solving complex problems and creating innovative solutions.</p>
+                        `;
+                        break;
+                        
+                    case 'projects':
+                        if (currentMode === 'dev') {
+                            response = `
+<p class="neon-text">> My Projects (Dev Mode):</p>
+<p><span class="blue-text">1. MYRAGAGENT</span> - Advanced RAG system with custom retrieval</p>
+<p><span class="blue-text">2. kssrag PyPI Package</span> - RAG framework for Python developers</p>
+<p><span class="blue-text">3. HomeCredit Data Alchemy</span> - Financial data analysis with ML</p>
+<p><span class="blue-text">4. ScrapeddashiiAlchemy</span> - Web scraping and data processing</p>
+<p>Type <span class="blue-text">'project [number]'</span> for more details.</p>
+                            `;
+                        } else if (currentMode === 'recruiter') {
+                            response = `
+<p class="neon-text">> My Projects (Recruiter Mode):</p>
+<p><span class="blue-text">- RAG Systems</span>: Built advanced AI systems for information retrieval</p>
+<p><span class="blue-text">- ML Solutions</span>: Developed machine learning models for real-world problems</p>
+<p><span class="blue-text">- Open Source</span>: Created and maintained Python packages</p>
+<p><span class="blue-text">- Data Analysis</span>: Extracted insights from complex datasets</p>
+                            `;
+                        } else {
+                            response = `
+<p class="neon-text">> My Projects:</p>
+<p>I've worked on several AI and machine learning projects including:</p>
+<p>- Intelligent chatbots and virtual assistants</p>
+<p>- Data analysis and visualization tools</p>
+<p>- Natural language processing systems</p>
+<p>- Open source Python packages</p>
+                            `;
+                        }
+                        break;
+                        
+                    case 'skills':
+                        response = `
+<p class="neon-text">> Technical Skills:</p>
+<p><span class="blue-text">Languages:</span> Python, JavaScript, Java, SQL</p>
+<p><span class="blue-text">Frameworks:</span> TensorFlow, PyTorch, Django, Flask</p>
+<p><span class="blue-text">AI/ML:</span> RAG, NLP, Neural Networks, Data Analysis</p>
+<p><span class="blue-text">Tools:</span> Git, Docker, AWS, Google Cloud</p>
+                        `;
+                        break;
+                        
+                    case 'contact':
+                        response = `
+<p class="neon-text">> Contact Information:</p>
+<p><span class="blue-text">Email:</span> kookafor893@gmail.com</p>
+<p><span class="blue-text">GitHub:</span> github.com/Ksschkw</p>
+<p><span class="blue-text">LinkedIn:</span> linkedin.com/in/yourprofile</p>
+<p>Feel free to reach out for collaborations or opportunities!</p>
+                        `;
+                        break;
+                        
+                    case 'clear':
+                        interactiveContent.innerHTML = '';
+                        return;
+                        
+                    case '':
+                        response = '<p>> Please enter a command.</p>';
+                        break;
+                        
+                    default:
+                        response = `<p>> Command not found: ${command}. Type 'help' for available commands.</p>`;
+                        break;
+                }
+                
+                const responseElement = document.createElement('div');
+                responseElement.className = 'output';
+                responseElement.innerHTML = response;
+                interactiveContent.appendChild(responseElement);
+            }
+            
+            // Initialize effects
+            createMatrixEffect();
+            createVisualizerEffect();
+            
+            // Focus on input
+            commandInput.focus();
+        });
+    </script>
+</body>
+</html>
