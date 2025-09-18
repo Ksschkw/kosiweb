@@ -27,7 +27,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', sans-serif;
+            font-family: 'Courier New', monospace;
         }
 
         body {
@@ -477,6 +477,105 @@
             border-color: var(--accent-color);
         }
 
+        /* CLI Mode */
+        .cli-mode {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--terminal-bg);
+            color: var(--terminal-text);
+            z-index: 1000;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            overflow: auto;
+        }
+
+        .cli-header {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .cli-content {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .cli-input {
+            background: transparent;
+            border: none;
+            color: var(--terminal-text);
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            width: 100%;
+            outline: none;
+            caret-color: var(--accent-color);
+        }
+
+        .cli-command {
+            color: var(--accent-color);
+        }
+
+        .cli-output {
+            margin-bottom: 1rem;
+        }
+
+        /* Game Section */
+        .game-section {
+            background: var(--card-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            padding: 2rem;
+            margin: 3rem 0;
+        }
+
+        .game-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            background: var(--terminal-bg);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .game-cell {
+            background: var(--secondary-bg);
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .game-cell:hover {
+            background: rgba(255, 119, 0, 0.1);
+        }
+
+        .game-cell.empty {
+            background: transparent;
+        }
+
+        .game-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .game-info {
+            margin-bottom: 1rem;
+        }
+
         /* Contact Section */
         .contact-grid {
             display: grid;
@@ -597,7 +696,8 @@
                 text-align: center;
             }
             
-            .contact-grid {
+            .contact-grid,
+            .game-container {
                 grid-template-columns: 1fr;
             }
 
@@ -673,7 +773,7 @@
                     <a href="#contact">Contact</a>
                 </div>
                 <button class="mode-toggle" id="modeToggle">
-                    <i class="fas fa-terminal"></i> Dev Mode
+                    <i class="fas fa-terminal"></i> CLI Mode
                 </button>
             </nav>
         </div>
@@ -769,7 +869,6 @@
                         </div>
                     </div>
 
-                    <!-- Other projects would go here -->
                     <!-- MYRAGAGENT -->
                     <div class="project-card fade-in delay-1" data-category="ai">
                         <div class="project-image">
@@ -794,8 +893,266 @@
                         </div>
                     </div>
 
-                    <!-- Include all other projects here with appropriate data-category attributes -->
-                    
+                    <!-- AI Copilot Agent -->
+                    <div class="project-card fade-in delay-2" data-category="ai">
+                        <div class="project-image">
+                            <img src="imagesnshii/image.png" alt="AI Copilot Agent">
+                        </div>
+                        <div class="project-content">
+                            <h3>AI Copilot Agent</h3>
+                            <p>FastAPI-based AI Copilot Agent for defining structured innovation challenges.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI</span>
+                                <span class="project-tag">FastAPI</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/AI-Copilot-Agent" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://ai-copilot-agent-1.onrender.com/" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vybe Analytics Telegram Bot -->
+                    <div class="project-card fade-in" data-category="telegram">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/vybe-telegram-bot" alt="Vybe Analytics Telegram Bot">
+                        </div>
+                        <div class="project-content">
+                            <h3>Vybe Analytics Telegram Bot</h3>
+                            <p>Provides real-time on-chain insights using Vybe Network APIs.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Telegram</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/vybe-telegram-bot" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://t.me/VybeVigil_bot" class="project-link">
+                                    <i class="fab fa-telegram"></i> Try Bot
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FPS Gamers Event Website -->
+                    <div class="project-card fade-in delay-1" data-category="web">
+                        <div class="project-image">
+                            <img src="imagesnshii/gaming.png" alt="FPS Gamers Event Website">
+                        </div>
+                        <div class="project-content">
+                            <h3>FPS Gamers Event Website (GRPGHT)</h3>
+                            <p>Platform for FPS gamers to compete in real-world events.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/GRPGHT" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://grpght.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bubblemaps Telegram Bot -->
+                    <div class="project-card fade-in delay-2" data-category="telegram">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/TheBubbleSnitchBot-2" alt="Bubblemaps Telegram Bot">
+                        </div>
+                        <div class="project-content">
+                            <h3>Bubblemaps Telegram Bot</h3>
+                            <p>Analyzes crypto tokens using Bubblemaps data with market insights.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Telegram</span>
+                                <span class="project-tag">Crypto</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/TheBubbleSnitchBot-2" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://t.me/TheBubbleSnitch_bot" class="project-link">
+                                    <i class="fab fa-telegram"></i> Try Bot
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Previous Portfolio -->
+                    <div class="project-card fade-in" data-category="web">
+                        <div class="project-image">
+                            <img src="imagesnshii/first.png" alt="Previous Portfolio">
+                        </div>
+                        <div class="project-content">
+                            <h3>Previous Portfolio</h3>
+                            <p>My earlier portfolio website with interactive elements and project showcases.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">HTML/CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/kosip" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="http://okaforkosisochukwu.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- School Lab Project -->
+                    <div class="project-card fade-in delay-1" data-category="web">
+                        <div class="project-image">
+                            <img src="imagesnshii/lab.png" alt="School Lab Project">
+                        </div>
+                        <div class="project-content">
+                            <h3>School Lab Project</h3>
+                            <p>A school project hosted online to demonstrate web development skills.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">HTML/CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/Nigeria.net" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://nigeria-net-justaschoollabproject-hostit.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kosi Weather -->
+                    <div class="project-card fade-in delay-2" data-category="web">
+                        <div class="project-image">
+                            <img src="imagesnshii/weather.png" alt="Kosi Weather">
+                        </div>
+                        <div class="project-content">
+                            <h3>Kosi Weather</h3>
+                            <p>Weather forecast application allowing users to search by city.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/weatherkosi" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://kosi-weather.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Krypto-Kosi -->
+                    <div class="project-card fade-in" data-category="web">
+                        <div class="project-image">
+                            <img src="imagesnshii/kryptokosi.png" alt="Krypto-Kosi">
+                        </div>
+                        <div class="project-content">
+                            <h3>Krypto-Kosi</h3>
+                            <p>Displays crypto prices with ranking by price and trend.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/KryptoKosi" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://krypto-kosi.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multi-Feature Telegram Bot -->
+                    <div class="project-card fade-in delay-1" data-category="telegram">
+                        <div class="project-image">
+                            <img src="imagesnshii/telegram-bot-thumb2.jpg" alt="Multi-Feature Telegram Bot">
+                        </div>
+                        <div class="project-content">
+                            <h3>Multi-Feature Telegram Bot</h3>
+                            <p>Telegram bot with integrated mini-apps for various functionalities.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Telegram</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/KosiTGBot" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://t.me/k0s1bot" class="project-link">
+                                    <i class="fab fa-telegram"></i> Try Bot
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolaborasi-Kosi -->
+                    <div class="project-card fade-in delay-2" data-category="web">
+                        <div class="project-image">
+                            <img src="imagesnshii/kolabrasi.png" alt="Kolaborasi-Kosi">
+                        </div>
+                        <div class="project-content">
+                            <h3>Kolaborasi-Kosi</h3>
+                            <p>Collaborative drawing canvas for real-time artwork.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/collab-draw" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://kolaborasi-kosi.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Chat Assistant -->
+                    <div class="project-card fade-in" data-category="ai">
+                        <div class="project-image">
+                            <img src="imagesnshii/aiassistant.png" alt="AI Chat Assistant">
+                        </div>
+                        <div class="project-content">
+                            <h3>AI Chat Assistant</h3>
+                            <p>Custom-built chatbot leveraging PyTorch with OpenRouter fallback.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI</span>
+                                <span class="project-tag">NLP</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/chatbot_and_backendformywebsite" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -812,6 +1169,28 @@
                 <div class="chat-input-group">
                     <input type="text" id="chatInput" placeholder="Ask me anything...">
                     <button id="sendButton" class="btn">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Section -->
+        <div class="container">
+            <div class="game-section fade-in">
+                <h2 class="section-title">15-Puzzle Game</h2>
+                <p class="game-info">Solve the puzzle by arranging the numbers in order. The empty space is for moving tiles.</p>
+                <div class="game-container">
+                    <div class="game-board" id="puzzleBoard">
+                        <!-- Puzzle tiles will be generated by JavaScript -->
+                    </div>
+                    <div class="game-controls">
+                        <div id="moveCounter">Moves: 0</div>
+                        <div id="timer">Time: 00:00</div>
+                        <button id="newGameBtn" class="btn">New Game</button>
+                        <button id="solvePuzzleBtn" class="btn" style="background: var(--success-color);">Solve Puzzle</button>
+                        <div class="game-instructions">
+                            <p>Win this game and send a screenshot to <strong>2349019549473</strong> on WhatsApp to claim your ₦100 reward!</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -895,6 +1274,21 @@
         </div>
     </footer>
 
+    <!-- CLI Mode Interface -->
+    <div class="cli-mode" id="cliMode">
+        <div class="cli-header">
+            <h2>Kosisochukwu's CLI Interface</h2>
+            <p>Type 'help' to see available commands</p>
+        </div>
+        <div class="cli-content" id="cliContent">
+            <div class="cli-output">Welcome to CLI mode! Type 'help' to see available commands.</div>
+        </div>
+        <div class="cli-command">
+            <span>></span>
+            <input type="text" class="cli-input" id="cliInput" autofocus>
+        </div>
+    </div>
+
     <div class="toast" id="toast"></div>
 
     <script>
@@ -904,6 +1298,12 @@
             
             // Initialize project filtering
             initProjectFiltering();
+            
+            // Initialize puzzle game
+            initPuzzleGame();
+            
+            // Initialize CLI mode
+            initCLIMode();
             
             // AI Chat functionality
             const chatContainer = document.getElementById('chatContainer');
@@ -1195,6 +1595,246 @@
                     document.getElementById('confidenceValue').textContent = 
                         `${Math.round(e.target.value * 100)}%`;
                 });
+            }
+            
+            // Puzzle Game
+            function initPuzzleGame() {
+                const puzzleBoard = document.getElementById('puzzleBoard');
+                const moveCounter = document.getElementById('moveCounter');
+                const timer = document.getElementById('timer');
+                const newGameBtn = document.getElementById('newGameBtn');
+                const solvePuzzleBtn = document.getElementById('solvePuzzleBtn');
+                
+                let moves = 0;
+                let time = 0;
+                let timerInterval;
+                let tiles = [];
+                let emptyIndex = 15;
+                
+                // Initialize the puzzle
+                function initPuzzle() {
+                    // Clear the board
+                    puzzleBoard.innerHTML = '';
+                    moves = 0;
+                    time = 0;
+                    moveCounter.textContent = 'Moves: 0';
+                    timer.textContent = 'Time: 00:00';
+                    
+                    // Clear any existing timer
+                    if (timerInterval) clearInterval(timerInterval);
+                    
+                    // Create tiles
+                    tiles = Array.from({length: 15}, (_, i) => i + 1);
+                    tiles.push(null); // Empty space
+                    
+                    // Shuffle tiles
+                    shuffleTiles();
+                    
+                    // Render tiles
+                    renderTiles();
+                }
+                
+                // Shuffle tiles
+                function shuffleTiles() {
+                    for (let i = tiles.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [tiles[i], tiles[j]] = [tiles[j], tiles[i]];
+                    }
+                    
+                    // Find the empty index
+                    emptyIndex = tiles.indexOf(null);
+                }
+                
+                // Render tiles on the board
+                function renderTiles() {
+                    tiles.forEach((tile, index) => {
+                        const cell = document.createElement('div');
+                        cell.className = 'game-cell';
+                        if (tile === null) {
+                            cell.classList.add('empty');
+                        } else {
+                            cell.textContent = tile;
+                            cell.addEventListener('click', () => moveTile(index));
+                        }
+                        puzzleBoard.appendChild(cell);
+                    });
+                }
+                
+                // Move a tile
+                function moveTile(index) {
+                    // Check if the tile can move (adjacent to empty space)
+                    const adjacentIndexes = [
+                        emptyIndex - 1, // left
+                        emptyIndex + 1, // right
+                        emptyIndex - 4, // up
+                        emptyIndex + 4  // down
+                    ];
+                    
+                    if (adjacentIndexes.includes(index)) {
+                        // Swap tiles
+                        [tiles[emptyIndex], tiles[index]] = [tiles[index], tiles[emptyIndex]];
+                        emptyIndex = index;
+                        
+                        // Update moves
+                        moves++;
+                        moveCounter.textContent = `Moves: ${moves}`;
+                        
+                        // Start timer on first move
+                        if (moves === 1) {
+                            startTimer();
+                        }
+                        
+                        // Re-render board
+                        puzzleBoard.innerHTML = '';
+                        renderTiles();
+                        
+                        // Check if puzzle is solved
+                        if (isPuzzleSolved()) {
+                            clearInterval(timerInterval);
+                            showToast('Congratulations! You solved the puzzle! Send a screenshot to claim your reward.');
+                        }
+                    }
+                }
+                
+                // Start timer
+                function startTimer() {
+                    timerInterval = setInterval(() => {
+                        time++;
+                        const minutes = Math.floor(time / 60);
+                        const seconds = time % 60;
+                        timer.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    }, 1000);
+                }
+                
+                // Check if puzzle is solved
+                function isPuzzleSolved() {
+                    for (let i = 0; i < tiles.length - 1; i++) {
+                        if (tiles[i] !== i + 1) return false;
+                    }
+                    return true;
+                }
+                
+                // Solve the puzzle (for demonstration)
+                function solvePuzzle() {
+                    clearInterval(timerInterval);
+                    tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null];
+                    emptyIndex = 15;
+                    puzzleBoard.innerHTML = '';
+                    renderTiles();
+                    moves = 0;
+                    moveCounter.textContent = 'Moves: 0';
+                    time = 0;
+                    timer.textContent = 'Time: 00:00';
+                    showToast('Puzzle solved! Try to solve it yourself next time!');
+                }
+                
+                // Event listeners
+                newGameBtn.addEventListener('click', initPuzzle);
+                solvePuzzleBtn.addEventListener('click', solvePuzzle);
+                
+                // Initialize the puzzle
+                initPuzzle();
+            }
+            
+            // CLI Mode
+            function initCLIMode() {
+                const modeToggle = document.getElementById('modeToggle');
+                const cliMode = document.getElementById('cliMode');
+                const cliInput = document.getElementById('cliInput');
+                const cliContent = document.getElementById('cliContent');
+                
+                // Toggle CLI mode
+                modeToggle.addEventListener('click', () => {
+                    if (cliMode.style.display === 'block') {
+                        cliMode.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    } else {
+                        cliMode.style.display = 'block';
+                        document.body.style.overflow = 'hidden';
+                        cliInput.focus();
+                    }
+                });
+                
+                // CLI commands
+                const commands = {
+                    help: () => {
+                        addCLIOutput('Available commands:');
+                        addCLIOutput('  help - Show this help message');
+                        addCLIOutput('  about - Learn about Kosisochukwu');
+                        addCLIOutput('  projects - List all projects');
+                        addCLIOutput('  skills - View technical skills');
+                        addCLIOutput('  contact - Get contact information');
+                        addCLIOutput('  game - Play the puzzle game');
+                        addCLIOutput('  clear - Clear the terminal');
+                        addCLIOutput('  exit - Exit CLI mode');
+                    },
+                    about: () => {
+                        addCLIOutput('Kosisochukwu Okafor - AI/ML Engineer & Software Developer');
+                        addCLIOutput('4th year Software Engineering student at Federal University of Technology Owerri');
+                        addCLIOutput('Passionate about AI, RAG systems, and building innovative solutions');
+                    },
+                    projects: () => {
+                        addCLIOutput('Projects:');
+                        addCLIOutput('  • Real-Time Object Detection - AI/ML, Web');
+                        addCLIOutput('  • MYRAGAGENT - AI, RAG, Python');
+                        addCLIOutput('  • AI Copilot Agent - AI, FastAPI, Python');
+                        addCLIOutput('  • Vybe Analytics Telegram Bot - Telegram, API, Python');
+                        addCLIOutput('  • FPS Gamers Event Website - Web, API, JavaScript');
+                        addCLIOutput('  • And many more... (type "projects --all" for full list)');
+                    },
+                    skills: () => {
+                        addCLIOutput('Skills:');
+                        addCLIOutput('  • AI/ML: RAG Systems, Neural Networks, NLP, TensorFlow, PyTorch');
+                        addCLIOutput('  • Development: Python, JavaScript, FastAPI, Flask, React, Vue.js');
+                        addCLIOutput('  • DevOps & Cloud: AWS, Docker, CI/CD, Render, Git');
+                    },
+                    contact: () => {
+                        addCLIOutput('Contact Information:');
+                        addCLIOutput('  • Email: kookafor893@gmail.com');
+                        addCLIOutput('  • Phone: +234 901 954 9473');
+                        addCLIOutput('  • GitHub: github.com/Ksschkw');
+                        addCLIOutput('  • WhatsApp: wa.me/2349019549473');
+                    },
+                    game: () => {
+                        addCLIOutput('Opening puzzle game...');
+                        setTimeout(() => {
+                            document.getElementById('puzzleBoard').scrollIntoView({ behavior: 'smooth' });
+                        }, 500);
+                    },
+                    clear: () => {
+                        cliContent.innerHTML = '';
+                    },
+                    exit: () => {
+                        cliMode.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                };
+                
+                // Handle CLI input
+                cliInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        const command = cliInput.value.trim().toLowerCase();
+                        cliInput.value = '';
+                        
+                        addCLIOutput(`> ${command}`, 'command');
+                        
+                        if (commands[command]) {
+                            commands[command]();
+                        } else if (command) {
+                            addCLIOutput(`Command not found: ${command}. Type 'help' for available commands.`);
+                        }
+                        
+                        cliContent.scrollTop = cliContent.scrollHeight;
+                    }
+                });
+                
+                // Add output to CLI
+                function addCLIOutput(text, type = 'output') {
+                    const outputDiv = document.createElement('div');
+                    outputDiv.className = `cli-${type}`;
+                    outputDiv.textContent = text;
+                    cliContent.appendChild(outputDiv);
+                }
             }
         });
     </script>
