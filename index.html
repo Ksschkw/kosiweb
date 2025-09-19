@@ -21,6 +21,7 @@
             --success-color: #00ff9d;
             --warning-color: #ffcc00;
             --error-color: #ff3860;
+            --spotify-green: #1DB954;
         }
 
         * {
@@ -624,6 +625,7 @@
         }
 
         /* Modal */
+        /* Improved Modal Styling */
         .modal {
             display: none;
             position: fixed;
@@ -632,39 +634,68 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
+            background-color: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(5px);
+            overflow-y: auto;
+            padding: 20px;
         }
 
         .modal-content {
             background-color: var(--card-bg);
-            margin: 10% auto;
-            padding: 2rem;
+            margin: 2% auto;
+            padding: 2.5rem;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            width: 80%;
-            max-width: 600px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 900px;
             position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            animation: modalFadeIn 0.4s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .close {
             color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
             position: absolute;
-            right: 1rem;
-            top: 1rem;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 32px;
+            font-weight: bold;
             cursor: pointer;
+            transition: color 0.3s;
+            z-index: 10;
         }
 
         .close:hover {
             color: var(--accent-color);
         }
 
+        .modal-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            font-size: 2.2rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .modal-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, var(--accent-color), var(--success-color));
+            margin: 0.5rem auto;
+            border-radius: 2px;
+        }
+
         .game-options {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1.5rem;
             margin-top: 2rem;
         }
@@ -672,36 +703,140 @@
         .game-option {
             background: var(--secondary-bg);
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 12px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s;
             border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
         }
 
         .game-option:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--accent-color);
+            box-shadow: 0 10px 25px rgba(255, 119, 0, 0.2);
         }
 
         .game-option i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 3.5rem;
+            margin-bottom: 1.2rem;
             color: var(--accent-color);
-            transition: transform 0.3s;
+            transition: transform 0.3s, color 0.3s;
         }
 
         .game-option:hover i {
             transform: scale(1.2);
+            color: var(--success-color);
         }
 
         .game-option h3 {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.4rem;
         }
 
         .game-option p {
             color: #ccc;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Spotify Section */
+        .spotify-section {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .spotify-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 2rem;
+            gap: 1rem;
+        }
+
+        .spotify-header i {
+            color: var(--spotify-green);
+            font-size: 2.5rem;
+        }
+
+        .spotify-header h2 {
+            color: var(--spotify-green);
+            font-size: 1.8rem;
+        }
+
+        .playlists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .playlist-item {
+            background: #191414;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s;
+            border: 1px solid #282828;
+        }
+
+        .playlist-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(29, 185, 84, 0.2);
+        }
+
+        .playlist-iframe {
+            width: 100%;
+            height: 352px;
+            border: none;
+        }
+
+        /* Music Visualizer */
+        .visualizer-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+            margin: 1.5rem 0;
+            background: rgba(25, 20, 20, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .visualizer-bars {
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            height: 50px;
+            gap: 3px;
+        }
+
+        .bar {
+            width: 4px;
+            background: var(--spotify-green);
+            border-radius: 2px;
+            height: 10px;
+            animation: visualizer 1.5s infinite ease-in-out;
+        }
+
+        .bar:nth-child(1) { animation-delay: 0s; }
+        .bar:nth-child(2) { animation-delay: 0.1s; }
+        .bar:nth-child(3) { animation-delay: 0.2s; }
+        .bar:nth-child(4) { animation-delay: 0.3s; }
+        .bar:nth-child(5) { animation-delay: 0.4s; }
+        .bar:nth-child(6) { animation-delay: 0.5s; }
+        .bar:nth-child(7) { animation-delay: 0.6s; }
+        .bar:nth-child(8) { animation-delay: 0.7s; }
+        .bar:nth-child(9) { animation-delay: 0.8s; }
+        .bar:nth-child(10) { animation-delay: 0.9s; }
+
+        @keyframes visualizer {
+            0%, 100% { height: 10px; }
+            50% { height: 40px; }
         }
 
         /* Game Section */
@@ -1257,6 +1392,81 @@
                 border-bottom: none;
             }
         }
+
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                padding: 1.5rem;
+                margin: 5% auto;
+            }
+            
+            .game-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .playlists-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .playlist-iframe {
+                height: 300px;
+            }
+            
+            .modal-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-content {
+                padding: 1rem;
+            }
+            
+            .game-option {
+                padding: 1.5rem;
+                min-height: 180px;
+            }
+            
+            .game-option i {
+                font-size: 2.8rem;
+            }
+            
+            .playlist-iframe {
+                height: 250px;
+            }
+        }
+
+        /* Button styling */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+            color: #000;
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 119, 0, 0.3);
+            margin-right: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 119, 0, 0.4);
+        }
+
+        .btn.spotify {
+            background: var(--spotify-green);
+            color: white;
+            box-shadow: 0 5px 15px rgba(29, 185, 84, 0.3);
+        }
+
+        .btn.spotify:hover {
+            box-shadow: 0 8px 20px rgba(29, 185, 84, 0.4);
+        }
     </style>
 </head>
 <body>
@@ -1267,9 +1477,9 @@
                     <div class="logo-icon">K</div>
                     Kosi<span>sochukwu</span>
                 </a>
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <!-- <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
-                </button>
+                </button> -->
                 <div class="nav-links" id="navLinks">
                     <a href="#about">About</a>
                     <a href="#skills">Skills</a>
@@ -1279,6 +1489,9 @@
                 </div>
                 <button class="mode-toggle" id="modeToggle">
                     <i class="fas fa-terminal"></i> CLI
+                </button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
                 </button>
             </nav>
         </div>
@@ -1446,7 +1659,7 @@
                     <button class="tab-button" data-category="ai">AI Projects</button>
                     <button class="tab-button" data-category="web">Web Projects</button>
                     <button class="tab-button" data-category="telegram">Telegram Bots</button>
-                    <button class="tab-button" data-category="data">Data Science</button>
+                    <button class="tab-button" data-category="data">Data stuff</button>
                 </div>
 
                 <div class="projects-grid">
@@ -1976,7 +2189,8 @@
         <div id="gameModal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <h2>Choose a Game</h2>
+                <h2 class="modal-title">Choose Your Experience</h2>
+                
                 <div class="game-options">
                     <div class="game-option" data-game="puzzle">
                         <i class="fas fa-puzzle-piece"></i>
@@ -1999,8 +2213,64 @@
                         <p>Match pairs of cards</p>
                     </div>
                 </div>
+                
+                <!-- Spotify Section -->
+                <div class="spotify-section">
+                    <div class="spotify-header">
+                        <i class="fab fa-spotify"></i>
+                        <h2>Need Some Tunes?</h2>
+                    </div>
+                    
+                    <div class="visualizer-container">
+                        <div class="visualizer-bars">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                    </div>
+                    
+                    <p style="text-align: center; margin-bottom: 1.5rem;">Check out my favorite playlists and album on Spotify</p>
+                    
+                    <div class="playlists-grid">
+                        <div class="playlist-item">
+                            <iframe class="playlist-iframe" src="https://open.spotify.com/embed/playlist/42y3UjRK0Kqafe7W34jZVd?utm_source=generator" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
+                        <div class="playlist-item">
+                            <iframe class="playlist-iframe" src="https://open.spotify.com/embed/playlist/1AZiiQoAaU42Zdm8mYqCha?utm_source=generator" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
+                        <div class="playlist-item">
+                            <iframe class="playlist-iframe" src="https://open.spotify.com/embed/playlist/0CUKIKEBjz7Iaob7MNCRNQ?utm_source=generator" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
+                        <div class="playlist-item">
+                            <iframe class="playlist-iframe" src="https://open.spotify.com/embed/playlist/7CoKstT9mBGdIgD6dgRyQc?utm_source=generator" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
+                        <div class="playlist-item">
+                            <iframe class="playlist-iframe" src="https://open.spotify.com/embed/album/6HwzIlrCDq3WF9vMq8meqG?utm_source=generator" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 2rem;">
+                        <a href="https://open.spotify.com/user/KOSISOCHUKWU" class="btn spotify" target="_blank">
+                            <i class="fab fa-spotify"></i> Follow me on Spotify
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
+    
+        <!-- Play Game Button -->
+        <div style="text-align: center; padding: 2rem;">
+            <button id="playGameBtn" class="btn">
+                <i class="fas fa-gamepad"></i> Open Experience Modal
+            </button>
+        </div>    
 
         <!-- Puzzle Game Section (Initially Hidden) -->
         <div id="puzzleGameSection" class="game-section fade-in hidden">
@@ -2072,7 +2342,7 @@
                         <button id="newTicTacToeGameBtn" class="btn">New Game</button>
                         <div class="game-instructions">
                             <p>Get three of your marks in a row (horizontally, vertically, or diagonally) to win.</p>
-                            <p>This game is easy so do not feel good about yourself if you win, i'll make AI play later, rn it is just randomized</p>
+                            <p>You will not win lol</p>
                         </div>
                     </div>
                 </div>
@@ -2175,7 +2445,7 @@
                     <i class="fab fa-whatsapp"></i>
                 </a>
             </div>
-            <p class="copyright">© 2023 Kosisochukwu Okafor. All rights reserved.</p>
+            <p class="copyright">© 2025 Kosisochukwu Okafor. All rights reserved.</p>
         </div>
     </footer>
 
@@ -2412,23 +2682,26 @@
             });
             
             // Initialize mobile menu
+            // Mobile menu functionality
             function initMobileMenu() {
-                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-                const navLinks = document.getElementById('navLinks');
-                
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+            
+            if (mobileMenuBtn && navLinks) {
                 mobileMenuBtn.addEventListener('click', () => {
-                    navLinks.classList.toggle('active');
-                    mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
-                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
                 });
                 
                 // Close menu when clicking on a link
                 document.querySelectorAll('.nav-links a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        navLinks.classList.remove('active');
-                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                    });
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
                 });
+                });
+            }
             }
             
             // Project filtering
@@ -2813,7 +3086,21 @@
             }
             
             // Queens Game
-            function initQueensGame() {
+            // function initQueensGame() {
+            //     const queensBoard = document.getElementById('queensBoard');
+            //     const queensCounter = document.getElementById('queensCounter');
+            //     const newQueensGameBtn = document.getElementById('newQueensGameBtn');
+            //     const checkQueensSolutionBtn = document.getElementById('checkQueensSolutionBtn');
+            //     const solveQueensBtn = document.getElementById('solveQueensBtn');
+            //     const boardSizeSelect = document.getElementById('boardSize');
+                
+            //     let boardSize = 8;
+            //     let queens = [];
+            //     let board = [];
+                
+            //     // Initialize the queens game
+            //     // Improved Queens Game
+                function initQueensGame() {
                 const queensBoard = document.getElementById('queensBoard');
                 const queensCounter = document.getElementById('queensCounter');
                 const newQueensGameBtn = document.getElementById('newQueensGameBtn');
@@ -2844,43 +3131,49 @@
                     queensBoard.style.gridTemplateColumns = `repeat(${boardSize}, 1fr)`;
                     
                     for (let row = 0; row < boardSize; row++) {
-                        for (let col = 0; col < boardSize; col++) {
-                            const cell = document.createElement('div');
-                            cell.className = 'queens-cell';
-                            cell.dataset.row = row;
-                            cell.dataset.col = col;
-                            
-                            // Alternate cell colors
-                            if ((row + col) % 2 === 0) {
-                                cell.style.backgroundColor = 'var(--terminal-bg)';
-                            }
-                            
-                            // Add queen if present
-                            if (board[row][col]) {
-                                cell.classList.add('has-queen');
-                            }
-                            
-                            // Check if cell is threatened
-                            if (isThreatened(row, col) && !board[row][col]) {
-                                cell.classList.add('threatened');
-                            }
-                            
-                            cell.addEventListener('click', () => toggleQueen(row, col));
-                            queensBoard.appendChild(cell);
+                    for (let col = 0; col < boardSize; col++) {
+                        const cell = document.createElement('div');
+                        cell.className = `queens-cell ${(row + col) % 2 === 0 ? 'light' : 'dark'}`;
+                        cell.dataset.row = row;
+                        cell.dataset.col = col;
+                        
+                        // Add queen if present
+                        if (board[row][col]) {
+                        cell.classList.add('has-queen');
                         }
+                        
+                        // Check if cell is threatened
+                        if (isThreatened(row, col) && !board[row][col]) {
+                        cell.classList.add('threatened');
+                        }
+                        
+                        // Show valid placement indicator
+                        if (!board[row][col] && !isThreatened(row, col) && queens.length < boardSize) {
+                        cell.classList.add('valid');
+                        }
+                        
+                        cell.addEventListener('click', () => toggleQueen(row, col));
+                        queensBoard.appendChild(cell);
+                    }
                     }
                 }
                 
                 // Toggle queen placement
                 function toggleQueen(row, col) {
                     if (board[row][col]) {
-                        // Remove queen
-                        board[row][col] = false;
-                        queens = queens.filter(q => !(q.row === row && q.col === col));
+                    // Remove queen
+                    board[row][col] = false;
+                    queens = queens.filter(q => !(q.row === row && q.col === col));
                     } else {
-                        // Add queen
-                        board[row][col] = true;
-                        queens.push({ row, col });
+                    // Check if placement is valid
+                    if (isThreatened(row, col)) {
+                        showToast('Cannot place queen in a threatened position!');
+                        return;
+                    }
+                    
+                    // Add queen
+                    board[row][col] = true;
+                    queens.push({ row, col });
                     }
                     
                     // Update counter
@@ -2893,14 +3186,14 @@
                 // Check if a cell is threatened
                 function isThreatened(row, col) {
                     for (const queen of queens) {
-                        // Same row
-                        if (queen.row === row && queen.col !== col) return true;
-                        
-                        // Same column
-                        if (queen.col === col && queen.row !== row) return true;
-                        
-                        // Same diagonal
-                        if (Math.abs(queen.row - row) === Math.abs(queen.col - col)) return true;
+                    // Same row
+                    if (queen.row === row && queen.col !== col) return true;
+                    
+                    // Same column
+                    if (queen.col === col && queen.row !== row) return true;
+                    
+                    // Same diagonal
+                    if (Math.abs(queen.row - row) === Math.abs(queen.col - col)) return true;
                     }
                     
                     return false;
@@ -2909,15 +3202,15 @@
                 // Check solution
                 function checkQueensSolution() {
                     if (queens.length !== boardSize) {
-                        showToast(`You need to place ${boardSize} queens on the board.`);
-                        return;
+                    showToast(`You need to place ${boardSize} queens on the board.`);
+                    return;
                     }
                     
                     for (const queen of queens) {
-                        if (isThreatened(queen.row, queen.col)) {
-                            showToast('The queens are attacking each other! Try again.');
-                            return;
-                        }
+                    if (isThreatened(queen.row, queen.col)) {
+                        showToast('The queens are attacking each other! Try again.');
+                        return;
+                    }
                     }
                     
                     showToast('Congratulations! You solved the N-Queens problem!');
@@ -2945,15 +3238,15 @@
                     if (col >= boardSize) return true;
                     
                     for (let row = 0; row < boardSize; row++) {
-                        if (isSafe(row, col)) {
-                            board[row][col] = true;
-                            queens.push({ row, col });
-                            
-                            if (solveQueensRecursive(col + 1)) return true;
-                            
-                            board[row][col] = false;
-                            queens.pop();
-                        }
+                    if (isSafe(row, col)) {
+                        board[row][col] = true;
+                        queens.push({ row, col });
+                        
+                        if (solveQueensRecursive(col + 1)) return true;
+                        
+                        board[row][col] = false;
+                        queens.pop();
+                    }
                     }
                     
                     return false;
@@ -2962,17 +3255,17 @@
                 function isSafe(row, col) {
                     // Check row
                     for (let i = 0; i < col; i++) {
-                        if (board[row][i]) return false;
+                    if (board[row][i]) return false;
                     }
                     
                     // Check upper diagonal
                     for (let i = row, j = col; i >= 0 && j >= 0; i--, j--) {
-                        if (board[i][j]) return false;
+                    if (board[i][j]) return false;
                     }
                     
                     // Check lower diagonal
                     for (let i = row, j = col; i < boardSize && j >= 0; i++, j--) {
-                        if (board[i][j]) return false;
+                    if (board[i][j]) return false;
                     }
                     
                     return true;
@@ -2986,151 +3279,238 @@
                 
                 // Initialize the queens game
                 initQueensGame();
-            }
+                }
+
             
             // Tic Tac Toe Game
+            // Unbeatable Tic-Tac-Toe AI using Minimax algorithm
             function initTicTacToeGame() {
-                const tictactoeBoard = document.getElementById('tictactoeBoard');
-                const gameStatus = document.getElementById('gameStatus');
-                const newTicTacToeGameBtn = document.getElementById('newTicTacToeGameBtn');
+            const tictactoeBoard = document.getElementById('tictactoeBoard');
+            const gameStatus = document.getElementById('gameStatus');
+            const newTicTacToeGameBtn = document.getElementById('newTicTacToeGameBtn');
+            
+            let currentPlayer = 'X';
+            let gameBoard = ['', '', '', '', '', '', '', '', ''];
+            let gameActive = true;
+            const humanPlayer = 'X';
+            const aiPlayer = 'O';
+            
+            // Winning combinations
+            const winPatterns = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+                [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+                [0, 4, 8], [2, 4, 6]             // diagonals
+            ];
+            
+            // Initialize the Tic Tac Toe game
+            function initTicTacToe() {
+                currentPlayer = 'X';
+                gameBoard = ['', '', '', '', '', '', '', '', ''];
+                gameActive = true;
+                gameStatus.textContent = 'Your turn (X)';
                 
-                let currentPlayer = 'X';
-                let gameBoard = ['', '', '', '', '', '', '', '', ''];
-                let gameActive = true;
-                
-                // Initialize the Tic Tac Toe game
-                function initTicTacToe() {
-                    currentPlayer = 'X';
-                    gameBoard = ['', '', '', '', '', '', '', '', ''];
-                    gameActive = true;
-                    gameStatus.textContent = 'Your turn (X)';
-                    
-                    // Render board
-                    renderTicTacToeBoard();
-                }
-                
-                // Render Tic Tac Toe board
-                function renderTicTacToeBoard() {
-                    tictactoeBoard.innerHTML = '';
-                    
-                    for (let i = 0; i < 9; i++) {
-                        const cell = document.createElement('div');
-                        cell.className = 'ttt-cell';
-                        cell.dataset.index = i;
-                        
-                        if (gameBoard[i] === 'X') {
-                            cell.textContent = 'X';
-                            cell.classList.add('x');
-                        } else if (gameBoard[i] === 'O') {
-                            cell.textContent = 'O';
-                            cell.classList.add('o');
-                        }
-                        
-                        cell.addEventListener('click', () => handleCellClick(i));
-                        tictactoeBoard.appendChild(cell);
-                    }
-                }
-                
-                // Handle cell click
-                function handleCellClick(index) {
-                    if (gameBoard[index] !== '' || !gameActive) return;
-                    
-                    // Player's move
-                    gameBoard[index] = currentPlayer;
-                    renderTicTacToeBoard();
-                    
-                    // Check for win or draw
-                    if (checkWin()) {
-                        gameStatus.textContent = `Player ${currentPlayer} wins!`;
-                        gameActive = false;
-                        showToast(`Congratulations! Player ${currentPlayer} wins!`);
-                        return;
-                    }
-                    
-                    if (checkDraw()) {
-                        gameStatus.textContent = 'Game ended in a draw!';
-                        gameActive = false;
-                        showToast('The game ended in a draw!');
-                        return;
-                    }
-                    
-                    // Switch to computer's turn
-                    currentPlayer = 'O';
-                    gameStatus.textContent = "Computer's turn (O)";
-                    
-                    // Computer's move (after a short delay)
-                    setTimeout(makeComputerMove, 500);
-                }
-                
-                // Computer's move
-                function makeComputerMove() {
-                    if (!gameActive) return;
-                    
-                    // Simple AI: find first available spot
-                    let availableSpots = [];
-                    for (let i = 0; i < 9; i++) {
-                        if (gameBoard[i] === '') {
-                            availableSpots.push(i);
-                        }
-                    }
-                    
-                    if (availableSpots.length > 0) {
-                        const randomIndex = Math.floor(Math.random() * availableSpots.length);
-                        const computerMove = availableSpots[randomIndex];
-                        
-                        gameBoard[computerMove] = 'O';
-                        renderTicTacToeBoard();
-                        
-                        // Check for win or draw
-                        if (checkWin()) {
-                            gameStatus.textContent = 'Computer wins!';
-                            gameActive = false;
-                            showToast('Computer wins! Better luck next time!');
-                            return;
-                        }
-                        
-                        if (checkDraw()) {
-                            gameStatus.textContent = 'Game ended in a draw!';
-                            gameActive = false;
-                            showToast('The game ended in a draw!');
-                            return;
-                        }
-                        
-                        // Switch back to player's turn
-                        currentPlayer = 'X';
-                        gameStatus.textContent = 'Your turn (X)';
-                    }
-                }
-                
-                // Check for win
-                function checkWin() {
-                    const winPatterns = [
-                        [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
-                        [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
-                        [0, 4, 8], [2, 4, 6]             // diagonals
-                    ];
-                    
-                    for (const pattern of winPatterns) {
-                        const [a, b, c] = pattern;
-                        if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
-                            return true;
-                        }
-                    }
-                    
-                    return false;
-                }
-                
-                // Check for draw
-                function checkDraw() {
-                    return !gameBoard.includes('');
-                }
-                
-                // Event listeners
-                newTicTacToeGameBtn.addEventListener('click', initTicTacToe);
-                
-                // Initialize the Tic Tac Toe game
-                initTicTacToe();
+                // Render board
+                renderTicTacToeBoard();
             }
+            
+            // Render Tic Tac Toe board
+            function renderTicTacToeBoard() {
+                tictactoeBoard.innerHTML = '';
+                
+                for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'ttt-cell';
+                cell.dataset.index = i;
+                
+                if (gameBoard[i] === 'X') {
+                    cell.textContent = 'X';
+                    cell.classList.add('x');
+                } else if (gameBoard[i] === 'O') {
+                    cell.textContent = 'O';
+                    cell.classList.add('o');
+                }
+                
+                cell.addEventListener('click', () => handleCellClick(i));
+                tictactoeBoard.appendChild(cell);
+                }
+            }
+            
+            // Handle cell click
+            function handleCellClick(index) {
+                if (gameBoard[index] !== '' || !gameActive || currentPlayer !== humanPlayer) return;
+                
+                // Player's move
+                makeMove(index, humanPlayer);
+                
+                // Check for win or draw
+                if (checkWin(humanPlayer)) {
+                gameStatus.textContent = 'You win!';
+                gameActive = false;
+                highlightWinningCells(humanPlayer);
+                showToast('Congratulations! You won!');
+                return;
+                }
+                
+                if (checkDraw()) {
+                gameStatus.textContent = 'Game ended in a draw!';
+                gameActive = false;
+                showToast('The game ended in a draw!');
+                return;
+                }
+                
+                // Switch to AI's turn
+                currentPlayer = aiPlayer;
+                gameStatus.textContent = "Computer's turn (O)";
+                
+                // AI's move (after a short delay)
+                setTimeout(makeAiMove, 500);
+            }
+            
+            // Make a move
+            function makeMove(index, player) {
+                gameBoard[index] = player;
+                renderTicTacToeBoard();
+            }
+            
+            // AI move using minimax algorithm
+            function makeAiMove() {
+                if (!gameActive) return;
+                
+                const bestMove = getBestMove();
+                makeMove(bestMove, aiPlayer);
+                
+                // Check for win or draw
+                if (checkWin(aiPlayer)) {
+                gameStatus.textContent = 'Computer wins!';
+                gameActive = false;
+                highlightWinningCells(aiPlayer);
+                showToast('Computer wins! Better luck next time!');
+                return;
+                }
+                
+                if (checkDraw()) {
+                gameStatus.textContent = 'Game ended in a draw!';
+                gameActive = false;
+                showToast('The game ended in a draw!');
+                return;
+                }
+                
+                // Switch back to player's turn
+                currentPlayer = humanPlayer;
+                gameStatus.textContent = 'Your turn (X)';
+            }
+            
+            // Get the best move using minimax algorithm
+            function getBestMove() {
+                // Easy mode - just pick a random move
+                // return getRandomMove();
+                
+                // Unbeatable mode - use minimax algorithm
+                let bestScore = -Infinity;
+                let bestMove;
+                
+                for (let i = 0; i < 9; i++) {
+                if (gameBoard[i] === '') {
+                    gameBoard[i] = aiPlayer;
+                    let score = minimax(gameBoard, 0, false);
+                    gameBoard[i] = '';
+                    
+                    if (score > bestScore) {
+                    bestScore = score;
+                    bestMove = i;
+                    }
+                }
+                }
+                
+                return bestMove;
+            }
+            
+            // Minimax algorithm
+            function minimax(board, depth, isMaximizing) {
+                // Check for terminal states
+                if (checkWin(aiPlayer)) return 10 - depth;
+                if (checkWin(humanPlayer)) return depth - 10;
+                if (checkDraw()) return 0;
+                
+                if (isMaximizing) {
+                let bestScore = -Infinity;
+                
+                for (let i = 0; i < 9; i++) {
+                    if (board[i] === '') {
+                    board[i] = aiPlayer;
+                    let score = minimax(board, depth + 1, false);
+                    board[i] = '';
+                    bestScore = Math.max(score, bestScore);
+                    }
+                }
+                
+                return bestScore;
+                } else {
+                let bestScore = Infinity;
+                
+                for (let i = 0; i < 9; i++) {
+                    if (board[i] === '') {
+                    board[i] = humanPlayer;
+                    let score = minimax(board, depth + 1, true);
+                    board[i] = '';
+                    bestScore = Math.min(score, bestScore);
+                    }
+                }
+                
+                return bestScore;
+                }
+            }
+            
+            // Get a random move (for easy mode)
+            function getRandomMove() {
+                let availableSpots = [];
+                for (let i = 0; i < 9; i++) {
+                if (gameBoard[i] === '') {
+                    availableSpots.push(i);
+                }
+                }
+                
+                return availableSpots[Math.floor(Math.random() * availableSpots.length)];
+            }
+            
+            // Check for win
+            function checkWin(player) {
+                for (const pattern of winPatterns) {
+                const [a, b, c] = pattern;
+                if (gameBoard[a] === player && gameBoard[b] === player && gameBoard[c] === player) {
+                    return true;
+                }
+                }
+                
+                return false;
+            }
+            
+            // Check for draw
+            function checkDraw() {
+                return !gameBoard.includes('');
+            }
+            
+            // Highlight winning cells
+            function highlightWinningCells(player) {
+                for (const pattern of winPatterns) {
+                const [a, b, c] = pattern;
+                if (gameBoard[a] === player && gameBoard[b] === player && gameBoard[c] === player) {
+                    document.querySelector(`.ttt-cell[data-index="${a}"]`).classList.add('winning-cell');
+                    document.querySelector(`.ttt-cell[data-index="${b}"]`).classList.add('winning-cell');
+                    document.querySelector(`.ttt-cell[data-index="${c}"]`).classList.add('winning-cell');
+                    break;
+                }
+                }
+            }
+            
+            // Event listeners
+            newTicTacToeGameBtn.addEventListener('click', initTicTacToe);
+            
+            // Initialize the Tic Tac Toe game
+            initTicTacToe();
+            }
+
+            // Add these initialization calls to your existing DOMContentLoaded event listener
             
             // Memory Game
             function initMemoryGame() {
@@ -3353,6 +3733,53 @@
                     cliContent.appendChild(outputDiv);
                 }
             }
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get modal elements
+            const playGameBtn = document.getElementById('playGameBtn');
+            const gameModal = document.getElementById('gameModal');
+            const closeModal = document.querySelector('.close');
+            const gameOptions = document.querySelectorAll('.game-option');
+            
+            // Open modal when button is clicked
+            playGameBtn.addEventListener('click', () => {
+                gameModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            // Close modal when X is clicked
+            closeModal.addEventListener('click', () => {
+                gameModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === gameModal) {
+                    gameModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Handle game selection
+            gameOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const gameType = option.getAttribute('data-game');
+                    gameModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    
+                    // Here you would handle the game selection
+                    alert(`You selected ${gameType} game!`);
+                });
+            });
+            
+            // Add keyboard escape functionality
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && gameModal.style.display === 'block') {
+                    gameModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
         });
     </script>
 </body>
