@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kosisochukwu Okafor | AI/ML Engineer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <div class="logo-icon">Kosisochukwu</div>osi<span>sochukwu</span>
+                </a>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#skills">Skills</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#certifications">Certifications</a>
+                    <a href="#contact">Contact</a>
+                </div>
+                <button class="mode-toggle" id="modeToggle">
+                    <i class="fas fa-terminal"></i> CLI
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-text fade-in">
+                        <h1>Kosisochukwu Okafor</h1>
+                        <p>AI/ML Engineer & Software Developer</p>
+                        <p class="hero-subtitle">Building intelligent systems that solve real-world problems</p>
+                        <a href="#projects" class="btn fade-in delay-2">Explore My Work</a>
+                        <button id="playGameBtn" class="btn secondary fade-in delay-3">
+                            <i class="fas fa-gamepad"></i> Play a Game
+                        </button>
+                    </div>
+                    <div class="hero-image fade-in delay-3">
+                        <div class="profile-shape">
+                            <img src="imagesnshii/prof3.jpg" alt="Kosisochukwu Okafor" class="profile-photo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>I'm a 4th year Software Engineering student at Federal University of Technology Owerri, passionate about AI, machine learning, and building innovative solutions.</p>
+                        <p>My expertise spans across AI/ML engineering, web development, and creating intelligent systems that solve real-world problems. I specialize in RAG systems, neural networks, and developing applications that leverage cutting-edge technologies.</p>
+                        <div class="tech-stack">
+                            <h3>Technical Stack</h3>
+                            <div class="tech-icons">
+                                <i class="fab fa-python" title="Python"></i>
+                                <i class="fab fa-js-square" title="JavaScript"></i>
+                                <i class="fas fa-brain" title="Machine Learning"></i>
+                                <i class="fas fa-robot" title="AI"></i>
+                                <i class="fab fa-aws" title="AWS"></i>
+                                <i class="fas fa-database" title="Databases"></i>
+                                <i class="fab fa-docker" title="Docker"></i>
+                                <i class="fab fa-git-alt" title="Git"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <div class="stat-number">-+</div>
+                            <div class="stat-label">Projects Completed</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">--</div>
+                            <div class="stat-label">AI Specializations</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">--</div>
+                            <div class="stat-label">Certifications</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>AI/ML Engineering</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span class="skill-name">RAG Systems</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Neural Networks</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">NLP</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="88"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">TensorFlow/PyTorch</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="92"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Development</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Python</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">JavaScript</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="60"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">FastAPI/Flask</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="90"></div>
+                                </div>
+                            </div>
+                            <!-- <div class="skill-item">
+                                <span class="skill-name">React/Vue.js</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="80"></div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>DevOps & Cloud</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span class="skill-name">AWS</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Docker</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="73"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">CI/CD</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="75"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Northflank/Render/Railway...etc</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="90"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <div class="container">
+                <h2 class="section-title">Projects</h2>
+                
+                <!-- Portfolio Tabs -->
+                <div class="portfolio-tabs">
+                    <button class="tab-button active" data-category="all">All Projects</button>
+                    <button class="tab-button" data-category="ai">AI Projects</button>
+                    <button class="tab-button" data-category="web">Web Projects</button>
+                    <button class="tab-button" data-category="telegram">Telegram Bots</button>
+                    <button class="tab-button" data-category="data">Data Science</button>
+                </div>
+
+                <div class="projects-grid">
+                    <!-- Object Detection Project (AI) -->
+                    <div class="project-card fade-in" data-category="ai">
+                        <div class="project-image">
+                            <img src="imagesnshii/object-detection-thumb.png" alt="Object detection preview">
+                        </div>
+                        <div class="project-content">
+                            <h3>Real-Time Object Detection</h3>
+                            <p>Interactive AI model detecting 80+ objects (powered by TensorFlow.js)</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI/ML</span>
+                                <span class="project-tag">Web</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <i class="fas fa-desktop"></i> Live Demo
+                                </a>
+                                <a href="https://github.com/Ksschkw/myWebsite" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                            
+                            <div class="ai-controls">
+                                <div class="filter-group">
+                                    <h4>Detect Objects:</h4>
+                                    <label class="filter-label">
+                                        <input type="checkbox" class="class-filter" value="person" checked>
+                                        Person
+                                    </label>
+                                    <label class="filter-label">
+                                        <input type="checkbox" class="class-filter" value="cell phone" checked>
+                                        Phone
+                                    </label>
+                                    <label class="filter-label">
+                                        <input type="checkbox" class="class-filter" value="car" checked>
+                                        Car
+                                    </label>
+                                    <label class="filter-label">
+                                        <input type="checkbox" class="class-filter" value="laptop" checked>
+                                        Laptop
+                                    </label>
+                                </div>
+                                <div class="confidence-control">
+                                    <label>
+                                        Minimum Confidence:
+                                        <input type="range" id="confidenceSlider" min="0" max="1" step="0.1" value="0.5">
+                                        <span id="confidenceValue">50%</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="demo-container">
+                                <div id="fpsCounter" class="fps-display">-- FPS</div>
+                                <video id="webcam" autoplay muted playsinline></video>
+                                <canvas id="output"></canvas>
+                            </div>
+                            <button id="startButton" class="btn">Start Webcam</button>
+                            <button id="stopButton" class="btn" style="background: var(--error-color); display: none;">Stop</button>
+                        </div>
+                    </div>
+
+                    <!-- MYRAGAGENTV2 -->
+                    <div class="project-card fade-in delay-1" data-category="ai">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENTV2" alt="MYRAGAGENTV2">
+                        </div>
+                        <div class="project-content">
+                            <h3>MYRAGAGENTV2</h3>
+                            <p>Advanced RAG agent using kssrag package with improved retrieval and generation capabilities.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI</span>
+                                <span class="project-tag">RAG</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/MYRAGAGENTV2" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://agentkosi.onrender.com/" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- kssrag Package -->
+                    <div class="project-card fade-in delay-2" data-category="ai">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/kssrag" alt="kssrag Package">
+                        </div>
+                        <div class="project-content">
+                            <h3>kssrag Package</h3>
+                            <p>Custom RAG framework published on PyPI for building retrieval-augmented generation systems.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI</span>
+                                <span class="project-tag">RAG</span>
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">PyPI</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/kssrag" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://pypi.org/project/kssrag/0.1.2/" class="project-link">
+                                    <i class="fab fa-python"></i> PyPI
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drug Classification -->
+                    <div class="project-card fade-in" data-category="data">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/drugs" alt="Drug Classification">
+                        </div>
+                        <div class="project-content">
+                            <h3>Drugs Data</h3>
+                            <p>A Script that scrapes <a href="https://drugs.com/" class="project-link">drugs.com</a> gracefully into json dictionaries.</p>
+                            <p>You can use this data to build a RAG system, A machine learning model that can detect drug interactions, and give general insights about a prescription or even prescribe for you based on you symptom(For this you will need the data from my other scraping<a href="https://github.com/Ksschkw/ScrapeddashiiAlchemy" class="project-link"> <i class="fab fa-github"></i> here) </a> and whatever you wish. I couldn't upload the data to github for now because it is too large but i wil later try to chunk it and then upload it or i wil just use hugginFace hehe</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI/ML</span>
+                                <span class="project-tag">Classification</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/drugs" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drug RAG -->
+                    <div class="project-card fade-in" data-category="ai">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/drugs" alt="Drug Classification">
+                        </div>
+                        <div class="project-content">
+                            <h3>Drugs RAG</h3>
+                            <p>Turn the previously scraped drugs data into a RAG system</p>
+                            <p>A RAG system that can detect drug interactions, and give general insights about a prescription or even prescribe for you based on you symptom(For this you will need the data from my other scraping<a href="https://github.com/Ksschkw/ScrapeddashiiAlchemy" class="project-link"> <i class="fab fa-github"></i> here) </a> and whatever you wish. I couldn't upload the data to github for now because it is too large but i wil later try to chunk it and then upload it or i wil just use hugginFace hehe</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI/ML</span>
+                                <span class="project-tag">Classification</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/drugs" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ScrapeddashiiAlchemy -->
+                    <div class="project-card fade-in delay-1" data-category="data">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/ScrapeddashiiAlchemy" alt="ScrapeddashiiAlchemy">
+                        </div>
+                        <div class="project-content">
+                            <h3>Conditions data</h3>
+                            <p>Data scraping and transformation pipeline for extracting insights from complex datasets.</p>
+                            <p>scrapes all condition pages from ada.com/conditions, extracting every <"h2"> -based feature and its corresponding content blocks beneath it(symptoms,Causes,etc). The results are saved in both JSON and CSV formats, ready for analysis, modeling, or medical NLP tasks.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Data Stuff</span>
+                                <span class="project-tag">Web Scraping</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/ScrapeddashiiAlchemy" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HomeCredit-Data-Alchemy -->
+                    <div class="project-card fade-in delay-2" data-category="data">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/HomeCredit-Data-Alchemy" alt="HomeCredit-Data-Alchemy">
+                        </div>
+                        <div class="project-content">
+                            <h3>HomeCredit Data Alchemy</h3>
+                            <p>Credit risk assessment model using machine learning to predict loan repayment capabilities.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Data Science</span>
+                                <span class="project-tag">Risk Assessment</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/HomeCredit-Data-Alchemy" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MYRAGAGENT -->
+                    <div class="project-card fade-in delay-1" data-category="ai">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENT" alt="MYRAGAGENT">
+                        </div>
+                        <div class="project-content">
+                            <h3>MYRAGAGENT</h3>
+                            <p>A Retrieval-Augmented Generation (RAG) Agent that provides intelligent responses.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI</span>
+                                <span class="project-tag">RAG</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/MYRAGAGENT" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://agentkosi.onrender.com/" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Copilot Agent -->
+                    <div class="project-card fade-in delay-2" data-category="ai">
+                        <div class="project-image">
+                            <img src="imagesnshii/image.png" alt="AI Copilot Agent">
+                        </div>
+                        <div class="project-content">
+                            <h3>AI Copilot Agent</h3>
+                            <p>FastAPI-based AI Copilot Agent for defining structured innovation challenges.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI</span>
+                                <span class="project-tag">FastAPI</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/AI-Copilot-Agent" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://ai-copilot-agent-1.onrender.com/" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vybe Analytics Telegram Bot -->
+                    <div class="project-card fade-in" data-category="telegram">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/vybe-telegram-bot" alt="Vybe Analytics Telegram Bot">
+                        </div>
+                        <div class="project-content">
+                            <h3>Vybe Analytics Telegram Bot</h3>
+                            <p>Provides real-time on-chain insights using Vybe Network APIs.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Telegram</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/vybe-telegram-bot" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://t.me/VybeVigil_bot" class="project-link">
+                                    <i class="fab fa-telegram"></i> Try Bot
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FPS Gamers Event Website -->
+                    <div class="project-card fade-in delay-1" data-category="web">
+                        <div class="project-image">
+                            <img src="imagesnshii/gaming.png" alt="FPS Gamers Event Website">
+                        </div>
+                        <div class="project-content">
+                            <h3>FPS Gamers Event Website (GRPGHT)</h3>
+                            <p>Platform for FPS gamers to compete in real-world events.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/GRPGHT" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://grpght.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bubblemaps Telegram Bot -->
+                    <div class="project-card fade-in delay-2" data-category="telegram">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/TheBubbleSnitchBot-2" alt="Bubblemaps Telegram Bot">
+                        </div>
+                        <div class="project-content">
+                            <h3>Bubblemaps Telegram Bot</h3>
+                            <p>Analyzes crypto tokens using Bubblemaps data with market insights.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Telegram</span>
+                                <span class="project-tag">Crypto</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/TheBubbleSnitchBot-2" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://t.me/TheBubbleSnitch_bot" class="project-link">
+                                    <i class="fab fa-telegram"></i> Try Bot
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Previous Portfolio -->
+                    <div class="project-card fade-in" data-category="web">
+                        <div class="project-image">
+                            <img src="imagesnshii/first.png" alt="Previous Portfolio">
+                        </div>
+                        <div class="project-content">
+                            <h3>Previous Portfolio</h3>
+                            <p>My earlier portfolio website with interactive elements and project showcases.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">HTML/CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/kosip" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="http://okaforkosisochukwu.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- School Lab Project -->
+                    <div class="project-card fade-in delay-1" data-category="web">
+                        <div class="project-image">
+                            <img src="imagesnshii/lab.png" alt="School Lab Project">
+                        </div>
+                        <div class="project-content">
+                            <h3>School Lab Project</h3>
+                            <p>A school project hosted online to demonstrate web development skills.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">HTML/CSS</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/Nigeria.net" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://nigeria-net-justaschoollabproject-hostit.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kosi Weather -->
+                    <div class="project-card fade-in delay-2" data-category="web">
+                        <div class="project-image">
+                            <img src="imagesnshii/weather.png" alt="Kosi Weather">
+                        </div>
+                        <div class="project-content">
+                            <h3>Kosi Weather</h3>
+                            <p>Weather forecast application allowing users to search by city.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/weatherkosi" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://kosi-weather.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Krypto-Kosi -->
+                    <div class="project-card fade-in" data-category="web">
+                        <div class="project-image">
+                            <img src="imagesnshii/kryptokosi.png" alt="Krypto-Kosi">
+                        </div>
+                        <div class="project-content">
+                            <h3>Krypto-Kosi</h3>
+                            <p>Displays crypto prices with ranking by price and trend.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/KryptoKosi" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://krypto-kosi.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Multi-Feature Telegram Bot -->
+                    <div class="project-card fade-in delay-1" data-category="telegram">
+                        <div class="project-image">
+                            <img src="imagesnshii/telegram-bot-thumb2.jpg" alt="Multi-Feature Telegram Bot">
+                        </div>
+                        <div class="project-content">
+                            <h3>Multi-Feature Telegram Bot</h3>
+                            <p>Telegram bot with integrated mini-apps for various functionalities.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Telegram</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/KosiTGBot" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://t.me/k0s1bot" class="project-link">
+                                    <i class="fab fa-telegram"></i> Try Bot
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kolaborasi-Kosi -->
+                    <div class="project-card fade-in delay-2" data-category="web">
+                        <div class="project-image">
+                            <img src="imagesnshii/kolabrasi.png" alt="Kolaborasi-Kosi">
+                        </div>
+                        <div class="project-content">
+                            <h3>Kolaborasi-Kosi</h3>
+                            <p>Collaborative drawing canvas for real-time artwork.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Web</span>
+                                <span class="project-tag">API</span>
+                                <span class="project-tag">JavaScript</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/collab-draw" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://kolaborasi-kosi.onrender.com" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AI Chat Assistant -->
+                    <div class="project-card fade-in" data-category="ai">
+                        <div class="project-image">
+                            <img src="imagesnshii/aiassistant.png" alt="AI Chat Assistant">
+                        </div>
+                        <div class="project-content">
+                            <h3>AI Chat Assistant</h3>
+                            <p>Custom-built chatbot leveraging PyTorch with OpenRouter fallback.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI</span>
+                                <span class="project-tag">NLP</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/chatbot_and_backendformywebsite" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Hehehehe -->
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <div class="container">
+                <h2 class="section-title">Certifications</h2>
+                <div class="certifications-grid">
+                    <div class="certification-item">
+                        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="9c49687c-a9e6-4d5b-9c09-67bbd3ca002e" data-share-badge-host="https://www.credly.com"></div>
+                        <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+                    </div>
+                    <div class="certification-item">
+                        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="2c36f2d2-983f-434d-a95f-baf1e0413ba2" data-share-badge-host="https://www.credly.com"></div>
+                        <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+                    </div>
+                    <div class="certification-item">
+                        <p>View all my certifications on</p>
+                        <a href="https://www.credly.com/users/kosisochukwu-okafor.4ba3b5f3" class="btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Credly Profile
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Assistant Section -->
+        <div class="container">
+            <div class="ai-assistant fade-in">
+                <h2 class="section-title">Chat with my AI Assistant</h2>
+                <div class="chat-container" id="chatContainer">
+                    <div class="chat-message bot-message">
+                        🤖 Hello! I'm an AI assistant powered by Kosisochukwu's RAG system. How can I help you today?
+                    </div>
+                </div>
+                <div class="chat-input-group">
+                    <input type="text" id="chatInput" placeholder="Ask me anything...">
+                    <button id="sendButton" class="btn">Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Modal -->
+        <div id="gameModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Choose a Game</h2>
+                <div class="game-options">
+                    <div class="game-option" data-game="puzzle">
+                        <i class="fas fa-puzzle-piece"></i>
+                        <h3>15-Puzzle</h3>
+                        <p>Arrange the numbers in order</p>
+                    </div>
+                    <div class="game-option" data-game="queens">
+                        <i class="fas fa-chess-queen"></i>
+                        <h3>N-Queens</h3>
+                        <p>Place queens without attacking each other</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Puzzle Game Section (Initially Hidden) -->
+        <div id="puzzleGameSection" class="game-section fade-in hidden">
+            <div class="container">
+                <h2 class="section-title">15-Puzzle Game</h2>
+                <p class="game-info">Solve the puzzle by arranging the numbers in order. The empty space is for moving tiles.</p>
+                <div class="game-container">
+                    <div class="game-board" id="puzzleBoard">
+                        <!-- Puzzle tiles will be generated by JavaScript -->
+                    </div>
+                    <div class="game-controls">
+                        <div id="moveCounter">Moves: 0</div>
+                        <div id="timer">Time: 00:00</div>
+                        <button id="newGameBtn" class="btn">New Game</button>
+                        <button id="undoMoveBtn" class="btn secondary">Undo</button>
+                        <button id="checkSolutionBtn" class="btn" style="background: var(--success-color);">Check Solution</button>
+                        <button id="solvePuzzleBtn" class="btn">Solve Puzzle</button>
+                        <div class="game-instructions">
+                            <p>Win this game and send a screenshot to <strong>2349019549473</strong> on WhatsApp to claim your ₦100 reward!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Queens Game Section (Initially Hidden) -->
+        <div id="queensGameSection" class="game-section fade-in hidden">
+            <div class="container">
+                <h2 class="section-title">N-Queens Game</h2>
+                <p class="game-info">Place queens on the board so that no two queens threaten each other.</p>
+                <div class="game-container">
+                    <div class="queens-game-board" id="queensBoard">
+                        <!-- Queens board will be generated by JavaScript -->
+                    </div>
+                    <div class="game-controls">
+                        <div class="queens-size-selector">
+                            <label for="boardSize">Board Size:</label>
+                            <select id="boardSize">
+                                <option value="4">4x4</option>
+                                <option value="5">5x5</option>
+                                <option value="6">6x6</option>
+                                <option value="7">7x7</option>
+                                <option value="8" selected>8x8</option>
+                            </select>
+                        </div>
+                        <div id="queensCounter">Queens placed: 0/8</div>
+                        <button id="newQueensGameBtn" class="btn">New Game</button>
+                        <button id="checkQueensSolutionBtn" class="btn" style="background: var(--success-color);">Check Solution</button>
+                        <button id="solveQueensBtn" class="btn">Solve</button>
+                        <div class="game-instructions">
+                            <p>No two queens should be in the same row, column, or diagonal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section id="contact">
+            <div class="container">
+                <h2 class="section-title">Get In Touch</h2>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h3>Email</h3>
+                                <p>kookafor893@gmail.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <h3>Phone</h3>
+                                <p>+234 901 954 9473</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h3>Location</h3>
+                                <p>Nigeria</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fab fa-github"></i>
+                            <div>
+                                <h3>GitHub</h3>
+                                <p>github.com/Ksschkw</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form action="https://formspree.io/f/xqapzbnb" method="POST" id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/Ksschkw" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="mailto:kookafor893@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://twitter.com/yourprofile" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://wa.me/+2349019549473" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+            <p class="copyright">© 2023 Kosisochukwu Okafor. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- CLI Mode Interface -->
+    <div class="cli-mode" id="cliMode">
+        <div class="cli-header">
+            <h2>Kosisochukwu's CLI Interface</h2>
+            <p>Type 'help' to see available commands</p>
+        </div>
+        <div class="cli-content" id="cliContent">
+            <div class="cli-output">Welcome to CLI mode! Type 'help' to see available commands.</div>
+        </div>
+        <div class="cli-command">
+            <span>></span>
+            <input type="text" class="cli-input" id="cliInput" autofocus>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize project filtering
+            initProjectFiltering();
+            
+            // Project filtering
+            function initProjectFiltering() {
+                const tabButtons = document.querySelectorAll('.tab-button');
+                const projectCards = document.querySelectorAll('.project-card');
+                
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        // Remove active class from all buttons
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        
+                        const category = button.getAttribute('data-category');
+                        
+                        // Filter projects
+                        projectCards.forEach(card => {
+                            if (category === 'all') {
+                                card.style.display = 'block';
+                            } else {
+                                const cardCategories = card.getAttribute('data-category').split(' ');
+                                if (cardCategories.includes(category)) {
+                                    card.style.display = 'block';
+                                } else {
+                                    card.style.display = 'none';
+                                }
+                            }
+                        });
+                    });
+                });
+            }
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>

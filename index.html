@@ -61,6 +61,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -200,8 +201,14 @@
 
         .hero p {
             font-size: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
             color: #ccc;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #999;
         }
 
         .highlight {
@@ -220,11 +227,23 @@
             border: none;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(255, 119, 0, 0.3);
+            margin-right: 1rem;
+            margin-bottom: 1rem;
         }
 
         .btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 20px rgba(255, 119, 0, 0.4);
+        }
+
+        .btn.secondary {
+            background: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--accent-color);
+        }
+
+        .btn.secondary:hover {
+            background: rgba(255, 119, 0, 0.1);
         }
 
         /* Sections */
@@ -248,6 +267,113 @@
             background: linear-gradient(to right, var(--accent-color), var(--success-color));
             margin: 0.5rem auto;
             border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 3rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .tech-stack {
+            margin-top: 2rem;
+        }
+
+        .tech-stack h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .tech-icons {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 2.5rem;
+        }
+
+        .tech-icons i {
+            transition: all 0.3s;
+        }
+
+        .tech-icons i:hover {
+            color: var(--accent-color);
+            transform: translateY(-5px);
+        }
+
+        .about-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #ccc;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .skill-category h3 {
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            text-align: center;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-name {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background: var(--secondary-bg);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(to right, var(--accent-color), var(--success-color));
+            border-radius: 5px;
+            width: 0;
+            transition: width 1s ease-in-out;
         }
 
         /* Portfolio Tabs */
@@ -422,6 +548,26 @@
             z-index: 2;
         }
 
+        /* Certifications Section */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            justify-items: center;
+        }
+
+        .certification-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
         /* AI Assistant Section */
         .ai-assistant {
             background: var(--card-bg);
@@ -477,49 +623,85 @@
             border-color: var(--accent-color);
         }
 
-        /* CLI Mode */
-        .cli-mode {
+        /* Modal */
+        .modal {
             display: none;
             position: fixed;
-            top: 0;
+            z-index: 1000;
             left: 0;
+            top: 0;
             width: 100%;
             height: 100%;
-            background: var(--terminal-bg);
-            color: var(--terminal-text);
-            z-index: 1000;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--card-bg);
+            margin: 10% auto;
             padding: 2rem;
-            font-family: 'Courier New', monospace;
-            overflow: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            position: relative;
         }
 
-        .cli-header {
-            margin-bottom: 1rem;
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            cursor: pointer;
+        }
+
+        .close:hover {
             color: var(--accent-color);
         }
 
-        .cli-content {
+        .game-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .game-option {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+        }
+
+        .game-option:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .game-option i {
+            font-size: 3rem;
             margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-
-        .cli-input {
-            background: transparent;
-            border: none;
-            color: var(--terminal-text);
-            font-family: 'Courier New', monospace;
-            font-size: 1rem;
-            width: 100%;
-            outline: none;
-            caret-color: var(--accent-color);
-        }
-
-        .cli-command {
             color: var(--accent-color);
+            transition: transform 0.3s;
         }
 
-        .cli-output {
-            margin-bottom: 1rem;
+        .game-option:hover i {
+            transform: scale(1.2);
+        }
+
+        .game-option h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .game-option p {
+            color: #ccc;
+            font-size: 0.9rem;
         }
 
         /* Game Section */
@@ -529,6 +711,10 @@
             border: 1px solid var(--border-color);
             padding: 2rem;
             margin: 3rem 0;
+        }
+
+        .game-section.hidden {
+            display: none;
         }
 
         .game-container {
@@ -574,6 +760,142 @@
 
         .game-info {
             margin-bottom: 1rem;
+        }
+
+        /* Queens Game */
+        .queens-game-board {
+            display: grid;
+            gap: 2px;
+            background: var(--terminal-bg);
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 500px;
+        }
+
+        .queens-cell {
+            background: var(--secondary-bg);
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .queens-cell:hover {
+            background: rgba(255, 119, 0, 0.1);
+        }
+
+        .queens-cell.has-queen::after {
+            content: '♛';
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        .queens-cell.threatened {
+            background: rgba(255, 0, 0, 0.2);
+        }
+
+        .queens-size-selector {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .queens-size-selector select {
+            background: var(--terminal-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        /* Tic Tac Toe Game */
+        .tic-tac-toe-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            background: var(--terminal-bg);
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+
+        .ttt-cell {
+            background: var(--secondary-bg);
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+
+        .ttt-cell:hover {
+            background: rgba(255, 119, 0, 0.1);
+        }
+
+        .ttt-cell.x {
+            color: var(--accent-color);
+        }
+
+        .ttt-cell.o {
+            color: var(--success-color);
+        }
+
+        /* Memory Game */
+        .memory-game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            background: var(--terminal-bg);
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 500px;
+        }
+
+        .memory-card {
+            aspect-ratio: 1;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .memory-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .memory-card.flipped .memory-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .memory-card-front, .memory-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .memory-card-front {
+            background: var(--secondary-bg);
+        }
+
+        .memory-card-back {
+            background: var(--accent-color);
+            color: #000;
+            transform: rotateY(180deg);
         }
 
         /* Contact Section */
@@ -668,6 +990,51 @@
             color: #666;
         }
 
+        /* CLI Mode */
+        .cli-mode {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--terminal-bg);
+            color: var(--terminal-text);
+            z-index: 1000;
+            padding: 2rem;
+            font-family: 'Courier New', monospace;
+            overflow: auto;
+        }
+
+        .cli-header {
+            margin-bottom: 1rem;
+            color: var(--accent-color);
+        }
+
+        .cli-content {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .cli-input {
+            background: transparent;
+            border: none;
+            color: var(--terminal-text);
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            width: 100%;
+            outline: none;
+            caret-color: var(--accent-color);
+        }
+
+        .cli-command {
+            color: var(--accent-color);
+        }
+
+        .cli-output {
+            margin-bottom: 1rem;
+        }
+
         /* Toast Notification */
         .toast {
             position: fixed;
@@ -690,10 +1057,21 @@
         }
 
         /* Responsive Design */
+        @media (max-width: 1200px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+        }
+
         @media (max-width: 968px) {
             .hero-content {
                 flex-direction: column;
                 text-align: center;
+                gap: 2rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
             }
             
             .contact-grid,
@@ -713,6 +1091,10 @@
                 width: 280px;
                 height: 280px;
             }
+
+            .nav-links {
+                gap: 1rem;
+            }
         }
 
         @media (max-width: 768px) {
@@ -726,6 +1108,81 @@
 
             .section-title {
                 font-size: 2rem;
+            }
+
+            .hero {
+                padding: 6rem 0 4rem;
+            }
+
+            section {
+                padding: 4rem 0;
+            }
+
+            .tech-icons {
+                font-size: 2rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .portfolio-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .tab-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .game-options {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+                margin-right: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+
+            .profile-shape {
+                width: 220px;
+                height: 220px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .tech-icons {
+                font-size: 1.5rem;
+            }
+
+            .project-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .chat-input-group {
+                flex-direction: column;
             }
         }
 
@@ -756,6 +1213,50 @@
             background: var(--accent-color);
             border-radius: 4px;
         }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--secondary-bg);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+                border-top: 1px solid var(--border-color);
+                transform: translateY(-100%);
+                transition: transform 0.3s ease;
+                z-index: 99;
+            }
+
+            .nav-links.active {
+                transform: translateY(0);
+            }
+
+            .nav-links a {
+                padding: 0.5rem 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -766,14 +1267,18 @@
                     <div class="logo-icon">K</div>
                     Kosi<span>sochukwu</span>
                 </a>
-                <div class="nav-links">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-links" id="navLinks">
                     <a href="#about">About</a>
                     <a href="#skills">Skills</a>
                     <a href="#projects">Projects</a>
+                    <a href="#certifications">Certifications</a>
                     <a href="#contact">Contact</a>
                 </div>
                 <button class="mode-toggle" id="modeToggle">
-                    <i class="fas fa-terminal"></i> CLI Mode
+                    <i class="fas fa-terminal"></i> CLI
                 </button>
             </nav>
         </div>
@@ -786,11 +1291,145 @@
                     <div class="hero-text fade-in">
                         <h1>Kosisochukwu Okafor</h1>
                         <p>AI/ML Engineer & Software Developer</p>
+                        <p class="hero-subtitle">Building intelligent systems that solve real-world problems</p>
                         <a href="#projects" class="btn fade-in delay-2">Explore My Work</a>
+                        <button id="playGameBtn" class="btn secondary fade-in delay-3">
+                            <i class="fas fa-gamepad"></i> Play a Game
+                        </button>
                     </div>
                     <div class="hero-image fade-in delay-3">
                         <div class="profile-shape">
-                            <img src="IMG-20250309-WA0013.jpg" alt="Kosisochukwu Okafor" class="profile-photo">
+                            <img src="imagesnshii/prof3.jpg" alt="Kosisochukwu Okafor" class="profile-photo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>I'm a 4th year Software Engineering student at Federal University of Technology Owerri, passionate about AI, machine learning, and building innovative solutions.</p>
+                        <p>My expertise spans across AI/ML engineering, web development, and creating intelligent systems that solve real-world problems. I specialize in RAG systems, neural networks, and developing applications that leverage cutting-edge technologies.</p>
+                        <div class="tech-stack">
+                            <h3>Technical Stack</h3>
+                            <div class="tech-icons">
+                                <i class="fab fa-python" title="Python"></i>
+                                <i class="fab fa-js-square" title="JavaScript"></i>
+                                <i class="fas fa-brain" title="Machine Learning"></i>
+                                <i class="fas fa-robot" title="AI"></i>
+                                <i class="fab fa-aws" title="AWS"></i>
+                                <i class="fas fa-database" title="Databases"></i>
+                                <i class="fab fa-docker" title="Docker"></i>
+                                <i class="fab fa-git-alt" title="Git"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <div class="stat-number">-+</div>
+                            <div class="stat-label">Projects Completed</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">--</div>
+                            <div class="stat-label">AI Specializations</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">--</div>
+                            <div class="stat-label">Certifications</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <div class="container">
+                <h2 class="section-title">Skills & Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>AI/ML Engineering</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span class="skill-name">RAG Systems</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Neural Networks</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">NLP</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="88"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">TensorFlow/PyTorch</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="92"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>Development</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Python</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">JavaScript</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="60"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">FastAPI/Flask</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="90"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category">
+                        <h3>DevOps & Cloud</h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span class="skill-name">AWS</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Docker</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="73"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">CI/CD</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="75"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Northflank/Render/Railway...etc</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" data-level="90"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -807,6 +1446,7 @@
                     <button class="tab-button" data-category="ai">AI Projects</button>
                     <button class="tab-button" data-category="web">Web Projects</button>
                     <button class="tab-button" data-category="telegram">Telegram Bots</button>
+                    <button class="tab-button" data-category="data">Data Science</button>
                 </div>
 
                 <div class="projects-grid">
@@ -866,6 +1506,142 @@
                             </div>
                             <button id="startButton" class="btn">Start Webcam</button>
                             <button id="stopButton" class="btn" style="background: var(--error-color); display: none;">Stop</button>
+                        </div>
+                    </div>
+
+                    <!-- MYRAGAGENTV2 -->
+                    <div class="project-card fade-in delay-1" data-category="ai">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENTV2" alt="MYRAGAGENTV2">
+                        </div>
+                        <div class="project-content">
+                            <h3>MYRAGAGENTV2</h3>
+                            <p>Advanced RAG agent using kssrag package with improved retrieval and generation capabilities.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI</span>
+                                <span class="project-tag">RAG</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/MYRAGAGENTV2" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://agentkosi.onrender.com/" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- kssrag Package -->
+                    <div class="project-card fade-in delay-2" data-category="ai">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/kssrag" alt="kssrag Package">
+                        </div>
+                        <div class="project-content">
+                            <h3>kssrag Package</h3>
+                            <p>Custom RAG framework published on PyPI for building retrieval-augmented generation systems.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI</span>
+                                <span class="project-tag">RAG</span>
+                                <span class="project-tag">Python</span>
+                                <span class="project-tag">PyPI</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/kssrag" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                                <a href="https://pypi.org/project/kssrag/0.1.2/" class="project-link">
+                                    <i class="fab fa-python"></i> PyPI
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drug Classification -->
+                    <div class="project-card fade-in" data-category="data">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/drugs" alt="Drug Classification">
+                        </div>
+                        <div class="project-content">
+                            <h3>Drugs Data</h3>
+                            <p>A Script that scrapes <a href="https://drugs.com/" class="project-link">drugs.com</a> gracefully into json dictionaries.</p>
+                            <p>You can use this data to build a RAG system, A machine learning model that can detect drug interactions, and give general insights about a prescription or even prescribe for you based on you symptom(For this you will need the data from my other scraping<a href="https://github.com/Ksschkw/ScrapeddashiiAlchemy" class="project-link"> <i class="fab fa-github"></i> here) </a> and whatever you wish. I couldn't upload the data to github for now because it is too large but i wil later try to chunk it and then upload it or i wil just use hugginFace hehe</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI/ML</span>
+                                <span class="project-tag">Classification</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/drugs" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Drug RAG -->
+                    <div class="project-card fade-in" data-category="ai">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/drugs" alt="Drug Classification">
+                        </div>
+                        <div class="project-content">
+                            <h3>Drugs RAG</h3>
+                            <p>Turn the previously scraped drugs data into a RAG system</p>
+                            <p>A RAG system that can detect drug interactions, and give general insights about a prescription or even prescribe for you based on you symptom(For this you will need the data from my other scraping<a href="https://github.com/Ksschkw/ScrapeddashiiAlchemy" class="project-link"> <i class="fab fa-github"></i> here) </a> and whatever you wish. I couldn't upload the data to github for now because it is too large but i wil later try to chunk it and then upload it or i wil just use hugginFace hehe</p>
+                            <div class="project-tags">
+                                <span class="project-tag">AI/ML</span>
+                                <span class="project-tag">Classification</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/drugs" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ScrapeddashiiAlchemy -->
+                    <div class="project-card fade-in delay-1" data-category="data">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/ScrapeddashiiAlchemy" alt="ScrapeddashiiAlchemy">
+                        </div>
+                        <div class="project-content">
+                            <h3>Conditions data</h3>
+                            <p>Data scraping and transformation pipeline for extracting insights from complex datasets.</p>
+                            <p>scrapes all condition pages from ada.com/conditions, extracting every <"h2"> -based feature and its corresponding content blocks beneath it(symptoms,Causes,etc). The results are saved in both JSON and CSV formats, ready for analysis, modeling, or medical NLP tasks.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Data Stuff</span>
+                                <span class="project-tag">Web Scraping</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/ScrapeddashiiAlchemy" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HomeCredit-Data-Alchemy -->
+                    <div class="project-card fade-in delay-2" data-category="data">
+                        <div class="project-image">
+                            <img src="https://opengraph.githubassets.com/1/Ksschkw/HomeCredit-Data-Alchemy" alt="HomeCredit-Data-Alchemy">
+                        </div>
+                        <div class="project-content">
+                            <h3>HomeCredit Data Alchemy</h3>
+                            <p>Credit risk assessment model using machine learning to predict loan repayment capabilities.</p>
+                            <div class="project-tags">
+                                <span class="project-tag">Data Science</span>
+                                <span class="project-tag">Risk Assessment</span>
+                                <span class="project-tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/Ksschkw/HomeCredit-Data-Alchemy" class="project-link">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
                         </div>
                     </div>
 
@@ -1153,6 +1929,29 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Hehehehe -->
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <div class="container">
+                <h2 class="section-title">Certifications</h2>
+                <div class="certifications-grid">
+                    <div class="certification-item">
+                        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="9c49687c-a9e6-4d5b-9c09-67bbd3ca002e" data-share-badge-host="https://www.credly.com"></div>
+                        <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+                    </div>
+                    <div class="certification-item">
+                        <div data-iframe-width="150" data-iframe-height="270" data-share-badge-id="2c36f2d2-983f-434d-a95f-baf1e0413ba2" data-share-badge-host="https://www.credly.com"></div>
+                        <script type="text/javascript" async src="//cdn.credly.com/assets/utilities/embed.js"></script>
+                    </div>
+                    <div class="certification-item">
+                        <p>View all my certifications on</p>
+                        <a href="https://www.credly.com/users/kosisochukwu-okafor.4ba3b5f3" class="btn" target="_blank">
+                            <i class="fas fa-external-link-alt"></i> Credly Profile
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1173,9 +1972,39 @@
             </div>
         </div>
 
-        <!-- Game Section -->
-        <div class="container">
-            <div class="game-section fade-in">
+        <!-- Game Modal -->
+        <div id="gameModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Choose a Game</h2>
+                <div class="game-options">
+                    <div class="game-option" data-game="puzzle">
+                        <i class="fas fa-puzzle-piece"></i>
+                        <h3>15-Puzzle</h3>
+                        <p>Arrange the numbers in order</p>
+                    </div>
+                    <div class="game-option" data-game="queens">
+                        <i class="fas fa-chess-queen"></i>
+                        <h3>N-Queens</h3>
+                        <p>Place queens without attacking each other</p>
+                    </div>
+                    <div class="game-option" data-game="tictactoe">
+                        <i class="fas fa-times-circle"></i>
+                        <h3>Tic-Tac-Toe</h3>
+                        <p>Classic X and O game</p>
+                    </div>
+                    <div class="game-option" data-game="memory">
+                        <i class="fas fa-brain"></i>
+                        <h3>Memory Game</h3>
+                        <p>Match pairs of cards</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Puzzle Game Section (Initially Hidden) -->
+        <div id="puzzleGameSection" class="game-section fade-in hidden">
+            <div class="container">
                 <h2 class="section-title">15-Puzzle Game</h2>
                 <p class="game-info">Solve the puzzle by arranging the numbers in order. The empty space is for moving tiles.</p>
                 <div class="game-container">
@@ -1186,9 +2015,85 @@
                         <div id="moveCounter">Moves: 0</div>
                         <div id="timer">Time: 00:00</div>
                         <button id="newGameBtn" class="btn">New Game</button>
-                        <button id="solvePuzzleBtn" class="btn" style="background: var(--success-color);">Solve Puzzle</button>
+                        <button id="undoMoveBtn" class="btn secondary">Undo</button>
+                        <button id="checkSolutionBtn" class="btn" style="background: var(--success-color);">Check Solution</button>
+                        <button id="solvePuzzleBtn" class="btn">Solve Puzzle</button>
                         <div class="game-instructions">
                             <p>Win this game and send a screenshot to <strong>2349019549473</strong> on WhatsApp to claim your ₦100 reward!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Queens Game Section (Initially Hidden) -->
+        <div id="queensGameSection" class="game-section fade-in hidden">
+            <div class="container">
+                <h2 class="section-title">N-Queens Game</h2>
+                <p class="game-info">Place queens on the board so that no two queens threaten each other.</p>
+                <div class="game-container">
+                    <div class="queens-game-board" id="queensBoard">
+                        <!-- Queens board will be generated by JavaScript -->
+                    </div>
+                    <div class="game-controls">
+                        <div class="queens-size-selector">
+                            <label for="boardSize">Board Size:</label>
+                            <select id="boardSize">
+                                <option value="4">4x4</option>
+                                <option value="5">5x5</option>
+                                <option value="6">6x6</option>
+                                <option value="7">7x7</option>
+                                <option value="8" selected>8x8</option>
+                            </select>
+                        </div>
+                        <div id="queensCounter">Queens placed: 0/8</div>
+                        <button id="newQueensGameBtn" class="btn">New Game</button>
+                        <button id="checkQueensSolutionBtn" class="btn" style="background: var(--success-color);">Check Solution</button>
+                        <button id="solveQueensBtn" class="btn">Solve</button>
+                        <div class="game-instructions">
+                            <p>No two queens should be in the same row, column, or diagonal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tic Tac Toe Game Section (Initially Hidden) -->
+        <div id="tictactoeGameSection" class="game-section fade-in hidden">
+            <div class="container">
+                <h2 class="section-title">Tic-Tac-Toe</h2>
+                <p class="game-info">Play against the computer in this classic game of X and O.</p>
+                <div class="game-container">
+                    <div class="tic-tac-toe-board" id="tictactoeBoard">
+                        <!-- Tic Tac Toe board will be generated by JavaScript -->
+                    </div>
+                    <div class="game-controls">
+                        <div id="gameStatus">Your turn (X)</div>
+                        <button id="newTicTacToeGameBtn" class="btn">New Game</button>
+                        <div class="game-instructions">
+                            <p>Get three of your marks in a row (horizontally, vertically, or diagonally) to win.</p>
+                            <p>This game is easy so do not feel good about yourself if you win, i'll make AI play later, rn it is just randomized</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Memory Game Section (Initially Hidden) -->
+        <div id="memoryGameSection" class="game-section fade-in hidden">
+            <div class="container">
+                <h2 class="section-title">Memory Game</h2>
+                <p class="game-info">Flip cards to find matching pairs. Try to complete the game with the fewest moves.</p>
+                <div class="game-container">
+                    <div class="memory-game-board" id="memoryBoard">
+                        <!-- Memory cards will be generated by JavaScript -->
+                    </div>
+                    <div class="game-controls">
+                        <div id="movesCounter">Moves: 0</div>
+                        <div id="pairsCounter">Pairs found: 0/8</div>
+                        <button id="newMemoryGameBtn" class="btn">New Game</button>
+                        <div class="game-instructions">
+                            <p>Flip two cards at a time to find matching pairs.</p>
                         </div>
                     </div>
                 </div>
@@ -1230,18 +2135,18 @@
                         </div>
                     </div>
                     <div class="contact-form">
-                        <form id="contactForm">
+                        <form action="https://formspree.io/f/xqapzbnb" method="POST" id="contactForm">
                             <div class="form-group">
                                 <label for="name">Name</label>
-                                <input type="text" id="name" required>
+                                <input type="text" id="name" name="name" required>
                             </div>
                             <div class="form-group">
                                 <label for="email">Email</label>
-                                <input type="email" id="email" required>
+                                <input type="email" id="email" name="email" required>
                             </div>
                             <div class="form-group">
                                 <label for="message">Message</label>
-                                <textarea id="message" required></textarea>
+                                <textarea id="message" name="message" required></textarea>
                             </div>
                             <button type="submit" class="btn">Send Message</button>
                         </form>
@@ -1292,6 +2197,13 @@
     <div class="toast" id="toast"></div>
 
     <script>
+        // Session management
+        let sessionId = localStorage.getItem("portfolio-session");
+        if (!sessionId) {
+            sessionId = "portfolio-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem("portfolio-session", sessionId);
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize object detection
             initObjectDetection();
@@ -1302,8 +2214,26 @@
             // Initialize puzzle game
             initPuzzleGame();
             
+            // Initialize queens game
+            initQueensGame();
+            
+            // Initialize Tic Tac Toe game
+            initTicTacToeGame();
+            
+            // Initialize Memory game
+            initMemoryGame();
+            
             // Initialize CLI mode
             initCLIMode();
+            
+            // Initialize game modal
+            initGameModal();
+            
+            // Initialize skill animations
+            initSkillAnimations();
+            
+            // Initialize mobile menu
+            initMobileMenu();
             
             // AI Chat functionality
             const chatContainer = document.getElementById('chatContainer');
@@ -1329,14 +2259,14 @@
                             },
                             body: JSON.stringify({
                                 query: `Generate a funny roast based on: ${message}`,
-                                session_id: 'portfolio_roast'
+                                session_id: sessionId + '-roast'
                             })
                         });
                         
                         const data = await response.json();
                         addMessage(data.response, 'bot');
                     } else {
-                        // Regular chat
+                        // Regular chat with unique session ID
                         const response = await fetch('https://p01--ragkss--qw5xhkblp8hy.code.run/query', {
                             method: 'POST',
                             headers: {
@@ -1344,7 +2274,7 @@
                             },
                             body: JSON.stringify({
                                 query: message,
-                                session_id: 'portfolio_session'
+                                session_id: sessionId
                             })
                         });
                         
@@ -1369,6 +2299,25 @@
                 if (e.key === 'Enter') sendMessage();
             });
             
+            // New Chat Button
+            const newChatBtn = document.createElement('button');
+            newChatBtn.textContent = 'New Chat Session';
+            newChatBtn.className = 'btn secondary';
+            newChatBtn.style.marginTop = '1rem';
+            newChatBtn.addEventListener('click', () => {
+                // Generate a new session ID
+                sessionId = "portfolio-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
+                localStorage.setItem("portfolio-session", sessionId);
+                
+                // Clear chat
+                chatContainer.innerHTML = '<div class="chat-message bot-message">🤖 Hello! I\'m an AI assistant powered by Kosisochukwu\'s RAG system. How can I help you today?</div>';
+                
+                showToast('New chat session started!');
+            });
+            
+            // Add the new chat button to the AI assistant section
+            document.querySelector('.chat-input-group').after(newChatBtn);
+            
             // Form submission with RAG integration
             const contactForm = document.getElementById('contactForm');
             if (contactForm) {
@@ -1379,16 +2328,31 @@
                     const email = document.getElementById('email').value;
                     const message = document.getElementById('message').value;
                     
+                    // Submit to Formspree
+                    const formData = new FormData();
+                    formData.append('name', name);
+                    formData.append('email', email);
+                    formData.append('message', message);
+                    
                     try {
-                        // Send to RAG for personalized response
+                        // Send to Formspree
+                        await fetch('https://formspree.io/f/xqapzbnb', {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+                        
+                        // Also send to RAG for personalized response with unique session ID
                         const response = await fetch('https://p01--ragkss--qw5xhkblp8hy.code.run/query', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                             },
                             body: JSON.stringify({
-                                query: `Generate a personalized response for someone named ${name} who sent this message: ${message}. I'm Kosisochukwu and I'll receive your message.`,
-                                session_id: 'contact_form'
+                                query: `You are working in the contact-me part of Kosi's personal website. Generate a personalized response for someone named ${name} who sent this message: ${message}.`,
+                                session_id: sessionId + '-contact'
                             })
                         });
                         
@@ -1447,6 +2411,26 @@
                 observer.observe(elem);
             });
             
+            // Initialize mobile menu
+            function initMobileMenu() {
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                const navLinks = document.getElementById('navLinks');
+                
+                mobileMenuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                        '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                });
+                
+                // Close menu when clicking on a link
+                document.querySelectorAll('.nav-links a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    });
+                });
+            }
+            
             // Project filtering
             function initProjectFiltering() {
                 const tabButtons = document.querySelectorAll('.tab-button');
@@ -1468,6 +2452,65 @@
                                 card.style.display = 'none';
                             }
                         });
+                    });
+                });
+            }
+            
+            // Initialize skill animations
+            function initSkillAnimations() {
+                const skillProgresses = document.querySelectorAll('.skill-progress');
+                
+                skillProgresses.forEach(progress => {
+                    const level = progress.getAttribute('data-level');
+                    progress.style.width = `${level}%`;
+                });
+            }
+            
+            // Game Modal
+            function initGameModal() {
+                const playGameBtn = document.getElementById('playGameBtn');
+                const gameModal = document.getElementById('gameModal');
+                const closeModal = document.querySelector('.close');
+                const gameOptions = document.querySelectorAll('.game-option');
+                
+                playGameBtn.addEventListener('click', () => {
+                    gameModal.style.display = 'block';
+                });
+                
+                closeModal.addEventListener('click', () => {
+                    gameModal.style.display = 'none';
+                });
+                
+                window.addEventListener('click', (e) => {
+                    if (e.target === gameModal) {
+                        gameModal.style.display = 'none';
+                    }
+                });
+                
+                gameOptions.forEach(option => {
+                    option.addEventListener('click', () => {
+                        const gameType = option.getAttribute('data-game');
+                        gameModal.style.display = 'none';
+                        
+                        // Hide all game sections
+                        document.querySelectorAll('.game-section').forEach(section => {
+                            section.classList.add('hidden');
+                        });
+                        
+                        // Show selected game
+                        if (gameType === 'puzzle') {
+                            document.getElementById('puzzleGameSection').classList.remove('hidden');
+                            document.getElementById('puzzleGameSection').scrollIntoView({ behavior: 'smooth' });
+                        } else if (gameType === 'queens') {
+                            document.getElementById('queensGameSection').classList.remove('hidden');
+                            document.getElementById('queensGameSection').scrollIntoView({ behavior: 'smooth' });
+                        } else if (gameType === 'tictactoe') {
+                            document.getElementById('tictactoeGameSection').classList.remove('hidden');
+                            document.getElementById('tictactoeGameSection').scrollIntoView({ behavior: 'smooth' });
+                        } else if (gameType === 'memory') {
+                            document.getElementById('memoryGameSection').classList.remove('hidden');
+                            document.getElementById('memoryGameSection').scrollIntoView({ behavior: 'smooth' });
+                        }
                     });
                 });
             }
@@ -1603,6 +2646,8 @@
                 const moveCounter = document.getElementById('moveCounter');
                 const timer = document.getElementById('timer');
                 const newGameBtn = document.getElementById('newGameBtn');
+                const undoMoveBtn = document.getElementById('undoMoveBtn');
+                const checkSolutionBtn = document.getElementById('checkSolutionBtn');
                 const solvePuzzleBtn = document.getElementById('solvePuzzleBtn');
                 
                 let moves = 0;
@@ -1610,6 +2655,7 @@
                 let timerInterval;
                 let tiles = [];
                 let emptyIndex = 15;
+                let moveHistory = [];
                 
                 // Initialize the puzzle
                 function initPuzzle() {
@@ -1619,6 +2665,7 @@
                     time = 0;
                     moveCounter.textContent = 'Moves: 0';
                     timer.textContent = 'Time: 00:00';
+                    moveHistory = [];
                     
                     // Clear any existing timer
                     if (timerInterval) clearInterval(timerInterval);
@@ -1671,6 +2718,9 @@
                     ];
                     
                     if (adjacentIndexes.includes(index)) {
+                        // Save current state for undo
+                        moveHistory.push([...tiles]);
+                        
                         // Swap tiles
                         [tiles[emptyIndex], tiles[index]] = [tiles[index], tiles[emptyIndex]];
                         emptyIndex = index;
@@ -1693,6 +2743,29 @@
                             clearInterval(timerInterval);
                             showToast('Congratulations! You solved the puzzle! Send a screenshot to claim your reward.');
                         }
+                    }
+                }
+                
+                // Undo last move
+                function undoMove() {
+                    if (moveHistory.length > 0) {
+                        tiles = moveHistory.pop();
+                        emptyIndex = tiles.indexOf(null);
+                        moves--;
+                        moveCounter.textContent = `Moves: ${moves}`;
+                        
+                        // Re-render board
+                        puzzleBoard.innerHTML = '';
+                        renderTiles();
+                    }
+                }
+                
+                // Check solution
+                function checkSolution() {
+                    if (isPuzzleSolved()) {
+                        showToast('Congratulations! The puzzle is solved correctly!');
+                    } else {
+                        showToast('Not quite right yet. Keep trying!');
                     }
                 }
                 
@@ -1725,15 +2798,459 @@
                     moveCounter.textContent = 'Moves: 0';
                     time = 0;
                     timer.textContent = 'Time: 00:00';
+                    moveHistory = [];
                     showToast('Puzzle solved! Try to solve it yourself next time!');
                 }
                 
                 // Event listeners
                 newGameBtn.addEventListener('click', initPuzzle);
+                undoMoveBtn.addEventListener('click', undoMove);
+                checkSolutionBtn.addEventListener('click', checkSolution);
                 solvePuzzleBtn.addEventListener('click', solvePuzzle);
                 
                 // Initialize the puzzle
                 initPuzzle();
+            }
+            
+            // Queens Game
+            function initQueensGame() {
+                const queensBoard = document.getElementById('queensBoard');
+                const queensCounter = document.getElementById('queensCounter');
+                const newQueensGameBtn = document.getElementById('newQueensGameBtn');
+                const checkQueensSolutionBtn = document.getElementById('checkQueensSolutionBtn');
+                const solveQueensBtn = document.getElementById('solveQueensBtn');
+                const boardSizeSelect = document.getElementById('boardSize');
+                
+                let boardSize = 8;
+                let queens = [];
+                let board = [];
+                
+                // Initialize the queens game
+                function initQueensGame() {
+                    boardSize = parseInt(boardSizeSelect.value);
+                    queens = [];
+                    board = Array(boardSize).fill().map(() => Array(boardSize).fill(false));
+                    
+                    // Update counter
+                    queensCounter.textContent = `Queens placed: 0/${boardSize}`;
+                    
+                    // Render board
+                    renderQueensBoard();
+                }
+                
+                // Render queens board
+                function renderQueensBoard() {
+                    queensBoard.innerHTML = '';
+                    queensBoard.style.gridTemplateColumns = `repeat(${boardSize}, 1fr)`;
+                    
+                    for (let row = 0; row < boardSize; row++) {
+                        for (let col = 0; col < boardSize; col++) {
+                            const cell = document.createElement('div');
+                            cell.className = 'queens-cell';
+                            cell.dataset.row = row;
+                            cell.dataset.col = col;
+                            
+                            // Alternate cell colors
+                            if ((row + col) % 2 === 0) {
+                                cell.style.backgroundColor = 'var(--terminal-bg)';
+                            }
+                            
+                            // Add queen if present
+                            if (board[row][col]) {
+                                cell.classList.add('has-queen');
+                            }
+                            
+                            // Check if cell is threatened
+                            if (isThreatened(row, col) && !board[row][col]) {
+                                cell.classList.add('threatened');
+                            }
+                            
+                            cell.addEventListener('click', () => toggleQueen(row, col));
+                            queensBoard.appendChild(cell);
+                        }
+                    }
+                }
+                
+                // Toggle queen placement
+                function toggleQueen(row, col) {
+                    if (board[row][col]) {
+                        // Remove queen
+                        board[row][col] = false;
+                        queens = queens.filter(q => !(q.row === row && q.col === col));
+                    } else {
+                        // Add queen
+                        board[row][col] = true;
+                        queens.push({ row, col });
+                    }
+                    
+                    // Update counter
+                    queensCounter.textContent = `Queens placed: ${queens.length}/${boardSize}`;
+                    
+                    // Re-render board
+                    renderQueensBoard();
+                }
+                
+                // Check if a cell is threatened
+                function isThreatened(row, col) {
+                    for (const queen of queens) {
+                        // Same row
+                        if (queen.row === row && queen.col !== col) return true;
+                        
+                        // Same column
+                        if (queen.col === col && queen.row !== row) return true;
+                        
+                        // Same diagonal
+                        if (Math.abs(queen.row - row) === Math.abs(queen.col - col)) return true;
+                    }
+                    
+                    return false;
+                }
+                
+                // Check solution
+                function checkQueensSolution() {
+                    if (queens.length !== boardSize) {
+                        showToast(`You need to place ${boardSize} queens on the board.`);
+                        return;
+                    }
+                    
+                    for (const queen of queens) {
+                        if (isThreatened(queen.row, queen.col)) {
+                            showToast('The queens are attacking each other! Try again.');
+                            return;
+                        }
+                    }
+                    
+                    showToast('Congratulations! You solved the N-Queens problem!');
+                }
+                
+                // Solve the queens problem (simple backtracking algorithm)
+                function solveQueens() {
+                    // Clear current board
+                    queens = [];
+                    board = Array(boardSize).fill().map(() => Array(boardSize).fill(false));
+                    
+                    // Solve using backtracking
+                    solveQueensRecursive(0);
+                    
+                    // Update counter
+                    queensCounter.textContent = `Queens placed: ${queens.length}/${boardSize}`;
+                    
+                    // Re-render board
+                    renderQueensBoard();
+                    
+                    showToast('Puzzle solved! The queens are placed without attacking each other.');
+                }
+                
+                function solveQueensRecursive(col) {
+                    if (col >= boardSize) return true;
+                    
+                    for (let row = 0; row < boardSize; row++) {
+                        if (isSafe(row, col)) {
+                            board[row][col] = true;
+                            queens.push({ row, col });
+                            
+                            if (solveQueensRecursive(col + 1)) return true;
+                            
+                            board[row][col] = false;
+                            queens.pop();
+                        }
+                    }
+                    
+                    return false;
+                }
+                
+                function isSafe(row, col) {
+                    // Check row
+                    for (let i = 0; i < col; i++) {
+                        if (board[row][i]) return false;
+                    }
+                    
+                    // Check upper diagonal
+                    for (let i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+                        if (board[i][j]) return false;
+                    }
+                    
+                    // Check lower diagonal
+                    for (let i = row, j = col; i < boardSize && j >= 0; i++, j--) {
+                        if (board[i][j]) return false;
+                    }
+                    
+                    return true;
+                }
+                
+                // Event listeners
+                newQueensGameBtn.addEventListener('click', initQueensGame);
+                checkQueensSolutionBtn.addEventListener('click', checkQueensSolution);
+                solveQueensBtn.addEventListener('click', solveQueens);
+                boardSizeSelect.addEventListener('change', initQueensGame);
+                
+                // Initialize the queens game
+                initQueensGame();
+            }
+            
+            // Tic Tac Toe Game
+            function initTicTacToeGame() {
+                const tictactoeBoard = document.getElementById('tictactoeBoard');
+                const gameStatus = document.getElementById('gameStatus');
+                const newTicTacToeGameBtn = document.getElementById('newTicTacToeGameBtn');
+                
+                let currentPlayer = 'X';
+                let gameBoard = ['', '', '', '', '', '', '', '', ''];
+                let gameActive = true;
+                
+                // Initialize the Tic Tac Toe game
+                function initTicTacToe() {
+                    currentPlayer = 'X';
+                    gameBoard = ['', '', '', '', '', '', '', '', ''];
+                    gameActive = true;
+                    gameStatus.textContent = 'Your turn (X)';
+                    
+                    // Render board
+                    renderTicTacToeBoard();
+                }
+                
+                // Render Tic Tac Toe board
+                function renderTicTacToeBoard() {
+                    tictactoeBoard.innerHTML = '';
+                    
+                    for (let i = 0; i < 9; i++) {
+                        const cell = document.createElement('div');
+                        cell.className = 'ttt-cell';
+                        cell.dataset.index = i;
+                        
+                        if (gameBoard[i] === 'X') {
+                            cell.textContent = 'X';
+                            cell.classList.add('x');
+                        } else if (gameBoard[i] === 'O') {
+                            cell.textContent = 'O';
+                            cell.classList.add('o');
+                        }
+                        
+                        cell.addEventListener('click', () => handleCellClick(i));
+                        tictactoeBoard.appendChild(cell);
+                    }
+                }
+                
+                // Handle cell click
+                function handleCellClick(index) {
+                    if (gameBoard[index] !== '' || !gameActive) return;
+                    
+                    // Player's move
+                    gameBoard[index] = currentPlayer;
+                    renderTicTacToeBoard();
+                    
+                    // Check for win or draw
+                    if (checkWin()) {
+                        gameStatus.textContent = `Player ${currentPlayer} wins!`;
+                        gameActive = false;
+                        showToast(`Congratulations! Player ${currentPlayer} wins!`);
+                        return;
+                    }
+                    
+                    if (checkDraw()) {
+                        gameStatus.textContent = 'Game ended in a draw!';
+                        gameActive = false;
+                        showToast('The game ended in a draw!');
+                        return;
+                    }
+                    
+                    // Switch to computer's turn
+                    currentPlayer = 'O';
+                    gameStatus.textContent = "Computer's turn (O)";
+                    
+                    // Computer's move (after a short delay)
+                    setTimeout(makeComputerMove, 500);
+                }
+                
+                // Computer's move
+                function makeComputerMove() {
+                    if (!gameActive) return;
+                    
+                    // Simple AI: find first available spot
+                    let availableSpots = [];
+                    for (let i = 0; i < 9; i++) {
+                        if (gameBoard[i] === '') {
+                            availableSpots.push(i);
+                        }
+                    }
+                    
+                    if (availableSpots.length > 0) {
+                        const randomIndex = Math.floor(Math.random() * availableSpots.length);
+                        const computerMove = availableSpots[randomIndex];
+                        
+                        gameBoard[computerMove] = 'O';
+                        renderTicTacToeBoard();
+                        
+                        // Check for win or draw
+                        if (checkWin()) {
+                            gameStatus.textContent = 'Computer wins!';
+                            gameActive = false;
+                            showToast('Computer wins! Better luck next time!');
+                            return;
+                        }
+                        
+                        if (checkDraw()) {
+                            gameStatus.textContent = 'Game ended in a draw!';
+                            gameActive = false;
+                            showToast('The game ended in a draw!');
+                            return;
+                        }
+                        
+                        // Switch back to player's turn
+                        currentPlayer = 'X';
+                        gameStatus.textContent = 'Your turn (X)';
+                    }
+                }
+                
+                // Check for win
+                function checkWin() {
+                    const winPatterns = [
+                        [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+                        [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+                        [0, 4, 8], [2, 4, 6]             // diagonals
+                    ];
+                    
+                    for (const pattern of winPatterns) {
+                        const [a, b, c] = pattern;
+                        if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+                            return true;
+                        }
+                    }
+                    
+                    return false;
+                }
+                
+                // Check for draw
+                function checkDraw() {
+                    return !gameBoard.includes('');
+                }
+                
+                // Event listeners
+                newTicTacToeGameBtn.addEventListener('click', initTicTacToe);
+                
+                // Initialize the Tic Tac Toe game
+                initTicTacToe();
+            }
+            
+            // Memory Game
+            function initMemoryGame() {
+                const memoryBoard = document.getElementById('memoryBoard');
+                const movesCounter = document.getElementById('movesCounter');
+                const pairsCounter = document.getElementById('pairsCounter');
+                const newMemoryGameBtn = document.getElementById('newMemoryGameBtn');
+                
+                let cards = [];
+                let flippedCards = [];
+                let matchedPairs = 0;
+                let moves = 0;
+                let lockBoard = false;
+                
+                // Initialize the Memory game
+                function initMemoryGame() {
+                    cards = [];
+                    flippedCards = [];
+                    matchedPairs = 0;
+                    moves = 0;
+                    lockBoard = false;
+                    
+                    movesCounter.textContent = 'Moves: 0';
+                    pairsCounter.textContent = 'Pairs found: 0/8';
+                    
+                    // Create cards with pairs
+                    const symbols = ['🍕', '🍔', '🍎', '🍉', '🍇', '🍓', '🍦', '🍩'];
+                    cards = [...symbols, ...symbols];
+                    
+                    // Shuffle cards
+                    shuffleCards();
+                    
+                    // Render board
+                    renderMemoryBoard();
+                }
+                
+                // Shuffle cards
+                function shuffleCards() {
+                    for (let i = cards.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [cards[i], cards[j]] = [cards[j], cards[i]];
+                    }
+                }
+                
+                // Render Memory board
+                function renderMemoryBoard() {
+                    memoryBoard.innerHTML = '';
+                    
+                    cards.forEach((symbol, index) => {
+                        const card = document.createElement('div');
+                        card.className = 'memory-card';
+                        card.dataset.index = index;
+                        
+                        const cardInner = document.createElement('div');
+                        cardInner.className = 'memory-card-inner';
+                        
+                        const cardFront = document.createElement('div');
+                        cardFront.className = 'memory-card-front';
+                        
+                        const cardBack = document.createElement('div');
+                        cardBack.className = 'memory-card-back';
+                        cardBack.textContent = symbol;
+                        
+                        cardInner.appendChild(cardFront);
+                        cardInner.appendChild(cardBack);
+                        card.appendChild(cardInner);
+                        
+                        card.addEventListener('click', () => flipCard(card, index));
+                        memoryBoard.appendChild(card);
+                    });
+                }
+                
+                // Flip card
+                function flipCard(card, index) {
+                    if (lockBoard || card.classList.contains('flipped') || flippedCards.length === 2) return;
+                    
+                    card.classList.add('flipped');
+                    flippedCards.push({ card, index });
+                    
+                    if (flippedCards.length === 2) {
+                        lockBoard = true;
+                        moves++;
+                        movesCounter.textContent = `Moves: ${moves}`;
+                        
+                        checkForMatch();
+                    }
+                }
+                
+                // Check for match
+                function checkForMatch() {
+                    const [firstCard, secondCard] = flippedCards;
+                    
+                    if (cards[firstCard.index] === cards[secondCard.index]) {
+                        // Match found
+                        matchedPairs++;
+                        pairsCounter.textContent = `Pairs found: ${matchedPairs}/8`;
+                        
+                        flippedCards = [];
+                        lockBoard = false;
+                        
+                        // Check if game is complete
+                        if (matchedPairs === 8) {
+                            showToast(`Congratulations! You completed the game in ${moves} moves!`);
+                        }
+                    } else {
+                        // No match
+                        setTimeout(() => {
+                            firstCard.card.classList.remove('flipped');
+                            secondCard.card.classList.remove('flipped');
+                            flippedCards = [];
+                            lockBoard = false;
+                        }, 1000);
+                    }
+                }
+                
+                // Event listeners
+                newMemoryGameBtn.addEventListener('click', initMemoryGame);
+                
+                // Initialize the Memory game
+                initMemoryGame();
             }
             
             // CLI Mode
@@ -1796,9 +3313,9 @@
                         addCLIOutput('  • WhatsApp: wa.me/2349019549473');
                     },
                     game: () => {
-                        addCLIOutput('Opening puzzle game...');
+                        addCLIOutput('Opening game modal...');
                         setTimeout(() => {
-                            document.getElementById('puzzleBoard').scrollIntoView({ behavior: 'smooth' });
+                            document.getElementById('playGameBtn').click();
                         }, 500);
                     },
                     clear: () => {
