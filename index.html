@@ -25,15 +25,15 @@
         <div class="container">
             <nav>
                 <a href="#" class="logo">
-                    <div class="logo-icon">K</div>
+                    <div class="logo-icon">KS</div>
                     Kosi<span>sochukwu</span>
                 </a>
                 <div class="nav-links" id="navLinks">
                     <a href="#about">About</a>
                     <a href="#skills">Skills</a>
                     <a href="#projects">Projects</a>
-                    <a href="#certifications">Certifications</a>
-                    <a href="#contact">Contact</a>
+                    <a href="#certifications">Badges</a>
+                    <!-- <a href="#contact">Contact</a> -->
                 </div>
                 <button class="mode-toggle" id="modeToggle">
                     <i class="fas fa-terminal"></i> CLI
@@ -51,11 +51,13 @@
                 <div class="hero-content">
                     <div class="hero-text fade-in">
                         <h1>Kosisochukwu Okafor</h1>
-                        <p>AI/ML Engineer & Software Developer</p>
+                        <p>AI/ML Engineer & Software Engineer</p>
                         <p class="hero-subtitle">Building intelligent systems that solve real-world problems</p>
                         <a href="#projects" class="btn fade-in delay-2">Explore My Work</a>
+                        <a href="#ai-assistant" class="btn fade-in delay-2">🤖</a>
+                        <a href="#contact" class="btn secondary fade-in delay-3">contact me</a>
                         <button id="playGameBtn" class="btn secondary fade-in delay-3">
-                            <i class="fas fa-gamepad"></i> Play a Game
+                            <i class="fas fa-gamepad"></i> Quick Game?
                         </button>
                     </div>
                     <div class="hero-image fade-in delay-3">
@@ -718,20 +720,22 @@
         </section>
 
         <!-- AI Assistant Section -->
-        <div class="container">
-            <div class="ai-assistant fade-in">
-                <h2 class="section-title">Chat with my AI Assistant</h2>
-                <div class="chat-container" id="chatContainer">
-                    <div class="chat-message bot-message">
-                        🤖 Hello! I'm an AI assistant powered by Kosisochukwu's RAG system. How can I help you today?
+         <section id="ai-assistant">
+            <div class="container">
+                <div class="ai-assistant fade-in">
+                    <h2 class="section-title">Chat with my AI Assistant</h2>
+                    <div class="chat-container" id="chatContainer">
+                        <div class="chat-message bot-message">
+                            🤖 Hello! I'm an AI assistant powered by Kosisochukwu's RAG system. How can I help you today?
+                        </div>
+                    </div>
+                    <div class="chat-input-group">
+                        <input type="text" id="chatInput" placeholder="Ask me anything...">
+                        <button id="sendButton" class="btn">Send</button>
                     </div>
                 </div>
-                <div class="chat-input-group">
-                    <input type="text" id="chatInput" placeholder="Ask me anything...">
-                    <button id="sendButton" class="btn">Send</button>
-                </div>
             </div>
-        </div>
+         </section>
 
         <!-- Game Modal -->
         <div id="gameModal" class="modal">
