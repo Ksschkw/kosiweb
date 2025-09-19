@@ -5,6 +5,67 @@ if (!sessionId) {
     localStorage.setItem("portfolio-session", sessionId);
 }
 
+// PWA functionality
+let deferredPrompt;
+const installPrompt = document.getElementById('installPrompt');
+const installButton = document.getElementById('installButton');
+const installPromptClose = document.getElementById('installPromptClose');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the mini-infobar from appearing on mobile
+    e.preventDefault();
+    // Stash the event so it can be triggered later
+    deferredPrompt = e;
+    // Show the install prompt
+    installPrompt.classList.add('show');
+    
+    // Log event for analytics
+    console.log('PWA installation available');
+});
+
+installButton.addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    
+    // Show the install prompt
+    deferredPrompt.prompt();
+    
+    // Wait for the user to respond to the prompt
+    const { outcome } = await deferredPrompt.userChoice;
+    
+    // Optionally, send analytics event with outcome of user choice
+    console.log(`User response to the install prompt: ${outcome}`);
+    
+    // We've used the prompt, and can't use it again
+    deferredPrompt = null;
+    
+    // Hide the install prompt
+    installPrompt.classList.remove('show');
+});
+
+installPromptClose.addEventListener('click', () => {
+    installPrompt.classList.remove('show');
+});
+
+window.addEventListener('appinstalled', () => {
+    // Hide the app-provided install promotion
+    installPrompt.classList.remove('show');
+    // Clear the deferredPrompt so it can be garbage collected
+    deferredPrompt = null;
+    // Optionally, send analytics event to indicate successful install
+    console.log('PWA was installed');
+});
+
+// Service Worker Registration for PWA
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then((registration) => {
+            console.log('SW registered: ', registration);
+        }).catch((registrationError) => {
+            console.log('SW registration failed: ', registrationError);
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize object detection
     initObjectDetection();
@@ -18,6 +79,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize queens game
     initQueensGame();
     
+    // Initialize Tic Tac Toe game
+    initTicTacToeGame();
+    
+    // Initialize Memory game
+    initMemoryGame();
+    
     // Initialize CLI mode
     initCLIMode();
     
@@ -26,6 +93,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize skill animations
     initSkillAnimations();
+    
+    // Initialize mobile menu
+    initMobileMenu();
     
     // AI Chat functionality
     const chatContainer = document.getElementById('chatContainer');
@@ -91,7 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.key === 'Enter') sendMessage();
     });
     
-    // New Chat Button (if you want to add one)
+    // New Chat Button
     const newChatBtn = document.createElement('button');
     newChatBtn.textContent = 'New Chat Session';
     newChatBtn.className = 'btn secondary';
@@ -163,14 +233,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Show toast notification
-    function showToast(message) {
+    function showToast(message, type = 'default', duration = 5000) {
         const toast = document.getElementById('toast');
         toast.textContent = message;
+        toast.className = 'toast'; // Reset classes
+        
+        // Add type class if specified
+        if (type !== 'default') {
+            toast.classList.add(type);
+        }
+        
         toast.classList.add('show');
         
+        // Hide after duration
         setTimeout(() => {
             toast.classList.remove('show');
-        }, 5000);
+        }, duration);
+        
+        // Also hide on click
+        toast.addEventListener('click', () => {
+            toast.classList.remove('show');
+        });
     }
     
     // Smooth scrolling for navigation links
@@ -202,6 +285,37 @@ document.addEventListener('DOMContentLoaded', function() {
         elem.style.transition = 'opacity 0.5s ease-in-out';
         observer.observe(elem);
     });
+    
+    // Mobile menu functionality
+    function initMobileMenu() {
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (mobileMenuBtn && navLinks) {
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('active');
+                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                    '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Close menu when clicking on a link
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+        }
+    }
     
     // Project filtering
     function initProjectFiltering() {
@@ -276,6 +390,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else if (gameType === 'queens') {
                     document.getElementById('queensGameSection').classList.remove('hidden');
                     document.getElementById('queensGameSection').scrollIntoView({ behavior: 'smooth' });
+                } else if (gameType === 'tictactoe') {
+                    document.getElementById('tictactoeGameSection').classList.remove('hidden');
+                    document.getElementById('tictactoeGameSection').scrollIntoView({ behavior: 'smooth' });
+                } else if (gameType === 'memory') {
+                    document.getElementById('memoryGameSection').classList.remove('hidden');
+                    document.getElementById('memoryGameSection').scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
@@ -612,14 +732,9 @@ document.addEventListener('DOMContentLoaded', function() {
             for (let row = 0; row < boardSize; row++) {
                 for (let col = 0; col < boardSize; col++) {
                     const cell = document.createElement('div');
-                    cell.className = 'queens-cell';
+                    cell.className = `queens-cell ${(row + col) % 2 === 0 ? 'light' : 'dark'}`;
                     cell.dataset.row = row;
                     cell.dataset.col = col;
-                    
-                    // Alternate cell colors
-                    if ((row + col) % 2 === 0) {
-                        cell.style.backgroundColor = 'var(--terminal-bg)';
-                    }
                     
                     // Add queen if present
                     if (board[row][col]) {
@@ -629,6 +744,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Check if cell is threatened
                     if (isThreatened(row, col) && !board[row][col]) {
                         cell.classList.add('threatened');
+                    }
+                    
+                    // Show valid placement indicator
+                    if (!board[row][col] && !isThreatened(row, col) && queens.length < boardSize) {
+                        cell.classList.add('valid');
                     }
                     
                     cell.addEventListener('click', () => toggleQueen(row, col));
@@ -644,6 +764,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 board[row][col] = false;
                 queens = queens.filter(q => !(q.row === row && q.col === col));
             } else {
+                // Check if placement is valid
+                if (isThreatened(row, col)) {
+                    showToast('Cannot place queen in a threatened position!');
+                    return;
+                }
+                
                 // Add queen
                 board[row][col] = true;
                 queens.push({ row, col });
@@ -754,6 +880,355 @@ document.addEventListener('DOMContentLoaded', function() {
         initQueensGame();
     }
     
+    // Tic Tac Toe Game
+    // Unbeatable Tic-Tac-Toe AI using Minimax algorithm
+    function initTicTacToeGame() {
+        const tictactoeBoard = document.getElementById('tictactoeBoard');
+        const gameStatus = document.getElementById('gameStatus');
+        const newTicTacToeGameBtn = document.getElementById('newTicTacToeGameBtn');
+        
+        let currentPlayer = 'X';
+        let gameBoard = ['', '', '', '', '', '', '', '', ''];
+        let gameActive = true;
+        const humanPlayer = 'X';
+        const aiPlayer = 'O';
+        
+        // Winning combinations
+        const winPatterns = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+            [0, 4, 8], [2, 4, 6]             // diagonals
+        ];
+        
+        // Initialize the Tic Tac Toe game
+        function initTicTacToe() {
+            currentPlayer = 'X';
+            gameBoard = ['', '', '', '', '', '', '', '', ''];
+            gameActive = true;
+            gameStatus.textContent = 'Your turn (X)';
+            
+            // Render board
+            renderTicTacToeBoard();
+        }
+        
+        // Render Tic Tac Toe board
+        function renderTicTacToeBoard() {
+            tictactoeBoard.innerHTML = '';
+            
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'ttt-cell';
+                cell.dataset.index = i;
+                
+                if (gameBoard[i] === 'X') {
+                    cell.textContent = 'X';
+                    cell.classList.add('x');
+                } else if (gameBoard[i] === 'O') {
+                    cell.textContent = 'O';
+                    cell.classList.add('o');
+                }
+                
+                cell.addEventListener('click', () => handleCellClick(i));
+                tictactoeBoard.appendChild(cell);
+            }
+        }
+        
+        // Handle cell click
+        function handleCellClick(index) {
+            if (gameBoard[index] !== '' || !gameActive || currentPlayer !== humanPlayer) return;
+            
+            // Player's move
+            makeMove(index, humanPlayer);
+            
+            // Check for win or draw
+            if (checkWin(humanPlayer)) {
+                gameStatus.textContent = 'You win!';
+                gameActive = false;
+                highlightWinningCells(humanPlayer);
+                showToast('Congratulations! You won!');
+                return;
+            }
+            
+            if (checkDraw()) {
+                gameStatus.textContent = 'Game ended in a draw!';
+                gameActive = false;
+                showToast('The game ended in a draw!');
+                return;
+            }
+            
+            // Switch to AI's turn
+            currentPlayer = aiPlayer;
+            gameStatus.textContent = "Computer's turn (O)";
+            
+            // AI's move (after a short delay)
+            setTimeout(makeAiMove, 500);
+        }
+        
+        // Make a move
+        function makeMove(index, player) {
+            gameBoard[index] = player;
+            renderTicTacToeBoard();
+        }
+        
+        // AI move using minimax algorithm
+        function makeAiMove() {
+            if (!gameActive) return;
+            
+            const bestMove = getBestMove();
+            makeMove(bestMove, aiPlayer);
+            
+            // Check for win or draw
+            if (checkWin(aiPlayer)) {
+                gameStatus.textContent = 'Computer wins!';
+                gameActive = false;
+                highlightWinningCells(aiPlayer);
+                showToast('Computer wins! Better luck next time!');
+                return;
+            }
+            
+            if (checkDraw()) {
+                gameStatus.textContent = 'Game ended in a draw!';
+                gameActive = false;
+                showToast('The game ended in a draw!');
+                return;
+            }
+            
+            // Switch back to player's turn
+            currentPlayer = humanPlayer;
+            gameStatus.textContent = 'Your turn (X)';
+        }
+        
+        // Get the best move using minimax algorithm
+        function getBestMove() {
+            // Easy mode - just pick a random move
+            // return getRandomMove();
+            
+            // Unbeatable mode - use minimax algorithm
+            let bestScore = -Infinity;
+            let bestMove;
+            
+            for (let i = 0; i < 9; i++) {
+                if (gameBoard[i] === '') {
+                    gameBoard[i] = aiPlayer;
+                    let score = minimax(gameBoard, 0, false);
+                    gameBoard[i] = '';
+                    
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestMove = i;
+                    }
+                }
+            }
+            
+            return bestMove;
+        }
+        
+        // Minimax algorithm
+        function minimax(board, depth, isMaximizing) {
+            // Check for terminal states
+            if (checkWin(aiPlayer)) return 10 - depth;
+            if (checkWin(humanPlayer)) return depth - 10;
+            if (checkDraw()) return 0;
+            
+            if (isMaximizing) {
+                let bestScore = -Infinity;
+                
+                for (let i = 0; i < 9; i++) {
+                    if (board[i] === '') {
+                        board[i] = aiPlayer;
+                        let score = minimax(board, depth + 1, false);
+                        board[i] = '';
+                        bestScore = Math.max(score, bestScore);
+                    }
+                }
+                
+                return bestScore;
+            } else {
+                let bestScore = Infinity;
+                
+                for (let i = 0; i < 9; i++) {
+                    if (board[i] === '') {
+                        board[i] = humanPlayer;
+                        let score = minimax(board, depth + 1, true);
+                        board[i] = '';
+                        bestScore = Math.min(score, bestScore);
+                    }
+                }
+                
+                return bestScore;
+            }
+        }
+        
+        // Get a random move (for easy mode)
+        function getRandomMove() {
+            let availableSpots = [];
+            for (let i = 0; i < 9; i++) {
+                if (gameBoard[i] === '') {
+                    availableSpots.push(i);
+                }
+            }
+            
+            return availableSpots[Math.floor(Math.random() * availableSpots.length)];
+        }
+        
+        // Check for win
+        function checkWin(player) {
+            for (const pattern of winPatterns) {
+                const [a, b, c] = pattern;
+                if (gameBoard[a] === player && gameBoard[b] === player && gameBoard[c] === player) {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+        
+        // Check for draw
+        function checkDraw() {
+            return !gameBoard.includes('');
+        }
+        
+        // Highlight winning cells
+        function highlightWinningCells(player) {
+            for (const pattern of winPatterns) {
+                const [a, b, c] = pattern;
+                if (gameBoard[a] === player && gameBoard[b] === player && gameBoard[c] === player) {
+                    document.querySelector(`.ttt-cell[data-index="${a}"]`).classList.add('winning-cell');
+                    document.querySelector(`.ttt-cell[data-index="${b}"]`).classList.add('winning-cell');
+                    document.querySelector(`.ttt-cell[data-index="${c}"]`).classList.add('winning-cell');
+                    break;
+                }
+            }
+        }
+        
+        // Event listeners
+        newTicTacToeGameBtn.addEventListener('click', initTicTacToe);
+        
+        // Initialize the Tic Tac Toe game
+        initTicTacToe();
+    }
+    
+    // Memory Game
+    function initMemoryGame() {
+        const memoryBoard = document.getElementById('memoryBoard');
+        const movesCounter = document.getElementById('movesCounter');
+        const pairsCounter = document.getElementById('pairsCounter');
+        const newMemoryGameBtn = document.getElementById('newMemoryGameBtn');
+        
+        let cards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let moves = 0;
+        let lockBoard = false;
+        
+        // Initialize the Memory game
+        function initMemoryGame() {
+            cards = [];
+            flippedCards = [];
+            matchedPairs = 0;
+            moves = 0;
+            lockBoard = false;
+            
+            movesCounter.textContent = 'Moves: 0';
+            pairsCounter.textContent = 'Pairs found: 0/8';
+            
+            // Create cards with pairs
+            const symbols = ['🍕', '🍔', '🍎', '🍉', '🍇', '🍓', '🍦', '🍩'];
+            cards = [...symbols, ...symbols];
+            
+            // Shuffle cards
+            shuffleCards();
+            
+            // Render board
+            renderMemoryBoard();
+        }
+        
+        // Shuffle cards
+        function shuffleCards() {
+            for (let i = cards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cards[i], cards[j]] = [cards[j], cards[i]];
+            }
+        }
+        
+        // Render Memory board
+        function renderMemoryBoard() {
+            memoryBoard.innerHTML = '';
+            
+            cards.forEach((symbol, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.dataset.index = index;
+                
+                const cardInner = document.createElement('div');
+                cardInner.className = 'memory-card-inner';
+                
+                const cardFront = document.createElement('div');
+                cardFront.className = 'memory-card-front';
+                
+                const cardBack = document.createElement('div');
+                cardBack.className = 'memory-card-back';
+                cardBack.textContent = symbol;
+                
+                cardInner.appendChild(cardFront);
+                cardInner.appendChild(cardBack);
+                card.appendChild(cardInner);
+                
+                card.addEventListener('click', () => flipCard(card, index));
+                memoryBoard.appendChild(card);
+            });
+        }
+        
+        // Flip card
+        function flipCard(card, index) {
+            if (lockBoard || card.classList.contains('flipped') || flippedCards.length === 2) return;
+            
+            card.classList.add('flipped');
+            flippedCards.push({ card, index });
+            
+            if (flippedCards.length === 2) {
+                lockBoard = true;
+                moves++;
+                movesCounter.textContent = `Moves: ${moves}`;
+                
+                checkForMatch();
+            }
+        }
+        
+        // Check for match
+        function checkForMatch() {
+            const [firstCard, secondCard] = flippedCards;
+            
+            if (cards[firstCard.index] === cards[secondCard.index]) {
+                // Match found
+                matchedPairs++;
+                pairsCounter.textContent = `Pairs found: ${matchedPairs}/8`;
+                
+                flippedCards = [];
+                lockBoard = false;
+                
+                // Check if game is complete
+                if (matchedPairs === 8) {
+                    showToast(`Congratulations! You completed the game in ${moves} moves!`);
+                }
+            } else {
+                // No match
+                setTimeout(() => {
+                    firstCard.card.classList.remove('flipped');
+                    secondCard.card.classList.remove('flipped');
+                    flippedCards = [];
+                    lockBoard = false;
+                }, 1000);
+            }
+        }
+        
+        // Event listeners
+        newMemoryGameBtn.addEventListener('click', initMemoryGame);
+        
+        // Initialize the Memory game
+        initMemoryGame();
+    }
+    
     // CLI Mode
     function initCLIMode() {
         const modeToggle = document.getElementById('modeToggle');
@@ -854,4 +1329,52 @@ document.addEventListener('DOMContentLoaded', function() {
             cliContent.appendChild(outputDiv);
         }
     }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Get modal elements
+    const playGameBtn = document.getElementById('playGameBtn');
+    const gameModal = document.getElementById('gameModal');
+    const closeModal = document.querySelector('.close');
+    const gameOptions = document.querySelectorAll('.game-option');
+    
+    // Open modal when button is clicked
+    playGameBtn.addEventListener('click', () => {
+        gameModal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+    });
+    
+    // Close modal when X is clicked
+    closeModal.addEventListener('click', () => {
+        gameModal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === gameModal) {
+            gameModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // Handle game selection
+    gameOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const gameType = option.getAttribute('data-game');
+            gameModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Here you would handle the game selection
+            showToast(`You selected ${gameType} game!`);
+        });
+    });
+    
+    // Add keyboard escape functionality
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && gameModal.style.display === 'block') {
+            gameModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
 });
