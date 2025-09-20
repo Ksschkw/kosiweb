@@ -66,6 +66,16 @@ if ('serviceWorker' in navigator) {
     });
 }
 
+// Configure marked.js
+marked.setOptions({
+    breaks: true,
+    gfm: true,
+    highlight: function(code, lang) {
+        // I shall add syntax highlighting later(lol, i know i will forget)
+        return code;
+    }
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize object detection
     initObjectDetection();
@@ -148,10 +158,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
+    // function addMessage(text, sender) {
+    //     const messageDiv = document.createElement('div');
+    //     messageDiv.className = `chat-message ${sender}-message`;
+    //     messageDiv.textContent = text;
+    //     chatContainer.appendChild(messageDiv);
+    //     chatContainer.scrollTop = chatContainer.scrollHeight;
+    // }
     function addMessage(text, sender) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `chat-message ${sender}-message`;
-        messageDiv.textContent = text;
+        
+        // Convert markdown to HTML and sanitize it
+        const sanitizedHTML = DOMPurify.sanitize(marked.parse(text));
+        messageDiv.innerHTML = sanitizedHTML;
+        
         chatContainer.appendChild(messageDiv);
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }

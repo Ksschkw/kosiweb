@@ -1620,3 +1620,108 @@ footer {
       font-size: 20px;
     }
   }
+
+/* markdown stuff */
+
+/* Markdown Styling for Chat Messages */
+.chat-message h1,
+.chat-message h2,
+.chat-message h3,
+.chat-message h4,
+.chat-message h5,
+.chat-message h6 {
+    margin: 1rem 0 0.5rem 0;
+    color: var(--accent-color);
+    line-height: 1.2;
+}
+
+.chat-message h1 {
+    font-size: 1.8rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.3rem;
+}
+
+.chat-message h2 {
+    font-size: 1.5rem;
+}
+
+.chat-message h3 {
+    font-size: 1.3rem;
+}
+
+.chat-message p {
+    margin: 0.8rem 0;
+    line-height: 1.6;
+}
+
+.chat-message ul,
+.chat-message ol {
+    margin: 0.8rem 0;
+    padding-left: 2rem;
+}
+
+.chat-message li {
+    margin: 0.4rem 0;
+}
+
+.chat-message blockquote {
+    border-left: 4px solid var(--accent-color);
+    margin: 1rem 0;
+    padding-left: 1rem;
+    color: #ccc;
+    font-style: italic;
+}
+
+.chat-message code {
+    background: var(--terminal-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.chat-message pre {
+    background: var(--terminal-bg);
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.chat-message pre code {
+    background: none;
+    padding: 0;
+}
+
+.chat-message a {
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.chat-message a:hover {
+    color: var(--accent-hover);
+}
+
+.chat-message table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.chat-message th,
+.chat-message td {
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    text-align: left;
+}
+
+.chat-message th {
+    background: rgba(255, 119, 0, 0.1);
+}
+
+.chat-message img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin: 0.5rem 0;
+}
