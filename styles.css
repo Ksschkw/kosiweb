@@ -1217,13 +1217,13 @@ footer {
         height: 280px;
     }
 
-    .nav-links {
+    #navLinks {
         gap: 1rem;
     }
 }
 
 @media (max-width: 768px) {
-    .nav-links {
+    #navLinks {
         display: none;
         position: fixed;
         top: 80px;
@@ -1239,18 +1239,19 @@ footer {
         z-index: 99;
     }
 
-    .nav-links.active {
+    #navLinks.active {
         transform: translateY(0);
+        display: flex; /* <--- make sure it shows */
     }
 
-    .nav-links a {
+    #navLinks a {
         padding: 0.5rem 0;
         border-bottom: 1px solid var(--border-color);
         width: 100%;
         text-align: center;
     }
 
-    .nav-links a:last-child {
+    #navLinks a:last-child {
         border-bottom: none;
     }
 
@@ -1385,7 +1386,7 @@ footer {
         display: block;
     }
 
-    .nav-links {
+    #navLinks {
         position: fixed;
         top: 80px;
         left: 0;
@@ -1400,16 +1401,17 @@ footer {
         z-index: 99;
     }
 
-    .nav-links.active {
+    #navLinks.active {
         transform: translateY(0);
+        display: flex; /* <--- make sure it shows */
     }
 
-    .nav-links a {
+    #navLinks a {
         padding: 0.5rem 0;
         border-bottom: 1px solid var(--border-color);
     }
 
-    .nav-links a:last-child {
+    #navLinks a:last-child {
         border-bottom: none;
     }
 }
@@ -1570,3 +1572,51 @@ footer {
     cursor: pointer;
     font-size: 1.2rem;
 }
+
+/* Add this to your CSS */
+.ai-assistant-icon {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 999;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+  }
+  
+  .ai-assistant-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+  }
+  
+  .ai-assistant-icon i {
+    font-size: 24px;
+    color: #000;
+  }
+  
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  
+  @media (max-width: 768px) {
+    .ai-assistant-icon {
+      bottom: 70px;
+      left: 15px;
+      width: 50px;
+      height: 50px;
+    }
+    
+    .ai-assistant-icon i {
+      font-size: 20px;
+    }
+  }

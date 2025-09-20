@@ -290,6 +290,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function initMobileMenu() {
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
+        // const navLinks = document.querySelector('.nav-links');
         
         if (mobileMenuBtn && navLinks) {
             mobileMenuBtn.addEventListener('click', (e) => {
@@ -1378,3 +1379,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// AI Assistant Icon
+const aiAssistantIcon = document.getElementById('ai-assistant-icon');
+if (aiAssistantIcon) {
+  aiAssistantIcon.addEventListener('click', () => {
+    document.getElementById('ai-assistant').scrollIntoView({ 
+      behavior: 'smooth' 
+    });
+  });
+}
