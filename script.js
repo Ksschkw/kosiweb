@@ -108,63 +108,145 @@ document.addEventListener('DOMContentLoaded', function() {
     initMobileMenu();
     
     // AI Chat functionality
+    // AI Chat functionality with streaming
     const chatContainer = document.getElementById('chatContainer');
     const chatInput = document.getElementById('chatInput');
     const sendButton = document.getElementById('sendButton');
-    
+
+    let isGenerating = false;
+
     async function sendMessage() {
         const message = chatInput.value.trim();
-        if (!message) return;
+        if (!message || isGenerating) return;
         
         // Add user message
         addMessage(message, 'user');
         chatInput.value = '';
         
+        // Disable input while generating
+        setInputState(false);
+        
         try {
+            // Show typing indicator
+            const typingIndicator = showTypingIndicator();
+            
+            // Prepare the request body
+            const requestBody = {
+                query: message,
+                session_id: sessionId
+            };
+            
             // Check if it's a roast request
             if (message.toLowerCase().includes('roast me') || message.toLowerCase().includes('roast')) {
-                // Call RAG endpoint for roast
-                const response = await fetch('https://p01--ragkss--qw5xhkblp8hy.code.run/query', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        query: `Generate a funny roast based on: ${message}`,
-                        session_id: sessionId + '-roast'
-                    })
-                });
-                
-                const data = await response.json();
-                addMessage(data.response, 'bot');
-            } else {
-                // Regular chat with unique session ID
-                const response = await fetch('https://p01--ragkss--qw5xhkblp8hy.code.run/query', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        query: message,
-                        session_id: sessionId
-                    })
-                });
-                
-                const data = await response.json();
-                addMessage(data.response, 'bot');
+                requestBody.query = `Generate a funny roast based on: ${message}`;
+                requestBody.session_id = sessionId + '-roast';
             }
+            
+            // Call streaming endpoint
+            const response = await fetch('https://p01--ragkss--qw5xhkblp8hy.code.run/stream', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody)
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            // Remove typing indicator
+            typingIndicator.remove();
+            
+            // Create message container for streaming
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'chat-message bot-message streaming-message';
+            chatContainer.appendChild(messageDiv);
+            
+            // Handle streaming response
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder();
+            let accumulatedText = '';
+            
+            while (true) {
+                const { value, done } = await reader.read();
+                
+                if (done) break;
+                
+                const chunk = decoder.decode(value);
+                const lines = chunk.split('\n');
+                
+                for (const line of lines) {
+                    if (line.startsWith('data: ')) {
+                        try {
+                            const data = JSON.parse(line.slice(6));
+                            
+                            if (data.chunk) {
+                                accumulatedText += data.chunk;
+                                
+                                // Update message content with markdown support
+                                const sanitizedHTML = DOMPurify.sanitize(marked.parse(accumulatedText));
+                                messageDiv.innerHTML = sanitizedHTML;
+                                
+                                // Scroll to bottom
+                                chatContainer.scrollTop = chatContainer.scrollHeight;
+                            }
+                            
+                            if (data.done) {
+                                messageDiv.classList.remove('streaming-message');
+                                break;
+                            }
+                        } catch (e) {
+                            console.error('Error parsing SSE data:', e);
+                        }
+                    }
+                }
+            }
+            
         } catch (error) {
+            console.error('Stream error:', error);
+            
+            // Remove typing indicator if it exists
+            const typingIndicator = document.querySelector('.typing-indicator');
+            if (typingIndicator) typingIndicator.remove();
+            
+            // Show error message
             addMessage("Sorry, I'm having trouble connecting to the AI service. Please try again later.", 'bot');
+        } finally {
+            // Re-enable input
+            setInputState(true);
         }
     }
-    
-    // function addMessage(text, sender) {
-    //     const messageDiv = document.createElement('div');
-    //     messageDiv.className = `chat-message ${sender}-message`;
-    //     messageDiv.textContent = text;
-    //     chatContainer.appendChild(messageDiv);
-    //     chatContainer.scrollTop = chatContainer.scrollHeight;
-    // }
+
+    function showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'chat-message bot-message typing-indicator';
+        typingDiv.innerHTML = `
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        `;
+        chatContainer.appendChild(typingDiv);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+        return typingDiv;
+    }
+
+    function setInputState(enabled) {
+        isGenerating = !enabled;
+        chatInput.disabled = !enabled;
+        sendButton.disabled = !enabled;
+        
+        if (enabled) {
+            chatInput.placeholder = "Ask me anything...";
+            sendButton.innerHTML = 'Send';
+        } else {
+            chatInput.placeholder = "AI is thinking...";
+            sendButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+        }
+    }
+
     function addMessage(text, sender) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `chat-message ${sender}-message`;
@@ -176,18 +258,20 @@ document.addEventListener('DOMContentLoaded', function() {
         chatContainer.appendChild(messageDiv);
         chatContainer.scrollTop = chatContainer.scrollHeight;
     }
-    
+
     sendButton.addEventListener('click', sendMessage);
     chatInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') sendMessage();
+        if (e.key === 'Enter' && !isGenerating) sendMessage();
     });
-    
+
     // New Chat Button
     const newChatBtn = document.createElement('button');
     newChatBtn.textContent = 'New Chat Session';
     newChatBtn.className = 'btn secondary';
     newChatBtn.style.marginTop = '1rem';
     newChatBtn.addEventListener('click', () => {
+        if (isGenerating) return;
+        
         // Generate a new session ID
         sessionId = "portfolio-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
         localStorage.setItem("portfolio-session", sessionId);
@@ -197,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         showToast('New chat session started!');
     });
-    
+
     // Add the new chat button to the AI assistant section
     document.querySelector('.chat-input-group').after(newChatBtn);
     
@@ -1404,9 +1488,9 @@ document.addEventListener('DOMContentLoaded', function() {
 // AI Assistant Icon
 const aiAssistantIcon = document.getElementById('ai-assistant-icon');
 if (aiAssistantIcon) {
-  aiAssistantIcon.addEventListener('click', () => {
-    document.getElementById('ai-assistant').scrollIntoView({ 
-      behavior: 'smooth' 
+    aiAssistantIcon.addEventListener('click', () => {
+        document.getElementById('ai-assistant').scrollIntoView({ 
+            behavior: 'smooth' 
+        });
     });
-  });
 }
