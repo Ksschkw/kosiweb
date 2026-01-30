@@ -116,118 +116,112 @@ document.addEventListener('DOMContentLoaded', function() {
     let isGenerating = false;
 
     async function sendMessage() {
-        const message = chatInput.value.trim();
-        if (!message || isGenerating) return;
-        
-        // Add user message
-        addMessage(message, 'user');
-        chatInput.value = '';
-        
-        // Disable input while generating
-        setInputState(false);
-        
-        try {
-            // Show typing indicator
-            const typingIndicator = showTypingIndicator();
-            
-            // Prepare the request body
-            const requestBody = {
-                query: message,
-                session_id: sessionId
-            };
-            
-            // Check if it's a roast request
-            if (message.toLowerCase().includes('roast me') || message.toLowerCase().includes('roast')) {
-                requestBody.query = `Generate a funny roast based on: ${message}`;
-                requestBody.session_id = sessionId + '-roast';
+    const message = chatInput.value.trim();
+    if (!message || isGenerating) return;
+
+    // Add user message
+    addMessage(message, 'user');
+    chatInput.value = '';
+
+    // Disable input while generating
+    setInputState(false);
+
+    try {
+        // Show typing indicator
+        const typingIndicator = showTypingIndicator();
+
+        // Prepare the request body
+        const requestBody = {
+            query: message,
+            session_id: sessionId
+        };
+
+        // Check if it's a roast request
+        if (message.toLowerCase().includes('roast me') || message.toLowerCase().includes('roast')) {
+            requestBody.query = `Generate a funny roast based on: ${message}`;
+            requestBody.session_id = sessionId + '-roast';
+        }
+
+        // Call streaming endpoint
+        const response = await fetch('https://p01--ragkss--qw5xhkblp8hy.code.run/stream', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(requestBody)
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        // Remove typing indicator
+        typingIndicator.remove();
+
+        // Create message container for streaming
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'chat-message bot-message streaming-message';
+        chatContainer.appendChild(messageDiv);
+
+        // --- STREAMING SSE RESPONSE ---
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder();
+
+        let buffer = '';           // holds incomplete lines
+        let accumulatedText = '';
+        let streamDone = false;
+
+        while (!streamDone) {
+            const { value, done } = await reader.read();
+            if (done) break;
+
+            buffer += decoder.decode(value, { stream: true });
+
+            let lines = buffer.split('\n');
+            buffer = lines.pop(); // keep incomplete line for next read
+
+            for (const line of lines) {
+                if (!line.startsWith('data: ')) continue;
+
+                const payload = line.slice(6).trim();
+                if (!payload) continue;
+
+                let data;
+                try {
+                    data = JSON.parse(payload);
+                } catch {
+                    continue; // wait for next chunk if incomplete JSON
+                }
+
+                if (data.chunk) {
+                    accumulatedText += data.chunk;
+
+                    messageDiv.innerHTML = DOMPurify.sanitize(
+                        marked.parse(accumulatedText)
+                    );
+                    chatContainer.scrollTop = chatContainer.scrollHeight;
+                }
+
+                if (data.done) {
+                    streamDone = true;
+                    messageDiv.classList.remove('streaming-message');
+                    break;
+                }
             }
-            
-            // Call streaming endpoint
-            const response = await fetch('https://p01--ragkss--qw5xhkblp8hy.code.run/stream', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(requestBody)
-            });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            
-            // Remove typing indicator
-            typingIndicator.remove();
-            
-            // Create message container for streaming
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'chat-message bot-message streaming-message';
-            chatContainer.appendChild(messageDiv);
-            
-            // Handle streaming response
-            const reader = response.body.getReader();
-const decoder = new TextDecoder();
-
-let buffer = '';           // keeps partial lines between reads
-let accumulatedText = '';
-let streamDone = false;
-
-while (!streamDone) {
-    const { value, done } = await reader.read();
-    if (done) break;
-
-    // Decode and append to buffer
-    buffer += decoder.decode(value, { stream: true });
-
-    // Split into lines; keep last line if incomplete
-    let lines = buffer.split('\n');
-    buffer = lines.pop();
-
-    for (const line of lines) {
-        if (!line.startsWith('data: ')) continue;
-
-        const payload = line.slice(6).trim();
-        if (!payload) continue;
-
-        let data;
-        try {
-            data = JSON.parse(payload);
-        } catch {
-            continue; // incomplete JSON, wait for next chunk
         }
 
-        if (data.chunk) {
-            accumulatedText += data.chunk;
+    } catch (error) {
+        console.error('Stream error:', error);
 
-            // Update message with markdown
-            messageDiv.innerHTML = DOMPurify.sanitize(
-                marked.parse(accumulatedText)
-            );
+        // Remove typing indicator if it exists
+        const typingIndicator = document.querySelector('.typing-indicator');
+        if (typingIndicator) typingIndicator.remove();
 
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        }
-
-        if (data.done) {
-            streamDone = true;
-            messageDiv.classList.remove('streaming-message');
-            break;
-        }
+        // Show error message
+        addMessage("Sorry, I'm having trouble connecting to the AI service. Please try again later.", 'bot');
+    } finally {
+        // Re-enable input
+        setInputState(true);
     }
 }
-            
-        } catch (error) {
-            console.error('Stream error:', error);
-            
-            // Remove typing indicator if it exists
-            const typingIndicator = document.querySelector('.typing-indicator');
-            if (typingIndicator) typingIndicator.remove();
-            
-            // Show error message
-            addMessage("Sorry, I'm having trouble connecting to the AI service. Please try again later.", 'bot');
-        } finally {
-            // Re-enable input
-            setInputState(true);
-        }
-    }
 
     function showTypingIndicator() {
         const typingDiv = document.createElement('div');
