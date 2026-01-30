@@ -165,43 +165,54 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Handle streaming response
             const reader = response.body.getReader();
-            const decoder = new TextDecoder();
-            let accumulatedText = '';
-            
-            while (true) {
-                const { value, done } = await reader.read();
-                
-                if (done) break;
-                
-                const chunk = decoder.decode(value);
-                const lines = chunk.split('\n');
-                
-                for (const line of lines) {
-                    if (line.startsWith('data: ')) {
-                        try {
-                            const data = JSON.parse(line.slice(6));
-                            
-                            if (data.chunk) {
-                                accumulatedText += data.chunk;
-                                
-                                // Update message content with markdown support
-                                const sanitizedHTML = DOMPurify.sanitize(marked.parse(accumulatedText));
-                                messageDiv.innerHTML = sanitizedHTML;
-                                
-                                // Scroll to bottom
-                                chatContainer.scrollTop = chatContainer.scrollHeight;
-                            }
-                            
-                            if (data.done) {
-                                messageDiv.classList.remove('streaming-message');
-                                break;
-                            }
-                        } catch (e) {
-                            console.error('Error parsing SSE data:', e);
-                        }
-                    }
-                }
-            }
+const decoder = new TextDecoder();
+
+let buffer = '';           // keeps partial lines between reads
+let accumulatedText = '';
+let streamDone = false;
+
+while (!streamDone) {
+    const { value, done } = await reader.read();
+    if (done) break;
+
+    // Decode and append to buffer
+    buffer += decoder.decode(value, { stream: true });
+
+    // Split into lines; keep last line if incomplete
+    let lines = buffer.split('\n');
+    buffer = lines.pop();
+
+    for (const line of lines) {
+        if (!line.startsWith('data: ')) continue;
+
+        const payload = line.slice(6).trim();
+        if (!payload) continue;
+
+        let data;
+        try {
+            data = JSON.parse(payload);
+        } catch {
+            continue; // incomplete JSON, wait for next chunk
+        }
+
+        if (data.chunk) {
+            accumulatedText += data.chunk;
+
+            // Update message with markdown
+            messageDiv.innerHTML = DOMPurify.sanitize(
+                marked.parse(accumulatedText)
+            );
+
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        if (data.done) {
+            streamDone = true;
+            messageDiv.classList.remove('streaming-message');
+            break;
+        }
+    }
+}
             
         } catch (error) {
             console.error('Stream error:', error);
