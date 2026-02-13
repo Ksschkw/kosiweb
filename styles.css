@@ -1,17 +1,17 @@
 :root {
-    --primary-bg: #0a0a14;
-    --secondary-bg: #12121d;
+    --primary-bg: #000000;
+    --secondary-bg: #111111;
     --text-color: #ffffff;
-    --accent-color: #ff7700;
-    --accent-hover: #ff9900;
-    --border-color: #2a2a3b;
-    --card-bg: #1a1a2a;
-    --terminal-bg: #0d0d1a;
-    --terminal-text: #00ff9d;
-    --success-color: #00ff9d;
-    --warning-color: #ffcc00;
-    --error-color: #ff3860;
-    --spotify-green: #1DB954;
+    --accent-color: #ffffff;
+    --accent-hover: #cccccc;
+    --border-color: #333333;
+    --card-bg: #0a0a0a;
+    --terminal-bg: #000000;
+    --terminal-text: #ffffff;
+    --success-color: #ffffff;
+    --warning-color: #888888;
+    --error-color: #999999;
+    --spotify-green: #e0e0e0;
 }
 
 * {
@@ -26,9 +26,11 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     overflow-x: hidden;
+    /* geometric background pattern */
     background-image: 
-        radial-gradient(circle at 15% 50%, rgba(255, 119, 0, 0.1) 0%, transparent 25%),
-        radial-gradient(circle at 85% 30%, rgba(0, 255, 157, 0.1) 0%, transparent 25%);
+        linear-gradient(var(--secondary-bg) 1px, transparent 1px),
+        linear-gradient(90deg, var(--secondary-bg) 1px, transparent 1px);
+    background-size: 50px 50px;
 }
 
 .container {
@@ -136,6 +138,11 @@ nav {
     position: relative;
     overflow: hidden;
 }
+.hero {
+    background-image: 
+        radial-gradient(circle at 15% 50%, rgba(255,255,255,0.05) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(255,255,255,0.05) 0%, transparent 25%);
+}
 
 .hero-content {
     display: flex;
@@ -161,9 +168,11 @@ nav {
     margin: 0 auto;
     position: relative;
     animation: pulse 4s infinite ease-in-out;
-    filter: drop-shadow(0 0 20px rgba(255, 119, 0, 0.5));
+    /* filter: drop-shadow(0 0 20px rgba(255, 119, 0, 0.5)); */
     clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    /* background: linear-gradient(135deg, var(--accent-color), var(--success-color)); */
     background: linear-gradient(135deg, var(--accent-color), var(--success-color));
+    filter: drop-shadow(0 0 20px rgba(255,255,255,0.3));
     display: flex;
     align-items: center;
     justify-content: center;
