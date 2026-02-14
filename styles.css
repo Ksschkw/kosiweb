@@ -367,13 +367,20 @@ section {
     border-radius: 5px;
     overflow: hidden;
 }
-
+/* 
 .skill-progress {
     height: 100%;
     background: linear-gradient(to right, var(--accent-color), var(--success-color));
     border-radius: 5px;
     width: 0;
     transition: width 1s ease-in-out;
+} */
+.skill-progress {
+    height: 100%;
+    background: linear-gradient(to right, var(--accent-color), var(--success-color));
+    border-radius: 5px;
+    width: 100% !important; /* always full */
+    transition: none; /* remove animation */
 }
 
 /* Portfolio Tabs */
@@ -1925,4 +1932,37 @@ footer {
         padding: 0.8rem;
         font-size: 0.9rem;
     }
+}
+
+.cli-prompt {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+.cli-output {
+    white-space: pre-wrap;
+}
+
+/* Mobile touch improvements */
+button, .btn, .game-option, .project-card {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Snake Game */
+.snake-game-board {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--terminal-bg);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#snakeCanvas {
+    background: #000;
+    border: 2px solid var(--border-color);
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    aspect-ratio: 1;
 }

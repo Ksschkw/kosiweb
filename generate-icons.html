@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Generate PWA Icons</title>
+    <style>
+        body { background: #111; color: #fff; font-family: monospace; text-align: center; padding: 2rem; }
+        canvas { border: 1px solid #333; margin: 1rem; background: #000; }
+        button { background: #fff; color: #000; border: none; padding: 0.5rem 1rem; margin: 0.5rem; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Generate "KS" Icons</h1>
+    <p>Icons will be saved to your downloads folder. Place them in the <code>/icons</code> directory.</p>
+    
+    <div>
+        <h2>192x192</h2>
+        <canvas id="canvas192" width="192" height="192"></canvas><br>
+        <button id="download192">Download 192.png</button>
+    </div>
+    
+    <div>
+        <h2>512x512</h2>
+        <canvas id="canvas512" width="512" height="512"></canvas><br>
+        <button id="download512">Download 512.png</button>
+    </div>
+
+    <script>
+        function drawIcon(ctx, size) {
+            // Clear with black
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, size, size);
+            
+            // Draw a light gray hexagon shape (optional)
+            ctx.fillStyle = '#ffffff';
+            ctx.shadowColor = '#ffffff';
+            ctx.shadowBlur = 20;
+            
+            // Simple "KS" text
+            ctx.font = `bold ${size * 0.5}px 'Courier New', monospace`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = '#ffffff';
+            ctx.shadowBlur = 15;
+            ctx.fillText('KS', size/2, size/2);
+            
+            // Optionally draw a subtle hexagon outline
+            ctx.shadowBlur = 0;
+            ctx.strokeStyle = '#ffffff';
+            ctx.lineWidth = size * 0.02;
+            ctx.beginPath();
+            // Hexagon coordinates (approximate)
+            let hexRadius = size * 0.4;
+            for (let i = 0; i < 6; i++) {
+                let angle = i * Math.PI / 3 - Math.PI / 2;
+                let x = size/2 + hexRadius * Math.cos(angle);
+                let y = size/2 + hexRadius * Math.sin(angle);
+                if (i === 0) ctx.moveTo(x, y);
+                else ctx.lineTo(x, y);
+            }
+            ctx.closePath();
+            ctx.stroke();
+        }
+
+        const canvas192 = document.getElementById('canvas192');
+        const ctx192 = canvas192.getContext('2d');
+        drawIcon(ctx192, 192);
+
+        const canvas512 = document.getElementById('canvas512');
+        const ctx512 = canvas512.getContext('2d');
+        drawIcon(ctx512, 512);
+
+        document.getElementById('download192').addEventListener('click', function() {
+            const link = document.createElement('a');
+            link.download = 'icon-192.png';
+            link.href = canvas192.toDataURL('image/png');
+            link.click();
+        });
+
+        document.getElementById('download512').addEventListener('click', function() {
+            const link = document.createElement('a');
+            link.download = 'icon-512.png';
+            link.href = canvas512.toDataURL('image/png');
+            link.click();
+        });
+    </script>
+</body>
+</html>

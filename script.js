@@ -256,7 +256,36 @@ const projectsData = [
             { href: "https://github.com/Ksschkw/chatbot_and_backendformywebsite", icon: "fab fa-github", text: "Code" }
         ],
         delayClass: ""
-    }
+    },
+    // Kaggle Dataset
+    {
+        category: "data",
+        title: "UK Local Authority Health & Environment Indicators",
+        description: `A dataset on Kaggle combining PM2.5 air quality and avoidable mortality rates across 100 UK local authorities (2022). <a href="https://www.kaggle.com/datasets/okaforkosisochukwujp/uk-local-authority-health-and-environment-indicators" target="_blank">View on Kaggle</a>`,
+        image: "https://www.kaggle.com/static/images/site-logo.png", // placeholder, you can replace
+        alt: "Kaggle Dataset",
+        tags: ["Data Science", "Public Health", "Environment"],
+        links: [
+            { href: "https://www.kaggle.com/datasets/okaforkosisochukwujp/uk-local-authority-health-and-environment-indicators", icon: "fab fa-kaggle", text: "Kaggle" }
+        ],
+        delayClass: ""
+    },
+
+    // Sister's Website
+    {
+        category: "web",
+        title: "Biochemist Portfolio for Obianuju",
+        description: "A professional portfolio website built for my sister, a biochemist, showcasing her academic work and research.",
+        image: "https://obianuju.onrender.com/static/images/og-image.jpg", // replace with actual screenshot if possible
+        alt: "Obianuju Portfolio",
+        tags: ["Web", "HTML/CSS", "JavaScript"],
+        links: [
+            { href: "https://obianuju.onrender.com", icon: "fas fa-external-link-alt", text: "Live Site" }
+        ],
+        delayClass: "delay-1"
+    },
+
+// (Optional) Add any client projects if you want – you can structure them similarly.
 ];
 
 // ---------- FUNCTION TO RENDER PROJECTS DYNAMICALLY ----------
@@ -407,6 +436,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize mobile menu
     initMobileMenu();
+
+    // Initialize snake game
+    initSnakeGame()
     
     // AI Chat functionality with streaming
     const chatContainer = document.getElementById('chatContainer');
@@ -786,6 +818,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else if (gameType === 'memory') {
                     document.getElementById('memoryGameSection').classList.remove('hidden');
                     document.getElementById('memoryGameSection').scrollIntoView({ behavior: 'smooth' });
+                } else if (gameType === 'snake') {
+                    document.getElementById('snakeGameSection').classList.remove('hidden');
+                    document.getElementById('snakeGameSection').scrollIntoView({ behavior: 'smooth' });
                 }
             });
         });
@@ -1510,13 +1545,375 @@ function initMemoryGame() {
     initMemoryGame();
 }
 
+// Snake Game
+function initSnakeGame() {
+    const canvas = document.getElementById('snakeCanvas');
+    if (!canvas) return; // section not present
+    const ctx = canvas.getContext('2d');
+    const scoreEl = document.getElementById('snakeScore');
+    const highScoreEl = document.getElementById('snakeHighScore');
+    const newGameBtn = document.getElementById('newSnakeGameBtn');
+
+    let gridSize = 20; // 20x20 cells
+    let cellSize = canvas.width / gridSize;
+    let snake = [{x: 10, y: 10}];
+    let direction = {x: 0, y: 0};
+    let food = {};
+    let score = 0;
+    let highScore = localStorage.getItem('snakeHighScore') || 0;
+    let gameLoop;
+    let gameActive = false;
+
+    highScoreEl.textContent = `High Score: ${highScore}`;
+
+    function randomFood() {
+        let newFood;
+        do {
+            newFood = {
+                x: Math.floor(Math.random() * gridSize),
+                y: Math.floor(Math.random() * gridSize)
+            };
+        } while (snake.some(segment => segment.x === newFood.x && segment.y === newFood.y));
+        food = newFood;
+    }
+
+    function draw() {
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // Draw snake
+        ctx.fillStyle = '#fff';
+        snake.forEach(segment => {
+            ctx.fillRect(segment.x * cellSize, segment.y * cellSize, cellSize - 1, cellSize - 1);
+        });
+
+        // Draw food
+        ctx.fillStyle = '#888'; // gray food
+        ctx.fillRect(food.x * cellSize, food.y * cellSize, cellSize - 1, cellSize - 1);
+    }
+
+    function move() {
+        if (!gameActive) return;
+
+        let head = {x: snake[0].x + direction.x, y: snake[0].y + direction.y};
+
+        // Check wall collision
+        if (head.x < 0 || head.x >= gridSize || head.y < 0 || head.y >= gridSize) {
+            gameOver();
+            return;
+        }
+
+        // Check self collision
+        if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+            gameOver();
+            return;
+        }
+
+        snake.unshift(head);
+
+        // Check food
+        if (head.x === food.x && head.y === food.y) {
+            score++;
+            scoreEl.textContent = `Score: ${score}`;
+            randomFood();
+        } else {
+            snake.pop();
+        }
+
+        draw();
+    }
+
+    function gameOver() {
+        gameActive = false;
+        clearInterval(gameLoop);
+        if (score > highScore) {
+            highScore = score;
+            localStorage.setItem('snakeHighScore', highScore);
+            highScoreEl.textContent = `High Score: ${highScore}`;
+        }
+        ctx.fillStyle = 'rgba(255,255,255,0.1)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.fillStyle = '#fff';
+        ctx.font = '20px monospace';
+        ctx.textAlign = 'center';
+        ctx.fillText('Game Over', canvas.width/2, canvas.height/2);
+    }
+
+    function startGame() {
+        if (gameActive) clearInterval(gameLoop);
+        snake = [{x: 10, y: 10}];
+        direction = {x: 1, y: 0}; // start moving right
+        score = 0;
+        scoreEl.textContent = 'Score: 0';
+        randomFood();
+        gameActive = true;
+        draw();
+        gameLoop = setInterval(move, 150);
+    }
+
+    // Keyboard controls
+    window.addEventListener('keydown', (e) => {
+        if (!gameActive) return;
+        switch (e.key) {
+            case 'ArrowUp': if (direction.y === 0) direction = {x: 0, y: -1}; break;
+            case 'ArrowDown': if (direction.y === 0) direction = {x: 0, y: 1}; break;
+            case 'ArrowLeft': if (direction.x === 0) direction = {x: -1, y: 0}; break;
+            case 'ArrowRight': if (direction.x === 0) direction = {x: 1, y: 0}; break;
+        }
+    });
+
+    newGameBtn.addEventListener('click', startGame);
+
+    // Initial setup
+    startGame();
+}
+
 // CLI Mode
+// CLI Mode – Advanced Terminal Simulation
 function initCLIMode() {
     const modeToggle = document.getElementById('modeToggle');
     const cliMode = document.getElementById('cliMode');
     const cliInput = document.getElementById('cliInput');
     const cliContent = document.getElementById('cliContent');
-    
+
+    // Virtual filesystem
+    let fs = {
+        '/': {
+            type: 'dir',
+            children: {
+                'home': { type: 'dir', children: {
+                    'kss': { type: 'dir', children: {} }
+                }},
+                'projects': { type: 'dir', children: {
+                    'object-detection.txt': { type: 'file', content: 'Real-time object detection with TensorFlow.js' },
+                    'rag-agent.txt': { type: 'file', content: 'MYRAGAGENT – RAG system using kssrag' }
+                }},
+                'about.txt': { type: 'file', content: 'Kosisochukwu Okafor – Software Engineer & AI/ML Engineer\n4th year Software Engineering student at Federal University of Technology Owerri\nPassionate about AI, RAG systems, and building innovative solutions.' },
+                'skills.txt': { type: 'file', content: 'AI/ML: RAG, Neural Networks, NLP, TensorFlow, PyTorch\nDevelopment: Python, JavaScript, .NET, FastAPI\nCloud: AWS, Azure, Ansible, GitHub Actions\nData: HDFS, Hadoop, Protege' }
+            }
+        }
+    };
+
+    let currentPath = '/home/kss';  // start in user home
+    let history = [];
+
+    function getNode(path) {
+        if (path === '/') return fs['/'];
+        let parts = path.split('/').filter(p => p !== '');
+        let node = fs['/'];
+        for (let part of parts) {
+            if (node.type !== 'dir' || !node.children[part]) return null;
+            node = node.children[part];
+        }
+        return node;
+    }
+
+    function resolvePath(inputPath) {
+        if (inputPath.startsWith('/')) return inputPath;
+        let parts = currentPath.split('/').filter(p => p !== '');
+        let inputParts = inputPath.split('/').filter(p => p !== '');
+        for (let p of inputParts) {
+            if (p === '..') {
+                if (parts.length > 0) parts.pop();
+            } else if (p !== '.') {
+                parts.push(p);
+            }
+        }
+        return '/' + parts.join('/');
+    }
+
+    function listDir(path) {
+        let node = getNode(path);
+        if (!node || node.type !== 'dir') return null;
+        return Object.keys(node.children).map(name => {
+            let child = node.children[name];
+            return { name, type: child.type };
+        });
+    }
+
+    function addCLIOutput(text, className = 'cli-output') {
+        const line = document.createElement('div');
+        line.className = className;
+        line.textContent = text;
+        cliContent.appendChild(line);
+        cliContent.scrollTop = cliContent.scrollHeight;
+    }
+
+    function showPrompt() {
+        addCLIOutput(`kss@portfolio:${currentPath}$ `, 'cli-prompt');
+    }
+
+    function processCommand(input) {
+        const args = input.trim().split(/\s+/);
+        const cmd = args[0].toLowerCase();
+        const rest = args.slice(1);
+
+        switch (cmd) {
+            case 'help':
+                addCLIOutput('Built-in commands:');
+                addCLIOutput('  help                    Show this help');
+                addCLIOutput('  about                   Display information about me');
+                addCLIOutput('  projects                List projects');
+                addCLIOutput('  skills                  View technical skills');
+                addCLIOutput('  contact                 Show contact info');
+                addCLIOutput('  game                    Open game modal');
+                addCLIOutput('  clear                   Clear terminal');
+                addCLIOutput('  exit                    Exit CLI mode');
+                addCLIOutput('');
+                addCLIOutput('Filesystem commands:');
+                addCLIOutput('  ls [path]               List directory contents');
+                addCLIOutput('  cd <path>               Change directory');
+                addCLIOutput('  cat <file>              Display file content');
+                addCLIOutput('  mkdir <dir>             Create directory');
+                addCLIOutput('  rm <path>               Remove file/directory');
+                addCLIOutput('  echo <text> > <file>    Write text to file');
+                break;
+            case 'about':
+                addCLIOutput('Kosisochukwu Okafor - Software Engineer & AI/ML Engineer');
+                addCLIOutput('4th year Software Engineering student at Federal University of Technology Owerri');
+                addCLIOutput('Passionate about AI, RAG systems, and building innovative solutions.');
+                addCLIOutput('');
+                addCLIOutput('Recent experience:');
+                addCLIOutput('  • AI/ML Cloud Intern @ Softgem.org (AWS partner)');
+                addCLIOutput('  • Chatbot Developer @ My Health Integral');
+                addCLIOutput('  • Freelance software engineer (Azure, Hadoop, Protege)');
+                break;
+            case 'projects':
+                addCLIOutput('Projects:');
+                addCLIOutput('  • Real-Time Object Detection - AI/ML, Web');
+                addCLIOutput('  • MYRAGAGENT - AI, RAG, Python');
+                addCLIOutput('  • AI Copilot Agent - AI, FastAPI, Python');
+                addCLIOutput('  • UK Health Dataset - Kaggle');
+                addCLIOutput('  • Biochemist Portfolio (sister)');
+                addCLIOutput('  • And many more... (type "projects --all" for full list)');
+                break;
+            case 'skills':
+                addCLIOutput('Skills:');
+                addCLIOutput('  • AI/ML: RAG Systems, Neural Networks, NLP, TensorFlow, PyTorch');
+                addCLIOutput('  • Development: Python, JavaScript, .NET, FastAPI');
+                addCLIOutput('  • Cloud & DevOps: AWS, Azure (PostgreSQL, CosmosDB, App Service, Front Door), Ansible, GitHub Actions');
+                addCLIOutput('  • Data: HDFS, Hadoop, Protege ontologies');
+                break;
+            case 'contact':
+                addCLIOutput('Contact Information:');
+                addCLIOutput('  • Email: kookafor893@gmail.com');
+                addCLIOutput('  • Phone: +234 901 954 9473');
+                addCLIOutput('  • GitHub: github.com/Ksschkw');
+                addCLIOutput('  • WhatsApp: wa.me/2349019549473');
+                break;
+            case 'game':
+                addCLIOutput('Opening game modal...');
+                setTimeout(() => document.getElementById('playGameBtn').click(), 300);
+                break;
+            case 'clear':
+                cliContent.innerHTML = '';
+                showPrompt();
+                break;
+            case 'exit':
+                cliMode.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                break;
+
+            // Filesystem commands
+            case 'ls':
+                {
+                    let target = rest[0] ? resolvePath(rest[0]) : currentPath;
+                    let entries = listDir(target);
+                    if (entries === null) {
+                        addCLIOutput(`ls: cannot access '${rest[0] || currentPath}': No such directory`);
+                    } else {
+                        entries.forEach(e => {
+                            addCLIOutput(e.name + (e.type === 'dir' ? '/' : ''), 'cli-output');
+                        });
+                    }
+                }
+                break;
+            case 'cd':
+                if (rest.length === 0) {
+                    currentPath = '/home/kss';
+                } else {
+                    let newPath = resolvePath(rest[0]);
+                    let node = getNode(newPath);
+                    if (node && node.type === 'dir') {
+                        currentPath = newPath;
+                    } else {
+                        addCLIOutput(`cd: no such directory: ${rest[0]}`);
+                    }
+                }
+                break;
+            case 'cat':
+                if (rest.length === 0) {
+                    addCLIOutput('cat: missing file operand');
+                } else {
+                    let filePath = resolvePath(rest[0]);
+                    let node = getNode(filePath);
+                    if (node && node.type === 'file') {
+                        addCLIOutput(node.content);
+                    } else {
+                        addCLIOutput(`cat: ${rest[0]}: No such file`);
+                    }
+                }
+                break;
+            case 'mkdir':
+                if (rest.length === 0) {
+                    addCLIOutput('mkdir: missing operand');
+                } else {
+                    let dirPath = resolvePath(rest[0]);
+                    let parentPath = dirPath.substring(0, dirPath.lastIndexOf('/')) || '/';
+                    let dirName = dirPath.split('/').pop();
+                    let parentNode = getNode(parentPath);
+                    if (!parentNode || parentNode.type !== 'dir') {
+                        addCLIOutput(`mkdir: cannot create directory '${rest[0]}': Parent not a directory`);
+                    } else if (parentNode.children[dirName]) {
+                        addCLIOutput(`mkdir: cannot create directory '${rest[0]}': File exists`);
+                    } else {
+                        parentNode.children[dirName] = { type: 'dir', children: {} };
+                    }
+                }
+                break;
+            case 'rm':
+                if (rest.length === 0) {
+                    addCLIOutput('rm: missing operand');
+                } else {
+                    let targetPath = resolvePath(rest[0]);
+                    let parentPath = targetPath.substring(0, targetPath.lastIndexOf('/')) || '/';
+                    let targetName = targetPath.split('/').pop();
+                    let parentNode = getNode(parentPath);
+                    if (parentNode && parentNode.type === 'dir' && parentNode.children[targetName]) {
+                        delete parentNode.children[targetName];
+                    } else {
+                        addCLIOutput(`rm: cannot remove '${rest[0]}': No such file or directory`);
+                    }
+                }
+                break;
+            case 'echo':
+                if (rest.includes('>')) {
+                    let gtIndex = rest.indexOf('>');
+                    let text = rest.slice(0, gtIndex).join(' ');
+                    let fileName = rest[gtIndex + 1];
+                    if (!fileName) {
+                        addCLIOutput('echo: missing file name after >');
+                    } else {
+                        let filePath = resolvePath(fileName);
+                        let parentPath = filePath.substring(0, filePath.lastIndexOf('/')) || '/';
+                        let fileNameOnly = filePath.split('/').pop();
+                        let parentNode = getNode(parentPath);
+                        if (parentNode && parentNode.type === 'dir') {
+                            parentNode.children[fileNameOnly] = { type: 'file', content: text };
+                        } else {
+                            addCLIOutput(`echo: cannot create file '${fileName}': Parent not a directory`);
+                        }
+                    }
+                } else {
+                    addCLIOutput(rest.join(' '));
+                }
+                break;
+            default:
+                if (cmd) addCLIOutput(`Command not found: ${cmd}. Type 'help' for available commands.`);
+        }
+    }
+
+    // Toggle CLI mode
     modeToggle.addEventListener('click', () => {
         if (cliMode.style.display === 'block') {
             cliMode.style.display = 'none';
@@ -1524,87 +1921,31 @@ function initCLIMode() {
         } else {
             cliMode.style.display = 'block';
             document.body.style.overflow = 'hidden';
+            cliContent.innerHTML = ''; // clear previous
+            addCLIOutput('Welcome to the KSSCHWK Linux-like terminal.');
+            addCLIOutput('Type \'help\' for available commands.');
+            showPrompt();
             cliInput.focus();
         }
     });
-    
-    const commands = {
-        help: () => {
-            addCLIOutput('Available commands:');
-            addCLIOutput('  help - Show this help message');
-            addCLIOutput('  about - Learn about Kosisochukwu');
-            addCLIOutput('  projects - List all projects');
-            addCLIOutput('  skills - View technical skills');
-            addCLIOutput('  contact - Get contact information');
-            addCLIOutput('  game - Play the puzzle game');
-            addCLIOutput('  clear - Clear the terminal');
-            addCLIOutput('  exit - Exit CLI mode');
-        },
-        about: () => {
-            addCLIOutput('Kosisochukwu Okafor - AI/ML Engineer & Software Developer');
-            addCLIOutput('4th year Software Engineering student at Federal University of Technology Owerri');
-            addCLIOutput('Passionate about AI, RAG systems, and building innovative solutions');
-        },
-        projects: () => {
-            addCLIOutput('Projects:');
-            addCLIOutput('  • Real-Time Object Detection - AI/ML, Web');
-            addCLIOutput('  • MYRAGAGENT - AI, RAG, Python');
-            addCLIOutput('  • AI Copilot Agent - AI, FastAPI, Python');
-            addCLIOutput('  • Vybe Analytics Telegram Bot - Telegram, API, Python');
-            addCLIOutput('  • FPS Gamers Event Website - Web, API, JavaScript');
-            addCLIOutput('  • And many more... (type "projects --all" for full list)');
-        },
-        skills: () => {
-            addCLIOutput('Skills:');
-            addCLIOutput('  • AI/ML: RAG Systems, Neural Networks, NLP, TensorFlow, PyTorch');
-            addCLIOutput('  • Development: Python, JavaScript, FastAPI, Flask, React, Vue.js');
-            addCLIOutput('  • DevOps & Cloud: AWS, Docker, CI/CD, Render, Git');
-        },
-        contact: () => {
-            addCLIOutput('Contact Information:');
-            addCLIOutput('  • Email: kookafor893@gmail.com');
-            addCLIOutput('  • Phone: +234 901 954 9473');
-            addCLIOutput('  • GitHub: github.com/Ksschkw');
-            addCLIOutput('  • WhatsApp: wa.me/2349019549473');
-        },
-        game: () => {
-            addCLIOutput('Opening game modal...');
-            setTimeout(() => {
-                document.getElementById('playGameBtn').click();
-            }, 500);
-        },
-        clear: () => {
-            cliContent.innerHTML = '';
-        },
-        exit: () => {
-            cliMode.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-    };
-    
+
     cliInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
-            const command = cliInput.value.trim().toLowerCase();
+            const input = cliInput.value.trim();
             cliInput.value = '';
-            
-            addCLIOutput(`> ${command}`, 'command');
-            
-            if (commands[command]) {
-                commands[command]();
-            } else if (command) {
-                addCLIOutput(`Command not found: ${command}. Type 'help' for available commands.`);
+            if (input) {
+                history.push(input);
+                processCommand(input);
             }
-            
+            showPrompt();
             cliContent.scrollTop = cliContent.scrollHeight;
+        } else if (e.key === 'ArrowUp') {
+            // simple history navigation (optional)
+            if (history.length > 0) {
+                cliInput.value = history[history.length - 1];
+            }
         }
     });
-    
-    function addCLIOutput(text, type = 'output') {
-        const outputDiv = document.createElement('div');
-        outputDiv.className = `cli-${type}`;
-        outputDiv.textContent = text;
-        cliContent.appendChild(outputDiv);
-    }
 }
 });
 
