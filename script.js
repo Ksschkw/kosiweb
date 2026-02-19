@@ -285,7 +285,7 @@ const projectsData = [
         delayClass: "delay-1"
     },
 
-// (Optional) Add any client projects if you want – you can structure them similarly.
+    // (Optional) Add any client projects if you want – you can structure them similarly.
 ];
 
 // ---------- FUNCTION TO RENDER PROJECTS DYNAMICALLY ----------
@@ -398,48 +398,48 @@ if ('serviceWorker' in navigator) {
 marked.setOptions({
     breaks: true,
     gfm: true,
-    highlight: function(code, lang) {
+    highlight: function (code, lang) {
         return code;
     }
 });
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // --- RENDER PROJECTS FIRST (before filtering) ---
     renderProjects();
 
     // Initialize object detection
     initObjectDetection();
-    
+
     // Initialize project filtering
     initProjectFiltering();
-    
+
     // Initialize puzzle game
     initPuzzleGame();
-    
+
     // Initialize queens game
     initQueensGame();
-    
+
     // Initialize Tic Tac Toe game
     initTicTacToeGame();
-    
+
     // Initialize Memory game
     initMemoryGame();
-    
+
     // Initialize CLI mode
     initCLIMode();
-    
+
     // Initialize game modal (now handles both buttons)
     initGameModal();
-    
+
     // Initialize skill animations
     initSkillAnimations();
-    
+
     // Initialize mobile menu
     initMobileMenu();
 
     // Initialize snake game
     initSnakeGame()
-    
+
     // AI Chat functionality with streaming
     const chatContainer = document.getElementById('chatContainer');
     const chatInput = document.getElementById('chatInput');
@@ -561,7 +561,7 @@ document.addEventListener('DOMContentLoaded', function() {
         isGenerating = !enabled;
         chatInput.disabled = !enabled;
         sendButton.disabled = !enabled;
-        
+
         if (enabled) {
             chatInput.placeholder = "Ask me anything...";
             sendButton.innerHTML = 'Send';
@@ -591,32 +591,32 @@ document.addEventListener('DOMContentLoaded', function() {
     newChatBtn.style.marginTop = '1rem';
     newChatBtn.addEventListener('click', () => {
         if (isGenerating) return;
-        
+
         sessionId = "portfolio-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
         localStorage.setItem("portfolio-session", sessionId);
-        
+
         chatContainer.innerHTML = '<div class="chat-message bot-message">🤖 Hello! I\'m an AI assistant powered by Kosisochukwu\'s RAG system. How can I help you today?</div>';
-        
+
         showToast('New chat session started!');
     });
 
     document.querySelector('.chat-input-group').after(newChatBtn);
-    
+
     // Form submission with RAG integration
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
+        contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
-            
+
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-            
+
             const formData = new FormData();
             formData.append('name', name);
             formData.append('email', email);
             formData.append('message', message);
-            
+
             try {
                 await fetch('https://formspree.io/f/xqapzbnb', {
                     method: 'POST',
@@ -625,7 +625,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         'Accept': 'application/json'
                     }
                 });
-                
+
                 const response = await fetch('https://p01--ragkss--qw5xhkblp8hy.code.run/query', {
                     method: 'POST',
                     headers: {
@@ -636,11 +636,11 @@ document.addEventListener('DOMContentLoaded', function() {
                         session_id: sessionId + '-contact'
                     })
                 });
-                
+
                 const data = await response.json();
-                
+
                 showToast(data.response);
-                
+
                 contactForm.reset();
             } catch (error) {
                 showToast("Message sent successfully! I'll get back to you soon.");
@@ -648,7 +648,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-    
+
     // Show toast notification
     function showToast(message, type = 'default', duration = 5000) {
         const toast = document.getElementById('toast');
@@ -658,19 +658,19 @@ document.addEventListener('DOMContentLoaded', function() {
             toast.classList.add(type);
         }
         toast.classList.add('show');
-        
+
         setTimeout(() => {
             toast.classList.remove('show');
         }, duration);
-        
+
         toast.addEventListener('click', () => {
             toast.classList.remove('show');
         });
     }
-    
+
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
@@ -681,7 +681,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // Animation on scroll
     const fadeElems = document.querySelectorAll('.fade-in');
     const observer = new IntersectionObserver((entries) => {
@@ -691,33 +691,33 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, { threshold: 0.1 });
-    
+
     fadeElems.forEach(elem => {
         elem.style.opacity = 0;
         elem.style.transition = 'opacity 0.5s ease-in-out';
         observer.observe(elem);
     });
-    
+
     // Mobile menu functionality
     function initMobileMenu() {
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
-        
+
         if (mobileMenuBtn && navLinks) {
             mobileMenuBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 navLinks.classList.toggle('active');
-                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ? 
+                mobileMenuBtn.innerHTML = navLinks.classList.contains('active') ?
                     '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             });
-            
+
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     navLinks.classList.remove('active');
                     mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
                 });
             });
-            
+
             document.addEventListener('click', (e) => {
                 if (!navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
                     navLinks.classList.remove('active');
@@ -726,19 +726,19 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-    
+
     // Project filtering
     function initProjectFiltering() {
         const tabButtons = document.querySelectorAll('.tab-button');
         const projectCards = document.querySelectorAll('.project-card');
-        
+
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-                
+
                 const category = button.getAttribute('data-category');
-                
+
                 projectCards.forEach(card => {
                     if (category === 'all' || card.getAttribute('data-category') === category) {
                         card.style.display = 'block';
@@ -749,7 +749,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-    
+
     // Initialize skill animations
     function initSkillAnimations() {
         const skillProgresses = document.querySelectorAll('.skill-progress');
@@ -758,7 +758,7 @@ document.addEventListener('DOMContentLoaded', function() {
             progress.style.width = `${level}%`;
         });
     }
-    
+
     // Game Modal - now handles both buttons
     function initGameModal() {
         const playGameBtn = document.getElementById('playGameBtn');
@@ -766,46 +766,46 @@ document.addEventListener('DOMContentLoaded', function() {
         const gameModal = document.getElementById('gameModal');
         const closeModal = document.querySelector('.close');
         const gameOptions = document.querySelectorAll('.game-option');
-        
+
         function openModal() {
             gameModal.style.display = 'block';
             document.body.style.overflow = 'hidden';
         }
-        
+
         playGameBtn.addEventListener('click', openModal);
         if (openExperienceBtn) {
             openExperienceBtn.addEventListener('click', openModal);
         }
-        
+
         closeModal.addEventListener('click', () => {
             gameModal.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
-        
+
         window.addEventListener('click', (e) => {
             if (e.target === gameModal) {
                 gameModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         });
-        
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && gameModal.style.display === 'block') {
                 gameModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
             }
         });
-        
+
         gameOptions.forEach(option => {
             option.addEventListener('click', () => {
                 const gameType = option.getAttribute('data-game');
                 gameModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
-                
+
                 document.querySelectorAll('.game-section').forEach(section => {
                     section.classList.add('hidden');
                 });
-                
+
                 if (gameType === 'puzzle') {
                     document.getElementById('puzzleGameSection').classList.remove('hidden');
                     document.getElementById('puzzleGameSection').scrollIntoView({ behavior: 'smooth' });
@@ -825,14 +825,14 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     }
-    
+
     // Object Detection Code - updated to grayscale
     function initObjectDetection() {
         let net;
         let isDetecting = false;
         let frameCount = 0;
         let lastUpdate = Date.now();
-        
+
         async function loadObjectDetection() {
             try {
                 net = await cocoSsd.load();
@@ -842,7 +842,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 showToast('Error loading AI model. Please try refreshing the page.');
             }
         }
-        
+
         function updateFPS() {
             const now = Date.now();
             const fps = (frameCount * 1000) / (now - lastUpdate);
@@ -850,39 +850,39 @@ document.addEventListener('DOMContentLoaded', function() {
             frameCount = 0;
             lastUpdate = now;
         }
-        
+
         async function detectFrame(video, canvas) {
             if (!isDetecting) return;
-            
+
             try {
                 frameCount++;
                 const predictions = await net.detect(video);
                 const ctx = canvas.getContext('2d');
                 const minConfidence = parseFloat(document.getElementById('confidenceSlider').value);
-                
+
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 ctx.save();
                 ctx.scale(-1, 1);
                 ctx.drawImage(video, -canvas.width, 0, canvas.width, canvas.height);
                 ctx.restore();
-                
+
                 predictions.forEach(prediction => {
                     if (prediction.score < minConfidence) return;
-                    
+
                     const allowedClasses = Array.from(document.querySelectorAll('.class-filter:checked'))
                         .map(checkbox => checkbox.value);
                     if (!allowedClasses.includes(prediction.class)) return;
-                    
+
                     const mirroredX = canvas.width - prediction.bbox[0] - prediction.bbox[2];
                     const y = prediction.bbox[1];
                     const width = prediction.bbox[2];
                     const height = prediction.bbox[3];
-                    
+
                     // Grayscale colors
                     ctx.strokeStyle = '#ffffff';
                     ctx.lineWidth = 2;
                     ctx.strokeRect(mirroredX, y, width, height);
-                    
+
                     ctx.fillStyle = '#000000';
                     ctx.fillRect(mirroredX, y - 20, ctx.measureText(prediction.class).width + 10, 20);
                     ctx.fillStyle = '#ffffff';
@@ -893,7 +893,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         y - 5
                     );
                 });
-                
+
                 if (Date.now() - lastUpdate > 1000) updateFPS();
                 requestAnimationFrame(() => detectFrame(video, canvas));
             } catch (error) {
@@ -901,17 +901,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 stopDetection();
             }
         }
-        
+
         async function startDetection() {
             try {
-                const stream = await navigator.mediaDevices.getUserMedia({ 
-                    video: { facingMode: "environment" } 
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { facingMode: "environment" }
                 });
                 const video = document.getElementById('webcam');
                 const canvas = document.getElementById('output');
-                
+
                 video.srcObject = stream;
-                
+
                 video.onloadedmetadata = () => {
                     video.play();
                     canvas.width = video.videoWidth;
@@ -926,7 +926,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 showToast('Error accessing webcam. Please enable camera permissions.');
             }
         }
-        
+
         function stopDetection() {
             isDetecting = false;
             const stream = document.getElementById('webcam').srcObject;
@@ -936,18 +936,18 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('startButton').style.display = 'inline-block';
             document.getElementById('stopButton').style.display = 'none';
         }
-        
+
         loadObjectDetection();
-        
+
         document.getElementById('startButton').addEventListener('click', startDetection);
         document.getElementById('stopButton').addEventListener('click', stopDetection);
-        
+
         document.getElementById('confidenceSlider').addEventListener('input', (e) => {
-            document.getElementById('confidenceValue').textContent = 
+            document.getElementById('confidenceValue').textContent =
                 `${Math.round(e.target.value * 100)}%`;
         });
     }
-    
+
     // Puzzle Game
     function initPuzzleGame() {
         const puzzleBoard = document.getElementById('puzzleBoard');
@@ -957,14 +957,14 @@ document.addEventListener('DOMContentLoaded', function() {
         const undoMoveBtn = document.getElementById('undoMoveBtn');
         const checkSolutionBtn = document.getElementById('checkSolutionBtn');
         const solvePuzzleBtn = document.getElementById('solvePuzzleBtn');
-        
+
         let moves = 0;
         let time = 0;
         let timerInterval;
         let tiles = [];
         let emptyIndex = 15;
         let moveHistory = [];
-        
+
         function initPuzzle() {
             puzzleBoard.innerHTML = '';
             moves = 0;
@@ -972,16 +972,16 @@ document.addEventListener('DOMContentLoaded', function() {
             moveCounter.textContent = 'Moves: 0';
             timer.textContent = 'Time: 00:00';
             moveHistory = [];
-            
+
             if (timerInterval) clearInterval(timerInterval);
-            
-            tiles = Array.from({length: 15}, (_, i) => i + 1);
+
+            tiles = Array.from({ length: 15 }, (_, i) => i + 1);
             tiles.push(null);
-            
+
             shuffleTiles();
             renderTiles();
         }
-        
+
         function shuffleTiles() {
             for (let i = tiles.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -989,7 +989,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             emptyIndex = tiles.indexOf(null);
         }
-        
+
         function renderTiles() {
             tiles.forEach((tile, index) => {
                 const cell = document.createElement('div');
@@ -1003,7 +1003,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 puzzleBoard.appendChild(cell);
             });
         }
-        
+
         function moveTile(index) {
             const adjacentIndexes = [
                 emptyIndex - 1,
@@ -1011,42 +1011,42 @@ document.addEventListener('DOMContentLoaded', function() {
                 emptyIndex - 4,
                 emptyIndex + 4
             ];
-            
+
             if (adjacentIndexes.includes(index)) {
                 moveHistory.push([...tiles]);
-                
+
                 [tiles[emptyIndex], tiles[index]] = [tiles[index], tiles[emptyIndex]];
                 emptyIndex = index;
-                
+
                 moves++;
                 moveCounter.textContent = `Moves: ${moves}`;
-                
+
                 if (moves === 1) {
                     startTimer();
                 }
-                
+
                 puzzleBoard.innerHTML = '';
                 renderTiles();
-                
+
                 if (isPuzzleSolved()) {
                     clearInterval(timerInterval);
                     showToast('Congratulations! You solved the puzzle! Send a screenshot to claim your reward.');
                 }
             }
         }
-        
+
         function undoMove() {
             if (moveHistory.length > 0) {
                 tiles = moveHistory.pop();
                 emptyIndex = tiles.indexOf(null);
                 moves--;
                 moveCounter.textContent = `Moves: ${moves}`;
-                
+
                 puzzleBoard.innerHTML = '';
                 renderTiles();
             }
         }
-        
+
         function checkSolution() {
             if (isPuzzleSolved()) {
                 showToast('Congratulations! The puzzle is solved correctly!');
@@ -1054,7 +1054,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 showToast('Not quite right yet. Keep trying!');
             }
         }
-        
+
         function startTimer() {
             timerInterval = setInterval(() => {
                 time++;
@@ -1063,14 +1063,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 timer.textContent = `Time: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
             }, 1000);
         }
-        
+
         function isPuzzleSolved() {
             for (let i = 0; i < tiles.length - 1; i++) {
                 if (tiles[i] !== i + 1) return false;
             }
             return true;
         }
-        
+
         function solvePuzzle() {
             clearInterval(timerInterval);
             tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, null];
@@ -1084,15 +1084,15 @@ document.addEventListener('DOMContentLoaded', function() {
             moveHistory = [];
             showToast('Puzzle solved! Try to solve it yourself next time!');
         }
-        
+
         newGameBtn.addEventListener('click', initPuzzle);
         undoMoveBtn.addEventListener('click', undoMove);
         checkSolutionBtn.addEventListener('click', checkSolution);
         solvePuzzleBtn.addEventListener('click', solvePuzzle);
-        
+
         initPuzzle();
     }
-    
+
     // Queens Game
     function initQueensGame() {
         const queensBoard = document.getElementById('queensBoard');
@@ -1101,50 +1101,50 @@ document.addEventListener('DOMContentLoaded', function() {
         const checkQueensSolutionBtn = document.getElementById('checkQueensSolutionBtn');
         const solveQueensBtn = document.getElementById('solveQueensBtn');
         const boardSizeSelect = document.getElementById('boardSize');
-        
+
         let boardSize = 8;
         let queens = [];
         let board = [];
-        
+
         function initQueensGame() {
             boardSize = parseInt(boardSizeSelect.value);
             queens = [];
             board = Array(boardSize).fill().map(() => Array(boardSize).fill(false));
-            
+
             queensCounter.textContent = `Queens placed: 0/${boardSize}`;
-            
+
             renderQueensBoard();
         }
-        
+
         function renderQueensBoard() {
             queensBoard.innerHTML = '';
             queensBoard.style.gridTemplateColumns = `repeat(${boardSize}, 1fr)`;
-            
+
             for (let row = 0; row < boardSize; row++) {
                 for (let col = 0; col < boardSize; col++) {
                     const cell = document.createElement('div');
                     cell.className = `queens-cell ${(row + col) % 2 === 0 ? 'light' : 'dark'}`;
                     cell.dataset.row = row;
                     cell.dataset.col = col;
-                    
+
                     if (board[row][col]) {
                         cell.classList.add('has-queen');
                     }
-                    
+
                     if (isThreatened(row, col) && !board[row][col]) {
                         cell.classList.add('threatened');
                     }
-                    
+
                     if (!board[row][col] && !isThreatened(row, col) && queens.length < boardSize) {
                         cell.classList.add('valid');
                     }
-                    
+
                     cell.addEventListener('click', () => toggleQueen(row, col));
                     queensBoard.appendChild(cell);
                 }
             }
         }
-        
+
         function toggleQueen(row, col) {
             if (board[row][col]) {
                 board[row][col] = false;
@@ -1154,15 +1154,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     showToast('Cannot place queen in a threatened position!');
                     return;
                 }
-                
+
                 board[row][col] = true;
                 queens.push({ row, col });
             }
-            
+
             queensCounter.textContent = `Queens placed: ${queens.length}/${boardSize}`;
             renderQueensBoard();
         }
-        
+
         function isThreatened(row, col) {
             for (const queen of queens) {
                 if (queen.row === row && queen.col !== col) return true;
@@ -1171,790 +1171,849 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             return false;
         }
-        
+
         function checkQueensSolution() {
             if (queens.length !== boardSize) {
                 showToast(`You need to place ${boardSize} queens on the board.`);
                 return;
             }
-            
+
             for (const queen of queens) {
                 if (isThreatened(queen.row, queen.col)) {
                     showToast('The queens are attacking each other! Try again.');
                     return;
-            }
-        }
-        
-        showToast('Congratulations! You solved the N-Queens problem!');
-    }
-    
-    function solveQueens() {
-        queens = [];
-        board = Array(boardSize).fill().map(() => Array(boardSize).fill(false));
-        
-        solveQueensRecursive(0);
-        
-        queensCounter.textContent = `Queens placed: ${queens.length}/${boardSize}`;
-        renderQueensBoard();
-        
-        showToast('Puzzle solved! The queens are placed without attacking each other.');
-    }
-    
-    function solveQueensRecursive(col) {
-        if (col >= boardSize) return true;
-        
-        for (let row = 0; row < boardSize; row++) {
-            if (isSafe(row, col)) {
-                board[row][col] = true;
-                queens.push({ row, col });
-                
-                if (solveQueensRecursive(col + 1)) return true;
-                
-                board[row][col] = false;
-                queens.pop();
-            }
-        }
-        
-        return false;
-    }
-    
-    function isSafe(row, col) {
-        for (let i = 0; i < col; i++) {
-            if (board[row][i]) return false;
-        }
-        
-        for (let i = row, j = col; i >= 0 && j >= 0; i--, j--) {
-            if (board[i][j]) return false;
-        }
-        
-        for (let i = row, j = col; i < boardSize && j >= 0; i++, j--) {
-            if (board[i][j]) return false;
-        }
-        
-        return true;
-    }
-    
-    newQueensGameBtn.addEventListener('click', initQueensGame);
-    checkQueensSolutionBtn.addEventListener('click', checkQueensSolution);
-    solveQueensBtn.addEventListener('click', solveQueens);
-    boardSizeSelect.addEventListener('change', initQueensGame);
-    
-    initQueensGame();
-}
-
-// Tic Tac Toe Game
-function initTicTacToeGame() {
-    const tictactoeBoard = document.getElementById('tictactoeBoard');
-    const gameStatus = document.getElementById('gameStatus');
-    const newTicTacToeGameBtn = document.getElementById('newTicTacToeGameBtn');
-    
-    let currentPlayer = 'X';
-    let gameBoard = ['', '', '', '', '', '', '', '', ''];
-    let gameActive = true;
-    const humanPlayer = 'X';
-    const aiPlayer = 'O';
-    
-    const winPatterns = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],
-        [0, 3, 6], [1, 4, 7], [2, 5, 8],
-        [0, 4, 8], [2, 4, 6]
-    ];
-    
-    function initTicTacToe() {
-        currentPlayer = 'X';
-        gameBoard = ['', '', '', '', '', '', '', '', ''];
-        gameActive = true;
-        gameStatus.textContent = 'Your turn (X)';
-        renderTicTacToeBoard();
-    }
-    
-    function renderTicTacToeBoard() {
-        tictactoeBoard.innerHTML = '';
-        
-        for (let i = 0; i < 9; i++) {
-            const cell = document.createElement('div');
-            cell.className = 'ttt-cell';
-            cell.dataset.index = i;
-            
-            if (gameBoard[i] === 'X') {
-                cell.textContent = 'X';
-                cell.classList.add('x');
-            } else if (gameBoard[i] === 'O') {
-                cell.textContent = 'O';
-                cell.classList.add('o');
-            }
-            
-            cell.addEventListener('click', () => handleCellClick(i));
-            tictactoeBoard.appendChild(cell);
-        }
-    }
-    
-    function handleCellClick(index) {
-        if (gameBoard[index] !== '' || !gameActive || currentPlayer !== humanPlayer) return;
-        
-        makeMove(index, humanPlayer);
-        
-        if (checkWin(humanPlayer)) {
-            gameStatus.textContent = 'You win!';
-            gameActive = false;
-            highlightWinningCells(humanPlayer);
-            showToast('Congratulations! You won!');
-            return;
-        }
-        
-        if (checkDraw()) {
-            gameStatus.textContent = 'Game ended in a draw!';
-            gameActive = false;
-            showToast('The game ended in a draw!');
-            return;
-        }
-        
-        currentPlayer = aiPlayer;
-        gameStatus.textContent = "Computer's turn (O)";
-        
-        setTimeout(makeAiMove, 500);
-    }
-    
-    function makeMove(index, player) {
-        gameBoard[index] = player;
-        renderTicTacToeBoard();
-    }
-    
-    function makeAiMove() {
-        if (!gameActive) return;
-        
-        const bestMove = getBestMove();
-        makeMove(bestMove, aiPlayer);
-        
-        if (checkWin(aiPlayer)) {
-            gameStatus.textContent = 'Computer wins!';
-            gameActive = false;
-            highlightWinningCells(aiPlayer);
-            showToast('Computer wins! Better luck next time!');
-            return;
-        }
-        
-        if (checkDraw()) {
-            gameStatus.textContent = 'Game ended in a draw!';
-            gameActive = false;
-            showToast('The game ended in a draw!');
-            return;
-        }
-        
-        currentPlayer = humanPlayer;
-        gameStatus.textContent = 'Your turn (X)';
-    }
-    
-    function getBestMove() {
-        let bestScore = -Infinity;
-        let bestMove;
-        
-        for (let i = 0; i < 9; i++) {
-            if (gameBoard[i] === '') {
-                gameBoard[i] = aiPlayer;
-                let score = minimax(gameBoard, 0, false);
-                gameBoard[i] = '';
-                
-                if (score > bestScore) {
-                    bestScore = score;
-                    bestMove = i;
                 }
             }
+
+            showToast('Congratulations! You solved the N-Queens problem!');
         }
-        
-        return bestMove;
+
+        function solveQueens() {
+            queens = [];
+            board = Array(boardSize).fill().map(() => Array(boardSize).fill(false));
+
+            solveQueensRecursive(0);
+
+            queensCounter.textContent = `Queens placed: ${queens.length}/${boardSize}`;
+            renderQueensBoard();
+
+            showToast('Puzzle solved! The queens are placed without attacking each other.');
+        }
+
+        function solveQueensRecursive(col) {
+            if (col >= boardSize) return true;
+
+            for (let row = 0; row < boardSize; row++) {
+                if (isSafe(row, col)) {
+                    board[row][col] = true;
+                    queens.push({ row, col });
+
+                    if (solveQueensRecursive(col + 1)) return true;
+
+                    board[row][col] = false;
+                    queens.pop();
+                }
+            }
+
+            return false;
+        }
+
+        function isSafe(row, col) {
+            for (let i = 0; i < col; i++) {
+                if (board[row][i]) return false;
+            }
+
+            for (let i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+                if (board[i][j]) return false;
+            }
+
+            for (let i = row, j = col; i < boardSize && j >= 0; i++, j--) {
+                if (board[i][j]) return false;
+            }
+
+            return true;
+        }
+
+        newQueensGameBtn.addEventListener('click', initQueensGame);
+        checkQueensSolutionBtn.addEventListener('click', checkQueensSolution);
+        solveQueensBtn.addEventListener('click', solveQueens);
+        boardSizeSelect.addEventListener('change', initQueensGame);
+
+        initQueensGame();
     }
-    
-    function minimax(board, depth, isMaximizing) {
-        if (checkWin(aiPlayer)) return 10 - depth;
-        if (checkWin(humanPlayer)) return depth - 10;
-        if (checkDraw()) return 0;
-        
-        if (isMaximizing) {
+
+    // Tic Tac Toe Game
+    function initTicTacToeGame() {
+        const tictactoeBoard = document.getElementById('tictactoeBoard');
+        const gameStatus = document.getElementById('gameStatus');
+        const newTicTacToeGameBtn = document.getElementById('newTicTacToeGameBtn');
+
+        let currentPlayer = 'X';
+        let gameBoard = ['', '', '', '', '', '', '', '', ''];
+        let gameActive = true;
+        const humanPlayer = 'X';
+        const aiPlayer = 'O';
+
+        const winPatterns = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8],
+            [0, 3, 6], [1, 4, 7], [2, 5, 8],
+            [0, 4, 8], [2, 4, 6]
+        ];
+
+        function initTicTacToe() {
+            currentPlayer = 'X';
+            gameBoard = ['', '', '', '', '', '', '', '', ''];
+            gameActive = true;
+            gameStatus.textContent = 'Your turn (X)';
+            renderTicTacToeBoard();
+        }
+
+        function renderTicTacToeBoard() {
+            tictactoeBoard.innerHTML = '';
+
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'ttt-cell';
+                cell.dataset.index = i;
+
+                if (gameBoard[i] === 'X') {
+                    cell.textContent = 'X';
+                    cell.classList.add('x');
+                } else if (gameBoard[i] === 'O') {
+                    cell.textContent = 'O';
+                    cell.classList.add('o');
+                }
+
+                cell.addEventListener('click', () => handleCellClick(i));
+                tictactoeBoard.appendChild(cell);
+            }
+        }
+
+        function handleCellClick(index) {
+            if (gameBoard[index] !== '' || !gameActive || currentPlayer !== humanPlayer) return;
+
+            makeMove(index, humanPlayer);
+
+            if (checkWin(humanPlayer)) {
+                gameStatus.textContent = 'You win!';
+                gameActive = false;
+                highlightWinningCells(humanPlayer);
+                showToast('Congratulations! You won!');
+                return;
+            }
+
+            if (checkDraw()) {
+                gameStatus.textContent = 'Game ended in a draw!';
+                gameActive = false;
+                showToast('The game ended in a draw!');
+                return;
+            }
+
+            currentPlayer = aiPlayer;
+            gameStatus.textContent = "Computer's turn (O)";
+
+            setTimeout(makeAiMove, 500);
+        }
+
+        function makeMove(index, player) {
+            gameBoard[index] = player;
+            renderTicTacToeBoard();
+        }
+
+        function makeAiMove() {
+            if (!gameActive) return;
+
+            const bestMove = getBestMove();
+            makeMove(bestMove, aiPlayer);
+
+            if (checkWin(aiPlayer)) {
+                gameStatus.textContent = 'Computer wins!';
+                gameActive = false;
+                highlightWinningCells(aiPlayer);
+                showToast('Computer wins! Better luck next time!');
+                return;
+            }
+
+            if (checkDraw()) {
+                gameStatus.textContent = 'Game ended in a draw!';
+                gameActive = false;
+                showToast('The game ended in a draw!');
+                return;
+            }
+
+            currentPlayer = humanPlayer;
+            gameStatus.textContent = 'Your turn (X)';
+        }
+
+        function getBestMove() {
             let bestScore = -Infinity;
-            
-            for (let i = 0; i < 9; i++) {
-                if (board[i] === '') {
-                    board[i] = aiPlayer;
-                    let score = minimax(board, depth + 1, false);
-                    board[i] = '';
-                    bestScore = Math.max(score, bestScore);
-                }
-            }
-            
-            return bestScore;
-        } else {
-            let bestScore = Infinity;
-            
-            for (let i = 0; i < 9; i++) {
-                if (board[i] === '') {
-                    board[i] = humanPlayer;
-                    let score = minimax(board, depth + 1, true);
-                    board[i] = '';
-                    bestScore = Math.min(score, bestScore);
-                }
-            }
-            
-            return bestScore;
-        }
-    }
-    
-    function getRandomMove() {
-        let availableSpots = [];
-        for (let i = 0; i < 9; i++) {
-            if (gameBoard[i] === '') {
-                availableSpots.push(i);
-            }
-        }
-        return availableSpots[Math.floor(Math.random() * availableSpots.length)];
-    }
-    
-    function checkWin(player) {
-        for (const pattern of winPatterns) {
-            const [a, b, c] = pattern;
-            if (gameBoard[a] === player && gameBoard[b] === player && gameBoard[c] === player) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    function checkDraw() {
-        return !gameBoard.includes('');
-    }
-    
-    function highlightWinningCells(player) {
-        for (const pattern of winPatterns) {
-            const [a, b, c] = pattern;
-            if (gameBoard[a] === player && gameBoard[b] === player && gameBoard[c] === player) {
-                document.querySelector(`.ttt-cell[data-index="${a}"]`).classList.add('winning-cell');
-                document.querySelector(`.ttt-cell[data-index="${b}"]`).classList.add('winning-cell');
-                document.querySelector(`.ttt-cell[data-index="${c}"]`).classList.add('winning-cell');
-                break;
-            }
-        }
-    }
-    
-    newTicTacToeGameBtn.addEventListener('click', initTicTacToe);
-    initTicTacToe();
-}
+            let bestMove;
 
-// Memory Game
-function initMemoryGame() {
-    const memoryBoard = document.getElementById('memoryBoard');
-    const movesCounter = document.getElementById('movesCounter');
-    const pairsCounter = document.getElementById('pairsCounter');
-    const newMemoryGameBtn = document.getElementById('newMemoryGameBtn');
-    
-    let cards = [];
-    let flippedCards = [];
-    let matchedPairs = 0;
-    let moves = 0;
-    let lockBoard = false;
-    
-    function initMemoryGame() {
-        cards = [];
-        flippedCards = [];
-        matchedPairs = 0;
-        moves = 0;
-        lockBoard = false;
-        
-        movesCounter.textContent = 'Moves: 0';
-        pairsCounter.textContent = 'Pairs found: 0/8';
-        
-        const symbols = ['🍕', '🍔', '🍎', '🍉', '🍇', '🍓', '🍦', '🍩'];
-        cards = [...symbols, ...symbols];
-        
-        shuffleCards();
-        renderMemoryBoard();
-    }
-    
-    function shuffleCards() {
-        for (let i = cards.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [cards[i], cards[j]] = [cards[j], cards[i]];
-        }
-    }
-    
-    function renderMemoryBoard() {
-        memoryBoard.innerHTML = '';
-        
-        cards.forEach((symbol, index) => {
-            const card = document.createElement('div');
-            card.className = 'memory-card';
-            card.dataset.index = index;
-            
-            const cardInner = document.createElement('div');
-            cardInner.className = 'memory-card-inner';
-            
-            const cardFront = document.createElement('div');
-            cardFront.className = 'memory-card-front';
-            
-            const cardBack = document.createElement('div');
-            cardBack.className = 'memory-card-back';
-            cardBack.textContent = symbol;
-            
-            cardInner.appendChild(cardFront);
-            cardInner.appendChild(cardBack);
-            card.appendChild(cardInner);
-            
-            card.addEventListener('click', () => flipCard(card, index));
-            memoryBoard.appendChild(card);
-        });
-    }
-    
-    function flipCard(card, index) {
-        if (lockBoard || card.classList.contains('flipped') || flippedCards.length === 2) return;
-        
-        card.classList.add('flipped');
-        flippedCards.push({ card, index });
-        
-        if (flippedCards.length === 2) {
-            lockBoard = true;
-            moves++;
-            movesCounter.textContent = `Moves: ${moves}`;
-            
-            checkForMatch();
-        }
-    }
-    
-    function checkForMatch() {
-        const [firstCard, secondCard] = flippedCards;
-        
-        if (cards[firstCard.index] === cards[secondCard.index]) {
-            matchedPairs++;
-            pairsCounter.textContent = `Pairs found: ${matchedPairs}/8`;
-            
-            flippedCards = [];
-            lockBoard = false;
-            
-            if (matchedPairs === 8) {
-                showToast(`Congratulations! You completed the game in ${moves} moves!`);
+            for (let i = 0; i < 9; i++) {
+                if (gameBoard[i] === '') {
+                    gameBoard[i] = aiPlayer;
+                    let score = minimax(gameBoard, 0, false);
+                    gameBoard[i] = '';
+
+                    if (score > bestScore) {
+                        bestScore = score;
+                        bestMove = i;
+                    }
+                }
             }
-        } else {
-            setTimeout(() => {
-                firstCard.card.classList.remove('flipped');
-                secondCard.card.classList.remove('flipped');
+
+            return bestMove;
+        }
+
+        function minimax(board, depth, isMaximizing) {
+            if (checkWin(aiPlayer)) return 10 - depth;
+            if (checkWin(humanPlayer)) return depth - 10;
+            if (checkDraw()) return 0;
+
+            if (isMaximizing) {
+                let bestScore = -Infinity;
+
+                for (let i = 0; i < 9; i++) {
+                    if (board[i] === '') {
+                        board[i] = aiPlayer;
+                        let score = minimax(board, depth + 1, false);
+                        board[i] = '';
+                        bestScore = Math.max(score, bestScore);
+                    }
+                }
+
+                return bestScore;
+            } else {
+                let bestScore = Infinity;
+
+                for (let i = 0; i < 9; i++) {
+                    if (board[i] === '') {
+                        board[i] = humanPlayer;
+                        let score = minimax(board, depth + 1, true);
+                        board[i] = '';
+                        bestScore = Math.min(score, bestScore);
+                    }
+                }
+
+                return bestScore;
+            }
+        }
+
+        function getRandomMove() {
+            let availableSpots = [];
+            for (let i = 0; i < 9; i++) {
+                if (gameBoard[i] === '') {
+                    availableSpots.push(i);
+                }
+            }
+            return availableSpots[Math.floor(Math.random() * availableSpots.length)];
+        }
+
+        function checkWin(player) {
+            for (const pattern of winPatterns) {
+                const [a, b, c] = pattern;
+                if (gameBoard[a] === player && gameBoard[b] === player && gameBoard[c] === player) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function checkDraw() {
+            return !gameBoard.includes('');
+        }
+
+        function highlightWinningCells(player) {
+            for (const pattern of winPatterns) {
+                const [a, b, c] = pattern;
+                if (gameBoard[a] === player && gameBoard[b] === player && gameBoard[c] === player) {
+                    document.querySelector(`.ttt-cell[data-index="${a}"]`).classList.add('winning-cell');
+                    document.querySelector(`.ttt-cell[data-index="${b}"]`).classList.add('winning-cell');
+                    document.querySelector(`.ttt-cell[data-index="${c}"]`).classList.add('winning-cell');
+                    break;
+                }
+            }
+        }
+
+        newTicTacToeGameBtn.addEventListener('click', initTicTacToe);
+        initTicTacToe();
+    }
+
+    // Memory Game
+    function initMemoryGame() {
+        const memoryBoard = document.getElementById('memoryBoard');
+        const movesCounter = document.getElementById('movesCounter');
+        const pairsCounter = document.getElementById('pairsCounter');
+        const newMemoryGameBtn = document.getElementById('newMemoryGameBtn');
+
+        let cards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let moves = 0;
+        let lockBoard = false;
+
+        function initMemoryGame() {
+            cards = [];
+            flippedCards = [];
+            matchedPairs = 0;
+            moves = 0;
+            lockBoard = false;
+
+            movesCounter.textContent = 'Moves: 0';
+            pairsCounter.textContent = 'Pairs found: 0/8';
+
+            const symbols = ['🍕', '🍔', '🍎', '🍉', '🍇', '🍓', '🍦', '🍩'];
+            cards = [...symbols, ...symbols];
+
+            shuffleCards();
+            renderMemoryBoard();
+        }
+
+        function shuffleCards() {
+            for (let i = cards.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [cards[i], cards[j]] = [cards[j], cards[i]];
+            }
+        }
+
+        function renderMemoryBoard() {
+            memoryBoard.innerHTML = '';
+
+            cards.forEach((symbol, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.dataset.index = index;
+
+                const cardInner = document.createElement('div');
+                cardInner.className = 'memory-card-inner';
+
+                const cardFront = document.createElement('div');
+                cardFront.className = 'memory-card-front';
+
+                const cardBack = document.createElement('div');
+                cardBack.className = 'memory-card-back';
+                cardBack.textContent = symbol;
+
+                cardInner.appendChild(cardFront);
+                cardInner.appendChild(cardBack);
+                card.appendChild(cardInner);
+
+                card.addEventListener('click', () => flipCard(card, index));
+                memoryBoard.appendChild(card);
+            });
+        }
+
+        function flipCard(card, index) {
+            if (lockBoard || card.classList.contains('flipped') || flippedCards.length === 2) return;
+
+            card.classList.add('flipped');
+            flippedCards.push({ card, index });
+
+            if (flippedCards.length === 2) {
+                lockBoard = true;
+                moves++;
+                movesCounter.textContent = `Moves: ${moves}`;
+
+                checkForMatch();
+            }
+        }
+
+        function checkForMatch() {
+            const [firstCard, secondCard] = flippedCards;
+
+            if (cards[firstCard.index] === cards[secondCard.index]) {
+                matchedPairs++;
+                pairsCounter.textContent = `Pairs found: ${matchedPairs}/8`;
+
                 flippedCards = [];
                 lockBoard = false;
-            }, 1000);
-        }
-    }
-    
-    newMemoryGameBtn.addEventListener('click', initMemoryGame);
-    initMemoryGame();
-}
 
-// Snake Game
-function initSnakeGame() {
-    const canvas = document.getElementById('snakeCanvas');
-    if (!canvas) return; // section not present
-    const ctx = canvas.getContext('2d');
-    const scoreEl = document.getElementById('snakeScore');
-    const highScoreEl = document.getElementById('snakeHighScore');
-    const newGameBtn = document.getElementById('newSnakeGameBtn');
-
-    let gridSize = 20; // 20x20 cells
-    let cellSize = canvas.width / gridSize;
-    let snake = [{x: 10, y: 10}];
-    let direction = {x: 0, y: 0};
-    let food = {};
-    let score = 0;
-    let highScore = localStorage.getItem('snakeHighScore') || 0;
-    let gameLoop;
-    let gameActive = false;
-
-    highScoreEl.textContent = `High Score: ${highScore}`;
-
-    function randomFood() {
-        let newFood;
-        do {
-            newFood = {
-                x: Math.floor(Math.random() * gridSize),
-                y: Math.floor(Math.random() * gridSize)
-            };
-        } while (snake.some(segment => segment.x === newFood.x && segment.y === newFood.y));
-        food = newFood;
-    }
-
-    function draw() {
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        // Draw snake
-        ctx.fillStyle = '#fff';
-        snake.forEach(segment => {
-            ctx.fillRect(segment.x * cellSize, segment.y * cellSize, cellSize - 1, cellSize - 1);
-        });
-
-        // Draw food
-        ctx.fillStyle = '#888'; // gray food
-        ctx.fillRect(food.x * cellSize, food.y * cellSize, cellSize - 1, cellSize - 1);
-    }
-
-    function move() {
-        if (!gameActive) return;
-
-        let head = {x: snake[0].x + direction.x, y: snake[0].y + direction.y};
-
-        // Check wall collision
-        if (head.x < 0 || head.x >= gridSize || head.y < 0 || head.y >= gridSize) {
-            gameOver();
-            return;
+                if (matchedPairs === 8) {
+                    showToast(`Congratulations! You completed the game in ${moves} moves!`);
+                }
+            } else {
+                setTimeout(() => {
+                    firstCard.card.classList.remove('flipped');
+                    secondCard.card.classList.remove('flipped');
+                    flippedCards = [];
+                    lockBoard = false;
+                }, 1000);
+            }
         }
 
-        // Check self collision
-        if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
-            gameOver();
-            return;
+        newMemoryGameBtn.addEventListener('click', initMemoryGame);
+        initMemoryGame();
+    }
+
+    // Snake Game
+    function initSnakeGame() {
+        const canvas = document.getElementById('snakeCanvas');
+        if (!canvas) return; // section not present
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('snakeScore');
+        const highScoreEl = document.getElementById('snakeHighScore');
+        const newGameBtn = document.getElementById('newSnakeGameBtn');
+
+        let gridSize = 20; // 20x20 cells
+        let cellSize = canvas.width / gridSize;
+        let snake = [{ x: 10, y: 10 }];
+        let direction = { x: 0, y: 0 };
+        let food = {};
+        let score = 0;
+        let highScore = localStorage.getItem('snakeHighScore') || 0;
+        let gameLoop;
+        let gameActive = false;
+
+        highScoreEl.textContent = `High Score: ${highScore}`;
+
+        function randomFood() {
+            let newFood;
+            do {
+                newFood = {
+                    x: Math.floor(Math.random() * gridSize),
+                    y: Math.floor(Math.random() * gridSize)
+                };
+            } while (snake.some(segment => segment.x === newFood.x && segment.y === newFood.y));
+            food = newFood;
         }
 
-        snake.unshift(head);
+        function draw() {
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // Check food
-        if (head.x === food.x && head.y === food.y) {
-            score++;
-            scoreEl.textContent = `Score: ${score}`;
+            // Draw snake
+            ctx.fillStyle = '#fff';
+            snake.forEach(segment => {
+                ctx.fillRect(segment.x * cellSize, segment.y * cellSize, cellSize - 1, cellSize - 1);
+            });
+
+            // Draw food
+            ctx.fillStyle = '#888'; // gray food
+            ctx.fillRect(food.x * cellSize, food.y * cellSize, cellSize - 1, cellSize - 1);
+        }
+
+        function move() {
+            if (!gameActive) return;
+
+            let head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+
+            // Check wall collision
+            if (head.x < 0 || head.x >= gridSize || head.y < 0 || head.y >= gridSize) {
+                gameOver();
+                return;
+            }
+
+            // Check self collision
+            if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
+                gameOver();
+                return;
+            }
+
+            snake.unshift(head);
+
+            // Check food
+            if (head.x === food.x && head.y === food.y) {
+                score++;
+                scoreEl.textContent = `Score: ${score}`;
+                randomFood();
+            } else {
+                snake.pop();
+            }
+
+            draw();
+        }
+
+        function gameOver() {
+            gameActive = false;
+            clearInterval(gameLoop);
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('snakeHighScore', highScore);
+                highScoreEl.textContent = `High Score: ${highScore}`;
+            }
+            ctx.fillStyle = 'rgba(255,255,255,0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#fff';
+            ctx.font = '20px monospace';
+            ctx.textAlign = 'center';
+            ctx.fillText('Game Over', canvas.width / 2, canvas.height / 2);
+        }
+
+        function startGame() {
+            if (gameActive) clearInterval(gameLoop);
+            snake = [{ x: 10, y: 10 }];
+            direction = { x: 1, y: 0 }; // start moving right
+            score = 0;
+            scoreEl.textContent = 'Score: 0';
             randomFood();
-        } else {
-            snake.pop();
+            gameActive = true;
+            draw();
+            gameLoop = setInterval(move, 150);
         }
 
-        draw();
-    }
-
-    function gameOver() {
-        gameActive = false;
-        clearInterval(gameLoop);
-        if (score > highScore) {
-            highScore = score;
-            localStorage.setItem('snakeHighScore', highScore);
-            highScoreEl.textContent = `High Score: ${highScore}`;
-        }
-        ctx.fillStyle = 'rgba(255,255,255,0.1)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = '#fff';
-        ctx.font = '20px monospace';
-        ctx.textAlign = 'center';
-        ctx.fillText('Game Over', canvas.width/2, canvas.height/2);
-    }
-
-    function startGame() {
-        if (gameActive) clearInterval(gameLoop);
-        snake = [{x: 10, y: 10}];
-        direction = {x: 1, y: 0}; // start moving right
-        score = 0;
-        scoreEl.textContent = 'Score: 0';
-        randomFood();
-        gameActive = true;
-        draw();
-        gameLoop = setInterval(move, 150);
-    }
-
-    // Keyboard controls
-    window.addEventListener('keydown', (e) => {
-        if (!gameActive) return;
-        switch (e.key) {
-            case 'ArrowUp': if (direction.y === 0) direction = {x: 0, y: -1}; break;
-            case 'ArrowDown': if (direction.y === 0) direction = {x: 0, y: 1}; break;
-            case 'ArrowLeft': if (direction.x === 0) direction = {x: -1, y: 0}; break;
-            case 'ArrowRight': if (direction.x === 0) direction = {x: 1, y: 0}; break;
-        }
-    });
-
-    newGameBtn.addEventListener('click', startGame);
-
-    // Initial setup
-    startGame();
-}
-
-// CLI Mode
-// CLI Mode – Advanced Terminal Simulation
-function initCLIMode() {
-    const modeToggle = document.getElementById('modeToggle');
-    const cliMode = document.getElementById('cliMode');
-    const cliInput = document.getElementById('cliInput');
-    const cliContent = document.getElementById('cliContent');
-
-    // Virtual filesystem
-    let fs = {
-        '/': {
-            type: 'dir',
-            children: {
-                'home': { type: 'dir', children: {
-                    'kss': { type: 'dir', children: {} }
-                }},
-                'projects': { type: 'dir', children: {
-                    'object-detection.txt': { type: 'file', content: 'Real-time object detection with TensorFlow.js' },
-                    'rag-agent.txt': { type: 'file', content: 'MYRAGAGENT – RAG system using kssrag' }
-                }},
-                'about.txt': { type: 'file', content: 'Kosisochukwu Okafor – Software Engineer & AI/ML Engineer\n4th year Software Engineering student at Federal University of Technology Owerri\nPassionate about AI, RAG systems, and building innovative solutions.' },
-                'skills.txt': { type: 'file', content: 'AI/ML: RAG, Neural Networks, NLP, TensorFlow, PyTorch\nDevelopment: Python, JavaScript, .NET, FastAPI\nCloud: AWS, Azure, Ansible, GitHub Actions\nData: HDFS, Hadoop, Protege' }
+        // Keyboard controls
+        window.addEventListener('keydown', (e) => {
+            if (!gameActive) return;
+            switch (e.key) {
+                case 'ArrowUp':
+                case 'w':
+                case 'W':
+                    if (direction.y === 0) direction = { x: 0, y: -1 }; break;
+                case 'ArrowDown':
+                case 's':
+                case 'S':
+                    if (direction.y === 0) direction = { x: 0, y: 1 }; break;
+                case 'ArrowLeft':
+                case 'a':
+                case 'A':
+                    if (direction.x === 0) direction = { x: -1, y: 0 }; break;
+                case 'ArrowRight':
+                case 'd':
+                case 'D':
+                    if (direction.x === 0) direction = { x: 1, y: 0 }; break;
             }
-        }
-    };
-
-    let currentPath = '/home/kss';  // start in user home
-    let history = [];
-
-    function getNode(path) {
-        if (path === '/') return fs['/'];
-        let parts = path.split('/').filter(p => p !== '');
-        let node = fs['/'];
-        for (let part of parts) {
-            if (node.type !== 'dir' || !node.children[part]) return null;
-            node = node.children[part];
-        }
-        return node;
-    }
-
-    function resolvePath(inputPath) {
-        if (inputPath.startsWith('/')) return inputPath;
-        let parts = currentPath.split('/').filter(p => p !== '');
-        let inputParts = inputPath.split('/').filter(p => p !== '');
-        for (let p of inputParts) {
-            if (p === '..') {
-                if (parts.length > 0) parts.pop();
-            } else if (p !== '.') {
-                parts.push(p);
-            }
-        }
-        return '/' + parts.join('/');
-    }
-
-    function listDir(path) {
-        let node = getNode(path);
-        if (!node || node.type !== 'dir') return null;
-        return Object.keys(node.children).map(name => {
-            let child = node.children[name];
-            return { name, type: child.type };
         });
+
+        // Mobile Controls
+        const snakeUpBtn = document.getElementById('snakeUpBtn');
+        const snakeDownBtn = document.getElementById('snakeDownBtn');
+        const snakeLeftBtn = document.getElementById('snakeLeftBtn');
+        const snakeRightBtn = document.getElementById('snakeRightBtn');
+
+        if (snakeUpBtn) {
+            snakeUpBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (direction.y === 0) direction = { x: 0, y: -1 };
+            });
+            snakeDownBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (direction.y === 0) direction = { x: 0, y: 1 };
+            });
+            snakeLeftBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (direction.x === 0) direction = { x: -1, y: 0 };
+            });
+            snakeRightBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (direction.x === 0) direction = { x: 1, y: 0 };
+            });
+
+            // Add touch support to prevent double firing or delay
+            snakeUpBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                if (direction.y === 0) direction = { x: 0, y: -1 };
+            });
+            snakeDownBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                if (direction.y === 0) direction = { x: 0, y: 1 };
+            });
+            snakeLeftBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                if (direction.x === 0) direction = { x: -1, y: 0 };
+            });
+            snakeRightBtn.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                if (direction.x === 0) direction = { x: 1, y: 0 };
+            });
+        }
+
+        newGameBtn.addEventListener('click', startGame);
+
+        // Initial setup
+        startGame();
     }
 
-    function addCLIOutput(text, className = 'cli-output') {
-        const line = document.createElement('div');
-        line.className = className;
-        line.textContent = text;
-        cliContent.appendChild(line);
-        cliContent.scrollTop = cliContent.scrollHeight;
-    }
+    // CLI Mode
+    // CLI Mode – Advanced Terminal Simulation
+    function initCLIMode() {
+        const modeToggle = document.getElementById('modeToggle');
+        const cliMode = document.getElementById('cliMode');
+        const cliInput = document.getElementById('cliInput');
+        const cliContent = document.getElementById('cliContent');
 
-    function showPrompt() {
-        addCLIOutput(`kss@portfolio:${currentPath}$ `, 'cli-prompt');
-    }
+        // Virtual filesystem
+        let fs = {
+            '/': {
+                type: 'dir',
+                children: {
+                    'home': {
+                        type: 'dir', children: {
+                            'kss': { type: 'dir', children: {} }
+                        }
+                    },
+                    'projects': {
+                        type: 'dir', children: {
+                            'object-detection.txt': { type: 'file', content: 'Real-time object detection with TensorFlow.js' },
+                            'rag-agent.txt': { type: 'file', content: 'MYRAGAGENT – RAG system using kssrag' }
+                        }
+                    },
+                    'about.txt': { type: 'file', content: 'Kosisochukwu Okafor – Software Engineer & AI/ML Engineer\n4th year Software Engineering student at Federal University of Technology Owerri\nPassionate about AI, RAG systems, and building innovative solutions.' },
+                    'skills.txt': { type: 'file', content: 'AI/ML: RAG, Neural Networks, NLP, TensorFlow, PyTorch\nDevelopment: Python, JavaScript, .NET, FastAPI\nCloud: AWS, Azure, Ansible, GitHub Actions\nData: HDFS, Hadoop, Protege' }
+                }
+            }
+        };
 
-    function processCommand(input) {
-        const args = input.trim().split(/\s+/);
-        const cmd = args[0].toLowerCase();
-        const rest = args.slice(1);
+        let currentPath = '/home/kss';  // start in user home
+        let history = [];
 
-        switch (cmd) {
-            case 'help':
-                addCLIOutput('Built-in commands:');
-                addCLIOutput('  help                    Show this help');
-                addCLIOutput('  about                   Display information about me');
-                addCLIOutput('  projects                List projects');
-                addCLIOutput('  skills                  View technical skills');
-                addCLIOutput('  contact                 Show contact info');
-                addCLIOutput('  game                    Open game modal');
-                addCLIOutput('  clear                   Clear terminal');
-                addCLIOutput('  exit                    Exit CLI mode');
-                addCLIOutput('');
-                addCLIOutput('Filesystem commands:');
-                addCLIOutput('  ls [path]               List directory contents');
-                addCLIOutput('  cd <path>               Change directory');
-                addCLIOutput('  cat <file>              Display file content');
-                addCLIOutput('  mkdir <dir>             Create directory');
-                addCLIOutput('  rm <path>               Remove file/directory');
-                addCLIOutput('  echo <text> > <file>    Write text to file');
-                break;
-            case 'about':
-                addCLIOutput('Kosisochukwu Okafor - Software Engineer & AI/ML Engineer');
-                addCLIOutput('4th year Software Engineering student at Federal University of Technology Owerri');
-                addCLIOutput('Passionate about AI, RAG systems, and building innovative solutions.');
-                addCLIOutput('');
-                addCLIOutput('Recent experience:');
-                addCLIOutput('  • AI/ML Cloud Intern @ Softgem.org (AWS partner)');
-                addCLIOutput('  • Chatbot Developer @ My Health Integral');
-                addCLIOutput('  • Freelance software engineer (Azure, Hadoop, Protege)');
-                break;
-            case 'projects':
-                addCLIOutput('Projects:');
-                addCLIOutput('  • Real-Time Object Detection - AI/ML, Web');
-                addCLIOutput('  • MYRAGAGENT - AI, RAG, Python');
-                addCLIOutput('  • AI Copilot Agent - AI, FastAPI, Python');
-                addCLIOutput('  • UK Health Dataset - Kaggle');
-                addCLIOutput('  • Biochemist Portfolio (sister)');
-                addCLIOutput('  • And many more... (type "projects --all" for full list)');
-                break;
-            case 'skills':
-                addCLIOutput('Skills:');
-                addCLIOutput('  • AI/ML: RAG Systems, Neural Networks, NLP, TensorFlow, PyTorch');
-                addCLIOutput('  • Development: Python, JavaScript, .NET, FastAPI');
-                addCLIOutput('  • Cloud & DevOps: AWS, Azure (PostgreSQL, CosmosDB, App Service, Front Door), Ansible, GitHub Actions');
-                addCLIOutput('  • Data: HDFS, Hadoop, Protege ontologies');
-                break;
-            case 'contact':
-                addCLIOutput('Contact Information:');
-                addCLIOutput('  • Email: kookafor893@gmail.com');
-                addCLIOutput('  • Phone: +234 901 954 9473');
-                addCLIOutput('  • GitHub: github.com/Ksschkw');
-                addCLIOutput('  • WhatsApp: wa.me/2349019549473');
-                break;
-            case 'game':
-                addCLIOutput('Opening game modal...');
-                setTimeout(() => document.getElementById('playGameBtn').click(), 300);
-                break;
-            case 'clear':
-                cliContent.innerHTML = '';
-                showPrompt();
-                break;
-            case 'exit':
-                cliMode.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                break;
+        function getNode(path) {
+            if (path === '/') return fs['/'];
+            let parts = path.split('/').filter(p => p !== '');
+            let node = fs['/'];
+            for (let part of parts) {
+                if (node.type !== 'dir' || !node.children[part]) return null;
+                node = node.children[part];
+            }
+            return node;
+        }
 
-            // Filesystem commands
-            case 'ls':
-                {
-                    let target = rest[0] ? resolvePath(rest[0]) : currentPath;
-                    let entries = listDir(target);
-                    if (entries === null) {
-                        addCLIOutput(`ls: cannot access '${rest[0] || currentPath}': No such directory`);
-                    } else {
-                        entries.forEach(e => {
-                            addCLIOutput(e.name + (e.type === 'dir' ? '/' : ''), 'cli-output');
-                        });
-                    }
+        function resolvePath(inputPath) {
+            if (inputPath.startsWith('/')) return inputPath;
+            let parts = currentPath.split('/').filter(p => p !== '');
+            let inputParts = inputPath.split('/').filter(p => p !== '');
+            for (let p of inputParts) {
+                if (p === '..') {
+                    if (parts.length > 0) parts.pop();
+                } else if (p !== '.') {
+                    parts.push(p);
                 }
-                break;
-            case 'cd':
-                if (rest.length === 0) {
-                    currentPath = '/home/kss';
-                } else {
-                    let newPath = resolvePath(rest[0]);
-                    let node = getNode(newPath);
-                    if (node && node.type === 'dir') {
-                        currentPath = newPath;
-                    } else {
-                        addCLIOutput(`cd: no such directory: ${rest[0]}`);
-                    }
-                }
-                break;
-            case 'cat':
-                if (rest.length === 0) {
-                    addCLIOutput('cat: missing file operand');
-                } else {
-                    let filePath = resolvePath(rest[0]);
-                    let node = getNode(filePath);
-                    if (node && node.type === 'file') {
-                        addCLIOutput(node.content);
-                    } else {
-                        addCLIOutput(`cat: ${rest[0]}: No such file`);
-                    }
-                }
-                break;
-            case 'mkdir':
-                if (rest.length === 0) {
-                    addCLIOutput('mkdir: missing operand');
-                } else {
-                    let dirPath = resolvePath(rest[0]);
-                    let parentPath = dirPath.substring(0, dirPath.lastIndexOf('/')) || '/';
-                    let dirName = dirPath.split('/').pop();
-                    let parentNode = getNode(parentPath);
-                    if (!parentNode || parentNode.type !== 'dir') {
-                        addCLIOutput(`mkdir: cannot create directory '${rest[0]}': Parent not a directory`);
-                    } else if (parentNode.children[dirName]) {
-                        addCLIOutput(`mkdir: cannot create directory '${rest[0]}': File exists`);
-                    } else {
-                        parentNode.children[dirName] = { type: 'dir', children: {} };
-                    }
-                }
-                break;
-            case 'rm':
-                if (rest.length === 0) {
-                    addCLIOutput('rm: missing operand');
-                } else {
-                    let targetPath = resolvePath(rest[0]);
-                    let parentPath = targetPath.substring(0, targetPath.lastIndexOf('/')) || '/';
-                    let targetName = targetPath.split('/').pop();
-                    let parentNode = getNode(parentPath);
-                    if (parentNode && parentNode.type === 'dir' && parentNode.children[targetName]) {
-                        delete parentNode.children[targetName];
-                    } else {
-                        addCLIOutput(`rm: cannot remove '${rest[0]}': No such file or directory`);
-                    }
-                }
-                break;
-            case 'echo':
-                if (rest.includes('>')) {
-                    let gtIndex = rest.indexOf('>');
-                    let text = rest.slice(0, gtIndex).join(' ');
-                    let fileName = rest[gtIndex + 1];
-                    if (!fileName) {
-                        addCLIOutput('echo: missing file name after >');
-                    } else {
-                        let filePath = resolvePath(fileName);
-                        let parentPath = filePath.substring(0, filePath.lastIndexOf('/')) || '/';
-                        let fileNameOnly = filePath.split('/').pop();
-                        let parentNode = getNode(parentPath);
-                        if (parentNode && parentNode.type === 'dir') {
-                            parentNode.children[fileNameOnly] = { type: 'file', content: text };
+            }
+            return '/' + parts.join('/');
+        }
+
+        function listDir(path) {
+            let node = getNode(path);
+            if (!node || node.type !== 'dir') return null;
+            return Object.keys(node.children).map(name => {
+                let child = node.children[name];
+                return { name, type: child.type };
+            });
+        }
+
+        function addCLIOutput(text, className = 'cli-output') {
+            const line = document.createElement('div');
+            line.className = className;
+            line.textContent = text;
+            cliContent.appendChild(line);
+            cliContent.scrollTop = cliContent.scrollHeight;
+        }
+
+        function showPrompt() {
+            addCLIOutput(`kss@portfolio:${currentPath}$ `, 'cli-prompt');
+        }
+
+        function processCommand(input) {
+            const args = input.trim().split(/\s+/);
+            const cmd = args[0].toLowerCase();
+            const rest = args.slice(1);
+
+            switch (cmd) {
+                case 'help':
+                    addCLIOutput('Built-in commands:');
+                    addCLIOutput('  help                    Show this help');
+                    addCLIOutput('  about                   Display information about me');
+                    addCLIOutput('  projects                List projects');
+                    addCLIOutput('  skills                  View technical skills');
+                    addCLIOutput('  contact                 Show contact info');
+                    addCLIOutput('  game                    Open game modal');
+                    addCLIOutput('  clear                   Clear terminal');
+                    addCLIOutput('  exit                    Exit CLI mode');
+                    addCLIOutput('');
+                    addCLIOutput('Filesystem commands:');
+                    addCLIOutput('  ls [path]               List directory contents');
+                    addCLIOutput('  cd <path>               Change directory');
+                    addCLIOutput('  cat <file>              Display file content');
+                    addCLIOutput('  mkdir <dir>             Create directory');
+                    addCLIOutput('  rm <path>               Remove file/directory');
+                    addCLIOutput('  echo <text> > <file>    Write text to file');
+                    break;
+                case 'about':
+                    addCLIOutput('Kosisochukwu Okafor - Software Engineer & AI/ML Engineer');
+                    addCLIOutput('4th year Software Engineering student at Federal University of Technology Owerri');
+                    addCLIOutput('Passionate about AI, RAG systems, and building innovative solutions.');
+                    addCLIOutput('');
+                    addCLIOutput('Recent experience:');
+                    addCLIOutput('  • AI/ML Cloud Intern @ Softgem.org (AWS partner)');
+                    addCLIOutput('  • Chatbot Developer @ My Health Integral');
+                    addCLIOutput('  • Freelance software engineer (Azure, Hadoop, Protege)');
+                    break;
+                case 'projects':
+                    addCLIOutput('Projects:');
+                    addCLIOutput('  • Real-Time Object Detection - AI/ML, Web');
+                    addCLIOutput('  • MYRAGAGENT - AI, RAG, Python');
+                    addCLIOutput('  • AI Copilot Agent - AI, FastAPI, Python');
+                    addCLIOutput('  • UK Health Dataset - Kaggle');
+                    addCLIOutput('  • Biochemist Portfolio (sister)');
+                    addCLIOutput('  • And many more... (type "projects --all" for full list)');
+                    break;
+                case 'skills':
+                    addCLIOutput('Skills:');
+                    addCLIOutput('  • AI/ML: RAG Systems, Neural Networks, NLP, TensorFlow, PyTorch');
+                    addCLIOutput('  • Development: Python, JavaScript, .NET, FastAPI');
+                    addCLIOutput('  • Cloud & DevOps: AWS, Azure (PostgreSQL, CosmosDB, App Service, Front Door), Ansible, GitHub Actions');
+                    addCLIOutput('  • Data: HDFS, Hadoop, Protege ontologies');
+                    break;
+                case 'contact':
+                    addCLIOutput('Contact Information:');
+                    addCLIOutput('  • Email: kookafor893@gmail.com');
+                    addCLIOutput('  • Phone: +234 901 954 9473');
+                    addCLIOutput('  • GitHub: github.com/Ksschkw');
+                    addCLIOutput('  • WhatsApp: wa.me/2349019549473');
+                    break;
+                case 'game':
+                    addCLIOutput('Opening game modal...');
+                    setTimeout(() => document.getElementById('playGameBtn').click(), 300);
+                    break;
+                case 'clear':
+                    cliContent.innerHTML = '';
+                    showPrompt();
+                    break;
+                case 'exit':
+                    cliMode.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    break;
+
+                // Filesystem commands
+                case 'ls':
+                    {
+                        let target = rest[0] ? resolvePath(rest[0]) : currentPath;
+                        let entries = listDir(target);
+                        if (entries === null) {
+                            addCLIOutput(`ls: cannot access '${rest[0] || currentPath}': No such directory`);
                         } else {
-                            addCLIOutput(`echo: cannot create file '${fileName}': Parent not a directory`);
+                            entries.forEach(e => {
+                                addCLIOutput(e.name + (e.type === 'dir' ? '/' : ''), 'cli-output');
+                            });
                         }
                     }
-                } else {
-                    addCLIOutput(rest.join(' '));
+                    break;
+                case 'cd':
+                    if (rest.length === 0) {
+                        currentPath = '/home/kss';
+                    } else {
+                        let newPath = resolvePath(rest[0]);
+                        let node = getNode(newPath);
+                        if (node && node.type === 'dir') {
+                            currentPath = newPath;
+                        } else {
+                            addCLIOutput(`cd: no such directory: ${rest[0]}`);
+                        }
+                    }
+                    break;
+                case 'cat':
+                    if (rest.length === 0) {
+                        addCLIOutput('cat: missing file operand');
+                    } else {
+                        let filePath = resolvePath(rest[0]);
+                        let node = getNode(filePath);
+                        if (node && node.type === 'file') {
+                            addCLIOutput(node.content);
+                        } else {
+                            addCLIOutput(`cat: ${rest[0]}: No such file`);
+                        }
+                    }
+                    break;
+                case 'mkdir':
+                    if (rest.length === 0) {
+                        addCLIOutput('mkdir: missing operand');
+                    } else {
+                        let dirPath = resolvePath(rest[0]);
+                        let parentPath = dirPath.substring(0, dirPath.lastIndexOf('/')) || '/';
+                        let dirName = dirPath.split('/').pop();
+                        let parentNode = getNode(parentPath);
+                        if (!parentNode || parentNode.type !== 'dir') {
+                            addCLIOutput(`mkdir: cannot create directory '${rest[0]}': Parent not a directory`);
+                        } else if (parentNode.children[dirName]) {
+                            addCLIOutput(`mkdir: cannot create directory '${rest[0]}': File exists`);
+                        } else {
+                            parentNode.children[dirName] = { type: 'dir', children: {} };
+                        }
+                    }
+                    break;
+                case 'rm':
+                    if (rest.length === 0) {
+                        addCLIOutput('rm: missing operand');
+                    } else {
+                        let targetPath = resolvePath(rest[0]);
+                        let parentPath = targetPath.substring(0, targetPath.lastIndexOf('/')) || '/';
+                        let targetName = targetPath.split('/').pop();
+                        let parentNode = getNode(parentPath);
+                        if (parentNode && parentNode.type === 'dir' && parentNode.children[targetName]) {
+                            delete parentNode.children[targetName];
+                        } else {
+                            addCLIOutput(`rm: cannot remove '${rest[0]}': No such file or directory`);
+                        }
+                    }
+                    break;
+                case 'echo':
+                    if (rest.includes('>')) {
+                        let gtIndex = rest.indexOf('>');
+                        let text = rest.slice(0, gtIndex).join(' ');
+                        let fileName = rest[gtIndex + 1];
+                        if (!fileName) {
+                            addCLIOutput('echo: missing file name after >');
+                        } else {
+                            let filePath = resolvePath(fileName);
+                            let parentPath = filePath.substring(0, filePath.lastIndexOf('/')) || '/';
+                            let fileNameOnly = filePath.split('/').pop();
+                            let parentNode = getNode(parentPath);
+                            if (parentNode && parentNode.type === 'dir') {
+                                parentNode.children[fileNameOnly] = { type: 'file', content: text };
+                            } else {
+                                addCLIOutput(`echo: cannot create file '${fileName}': Parent not a directory`);
+                            }
+                        }
+                    } else {
+                        addCLIOutput(rest.join(' '));
+                    }
+                    break;
+                default:
+                    if (cmd) addCLIOutput(`Command not found: ${cmd}. Type 'help' for available commands.`);
+            }
+        }
+
+        // Toggle CLI mode
+        modeToggle.addEventListener('click', () => {
+            if (cliMode.style.display === 'block') {
+                cliMode.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            } else {
+                cliMode.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                cliContent.innerHTML = ''; // clear previous
+                addCLIOutput('Welcome to the KSSCHWK Linux-like terminal.');
+                addCLIOutput('Type \'help\' for available commands.');
+                showPrompt();
+                cliInput.focus();
+            }
+        });
+
+        cliInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const input = cliInput.value.trim();
+                cliInput.value = '';
+                if (input) {
+                    history.push(input);
+                    processCommand(input);
                 }
-                break;
-            default:
-                if (cmd) addCLIOutput(`Command not found: ${cmd}. Type 'help' for available commands.`);
-        }
+                showPrompt();
+                cliContent.scrollTop = cliContent.scrollHeight;
+            } else if (e.key === 'ArrowUp') {
+                // simple history navigation (optional)
+                if (history.length > 0) {
+                    cliInput.value = history[history.length - 1];
+                }
+            }
+        });
     }
-
-    // Toggle CLI mode
-    modeToggle.addEventListener('click', () => {
-        if (cliMode.style.display === 'block') {
-            cliMode.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        } else {
-            cliMode.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            cliContent.innerHTML = ''; // clear previous
-            addCLIOutput('Welcome to the KSSCHWK Linux-like terminal.');
-            addCLIOutput('Type \'help\' for available commands.');
-            showPrompt();
-            cliInput.focus();
-        }
-    });
-
-    cliInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            const input = cliInput.value.trim();
-            cliInput.value = '';
-            if (input) {
-                history.push(input);
-                processCommand(input);
-            }
-            showPrompt();
-            cliContent.scrollTop = cliContent.scrollHeight;
-        } else if (e.key === 'ArrowUp') {
-            // simple history navigation (optional)
-            if (history.length > 0) {
-                cliInput.value = history[history.length - 1];
-            }
-        }
-    });
-}
 });
 
 // AI Assistant Icon
 const aiAssistantIcon = document.getElementById('ai-assistant-icon');
 if (aiAssistantIcon) {
-aiAssistantIcon.addEventListener('click', () => {
-    document.getElementById('ai-assistant').scrollIntoView({ 
-        behavior: 'smooth' 
+    aiAssistantIcon.addEventListener('click', () => {
+        document.getElementById('ai-assistant').scrollIntoView({
+            behavior: 'smooth'
+        });
     });
-});
 }
