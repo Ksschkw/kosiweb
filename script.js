@@ -388,11 +388,93 @@ if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js').then((registration) => {
             console.log('SW registered: ', registration);
+
+            // Check for updates
+            registration.addEventListener('updatefound', () => {
+                const newWorker = registration.installing;
+                newWorker.addEventListener('statechange', () => {
+                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                        // New version available
+                        showToast('New version available! Updating...', 'info');
+                        // Optional: Automated update or ask user
+                        // For now, we auto-update after a delay or let the user click a toast action
+                        // But let's just show a toast and reload if user clicks "Update" (simulated here by reload after toast)
+
+                        const toast = document.getElementById('toast');
+                        toast.innerHTML = 'Update available! <button id="pwaUpdateBtn" style="background:transparent;border:1px solid currentColor;border-radius:4px;padding:2px 5px;cursor:pointer;">Update</button>';
+                        toast.classList.add('show');
+
+                        document.getElementById('pwaUpdateBtn').addEventListener('click', () => {
+                            if (registration.waiting) {
+                                registration.waiting.postMessage({ type: 'SKIP_WAITING' });
+                            }
+                        });
+                    }
+                });
+            });
         }).catch((registrationError) => {
             console.log('SW registration failed: ', registrationError);
         });
+
+        // Ensure controller change reloads page
+        navigator.serviceWorker.addEventListener('controllerchange', () => {
+            window.location.reload();
+        });
     });
 }
+
+// Mobile Nav Logic
+document.addEventListener('DOMContentLoaded', () => {
+    const mobileNavHome = document.getElementById('mobileNavHome');
+    const mobileNavGames = document.getElementById('mobileNavGames');
+    const openExperienceModalBtn = document.getElementById('openExperienceModalBtn');
+
+    if (mobileNavHome) {
+        mobileNavHome.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // Generate active state
+            document.querySelectorAll('.mobile-bottom-nav .nav-item').forEach(el => el.classList.remove('active'));
+            mobileNavHome.classList.add('active');
+        });
+    }
+
+    if (mobileNavGames) {
+        mobileNavGames.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (openExperienceModalBtn) {
+                openExperienceModalBtn.click();
+            }
+            // Generate active state
+            document.querySelectorAll('.mobile-bottom-nav .nav-item').forEach(el => el.classList.remove('active'));
+            mobileNavGames.classList.add('active');
+        });
+    }
+
+    // Auto active state on scroll
+    window.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('section');
+        const scrollPos = window.scrollY + 200;
+
+        sections.forEach(sec => {
+            if (scrollPos >= sec.offsetTop && scrollPos < sec.offsetTop + sec.offsetHeight) {
+                const id = sec.getAttribute('id');
+                document.querySelectorAll('.mobile-bottom-nav .nav-item').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + id) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+
+        if (window.scrollY < 100) {
+            document.querySelectorAll('.mobile-bottom-nav .nav-item').forEach(el => el.classList.remove('active'));
+            if (mobileNavHome) mobileNavHome.classList.add('active');
+        }
+    });
+});
 
 // Configure marked.js
 marked.setOptions({

@@ -41,13 +41,14 @@ body {
 
 /* Header & Navigation */
 header {
-    background: rgba(18, 18, 29, 0.95);
+    background: rgba(18, 18, 29, 0.7);
     padding: 1.5rem 0;
     position: sticky;
     top: 0;
     z-index: 100;
     border-bottom: 1px solid var(--border-color);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 nav {
@@ -1857,18 +1858,27 @@ footer {
 }
 
 /* App Install Prompt */
+/* App Install Prompt */
 .install-prompt {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100px);
     background: var(--card-bg);
     border: 1px solid var(--accent-color);
     border-radius: 10px;
     padding: 1rem;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    z-index: 1000;
-    max-width: 300px;
+    z-index: 2000;
+    max-width: 90%;
+    width: 300px;
     display: none;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.install-prompt.show {
+    display: block;
+    transform: translateX(-50%) translateY(0);
 }
 
 .install-prompt.show {
@@ -1902,7 +1912,7 @@ footer {
 /* Enhanced AI Assistant Icon */
 .ai-assistant-icon {
     position: fixed;
-    bottom: 25px;
+    bottom: 90px;
     left: 25px;
     width: 65px;
     height: 65px;
@@ -1975,7 +1985,7 @@ footer {
 
 @media (max-width: 768px) {
     .ai-assistant-icon {
-        bottom: 20px;
+        bottom: 100px;
         left: 20px;
         width: 55px;
         height: 55px;

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kss-portfolio-v1';
+const CACHE_NAME = 'kss-portfolio-v2';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -31,4 +31,10 @@ self.addEventListener('activate', event => {
       })
     ))
   );
+});
+
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
 });
