@@ -429,6 +429,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileNavGames = document.getElementById('mobileNavGames');
     const openExperienceModalBtn = document.getElementById('openExperienceModalBtn');
 
+    // Close modals on any mobile nav click
+    document.querySelectorAll('.mobile-bottom-nav .nav-item').forEach(link => {
+        link.addEventListener('click', () => {
+            document.querySelectorAll('.modal').forEach(m => m.style.display = 'none');
+            document.body.style.overflow = 'auto';
+        });
+    });
+
     if (mobileNavHome) {
         mobileNavHome.addEventListener('click', (e) => {
             e.preventDefault();
