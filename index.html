@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
     <meta name="description"
         content="Software Engineer | API | Backend Engineer specializing in API development, Software Architecture, System Designer, AI Agents, RAG systems, neural networks, and building innovative solutions. Explore my portfolio of AI projects and web applications.">
     <meta name="keywords"
@@ -760,6 +761,10 @@
                 <i class="fas fa-compass"></i>
                 <!-- <span>Explore</span> -->
             </a>
+            <a href="#ai-assistant" class="nav-item" id="mobileNavChat">
+                <i class="fas fa-robot"></i>
+                <!-- <span>Chat</span> -->
+            </a>
             <a href="#" class="nav-item" id="mobileNavGames">
                 <i class="fas fa-gamepad"></i>
                 <!-- <span>Play</span> -->
@@ -797,15 +802,24 @@
     <!-- CLI Mode Interface -->
     <div class="cli-mode" id="cliMode">
         <div class="cli-header">
-            <h2>KSSCHKW's CLI Interface</h2>
-            <p>Type 'help' to see available commands</p>
+            <div class="cli-window-dots">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+            </div>
+            <div class="cli-title">terminal — kss@portfolio</div>
+            <button class="cli-close-btn" id="cliCloseBtn" aria-label="Close Terminal">&times;</button>
         </div>
-        <div class="cli-content" id="cliContent">
-            <div class="cli-output">Welcome to CLI mode! Type 'help' to see available commands.</div>
-        </div>
-        <div class="cli-command">
-            <span>></span>
-            <input type="text" class="cli-input" id="cliInput" autofocus>
+        <div class="cli-body" id="cliBody">
+            <div class="cli-content" id="cliContent">
+                <div class="cli-output">Welcome to CLI mode! Type 'help' to see available commands.</div>
+            </div>
+            <div class="cli-input-line">
+                <span class="cli-active-prompt" id="cliActivePrompt">kss@portfolio:/home/kss$</span>
+                <span class="cli-input-container">
+                    <input type="text" class="cli-input" id="cliInput" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" autofocus>
+                </span>
+            </div>
         </div>
     </div>
 

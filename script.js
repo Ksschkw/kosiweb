@@ -427,6 +427,7 @@ if ('serviceWorker' in navigator) {
 document.addEventListener('DOMContentLoaded', () => {
     const mobileNavHome = document.getElementById('mobileNavHome');
     const mobileNavGames = document.getElementById('mobileNavGames');
+    const mobileNavChat = document.getElementById('mobileNavChat');
     const openExperienceModalBtn = document.getElementById('openExperienceModalBtn');
 
     // Close modals on any mobile nav click
@@ -457,6 +458,23 @@ document.addEventListener('DOMContentLoaded', () => {
             // Generate active state
             document.querySelectorAll('.mobile-bottom-nav .nav-item').forEach(el => el.classList.remove('active'));
             mobileNavGames.classList.add('active');
+        });
+    }
+
+    if (mobileNavChat) {
+        mobileNavChat.addEventListener('click', (e) => {
+            e.preventDefault();
+            const chatSection = document.getElementById('ai-assistant');
+            if (chatSection) {
+                chatSection.scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => {
+                    const chatInput = document.getElementById('chatInput');
+                    if (chatInput) chatInput.focus();
+                }, 800);
+            }
+            // Generate active state
+            document.querySelectorAll('.mobile-bottom-nav .nav-item').forEach(el => el.classList.remove('active'));
+            mobileNavChat.classList.add('active');
         });
     }
 
@@ -1818,8 +1836,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function initCLIMode() {
         const modeToggle = document.getElementById('modeToggle');
         const cliMode = document.getElementById('cliMode');
+        const cliCloseBtn = document.getElementById('cliCloseBtn');
         const cliInput = document.getElementById('cliInput');
         const cliContent = document.getElementById('cliContent');
+        const cliActivePrompt = document.getElementById('cliActivePrompt');
+        const cliBody = document.getElementById('cliBody');
 
         // Virtual filesystem
         let fs = {
@@ -1845,6 +1866,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         let currentPath = '/home/kss';  // start in user home
         let history = [];
+        let historyIndex = -1;
 
         function getNode(path) {
             if (path === '/') return fs['/'];
@@ -1885,11 +1907,56 @@ document.addEventListener('DOMContentLoaded', function () {
             line.className = className;
             line.textContent = text;
             cliContent.appendChild(line);
-            cliContent.scrollTop = cliContent.scrollHeight;
+            scrollToBottom();
         }
 
-        function showPrompt() {
-            addCLIOutput(`kss@portfolio:${currentPath}$ `, 'cli-prompt');
+        function addRawHTMLOutput(html, className = 'cli-output') {
+            const line = document.createElement('div');
+            line.className = className;
+            line.innerHTML = html;
+            cliContent.appendChild(line);
+            scrollToBottom();
+        }
+
+        function scrollToBottom() {
+            if (cliBody) {
+                cliBody.scrollTop = cliBody.scrollHeight;
+            }
+        }
+
+        function updatePromptDisplay() {
+            if (cliActivePrompt) {
+                cliActivePrompt.textContent = `kss@portfolio:${currentPath}$`;
+            }
+        }
+
+        function closeCLI() {
+            cliMode.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openCLI() {
+            cliMode.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            cliContent.innerHTML = ''; // clear previous
+            
+            // Hacker ASCII art welcome header
+            const welcomeArt = `
+██╗  ██╗███████╗███████╗ ██████╗██╗  ██╗██╗██╗    ██╗
+██║ ██╔╝██╔════╝██╔════╝██╔════╝██║  ██║██║██║    ██║
+█████╔╝ ███████╗███████╗██║     ███████║██║██║ █╗ ██║
+██╔═██╗ ╚════██║╚════██║██║     ██╔══██║██║██║███╗██║
+██║  ██╗███████║███████║╚██████╗██║  ██║██║╚███╔███╔╝
+╚═╝  ╚═╝╚══════╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝ ╚══╝╚══╝ 
+`;
+            addRawHTMLOutput(`<pre style="color: #ff7700; font-weight: bold; font-family: monospace; line-height: 1.2; margin: 0; white-space: pre;">${welcomeArt}</pre>`);
+            addCLIOutput('Welcome to KSSCHWK Linux terminal simulation (v2.0).');
+            addCLIOutput('Type \'help\' to see the list of available commands.');
+            addCLIOutput('');
+            updatePromptDisplay();
+            setTimeout(() => {
+                if (cliInput) cliInput.focus();
+            }, 100);
         }
 
         function processCommand(input) {
@@ -1900,67 +1967,82 @@ document.addEventListener('DOMContentLoaded', function () {
             switch (cmd) {
                 case 'help':
                     addCLIOutput('Built-in commands:');
-                    addCLIOutput('  help                    Show this help');
-                    addCLIOutput('  about                   Display information about me');
-                    addCLIOutput('  projects                List projects');
-                    addCLIOutput('  skills                  View technical skills');
-                    addCLIOutput('  contact                 Show contact info');
-                    addCLIOutput('  game                    Open game modal');
-                    addCLIOutput('  clear                   Clear terminal');
-                    addCLIOutput('  exit                    Exit CLI mode');
+                    addCLIOutput('  help                    Show this help menu');
+                    addCLIOutput('  about                   Display personal background information');
+                    addCLIOutput('  projects [--all]        List projects (use --all flag to list details)');
+                    addCLIOutput('  skills                  View technical expertise list');
+                    addCLIOutput('  contact                 Show contact card');
+                    addCLIOutput('  game                    Launch the gaming modal');
+                    addCLIOutput('  clear                   Clear the screen');
+                    addCLIOutput('  exit                    Close terminal interface');
                     addCLIOutput('');
                     addCLIOutput('Filesystem commands:');
-                    addCLIOutput('  ls [path]               List directory contents');
-                    addCLIOutput('  cd <path>               Change directory');
-                    addCLIOutput('  cat <file>              Display file content');
-                    addCLIOutput('  mkdir <dir>             Create directory');
-                    addCLIOutput('  rm <path>               Remove file/directory');
-                    addCLIOutput('  echo <text> > <file>    Write text to file');
+                    addCLIOutput('  ls [path]               List directory items');
+                    addCLIOutput('  cd <path>               Change directory path');
+                    addCLIOutput('  cat <file>              Output contents of a file');
+                    addCLIOutput('  mkdir <dir>             Create a new directory');
+                    addCLIOutput('  rm <path>               Delete file or directory');
+                    addCLIOutput('  echo <text> > <file>    Write custom text to file');
                     break;
                 case 'about':
                     addCLIOutput('Kosisochukwu Okafor - Software Engineer & AI/ML Engineer');
-                    addCLIOutput('4th year Software Engineering student at Federal University of Technology Owerri');
-                    addCLIOutput('Passionate about AI, RAG systems, and building innovative solutions.');
+                    addCLIOutput('4th year Software Engineering student at Federal University of Technology FUTO');
+                    addCLIOutput('Passionate about AI, RAG architectures, and building backend solutions.');
                     addCLIOutput('');
-                    addCLIOutput('Recent experience:');
+                    addCLIOutput('Experience highlight:');
                     addCLIOutput('  • AI/ML Cloud Intern @ Softgem.org (AWS partner)');
-                    addCLIOutput('  • Chatbot Developer @ My Health Integral');
-                    addCLIOutput('  • Freelance software engineer (Azure, Hadoop, Protege)');
+                    addCLIOutput('  • Chatbot Developer @ My Health Integral (Built Annie chatbot)');
+                    addCLIOutput('  • Freelance Software Engineer (Azure, CosmosDB, Hadoop, Protege)');
                     break;
                 case 'projects':
-                    addCLIOutput('Projects:');
-                    addCLIOutput('  • Real-Time Object Detection - AI/ML, Web');
-                    addCLIOutput('  • MYRAGAGENT - AI, RAG, Python');
-                    addCLIOutput('  • AI Copilot Agent - AI, FastAPI, Python');
-                    addCLIOutput('  • UK Health Dataset - Kaggle');
-                    addCLIOutput('  • Biochemist Portfolio (sister)');
-                    addCLIOutput('  • And many more... (type "projects --all" for full list)');
+                    if (rest[0] === '--all') {
+                        addCLIOutput('All Portfolio Projects Detail:');
+                        projectsData.forEach(p => {
+                            // Strip HTML tags for clean command-line view
+                            const desc = p.description.replace(/<[^>]*>/g, '');
+                            addCLIOutput(`  • ${p.title} [${p.category.toUpperCase()}]`);
+                            addCLIOutput(`    Description: ${desc}`);
+                            if (p.links && p.links.length > 0) {
+                                const linkStr = p.links.map(l => `${l.text}: ${l.href}`).join(' | ');
+                                addCLIOutput(`    Links: ${linkStr}`);
+                            }
+                            addCLIOutput('');
+                        });
+                    } else {
+                        addCLIOutput('Projects list (type "projects --all" for descriptions):');
+                        addCLIOutput('  • Real-Time Object Detection - [AI/ML, WEB]');
+                        addCLIOutput('  • Kolaborasi-Kosi (Real-time whiteboard) - [WEB]');
+                        addCLIOutput('  • AI Chat Assistant (PyTorch/OpenRouter) - [AI/ML]');
+                        addCLIOutput('  • UK Local Authority Indicators - [DATA]');
+                        addCLIOutput('  • Biochemist Portfolio (Sibling project) - [WEB]');
+                    }
                     break;
                 case 'skills':
-                    addCLIOutput('Skills:');
-                    addCLIOutput('  • AI/ML: RAG Systems, Neural Networks, NLP, TensorFlow, PyTorch');
-                    addCLIOutput('  • Development: Python, JavaScript, .NET, FastAPI');
-                    addCLIOutput('  • Cloud & DevOps: AWS, Azure (PostgreSQL, CosmosDB, App Service, Front Door), Ansible, GitHub Actions');
-                    addCLIOutput('  • Data: HDFS, Hadoop, Protege ontologies');
+                    addCLIOutput('Skills Inventory:');
+                    addCLIOutput('  • AI/ML: RAG architectures, Neural Networks, NLP, TensorFlow, PyTorch');
+                    addCLIOutput('  • Languages & Frameworks: Python, JavaScript, C#, .NET, FastAPI, Flask');
+                    addCLIOutput('  • Cloud & Infrastructure: AWS, Azure (CosmosDB, PostgreSQL, App Service, Front Door), Docker, Ansible, GitHub Actions');
+                    addCLIOutput('  • Big Data & Semantics: Hadoop, HDFS, Protege (ontologies)');
                     break;
                 case 'contact':
-                    addCLIOutput('Contact Information:');
+                    addCLIOutput('Contact details:');
                     addCLIOutput('  • Email: kookafor893@gmail.com');
                     addCLIOutput('  • Phone: +234 901 954 9473');
-                    addCLIOutput('  • GitHub: github.com/Ksschkw');
+                    addCLIOutput('  • Github: github.com/Ksschkw');
                     addCLIOutput('  • WhatsApp: wa.me/2349019549473');
                     break;
                 case 'game':
-                    addCLIOutput('Opening game modal...');
-                    setTimeout(() => document.getElementById('playGameBtn').click(), 300);
+                    addCLIOutput('Launching gaming modal window...');
+                    setTimeout(() => {
+                        const playBtn = document.getElementById('playGameBtn');
+                        if (playBtn) playBtn.click();
+                    }, 300);
                     break;
                 case 'clear':
                     cliContent.innerHTML = '';
-                    showPrompt();
                     break;
                 case 'exit':
-                    cliMode.style.display = 'none';
-                    document.body.style.overflow = 'auto';
+                    closeCLI();
                     break;
 
                 // Filesystem commands
@@ -1970,10 +2052,19 @@ document.addEventListener('DOMContentLoaded', function () {
                         let entries = listDir(target);
                         if (entries === null) {
                             addCLIOutput(`ls: cannot access '${rest[0] || currentPath}': No such directory`);
+                        } else if (entries.length === 0) {
+                            // Empty directory, do nothing
                         } else {
+                            // Format list dynamically in columns with colored directories
+                            let outputHTML = '';
                             entries.forEach(e => {
-                                addCLIOutput(e.name + (e.type === 'dir' ? '/' : ''), 'cli-output');
+                                if (e.type === 'dir') {
+                                    outputHTML += `<span class="cli-item-dir">${e.name}/</span>   `;
+                                } else {
+                                    outputHTML += `<span class="cli-item-file">${e.name}</span>   `;
+                                }
                             });
+                            addRawHTMLOutput(outputHTML);
                         }
                     }
                     break;
@@ -1989,6 +2080,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             addCLIOutput(`cd: no such directory: ${rest[0]}`);
                         }
                     }
+                    updatePromptDisplay();
                     break;
                 case 'cat':
                     if (rest.length === 0) {
@@ -2062,39 +2154,132 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
 
-        // Toggle CLI mode
-        modeToggle.addEventListener('click', () => {
-            if (cliMode.style.display === 'block') {
-                cliMode.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            } else {
-                cliMode.style.display = 'block';
-                document.body.style.overflow = 'hidden';
-                cliContent.innerHTML = ''; // clear previous
-                addCLIOutput('Welcome to the KSSCHWK Linux-like terminal.');
-                addCLIOutput('Type \'help\' for available commands.');
-                showPrompt();
-                cliInput.focus();
+        // Toggle CLI mode event listeners
+        if (modeToggle) {
+            modeToggle.addEventListener('click', () => {
+                if (cliMode.style.display === 'flex') {
+                    closeCLI();
+                } else {
+                    openCLI();
+                }
+            });
+        }
+
+        if (cliCloseBtn) {
+            cliCloseBtn.addEventListener('click', closeCLI);
+        }
+
+        // Click anywhere in terminal body to focus input
+        if (cliBody) {
+            cliBody.addEventListener('click', () => {
+                if (cliInput) cliInput.focus();
+            });
+        }
+
+        // Esc key to close terminal
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && cliMode.style.display === 'flex') {
+                closeCLI();
             }
         });
 
-        cliInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const input = cliInput.value.trim();
-                cliInput.value = '';
-                if (input) {
-                    history.push(input);
-                    processCommand(input);
+        // Key events on input (Enter, ArrowUp, ArrowDown, Tab)
+        if (cliInput) {
+            cliInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const input = cliInput.value;
+                    cliInput.value = '';
+                    historyIndex = -1;
+
+                    // Append static execution line to history log
+                    const historyLine = document.createElement('div');
+                    historyLine.className = 'cli-history-line';
+                    historyLine.innerHTML = `<span class="cli-prompt">kss@portfolio:${currentPath}$</span><span class="cli-command-entered">${input}</span>`;
+                    cliContent.appendChild(historyLine);
+
+                    const trimmed = input.trim();
+                    if (trimmed) {
+                        history.push(trimmed);
+                        processCommand(trimmed);
+                    }
+                    
+                    scrollToBottom();
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (history.length === 0) return;
+                    if (historyIndex === -1) {
+                        historyIndex = history.length - 1;
+                    } else if (historyIndex > 0) {
+                        historyIndex--;
+                    }
+                    cliInput.value = history[historyIndex];
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (historyIndex === -1) return;
+                    if (historyIndex < history.length - 1) {
+                        historyIndex++;
+                        cliInput.value = history[historyIndex];
+                    } else {
+                        historyIndex = -1;
+                        cliInput.value = '';
+                    }
+                } else if (e.key === 'Tab') {
+                    e.preventDefault();
+                    const value = cliInput.value;
+                    const parts = value.trim().split(/\s+/);
+                    
+                    // Available commands list
+                    const commands = ['help', 'about', 'projects', 'skills', 'contact', 'game', 'clear', 'exit', 'ls', 'cd', 'cat', 'mkdir', 'rm', 'echo'];
+
+                    // Case 1: autocomplete a command
+                    if (parts.length <= 1 && !value.endsWith(' ')) {
+                        const partialCmd = parts[0] || '';
+                        const matches = commands.filter(c => c.startsWith(partialCmd.toLowerCase()));
+                        if (matches.length === 1) {
+                            cliInput.value = matches[0] + ' ';
+                        } else if (matches.length > 1) {
+                            // list options
+                            addCLIOutput('');
+                            addCLIOutput(matches.join('    '));
+                            // restore prompt and scroll
+                            scrollToBottom();
+                        }
+                    } 
+                    // Case 2: autocomplete a path (for cd, cat, rm)
+                    else if (parts.length > 1) {
+                        const cmd = parts[0].toLowerCase();
+                        if (['cd', 'cat', 'ls', 'rm'].includes(cmd)) {
+                            const lastArg = parts[parts.length - 1];
+                            const lastSlash = lastArg.lastIndexOf('/');
+                            
+                            let searchDir = currentPath;
+                            let prefix = lastArg;
+                            
+                            if (lastSlash !== -1) {
+                                const pathPrefix = lastArg.substring(0, lastSlash);
+                                searchDir = resolvePath(pathPrefix);
+                                prefix = lastArg.substring(lastSlash + 1);
+                            }
+
+                            const entries = listDir(searchDir);
+                            if (entries) {
+                                const matches = entries.filter(e => e.name.startsWith(prefix));
+                                if (matches.length === 1) {
+                                    const completed = matches[0].name + (matches[0].type === 'dir' ? '/' : '');
+                                    const beforeLastArg = value.substring(0, value.lastIndexOf(lastArg));
+                                    const newArg = (lastSlash !== -1 ? lastArg.substring(0, lastSlash + 1) : '') + completed;
+                                    cliInput.value = beforeLastArg + newArg;
+                                } else if (matches.length > 1) {
+                                    addCLIOutput('');
+                                    addCLIOutput(matches.map(m => m.name + (m.type === 'dir' ? '/' : '')).join('    '));
+                                    scrollToBottom();
+                                }
+                            }
+                        }
+                    }
                 }
-                showPrompt();
-                cliContent.scrollTop = cliContent.scrollHeight;
-            } else if (e.key === 'ArrowUp') {
-                // simple history navigation (optional)
-                if (history.length > 0) {
-                    cliInput.value = history[history.length - 1];
-                }
-            }
-        });
+            });
+        }
     }
 });
 
