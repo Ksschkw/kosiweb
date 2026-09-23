@@ -276,13 +276,126 @@ const projectsData = [
         category: "web",
         title: "Biochemist Portfolio for Obianuju",
         description: "A professional portfolio website built for my sister, a biochemist, showcasing her academic work and research.",
-        image: "https://obianuju.onrender.com/static/images/og-image.jpg", // replace with actual screenshot if possible
+        image: "https://obianuju.onrender.com/gallery/justmehehe.jpeg", // replace with actual screenshot if possible
         alt: "Obianuju Portfolio",
         tags: ["Web", "HTML/CSS", "JavaScript"],
         links: [
             { href: "https://obianuju.onrender.com", icon: "fas fa-external-link-alt", text: "Live Site" }
         ],
         delayClass: "delay-1"
+    },
+
+    // driftlock
+    {
+        category: "ai",
+        title: "driftlock",
+        description: "A commit-time gatekeeper written in Go that detects when documentation drifts out of sync with code and auto-fixes it. Parses staged git diffs, flags structural/API-surface changes across languages, and blocks or auto-rewrites docs via an LLM. Ships as a GitHub Action, pre-commit hook, and standalone CLI, with an optional feature to log doc-sync checks to the Solana blockchain as a tamper-proof audit trail.",
+        image: "https://opengraph.githubassets.com/1/Ksschkw/driftlock",
+        alt: "driftlock",
+        tags: ["DevTools", "Go", "AI", "CLI"],
+        links: [
+            { href: "https://github.com/Ksschkw/driftlock", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: "delay-2"
+    },
+
+    // BAROS / Gigr
+    {
+        category: "web",
+        title: "BAROS (Gigr)",
+        description: "A neighborhood marketplace on Solana where reputation is real and payments are guaranteed, without users needing to understand blockchain. Uses on-chain escrow, PostGIS-based hyper-local matching, and compressed NFTs (cNFTs) to mint permanent, tamper-proof social vouches. Wallets are auto-created at registration. Includes an AI assistant that can post jobs and negotiate on the user's behalf, plus community-jury on-chain dispute resolution. Currently in pilot.",
+        image: "https://gigrr.vercel.app/icon.png",
+        alt: "BAROS Gigr",
+        tags: ["Web3", "Solana", "TypeScript", "AI"],
+        links: [
+            { href: "https://github.com/Ksschkw/BAROS", icon: "fab fa-github", text: "Code" },
+            { href: "https://gigrr.vercel.app/", icon: "fas fa-external-link-alt", text: "Live Demo" }
+        ],
+        delayClass: ""
+    },
+
+    // CongestIQ (FYP)
+    {
+        category: "ai",
+        title: "CongestIQ",
+        description: "My final year project at FUTO — a multi-agent reinforcement learning system for adaptive TCP congestion control, built to dynamically improve network throughput and fairness rather than relying on static congestion algorithms. Simulated using ns-3 and netanim.",
+        image: "https://opengraph.githubassets.com/1/Ksschkw/CongestIQ-FYP",
+        alt: "CongestIQ",
+        tags: ["AI", "Networking", "C++", "Reinforcement Learning"],
+        links: [
+            { href: "https://github.com/Ksschkw/CongestIQ-FYP", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: "delay-1"
+    },
+
+    // AutoSig
+    {
+        category: "ai",
+        title: "AutoSig",
+        description: "A hackathon submission for Superteam Nigeria's Agentic Wallets challenge — a multi-agent trading system for Solana where LLM agents propose trades that must pass three independent safety layers: hardcoded limits no LLM can override, deterministic policy checks, and a second independent LLM as sanity-check reviewer. Backed by a real test suite proving the guardrails hold under adversarial scenarios.",
+        image: "https://opengraph.githubassets.com/1/Ksschkw/AutoSig",
+        alt: "AutoSig",
+        tags: ["AI", "Solana", "C#", "Agents"],
+        links: [
+            { href: "https://github.com/Ksschkw/AutoSig", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: "delay-2"
+    },
+
+    // LexAI
+    {
+        category: "ai",
+        title: "LexAI",
+        description: "A hybrid FAISS+BM25 RAG chatbot built over the Nigerian Constitution, aimed at making legal information accessible to Nigerians without direct access to a lawyer.",
+        image: "https://opengraph.githubassets.com/1/Ksschkw/LexAI",
+        alt: "LexAI",
+        tags: ["AI", "RAG", "Python", "Legal Tech"],
+        links: [
+            { href: "https://github.com/Ksschkw/LexAI", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: ""
+    },
+
+    // healthcare-diagnostic-api
+    {
+        category: "web",
+        title: "Healthcare Diagnostic API",
+        description: "A FastAPI backend for multi-tenant healthcare record management (patients, test requests, lab results), built during an internship. Features an AWS IAM-style permission model (atomic permissions → permission sets → roles), soft deletes for audit/compliance, and Argon2 password hashing.",
+        image: "https://opengraph.githubassets.com/1/Ksschkw/healthcare-diagnostic-api",
+        alt: "Healthcare Diagnostic API",
+        tags: ["Backend", "FastAPI", "Python", "Healthcare"],
+        links: [
+            { href: "https://github.com/Ksschkw/healthcare-diagnostic-api", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: "delay-1"
+    },
+
+    // mediapipe-openCV-projects-n-stuff
+    {
+        category: "ai",
+        title: "MediaPipe & OpenCV Experiments",
+        description: "Early computer vision learning exercises — hand pose detection and face mesh detection using MediaPipe and OpenCV.",
+        image: "https://opengraph.githubassets.com/1/Ksschkw/mediapipe-openCV-projects-n-stuff",
+        alt: "MediaPipe OpenCV Projects",
+        tags: ["AI", "Computer Vision", "Python"],
+        links: [
+            { href: "https://github.com/Ksschkw/mediapipe-openCV-projects-n-stuff", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: "delay-2"
+    },
+
+    // donotopen
+    {
+        category: "web",
+        title: "donotopen",
+        description: "An archive of older creative-coding sketches and experiments — fractal trees, small neural-network ecosystems, WebGL shader art, and a puzzle game built on Baba-Is-You-style rule manipulation. A personal, playful repo rather than a production project.",
+        image: "https://opengraph.githubassets.com/1/Ksschkw/donotopen",
+        alt: "donotopen",
+        tags: ["Creative Coding", "JavaScript", "WebGL"],
+        links: [
+            { href: "https://github.com/Ksschkw/donotopen", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: ""
     },
 
     // (Optional) Add any client projects if you want – you can structure them similarly.
