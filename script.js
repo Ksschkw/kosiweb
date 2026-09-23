@@ -5,400 +5,407 @@ if (!sessionId) {
     localStorage.setItem("portfolio-session", sessionId);
 }
 
-// ---------- PROJECTS DATA (all except the static Object Detection card) ----------
+// ---------- PROJECTS DATA ----------
+// Ordered by engineering weight, hardest and most complete first. `rank` drives
+// both display order and the index shown on each card. `featured` gets flagship
+// treatment in the grid. The static Object Detection card in index.html carries
+// its own rank through an inline `order` style.
 const projectsData = [
-    // MYRAGAGENTV2
+    // 01 - BAROS / Gigr
     {
-        category: "ai",
-        title: "MYRAGAGENTV2",
-        description: "Advanced RAG agent using kssrag package with improved retrieval and generation capabilities.",
-        image: "https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENTV2",
-        alt: "MYRAGAGENTV2",
-        tags: ["AI", "RAG", "Python"],
-        links: [
-            { href: "https://github.com/Ksschkw/MYRAGAGENTV2", icon: "fab fa-github", text: "Code" },
-            { href: "https://agentkosi.onrender.com/", icon: "fas fa-external-link-alt", text: "Live Demo" }
-        ],
-        delayClass: "delay-1"
-    },
-    // kssrag Package
-    {
-        category: "ai",
-        title: "kssrag Package",
-        description: "Custom RAG framework published on PyPI for building retrieval-augmented generation systems.",
-        image: "https://opengraph.githubassets.com/1/Ksschkw/kssrag",
-        alt: "kssrag Package",
-        tags: ["AI", "RAG", "Python", "PyPI"],
-        links: [
-            { href: "https://github.com/Ksschkw/kssrag", icon: "fab fa-github", text: "Code" },
-            { href: "https://pypi.org/project/kssrag/0.1.2/", icon: "fab fa-python", text: "PyPI" }
-        ],
-        delayClass: "delay-2"
-    },
-    // Drug Classification
-    {
-        category: "data",
-        title: "Drugs Data",
-        description: `A Script that scrapes <a href="https://drugs.com/" class="project-link">drugs.com</a> gracefully into json dictionaries.
-        You can use this data to build a RAG system, A machine learning model that can detect drug interactions, and give general insights about a prescription or even prescribe for you based on you symptom(For this you will need the data from my other scraping<a href="https://github.com/Ksschkw/ScrapeddashiiAlchemy" class="project-link"> <i class="fab fa-github"></i> here) </a> and whatever you wish. I couldn't upload the data to github for now because it is too large but i wil later try to chunk it and then upload it or i wil just use hugginFace hehe`,
-        image: "https://opengraph.githubassets.com/1/Ksschkw/drugs",
-        alt: "Drug Classification",
-        tags: ["AI/ML", "Classification", "Python"],
-        links: [
-            { href: "https://github.com/Ksschkw/drugs", icon: "fab fa-github", text: "Code" }
-        ],
-        delayClass: ""
-    },
-    // Drug RAG
-    {
-        category: "ai",
-        title: "Drugs RAG",
-        description: `Turn the previously scraped drugs data into a RAG system.
-        A RAG system that can detect drug interactions, and give general insights about a prescription or even prescribe for you based on you symptom(For this you will need the data from my other scraping<a href="https://github.com/Ksschkw/ScrapeddashiiAlchemy" class="project-link"> <i class="fab fa-github"></i> here) </a> and whatever you wish. I couldn't upload the data to github for now because it is too large but i wil later try to chunk it and then upload it or i wil just use hugginFace hehe`,
-        image: "https://opengraph.githubassets.com/1/Ksschkw/drugs",
-        alt: "Drug Classification",
-        tags: ["AI/ML", "Classification", "Python"],
-        links: [
-            { href: "https://github.com/Ksschkw/drugs", icon: "fab fa-github", text: "Code" }
-        ],
-        delayClass: ""
-    },
-    // ScrapeddashiiAlchemy
-    {
-        category: "data",
-        title: "Conditions data",
-        description: `Data scraping and transformation pipeline for extracting insights from complex datasets.
-        scrapes all condition pages from ada.com/conditions, extracting every <"h2"> -based feature and its corresponding content blocks beneath it(symptoms,Causes,etc). The results are saved in both JSON and CSV formats, ready for analysis, modeling, or medical NLP tasks.`,
-        image: "https://opengraph.githubassets.com/1/Ksschkw/ScrapeddashiiAlchemy",
-        alt: "ScrapeddashiiAlchemy",
-        tags: ["Data Stuff", "Web Scraping", "Python"],
-        links: [
-            { href: "https://github.com/Ksschkw/ScrapeddashiiAlchemy", icon: "fab fa-github", text: "Code" }
-        ],
-        delayClass: "delay-1"
-    },
-    // HomeCredit-Data-Alchemy
-    {
-        category: "data",
-        title: "HomeCredit Data Alchemy",
-        description: "Credit risk assessment model using machine learning to predict loan repayment capabilities.",
-        image: "https://opengraph.githubassets.com/1/Ksschkw/HomeCredit-Data-Alchemy",
-        alt: "HomeCredit-Data-Alchemy",
-        tags: ["Data Science", "Risk Assessment", "Python"],
-        links: [
-            { href: "https://github.com/Ksschkw/HomeCredit-Data-Alchemy", icon: "fab fa-github", text: "Code" }
-        ],
-        delayClass: "delay-2"
-    },
-    // MYRAGAGENT
-    {
-        category: "ai",
-        title: "MYRAGAGENT",
-        description: "A Retrieval-Augmented Generation (RAG) Agent that provides intelligent responses.",
-        image: "https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENT",
-        alt: "MYRAGAGENT",
-        tags: ["AI", "RAG", "Python"],
-        links: [
-            { href: "https://github.com/Ksschkw/MYRAGAGENT", icon: "fab fa-github", text: "Code" },
-            { href: "https://agentkosi.onrender.com/", icon: "fas fa-external-link-alt", text: "Live Demo" }
-        ],
-        delayClass: "delay-1"
-    },
-    // AI Copilot Agent
-    {
-        category: "ai",
-        title: "AI Copilot Agent",
-        description: "FastAPI-based AI Copilot Agent for defining structured innovation challenges.",
-        image: "imagesnshii/image.png",
-        alt: "AI Copilot Agent",
-        tags: ["AI", "FastAPI", "Python"],
-        links: [
-            { href: "https://github.com/Ksschkw/AI-Copilot-Agent", icon: "fab fa-github", text: "Code" },
-            { href: "https://ai-copilot-agent-1.onrender.com/", icon: "fas fa-external-link-alt", text: "Live Demo" }
-        ],
-        delayClass: "delay-2"
-    },
-    // Vybe Analytics Telegram Bot
-    {
-        category: "telegram",
-        title: "Vybe Analytics Telegram Bot",
-        description: "Provides real-time on-chain insights using Vybe Network APIs.",
-        image: "https://opengraph.githubassets.com/1/Ksschkw/vybe-telegram-bot",
-        alt: "Vybe Analytics Telegram Bot",
-        tags: ["Telegram", "API", "Python"],
-        links: [
-            { href: "https://github.com/Ksschkw/vybe-telegram-bot", icon: "fab fa-github", text: "Code" },
-            { href: "https://t.me/VybeVigil_bot", icon: "fab fa-telegram", text: "Try Bot" }
-        ],
-        delayClass: ""
-    },
-    // FPS Gamers Event Website (GRPGHT)
-    {
-        category: "web",
-        title: "FPS Gamers Event Website (GRPGHT)",
-        description: "Platform for FPS gamers to compete in real-world events.",
-        image: "imagesnshii/gaming.png",
-        alt: "FPS Gamers Event Website",
-        tags: ["Web", "API", "JavaScript"],
-        links: [
-            { href: "https://github.com/Ksschkw/GRPGHT", icon: "fab fa-github", text: "Code" },
-            { href: "https://grpght.onrender.com", icon: "fas fa-external-link-alt", text: "Live Demo" }
-        ],
-        delayClass: "delay-1"
-    },
-    // Bubblemaps Telegram Bot
-    {
-        category: "telegram",
-        title: "Bubblemaps Telegram Bot",
-        description: "Analyzes crypto tokens using Bubblemaps data with market insights.",
-        image: "https://opengraph.githubassets.com/1/Ksschkw/TheBubbleSnitchBot-2",
-        alt: "Bubblemaps Telegram Bot",
-        tags: ["Telegram", "Crypto", "Python"],
-        links: [
-            { href: "https://github.com/Ksschkw/TheBubbleSnitchBot-2", icon: "fab fa-github", text: "Code" },
-            { href: "https://t.me/TheBubbleSnitch_bot", icon: "fab fa-telegram", text: "Try Bot" }
-        ],
-        delayClass: "delay-2"
-    },
-    // Previous Portfolio
-    {
-        category: "web",
-        title: "Previous Portfolio",
-        description: "My earlier portfolio website with interactive elements and project showcases.",
-        image: "imagesnshii/first.png",
-        alt: "Previous Portfolio",
-        tags: ["Web", "HTML/CSS", "JavaScript"],
-        links: [
-            { href: "https://github.com/Ksschkw/kosip", icon: "fab fa-github", text: "Code" },
-            { href: "http://okaforkosisochukwu.onrender.com", icon: "fas fa-external-link-alt", text: "Live Demo" }
-        ],
-        delayClass: ""
-    },
-    // School Lab Project
-    {
-        category: "web",
-        title: "School Lab Project",
-        description: "A school project hosted online to demonstrate web development skills.",
-        image: "imagesnshii/lab.png",
-        alt: "School Lab Project",
-        tags: ["Web", "HTML/CSS", "JavaScript"],
-        links: [
-            { href: "https://github.com/Ksschkw/Nigeria.net", icon: "fab fa-github", text: "Code" },
-            { href: "https://nigeria-net-justaschoollabproject-hostit.onrender.com", icon: "fas fa-external-link-alt", text: "Live Demo" }
-        ],
-        delayClass: "delay-1"
-    },
-    // Kosi Weather
-    {
-        category: "web",
-        title: "Kosi Weather",
-        description: "Weather forecast application allowing users to search by city.",
-        image: "imagesnshii/weather.png",
-        alt: "Kosi Weather",
-        tags: ["Web", "API", "JavaScript"],
-        links: [
-            { href: "https://github.com/Ksschkw/weatherkosi", icon: "fab fa-github", text: "Code" },
-            { href: "https://kosi-weather.onrender.com", icon: "fas fa-external-link-alt", text: "Live Demo" }
-        ],
-        delayClass: "delay-2"
-    },
-    // Krypto-Kosi
-    {
-        category: "web",
-        title: "Krypto-Kosi",
-        description: "Displays crypto prices with ranking by price and trend.",
-        image: "imagesnshii/kryptokosi.png",
-        alt: "Krypto-Kosi",
-        tags: ["Web", "API", "JavaScript"],
-        links: [
-            { href: "https://github.com/Ksschkw/KryptoKosi", icon: "fab fa-github", text: "Code" },
-            { href: "https://krypto-kosi.onrender.com", icon: "fas fa-external-link-alt", text: "Live Demo" }
-        ],
-        delayClass: ""
-    },
-    // Multi-Feature Telegram Bot
-    {
-        category: "telegram",
-        title: "Multi-Feature Telegram Bot",
-        description: "Telegram bot with integrated mini-apps for various functionalities.",
-        image: "imagesnshii/telegram-bot-thumb2.jpg",
-        alt: "Multi-Feature Telegram Bot",
-        tags: ["Telegram", "API", "Python"],
-        links: [
-            { href: "https://github.com/Ksschkw/KosiTGBot", icon: "fab fa-github", text: "Code" },
-            { href: "https://t.me/k0s1bot", icon: "fab fa-telegram", text: "Try Bot" }
-        ],
-        delayClass: "delay-1"
-    },
-    // Kolaborasi-Kosi
-    {
-        category: "web",
-        title: "Kolaborasi-Kosi",
-        description: "Collaborative drawing canvas for real-time artwork.",
-        image: "imagesnshii/kolabrasi.png",
-        alt: "Kolaborasi-Kosi",
-        tags: ["Web", "API", "JavaScript"],
-        links: [
-            { href: "https://github.com/Ksschkw/collab-draw", icon: "fab fa-github", text: "Code" },
-            { href: "https://kolaborasi-kosi.onrender.com", icon: "fas fa-external-link-alt", text: "Live Demo" }
-        ],
-        delayClass: "delay-2"
-    },
-    // AI Chat Assistant
-    {
-        category: "ai",
-        title: "AI Chat Assistant",
-        description: "Custom-built chatbot leveraging PyTorch with OpenRouter fallback.",
-        image: "imagesnshii/aiassistant.png",
-        alt: "AI Chat Assistant",
-        tags: ["AI", "NLP", "Python"],
-        links: [
-            { href: "https://github.com/Ksschkw/chatbot_and_backendformywebsite", icon: "fab fa-github", text: "Code" }
-        ],
-        delayClass: ""
-    },
-    // Kaggle Dataset
-    {
-        category: "data",
-        title: "UK Local Authority Health & Environment Indicators",
-        description: `A dataset on Kaggle combining PM2.5 air quality and avoidable mortality rates across 100 UK local authorities (2022). <a href="https://www.kaggle.com/datasets/okaforkosisochukwujp/uk-local-authority-health-and-environment-indicators" target="_blank">View on Kaggle</a>`,
-        image: "https://www.kaggle.com/static/images/site-logo.png", // placeholder, you can replace
-        alt: "Kaggle Dataset",
-        tags: ["Data Science", "Public Health", "Environment"],
-        links: [
-            { href: "https://www.kaggle.com/datasets/okaforkosisochukwujp/uk-local-authority-health-and-environment-indicators", icon: "fab fa-kaggle", text: "Kaggle" }
-        ],
-        delayClass: ""
-    },
-
-    // Sister's Website
-    {
-        category: "web",
-        title: "Biochemist Portfolio for Obianuju",
-        description: "A professional portfolio website built for my sister, a biochemist, showcasing her academic work and research.",
-        image: "https://obianuju.onrender.com/gallery/justmehehe.jpeg", // replace with actual screenshot if possible
-        alt: "Obianuju Portfolio",
-        tags: ["Web", "HTML/CSS", "JavaScript"],
-        links: [
-            { href: "https://obianuju.onrender.com", icon: "fas fa-external-link-alt", text: "Live Site" }
-        ],
-        delayClass: "delay-1"
-    },
-
-    // driftlock
-    {
-        category: "ai",
-        title: "driftlock",
-        description: "A commit-time gatekeeper written in Go that detects when documentation drifts out of sync with code and auto-fixes it. Parses staged git diffs, flags structural/API-surface changes across languages, and blocks or auto-rewrites docs via an LLM. Ships as a GitHub Action, pre-commit hook, and standalone CLI, with an optional feature to log doc-sync checks to the Solana blockchain as a tamper-proof audit trail.",
-        image: "https://opengraph.githubassets.com/1/Ksschkw/driftlock",
-        alt: "driftlock",
-        tags: ["DevTools", "Go", "AI", "CLI"],
-        links: [
-            { href: "https://github.com/Ksschkw/driftlock", icon: "fab fa-github", text: "Code" }
-        ],
-        delayClass: "delay-2"
-    },
-
-    // BAROS / Gigr
-    {
+        rank: 1,
+        featured: true,
         category: "web",
         title: "BAROS (Gigr)",
-        description: "A neighborhood marketplace on Solana where reputation is real and payments are guaranteed, without users needing to understand blockchain. Uses on-chain escrow, PostGIS-based hyper-local matching, and compressed NFTs (cNFTs) to mint permanent, tamper-proof social vouches. Wallets are auto-created at registration. Includes an AI assistant that can post jobs and negotiate on the user's behalf, plus community-jury on-chain dispute resolution. Currently in pilot.",
+        description: `Neighborhood marketplace on Solana with on-chain escrow and PostGIS-backed local matching. Reputation is minted as compressed NFTs, so a vouch cannot be quietly edited or deleted later, and wallets are provisioned at registration to keep seed phrases out of the user's path. An AI assistant can post jobs and negotiate on the user's behalf, while disputes route to a community jury. Currently in pilot.`,
         image: "https://gigrr.vercel.app/icon.png",
-        alt: "BAROS Gigr",
-        tags: ["Web3", "Solana", "TypeScript", "AI"],
+        alt: "BAROS (Gigr) interface",
+        tags: ["Solana", "TypeScript", "PostGIS", "AI"],
         links: [
             { href: "https://github.com/Ksschkw/BAROS", icon: "fab fa-github", text: "Code" },
-            { href: "https://gigrr.vercel.app/", icon: "fas fa-external-link-alt", text: "Live Demo" }
+            { href: "https://gigrr.vercel.app/", icon: "fas fa-external-link-alt", text: "Live" }
         ],
         delayClass: ""
     },
-
-    // CongestIQ (FYP)
+    // 02 - CongestIQ
     {
+        rank: 2,
+        featured: true,
         category: "ai",
         title: "CongestIQ",
-        description: "My final year project at FUTO — a multi-agent reinforcement learning system for adaptive TCP congestion control, built to dynamically improve network throughput and fairness rather than relying on static congestion algorithms. Simulated using ns-3 and netanim.",
+        description: `Multi-agent reinforcement learning for adaptive TCP congestion control. The agents learn to trade throughput against fairness per flow rather than applying one fixed loss-based rule, and the policies are evaluated against standard congestion control inside ns-3 with netanim traces.`,
         image: "https://opengraph.githubassets.com/1/Ksschkw/CongestIQ-FYP",
-        alt: "CongestIQ",
-        tags: ["AI", "Networking", "C++", "Reinforcement Learning"],
+        alt: "CongestIQ reinforcement learning simulations",
+        tags: ["Reinforcement Learning", "Networking", "C++", "ns-3"],
         links: [
             { href: "https://github.com/Ksschkw/CongestIQ-FYP", icon: "fab fa-github", text: "Code" }
         ],
         delayClass: "delay-1"
     },
-
-    // AutoSig
+    // 03 - driftlock
     {
+        rank: 3,
+        featured: true,
         category: "ai",
-        title: "AutoSig",
-        description: "A hackathon submission for Superteam Nigeria's Agentic Wallets challenge — a multi-agent trading system for Solana where LLM agents propose trades that must pass three independent safety layers: hardcoded limits no LLM can override, deterministic policy checks, and a second independent LLM as sanity-check reviewer. Backed by a real test suite proving the guardrails hold under adversarial scenarios.",
-        image: "https://opengraph.githubassets.com/1/Ksschkw/AutoSig",
-        alt: "AutoSig",
-        tags: ["AI", "Solana", "C#", "Agents"],
+        title: "driftlock",
+        description: `Commit-time gatekeeper that catches documentation drift before it lands. It parses staged diffs, detects API-surface and structural changes across languages, then either blocks the commit or rewrites the affected docs through an LLM. Ships as a standalone CLI, a pre-commit hook, and a GitHub Action, with optional anchoring of each doc-sync check to Solana for a tamper-evident audit trail.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/driftlock",
+        alt: "driftlock CLI output",
+        tags: ["Go", "DevTooling", "GitHub Actions", "LLM"],
         links: [
-            { href: "https://github.com/Ksschkw/AutoSig", icon: "fab fa-github", text: "Code" }
+            { href: "https://github.com/Ksschkw/driftlock", icon: "fab fa-github", text: "Code" }
         ],
         delayClass: "delay-2"
     },
-
-    // LexAI
+    // 04 - AutoSig
     {
+        rank: 4,
+        featured: true,
         category: "ai",
-        title: "LexAI",
-        description: "A hybrid FAISS+BM25 RAG chatbot built over the Nigerian Constitution, aimed at making legal information accessible to Nigerians without direct access to a lawyer.",
-        image: "https://opengraph.githubassets.com/1/Ksschkw/LexAI",
-        alt: "LexAI",
-        tags: ["AI", "RAG", "Python", "Legal Tech"],
+        title: "AutoSig",
+        description: `Multi-agent trading system for Solana, built for Superteam Nigeria's Agentic Wallets challenge. LLM agents propose trades, but nothing reaches the chain until it clears three independent gates: hard limits no model can override, deterministic policy checks, and a second model acting as reviewer. An adversarial test suite verifies the guardrails still hold when the proposing agent is actively trying to break them.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/AutoSig",
+        alt: "AutoSig agent guardrail architecture",
+        tags: ["Solana", "C#", "Agents", "Testing"],
         links: [
-            { href: "https://github.com/Ksschkw/LexAI", icon: "fab fa-github", text: "Code" }
+            { href: "https://github.com/Ksschkw/AutoSig", icon: "fab fa-github", text: "Code" }
         ],
         delayClass: ""
     },
-
-    // healthcare-diagnostic-api
+    // 05 - Healthcare Diagnostic API
     {
+        rank: 5,
         category: "web",
         title: "Healthcare Diagnostic API",
-        description: "A FastAPI backend for multi-tenant healthcare record management (patients, test requests, lab results), built during an internship. Features an AWS IAM-style permission model (atomic permissions → permission sets → roles), soft deletes for audit/compliance, and Argon2 password hashing.",
+        description: `Multi-tenant FastAPI backend for healthcare records covering patients, test requests, and lab results. Authorization follows the AWS IAM shape, where atomic permissions compose into permission sets and then into roles. Records use soft deletes to keep an auditable history, and credentials are hashed with Argon2.`,
         image: "https://opengraph.githubassets.com/1/Ksschkw/healthcare-diagnostic-api",
-        alt: "Healthcare Diagnostic API",
+        alt: "Healthcare Diagnostic API structure",
         tags: ["Backend", "FastAPI", "Python", "Healthcare"],
         links: [
             { href: "https://github.com/Ksschkw/healthcare-diagnostic-api", icon: "fab fa-github", text: "Code" }
         ],
         delayClass: "delay-1"
     },
-
-    // mediapipe-openCV-projects-n-stuff
+    // 06 - LexAI
     {
+        rank: 6,
         category: "ai",
-        title: "MediaPipe & OpenCV Experiments",
-        description: "Early computer vision learning exercises — hand pose detection and face mesh detection using MediaPipe and OpenCV.",
-        image: "https://opengraph.githubassets.com/1/Ksschkw/mediapipe-openCV-projects-n-stuff",
-        alt: "MediaPipe OpenCV Projects",
-        tags: ["AI", "Computer Vision", "Python"],
+        title: "LexAI",
+        description: `Question answering over the Nigerian Constitution with a hybrid retriever that pairs FAISS vector search against BM25 keyword scoring, so exact statutory phrasing and paraphrased questions both retrieve the right passage.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/LexAI",
+        alt: "LexAI retrieval pipeline",
+        tags: ["RAG", "Python", "Legal Tech", "FAISS"],
         links: [
-            { href: "https://github.com/Ksschkw/mediapipe-openCV-projects-n-stuff", icon: "fab fa-github", text: "Code" }
+            { href: "https://github.com/Ksschkw/LexAI", icon: "fab fa-github", text: "Code" }
         ],
         delayClass: "delay-2"
     },
-
-    // donotopen
+    // 07 - kssrag
     {
+        rank: 7,
+        category: "ai",
+        title: "kssrag",
+        description: `Retrieval-augmented generation framework published to PyPI. Ingestion, chunking, embedding, and retrieval are exposed as composable pieces instead of one fixed pipeline, and the package carries its own versioned release on the index.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/kssrag",
+        alt: "kssrag package",
+        tags: ["RAG", "Python", "PyPI", "Library"],
+        links: [
+            { href: "https://github.com/Ksschkw/kssrag", icon: "fab fa-github", text: "Code" },
+            { href: "https://pypi.org/project/kssrag/0.1.2/", icon: "fab fa-python", text: "PyPI" }
+        ],
+        delayClass: ""
+    },
+    // 08 - MYRAGAGENTV2
+    {
+        rank: 8,
+        category: "ai",
+        title: "MYRAGAGENTV2",
+        description: `Retrieval agent built on the kssrag package, with query rewriting before search and a rejection path for questions the retrieved context cannot actually support.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENTV2",
+        alt: "MYRAGAGENTV2 agent",
+        tags: ["RAG", "Python", "Agents"],
+        links: [
+            { href: "https://github.com/Ksschkw/MYRAGAGENTV2", icon: "fab fa-github", text: "Code" },
+            { href: "https://agentkosi.onrender.com/", icon: "fas fa-external-link-alt", text: "Live" }
+        ],
+        delayClass: "delay-1"
+    },
+    // 10 - MYRAGAGENT
+    {
+        rank: 10,
+        category: "ai",
+        title: "MYRAGAGENT",
+        description: `Earlier retrieval agent that answers strictly from an indexed corpus. Superseded by MYRAGAGENTV2 and kept for reference.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENT",
+        alt: "MYRAGAGENT agent",
+        tags: ["RAG", "Python", "Agents"],
+        links: [
+            { href: "https://github.com/Ksschkw/MYRAGAGENT", icon: "fab fa-github", text: "Code" },
+            { href: "https://agentkosi.onrender.com/", icon: "fas fa-external-link-alt", text: "Live" }
+        ],
+        delayClass: "delay-2"
+    },
+    // 11 - AI Copilot Agent
+    {
+        rank: 11,
+        category: "ai",
+        title: "AI Copilot Agent",
+        description: `FastAPI service that turns a rough brief into a structured innovation challenge definition. Model output is constrained to a schema the API validates before it is stored.`,
+        image: "imagesnshii/image.png",
+        alt: "AI Copilot Agent service",
+        tags: ["FastAPI", "Python", "Structured Output"],
+        links: [
+            { href: "https://github.com/Ksschkw/AI-Copilot-Agent", icon: "fab fa-github", text: "Code" },
+            { href: "https://ai-copilot-agent-1.onrender.com/", icon: "fas fa-external-link-alt", text: "Live" }
+        ],
+        delayClass: ""
+    },
+    // 12 - Vybe Analytics Telegram Bot
+    {
+        rank: 12,
+        category: "telegram",
+        title: "Vybe Analytics Bot",
+        description: `Telegram bot serving real-time Solana on-chain analytics through Vybe Network APIs, with responses shaped for reading on a phone.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/vybe-telegram-bot",
+        alt: "Vybe Analytics Telegram bot",
+        tags: ["Telegram", "API", "Python", "Solana"],
+        links: [
+            { href: "https://github.com/Ksschkw/vybe-telegram-bot", icon: "fab fa-github", text: "Code" },
+            { href: "https://t.me/VybeVigil_bot", icon: "fab fa-telegram", text: "Bot" }
+        ],
+        delayClass: "delay-1"
+    },
+    // 13 - Bubblemaps Telegram Bot
+    {
+        rank: 13,
+        category: "telegram",
+        title: "Bubblemaps Bot",
+        description: `Token analysis bot that pulls holder-cluster data from Bubblemaps and reports concentration risk on demand.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/TheBubbleSnitchBot-2",
+        alt: "Bubblemaps Telegram bot",
+        tags: ["Telegram", "Python", "Crypto"],
+        links: [
+            { href: "https://github.com/Ksschkw/TheBubbleSnitchBot-2", icon: "fab fa-github", text: "Code" },
+            { href: "https://t.me/TheBubbleSnitch_bot", icon: "fab fa-telegram", text: "Bot" }
+        ],
+        delayClass: "delay-2"
+    },
+    // 14 - Kaggle dataset
+    {
+        rank: 14,
+        category: "data",
+        title: "UK Health & Environment Indicators",
+        description: `Published Kaggle dataset joining PM2.5 air quality against avoidable mortality rates across 100 UK local authorities for 2022, built to make the two series directly comparable at authority level.`,
+        image: "https://www.kaggle.com/static/images/site-logo.png",
+        alt: "UK local authority health dataset",
+        tags: ["Data Science", "Public Health", "Kaggle"],
+        links: [
+            { href: "https://www.kaggle.com/datasets/okaforkosisochukwujp/uk-local-authority-health-and-environment-indicators", icon: "fab fa-kaggle", text: "Dataset" }
+        ],
+        delayClass: ""
+    },
+    // 15 - HomeCredit
+    {
+        rank: 15,
+        category: "data",
+        title: "HomeCredit Data Alchemy",
+        description: `Credit risk modelling on the Home Credit dataset, covering feature engineering across bureau and previous-application history through to model evaluation.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/HomeCredit-Data-Alchemy",
+        alt: "HomeCredit risk model",
+        tags: ["Machine Learning", "Python", "Risk"],
+        links: [
+            { href: "https://github.com/Ksschkw/HomeCredit-Data-Alchemy", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: "delay-1"
+    },
+    // 16 - Drugs RAG
+    {
+        rank: 16,
+        category: "ai",
+        title: "Drugs RAG",
+        description: `Retrieval system over scraped drug monographs that answers interaction and prescribing questions by citing the source text rather than generating from memory.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/drugs",
+        alt: "Drugs RAG system",
+        tags: ["RAG", "Python", "Healthcare"],
+        links: [
+            { href: "https://github.com/Ksschkw/drugs", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: "delay-2"
+    },
+    // 17 - Conditions data
+    {
+        rank: 17,
+        category: "data",
+        title: "Conditions Data Pipeline",
+        description: `Scraper that walks every condition page on ada.com and extracts each section heading with the content beneath it, covering symptoms and causes, then writes the result to JSON and CSV for downstream medical NLP work.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/ScrapeddashiiAlchemy",
+        alt: "Conditions data pipeline",
+        tags: ["Web Scraping", "Python", "Data"],
+        links: [
+            { href: "https://github.com/Ksschkw/ScrapeddashiiAlchemy", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: ""
+    },
+    // 18 - Drugs data
+    {
+        rank: 18,
+        category: "data",
+        title: "Drugs Data",
+        description: `Scraper that pulls drug monographs from drugs.com into structured JSON, intended as source material for retrieval and interaction modelling.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/drugs",
+        alt: "Drugs data scraper",
+        tags: ["Web Scraping", "Python", "Data"],
+        links: [
+            { href: "https://github.com/Ksschkw/drugs", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: "delay-1"
+    },
+    // 19 - GRPGHT
+    {
+        rank: 19,
+        category: "web",
+        title: "GRPGHT Event Platform",
+        description: `Platform for competitive FPS players entering real-world events, covering registration, brackets, and scheduling.`,
+        image: "imagesnshii/gaming.png",
+        alt: "GRPGHT event platform",
+        tags: ["Web", "JavaScript", "API"],
+        links: [
+            { href: "https://github.com/Ksschkw/GRPGHT", icon: "fab fa-github", text: "Code" },
+            { href: "https://grpght.onrender.com", icon: "fas fa-external-link-alt", text: "Live" }
+        ],
+        delayClass: "delay-2"
+    },
+    // 20 - AI Chat Assistant
+    {
+        rank: 20,
+        category: "ai",
+        title: "AI Chat Assistant",
+        description: `Chat backend that runs a locally hosted PyTorch model by default and falls back to OpenRouter when the local path is unavailable.`,
+        image: "imagesnshii/aiassistant.png",
+        alt: "AI chat assistant",
+        tags: ["PyTorch", "Python", "NLP"],
+        links: [
+            { href: "https://github.com/Ksschkw/chatbot_and_backendformywebsite", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: ""
+    },
+    // 21 - Multi-feature bot
+    {
+        rank: 21,
+        category: "telegram",
+        title: "Multi-Feature Bot",
+        description: `Telegram bot hosting a set of small utilities and mini-apps behind a single command interface.`,
+        image: "imagesnshii/telegram-bot-thumb2.jpg",
+        alt: "Multi-feature Telegram bot",
+        tags: ["Telegram", "Python", "API"],
+        links: [
+            { href: "https://github.com/Ksschkw/KosiTGBot", icon: "fab fa-github", text: "Code" },
+            { href: "https://t.me/k0s1bot", icon: "fab fa-telegram", text: "Bot" }
+        ],
+        delayClass: "delay-1"
+    },
+    // 22 - Client site
+    {
+        rank: 22,
+        category: "web",
+        title: "Biochemistry Research Portfolio",
+        description: `Portfolio site delivered for a biochemistry researcher, covering publications, current research, and a media gallery. Built to be edited without touching markup.`,
+        image: "https://obianuju.onrender.com/gallery/justmehehe.jpeg",
+        alt: "Biochemistry research portfolio site",
+        tags: ["Web", "Client Work", "JavaScript"],
+        links: [
+            { href: "https://obianuju.onrender.com", icon: "fas fa-external-link-alt", text: "Live" }
+        ],
+        delayClass: "delay-2"
+    },
+    // 23 - Kolaborasi-Kosi
+    {
+        rank: 23,
+        category: "web",
+        title: "Kolaborasi-Kosi",
+        description: `Shared drawing canvas where multiple clients paint on the same board in real time.`,
+        image: "imagesnshii/kolabrasi.png",
+        alt: "Kolaborasi-Kosi drawing canvas",
+        tags: ["Web", "JavaScript", "Realtime"],
+        links: [
+            { href: "https://github.com/Ksschkw/collab-draw", icon: "fab fa-github", text: "Code" },
+            { href: "https://kolaborasi-kosi.onrender.com", icon: "fas fa-external-link-alt", text: "Live" }
+        ],
+        delayClass: ""
+    },
+    // 24 - Krypto-Kosi
+    {
+        rank: 24,
+        category: "web",
+        title: "Krypto-Kosi",
+        description: `Crypto price board with sorting by price and momentum, reading from a public market data API.`,
+        image: "imagesnshii/kryptokosi.png",
+        alt: "Krypto-Kosi price board",
+        tags: ["Web", "JavaScript", "API"],
+        links: [
+            { href: "https://github.com/Ksschkw/KryptoKosi", icon: "fab fa-github", text: "Code" },
+            { href: "https://krypto-kosi.onrender.com", icon: "fas fa-external-link-alt", text: "Live" }
+        ],
+        delayClass: "delay-1"
+    },
+    // 25 - Kosi Weather
+    {
+        rank: 25,
+        category: "web",
+        title: "Kosi Weather",
+        description: `Weather lookup by city with current conditions and a short forecast.`,
+        image: "imagesnshii/weather.png",
+        alt: "Kosi Weather app",
+        tags: ["Web", "JavaScript", "API"],
+        links: [
+            { href: "https://github.com/Ksschkw/weatherkosi", icon: "fab fa-github", text: "Code" },
+            { href: "https://kosi-weather.onrender.com", icon: "fas fa-external-link-alt", text: "Live" }
+        ],
+        delayClass: "delay-2"
+    },
+    // 26 - MediaPipe experiments
+    {
+        rank: 26,
+        category: "ai",
+        title: "MediaPipe & OpenCV Experiments",
+        description: `Computer vision exercises with MediaPipe and OpenCV covering hand pose and face mesh tracking.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/mediapipe-openCV-projects-n-stuff",
+        alt: "MediaPipe and OpenCV experiments",
+        tags: ["Computer Vision", "Python", "OpenCV"],
+        links: [
+            { href: "https://github.com/Ksschkw/mediapipe-openCV-projects-n-stuff", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: ""
+    },
+    // 27 - donotopen
+    {
+        rank: 27,
         category: "web",
         title: "donotopen",
-        description: "An archive of older creative-coding sketches and experiments — fractal trees, small neural-network ecosystems, WebGL shader art, and a puzzle game built on Baba-Is-You-style rule manipulation. A personal, playful repo rather than a production project.",
+        description: `Archive of earlier creative-coding work: fractal trees, small neural-network ecosystems, WebGL shaders, and a rule-manipulation puzzle.`,
         image: "https://opengraph.githubassets.com/1/Ksschkw/donotopen",
-        alt: "donotopen",
+        alt: "Creative coding archive",
         tags: ["Creative Coding", "JavaScript", "WebGL"],
         links: [
             { href: "https://github.com/Ksschkw/donotopen", icon: "fab fa-github", text: "Code" }
         ],
-        delayClass: ""
+        delayClass: "delay-1"
     },
-
-    // (Optional) Add any client projects if you want – you can structure them similarly.
+    // 28 - Previous portfolio
+    {
+        rank: 28,
+        category: "web",
+        title: "First Portfolio",
+        description: `The first version of this site, kept for reference. Replaced by the current build.`,
+        image: "imagesnshii/first.png",
+        alt: "First portfolio site",
+        tags: ["Web", "Archive"],
+        links: [
+            { href: "https://github.com/Ksschkw/kosip", icon: "fab fa-github", text: "Code" },
+            { href: "http://okaforkosisochukwu.onrender.com", icon: "fas fa-external-link-alt", text: "Live" }
+        ],
+        delayClass: "delay-2"
+    }
 ];
 
 // ---------- FUNCTION TO RENDER PROJECTS DYNAMICALLY ----------
@@ -406,10 +413,15 @@ function renderProjects() {
     const grid = document.getElementById('projectsGrid');
     if (!grid) return;
 
-    projectsData.forEach(proj => {
-        const card = document.createElement('div');
-        card.className = `project-card fade-in ${proj.delayClass}`;
+    const ordered = [...projectsData].sort((a, b) => (a.rank || 999) - (b.rank || 999));
+
+    ordered.forEach(proj => {
+        const card = document.createElement('article');
+        card.className = `project-card fade-in ${proj.delayClass || ''}`.trim();
         card.setAttribute('data-category', proj.category);
+        card.setAttribute('data-rank', proj.rank);
+        card.style.order = proj.rank;
+        if (proj.featured) card.classList.add('is-featured');
 
         // Image
         const imgDiv = document.createElement('div');
@@ -423,10 +435,26 @@ function renderProjects() {
         const contentDiv = document.createElement('div');
         contentDiv.className = 'project-content';
 
+        const meta = document.createElement('div');
+        meta.className = 'project-meta';
+
+        const rank = document.createElement('span');
+        rank.className = 'project-rank';
+        rank.textContent = String(proj.rank).padStart(2, '0');
+        meta.appendChild(rank);
+
+        if (proj.featured) {
+            const flag = document.createElement('span');
+            flag.className = 'project-flag';
+            flag.textContent = 'Flagship';
+            meta.appendChild(flag);
+        }
+
         const title = document.createElement('h3');
         title.textContent = proj.title;
 
         const desc = document.createElement('p');
+        desc.className = 'project-desc';
         desc.innerHTML = proj.description; // HTML allowed
 
         // Tags
@@ -452,8 +480,26 @@ function renderProjects() {
             linksDiv.appendChild(a);
         });
 
+        contentDiv.appendChild(meta);
         contentDiv.appendChild(title);
         contentDiv.appendChild(desc);
+
+        // Long descriptions collapse so cards stay scannable. The toggle is only
+        // revealed once layout proves the text actually overflows.
+        const toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'desc-toggle';
+        toggle.textContent = 'Read more';
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.hidden = true;
+
+        toggle.addEventListener('click', () => {
+            const collapsed = desc.classList.toggle('is-collapsed');
+            toggle.textContent = collapsed ? 'Read more' : 'Read less';
+            toggle.setAttribute('aria-expanded', String(!collapsed));
+        });
+
+        contentDiv.appendChild(toggle);
         contentDiv.appendChild(tagsDiv);
         contentDiv.appendChild(linksDiv);
 
@@ -461,6 +507,13 @@ function renderProjects() {
         card.appendChild(contentDiv);
 
         grid.appendChild(card);
+
+        desc.classList.add('is-collapsed');
+        if (desc.scrollHeight - desc.clientHeight > 2) {
+            toggle.hidden = false;
+        } else {
+            desc.classList.remove('is-collapsed');
+        }
     });
 }
 
@@ -1809,7 +1862,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
 
             // Draw food
-            ctx.fillStyle = '#888'; // gray food
+            ctx.fillStyle = '#ff2d20';
             ctx.fillRect(food.x * cellSize, food.y * cellSize, cellSize - 1, cellSize - 1);
         }
 
@@ -1971,7 +2024,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             'rag-agent.txt': { type: 'file', content: 'MYRAGAGENT – RAG system using kssrag' }
                         }
                     },
-                    'about.txt': { type: 'file', content: 'Kosisochukwu Okafor – Software Engineer & AI/ML Engineer\n4th year Software Engineering student at Federal University of Technology Owerri\nPassionate about AI, RAG systems, and building innovative solutions.' },
+                    'about.txt': { type: 'file', content: 'Kosisochukwu Okafor\nSoftware Engineer. Backend, infrastructure, and AI systems.\nShips production services in Python, C#, and Go. Works across AWS and Azure.\nContact: kookafor893@gmail.com' },
                     'skills.txt': { type: 'file', content: 'AI/ML: RAG, Neural Networks, NLP, TensorFlow, PyTorch\nDevelopment: Python, JavaScript, .NET, FastAPI\nCloud: AWS, Azure, Ansible, GitHub Actions\nData: HDFS, Hadoop, Protege' }
                 }
             }
@@ -2053,18 +2106,18 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.style.overflow = 'hidden';
             cliContent.innerHTML = ''; // clear previous
             
-            // Hacker ASCII art welcome header
+            // Terminal banner
             const welcomeArt = `
-██╗  ██╗███████╗███████╗ ██████╗██╗  ██╗██╗██╗    ██╗
-██║ ██╔╝██╔════╝██╔════╝██╔════╝██║  ██║██║██║    ██║
-█████╔╝ ███████╗███████╗██║     ███████║██║██║ █╗ ██║
-██╔═██╗ ╚════██║╚════██║██║     ██╔══██║██║██║███╗██║
-██║  ██╗███████║███████║╚██████╗██║  ██║██║╚███╔███╔╝
-╚═╝  ╚═╝╚══════╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝ ╚══╝╚══╝ 
+ ██╗  ██╗███████╗███████╗ ██████╗██╗  ██╗██╗██╗    ██╗
+ ██║ ██╔╝██╔════╝██╔════╝██╔════╝██║  ██║██║██║    ██║
+ █████╔╝ ███████╗███████╗██║     ███████║██║██║ █╗ ██║
+ ██╔═██╗ ╚════██║╚════██║██║     ██╔══██║██║██║███╗██║
+ ██║  ██╗███████║███████║╚██████╗██║  ██║██║╚███╔███╔╝
+ ╚═╝  ╚═╝╚══════╝╚══════╝ ╚═════╝╚═╝  ╚═╝╚═╝ ╚══╝╚══╝ 
 `;
-            addRawHTMLOutput(`<pre style="color: #ff7700; font-weight: bold; font-family: monospace; line-height: 1.2; margin: 0; white-space: pre;">${welcomeArt}</pre>`);
-            addCLIOutput('Welcome to KSSCHWK Linux terminal simulation (v2.0).');
-            addCLIOutput('Type \'help\' to see the list of available commands.');
+            addRawHTMLOutput(`<pre style="color: var(--accent); font-weight: bold; line-height: 1.15; margin: 0 0 1rem; white-space: pre;">${welcomeArt}</pre>`);
+            addCLIOutput('Kosisochukwu Okafor. Software engineer.');
+            addCLIOutput('Type \'help\' for commands, \'projects\' for the ranked index.');
             addCLIOutput('');
             updatePromptDisplay();
             setTimeout(() => {
@@ -2098,44 +2151,48 @@ document.addEventListener('DOMContentLoaded', function () {
                     addCLIOutput('  echo <text> > <file>    Write custom text to file');
                     break;
                 case 'about':
-                    addCLIOutput('Kosisochukwu Okafor - Software Engineer & AI/ML Engineer');
-                    addCLIOutput('4th year Software Engineering student at Federal University of Technology FUTO');
-                    addCLIOutput('Passionate about AI, RAG architectures, and building backend solutions.');
+                    addCLIOutput('Kosisochukwu Okafor - Software Engineer');
+                    addCLIOutput('Backend, infrastructure, and AI systems.');
+                    addCLIOutput('AWS Certified Generative AI Developer - Professional.');
                     addCLIOutput('');
-                    addCLIOutput('Experience highlight:');
+                    addCLIOutput('Experience:');
                     addCLIOutput('  • AI/ML Cloud Intern @ Softgem.org (AWS partner)');
-                    addCLIOutput('  • Chatbot Developer @ My Health Integral (Built Annie chatbot)');
-                    addCLIOutput('  • Freelance Software Engineer (Azure, CosmosDB, Hadoop, Protege)');
+                    addCLIOutput('  • Software and AI Applications Engineer @ My Health Integral');
+                    addCLIOutput('  • Freelance Software Engineer (Azure, Hadoop, Protege)');
                     break;
                 case 'projects':
                     if (rest[0] === '--all') {
-                        addCLIOutput('All Portfolio Projects Detail:');
-                        projectsData.forEach(p => {
+                        addCLIOutput('All projects, ranked by engineering weight:');
+                        addCLIOutput('');
+                        [...projectsData].sort((a, b) => (a.rank || 999) - (b.rank || 999)).forEach(p => {
                             // Strip HTML tags for clean command-line view
                             const desc = p.description.replace(/<[^>]*>/g, '');
-                            addCLIOutput(`  • ${p.title} [${p.category.toUpperCase()}]`);
-                            addCLIOutput(`    Description: ${desc}`);
+                            addCLIOutput(`  ${String(p.rank).padStart(2, '0')}  ${p.title} [${p.category.toUpperCase()}]`);
+                            addCLIOutput(`      ${desc}`);
                             if (p.links && p.links.length > 0) {
                                 const linkStr = p.links.map(l => `${l.text}: ${l.href}`).join(' | ');
-                                addCLIOutput(`    Links: ${linkStr}`);
+                                addCLIOutput(`      ${linkStr}`);
                             }
                             addCLIOutput('');
                         });
                     } else {
-                        addCLIOutput('Projects list (type "projects --all" for descriptions):');
-                        addCLIOutput('  • Real-Time Object Detection - [AI/ML, WEB]');
-                        addCLIOutput('  • Kolaborasi-Kosi (Real-time whiteboard) - [WEB]');
-                        addCLIOutput('  • AI Chat Assistant (PyTorch/OpenRouter) - [AI/ML]');
-                        addCLIOutput('  • UK Local Authority Indicators - [DATA]');
-                        addCLIOutput('  • Biochemist Portfolio (Sibling project) - [WEB]');
+                        addCLIOutput('Projects, ranked. Run "projects --all" for descriptions.');
+                        addCLIOutput('');
+                        const ranked = [...projectsData].sort((a, b) => (a.rank || 999) - (b.rank || 999));
+                        const line = p => `  ${String(p.rank).padStart(2, '0')}  ${p.title} [${p.category.toUpperCase()}]`;
+                        ranked.filter(p => p.rank < 9).forEach(p => addCLIOutput(line(p)));
+                        addCLIOutput('  09  Real-Time Object Detection [AI]');
+                        ranked.filter(p => p.rank > 9 && p.rank <= 12).forEach(p => addCLIOutput(line(p)));
                     }
                     break;
                 case 'skills':
-                    addCLIOutput('Skills Inventory:');
-                    addCLIOutput('  • AI/ML: RAG architectures, Neural Networks, NLP, TensorFlow, PyTorch');
-                    addCLIOutput('  • Languages & Frameworks: Python, JavaScript, C#, .NET, FastAPI, Flask');
-                    addCLIOutput('  • Cloud & Infrastructure: AWS, Azure (CosmosDB, PostgreSQL, App Service, Front Door), Docker, Ansible, GitHub Actions');
-                    addCLIOutput('  • Big Data & Semantics: Hadoop, HDFS, Protege (ontologies)');
+                    addCLIOutput('Capabilities:');
+                    addCLIOutput('  Systems      API and service design, data modelling, authorization, failure handling');
+                    addCLIOutput('  Delivery     scoping, review, observability, cost tradeoffs, release and rollback');
+                    addCLIOutput('  Applied AI   retrieval, agent guardrails, evaluation, PyTorch, TensorFlow');
+                    addCLIOutput('  Cloud        AWS, Azure, Docker, GitHub Actions, configuration management');
+                    addCLIOutput('  Data         PostgreSQL, PostGIS, CosmosDB, Hadoop, extraction pipelines');
+                    addCLIOutput('  Languages    Python, TypeScript, C#, Go, SQL, C++');
                     break;
                 case 'contact':
                     addCLIOutput('Contact details:');
@@ -2307,7 +2364,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     // Append static execution line to history log
                     const historyLine = document.createElement('div');
                     historyLine.className = 'cli-history-line';
-                    historyLine.innerHTML = `<span class="cli-prompt">kss@portfolio:${currentPath}$</span><span class="cli-command-entered">${input}</span>`;
+                    historyLine.innerHTML = `<span class="cli-prompt">kss@portfolio:${currentPath}$</span> <span class="cli-command-entered">${input}</span>`;
                     cliContent.appendChild(historyLine);
 
                     const trimmed = input.trim();

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kss-portfolio-v2';
+const CACHE_NAME = 'kss-portfolio-v3';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -6,6 +6,7 @@ const urlsToCache = [
   '/script.js',
   '/manifest.json',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
+  'https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap',
   // add any other assets
 ];
 
