@@ -50,9 +50,10 @@
     box-sizing: border-box;
 }
 
-*,
-*::before,
-*::after {
+/* Applied to elements only. Setting font-family on ::before/::after as well
+   would override the icon font that Font Awesome's classes rely on, which
+   renders every icon as a tofu box showing its raw codepoint. */
+* {
     font-family: var(--mono);
 }
 
@@ -649,44 +650,12 @@ header {
     border-top: 1px solid var(--line);
 }
 
-.lang-strip {
-    margin-top: 1.4rem;
-    font-size: 0.78rem;
-    color: var(--text-faint);
-}
-
-.lang-strip span {
-    display: inline-block;
-    color: var(--text-dim);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    font-size: 0.68rem;
-    margin-right: 1rem;
-}
-
 .tech-stack h3 {
     font-size: 0.74rem;
     text-transform: uppercase;
     letter-spacing: 0.14em;
     color: var(--text-faint);
     margin-bottom: 1.2rem;
-}
-
-.tech-icons {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.4rem;
-    font-size: 1.5rem;
-    color: var(--text-faint);
-    margin-bottom: 1.6rem;
-}
-
-.tech-icons i {
-    transition: color 0.15s ease;
-}
-
-.tech-icons i:hover {
-    color: var(--accent);
 }
 
 /* ---------------------------------------------------------------------
@@ -713,6 +682,17 @@ header {
     letter-spacing: 0.14em;
     color: var(--accent);
     margin-bottom: 0.9rem;
+}
+
+.projects-foot {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+}
+
+/* .btn sets display, which would otherwise beat the hidden attribute. */
+.btn[hidden] {
+    display: none !important;
 }
 
 .stack-group ul {
@@ -1190,14 +1170,47 @@ header {
 }
 
 .chat-container {
-    height: 380px;
+    height: 460px;
     overflow-y: auto;
+    overscroll-behavior: contain;
     padding: 1.2rem;
     background: var(--bg);
     border: 1px solid var(--line);
     display: flex;
     flex-direction: column;
     gap: 0.9rem;
+}
+
+/* Sticky inside the scroll container: it sits over the newest message without
+   covering the reading position. */
+.chat-jump {
+    position: sticky;
+    bottom: 0;
+    align-self: center;
+    margin-top: 0.4rem;
+    background: var(--accent);
+    color: #0b0c0d;
+    border: 1px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 0.4rem 0.8rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.chat-jump[hidden] {
+    display: none !important;
+}
+
+.chat-note {
+    margin-top: 0.7rem;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--line);
+    color: var(--text-faint);
+    font-size: 0.75rem;
 }
 
 .chat-message {
@@ -2344,6 +2357,26 @@ footer .container {
 
     .exp-when {
         padding-top: 0;
+    }
+
+    /* Compact project cards: less image, shorter clamp, tighter padding, so the
+       ranked list reads as a list on a phone rather than a column of posters. */
+    .project-image {
+        aspect-ratio: 24 / 9;
+    }
+
+    .project-content {
+        padding: 1.1rem 1.2rem 1.3rem;
+    }
+
+    .project-desc.is-collapsed {
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+    }
+
+    /* Two tags are enough to place a project on a phone. */
+    .project-tag:nth-child(n + 3) {
+        display: none;
     }
 }
 

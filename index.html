@@ -148,27 +148,9 @@
                             <div class="stat-label">Verified Credly skills</div>
                         </div>
                         <div class="stat">
-                            <div class="stat-number">28</div>
+                            <div class="stat-number">39</div>
                             <div class="stat-label">Projects in the index</div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="tech-stack">
-                    <h3>Working tools</h3>
-                    <div class="tech-icons">
-                        <i class="fab fa-python" title="Python"></i>
-                        <i class="fab fa-js-square" title="JavaScript / TypeScript"></i>
-                        <i class="fab fa-aws" title="AWS"></i>
-                        <i class="fab fa-microsoft" title=".NET / C#"></i>
-                        <i class="fab fa-docker" title="Docker"></i>
-                        <i class="fas fa-database" title="PostgreSQL, PostGIS, SQL, NoSQL"></i>
-                        <i class="fas fa-network-wired" title="Networking and distributed systems"></i>
-                        <i class="fas fa-brain" title="Machine learning"></i>
-                        <i class="fas fa-robot" title="AI agents and retrieval"></i>
-                        <i class="fas fa-cloud" title="Azure: App Service, CosmosDB, Front Door"></i>
-                        <i class="fas fa-hdd" title="Hadoop / HDFS"></i>
-                        <i class="fab fa-github" title="GitHub Actions"></i>
                     </div>
                 </div>
             </div>
@@ -214,39 +196,39 @@
                         </ul>
                     </div>
                     <div class="stack-group">
-                        <h3>Cloud and infrastructure</h3>
+                        <h3>Platforms and data</h3>
                         <ul>
-                            <li>AWS</li>
-                            <li>Azure</li>
-                            <li>Docker</li>
-                            <li>GitHub Actions</li>
+                            <li>AWS and Azure</li>
+                            <li>Containers and CI/CD</li>
                             <li>Configuration management</li>
-                            <li>Cost and architecture review</li>
-                        </ul>
-                    </div>
-                    <div class="stack-group">
-                        <h3>Data</h3>
-                        <ul>
                             <li>PostgreSQL and PostGIS</li>
-                            <li>CosmosDB</li>
                             <li>Hadoop and HDFS</li>
-                            <li>Scraping and extraction pipelines</li>
-                            <li>Dataset publication</li>
+                            <li>Extraction and pipelines</li>
                         </ul>
                     </div>
                     <div class="stack-group">
-                        <h3>Domains</h3>
+                        <h3>Security and tenancy</h3>
                         <ul>
-                            <li>Healthcare records</li>
-                            <li>Payments and escrow</li>
-                            <li>Legal information retrieval</li>
-                            <li>Network congestion control</li>
-                            <li>Developer tooling</li>
+                            <li>Deny-by-default authorization</li>
+                            <li>Tenant isolation and row-level security</li>
+                            <li>Append-only audit trails</li>
+                            <li>Secret and credential handling</li>
+                            <li>Input validation</li>
+                            <li>Least-privilege permissions</li>
+                        </ul>
+                    </div>
+                    <div class="stack-group">
+                        <h3>Product and communication</h3>
+                        <ul>
+                            <li>Requirement to shipped feature</li>
+                            <li>Interface design under constraint</li>
+                            <li>Written documentation</li>
+                            <li>Working with non-technical clients</li>
+                            <li>Deciding what not to build</li>
+                            <li>Handover that survives me</li>
                         </ul>
                     </div>
                 </div>
-
-                <p class="lang-strip"><span>Languages</span>Python, TypeScript, JavaScript, C#, Go, SQL, C++</p>
 
                 <div class="tech-stack">
                     <h3>Skills verified on Credly</h3>
@@ -280,7 +262,7 @@
             <div class="container">
                 <h2 class="section-title"><span class="section-index">03</span>Work</h2>
                 <p class="section-lede">Ranked by engineering weight, not by how recently I touched them. The top
-                    four carry the most systems complexity and the least hand-waving.</p>
+                    five carry the most systems complexity and the least hand-waving.</p>
 
                 <!-- Portfolio Tabs -->
                 <div class="portfolio-tabs">
@@ -294,13 +276,13 @@
                 <!-- Projects Grid - Static card (Object Detection) kept, others will be loaded via JS -->
                 <div class="projects-grid" id="projectsGrid">
                     <!-- Object Detection Project (AI) - STATIC, complex interactive card -->
-                    <div class="project-card fade-in is-live" data-category="ai" data-rank="9" style="order: 9;">
+                    <div class="project-card fade-in is-live" data-category="ai" data-rank="14" style="order: 14;">
                         <div class="project-image">
                             <img src="imagesnshii/object-detection-thumb.png" alt="Object detection preview">
                         </div>
                         <div class="project-content">
                             <div class="project-meta">
-                                <span class="project-rank">09</span>
+                                <span class="project-rank">14</span>
                                 <span class="project-flag is-live-flag">Runs here</span>
                             </div>
                             <h3>Real-Time Object Detection</h3>
@@ -357,6 +339,10 @@
                         </div>
                     </div>
                     <!-- All other project cards are now dynamically loaded from script.js -->
+                </div>
+
+                <div class="projects-foot">
+                    <button id="projectsToggle" class="btn ghost" hidden></button>
                 </div>
             </div>
         </section>

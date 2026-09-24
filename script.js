@@ -9,11 +9,44 @@ if (!sessionId) {
 // Ordered by engineering weight, hardest and most complete first. `rank` drives
 // both display order and the index shown on each card. `featured` gets flagship
 // treatment in the grid. The static Object Detection card in index.html carries
-// its own rank through an inline `order` style.
+// its own rank through `data-rank` (see renderProjects).
 const projectsData = [
-    // 01 - BAROS / Gigr
+    // 01 - AHIA
     {
         rank: 1,
+        featured: true,
+        category: "web",
+        title: "AHIA",
+        description: `Multi-tenant retail platform for small traders, delivered as a FastAPI backend, a Next.js web app, and an offline-first mobile client. Every business-owned table carries a row-level security policy bound per transaction, so a missing filter returns nothing rather than another shop's data. Sales, payments, stock movements, expenses and audit events are append-only ledgers committed together, and a device that goes offline pushes idempotent operations through a sync service that cannot apply a sale twice. Customers build a list from a public link with no account, the trader prices and sources it, and dispatch records the waybill. The suite runs past two thousand tests, including architecture contracts that fail the build on a layering violation.`,
+        image: "https://useahia-hazel.vercel.app/icon-192.png",
+        alt: "AHIA retail platform",
+        tags: ["FastAPI", "Next.js", "PostgreSQL", "Offline First"],
+        links: [
+            { href: "https://github.com/Ksschkw/AHIA", icon: "fab fa-github", text: "Code" },
+            { href: "https://useahia-hazel.vercel.app/", icon: "fas fa-external-link-alt", text: "Live" }
+        ],
+        delayClass: ""
+    },
+    // 02 - kssrag
+    {
+        rank: 2,
+        featured: true,
+        category: "ai",
+        title: "kssrag",
+        description: `Retrieval-augmented generation framework published on PyPI, built around one command: point the CLI at a document and it loads, chunks, indexes, and serves a FastAPI endpoint with token-by-token SSE streaming and per-session conversation memory. Six vector stores and two retrievers are chosen by config or replaced with your own classes by import path, and any hosted or local model provider can be swapped with a single flag, with automatic fallback when one is unavailable.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/kssrag",
+        alt: "kssrag retrieval framework",
+        tags: ["RAG", "Python", "FastAPI", "PyPI"],
+        links: [
+            { href: "https://github.com/Ksschkw/kssrag", icon: "fab fa-github", text: "Code" },
+            { href: "https://pypi.org/project/kssrag/", icon: "fab fa-python", text: "PyPI" },
+            { href: "https://github.com/Ksschkw/kssrag/releases/tag/v0.4.0", icon: "fas fa-tag", text: "v0.4.0" }
+        ],
+        delayClass: "delay-1"
+    },
+    // 03 - BAROS / Gigr
+    {
+        rank: 3,
         featured: true,
         category: "web",
         title: "BAROS (Gigr)",
@@ -25,11 +58,11 @@ const projectsData = [
             { href: "https://github.com/Ksschkw/BAROS", icon: "fab fa-github", text: "Code" },
             { href: "https://gigrr.vercel.app/", icon: "fas fa-external-link-alt", text: "Live" }
         ],
-        delayClass: ""
+        delayClass: "delay-2"
     },
-    // 02 - CongestIQ
+    // 04 - CongestIQ
     {
-        rank: 2,
+        rank: 4,
         featured: true,
         category: "ai",
         title: "CongestIQ",
@@ -40,11 +73,11 @@ const projectsData = [
         links: [
             { href: "https://github.com/Ksschkw/CongestIQ-FYP", icon: "fab fa-github", text: "Code" }
         ],
-        delayClass: "delay-1"
+        delayClass: ""
     },
-    // 03 - driftlock
+    // 05 - driftlock
     {
-        rank: 3,
+        rank: 5,
         featured: true,
         category: "ai",
         title: "driftlock",
@@ -53,14 +86,14 @@ const projectsData = [
         alt: "driftlock CLI output",
         tags: ["Go", "DevTooling", "GitHub Actions", "LLM"],
         links: [
-            { href: "https://github.com/Ksschkw/driftlock", icon: "fab fa-github", text: "Code" }
+            { href: "https://github.com/Ksschkw/driftlock", icon: "fab fa-github", text: "Code" },
+            { href: "https://github.com/Ksschkw/driftlock/releases/tag/v0.4.0", icon: "fas fa-tag", text: "v0.4.0" }
         ],
-        delayClass: "delay-2"
+        delayClass: "delay-1"
     },
-    // 04 - AutoSig
+    // 06 - AutoSig
     {
-        rank: 4,
-        featured: true,
+        rank: 6,
         category: "ai",
         title: "AutoSig",
         description: `Multi-agent trading system for Solana, built for Superteam Nigeria's Agentic Wallets challenge. LLM agents propose trades, but nothing reaches the chain until it clears three independent gates: hard limits no model can override, deterministic policy checks, and a second model acting as reviewer. An adversarial test suite verifies the guardrails still hold when the proposing agent is actively trying to break them.`,
@@ -70,11 +103,40 @@ const projectsData = [
         links: [
             { href: "https://github.com/Ksschkw/AutoSig", icon: "fab fa-github", text: "Code" }
         ],
+        delayClass: "delay-2"
+    },
+    // 07 - RepEngine
+    {
+        rank: 7,
+        category: "web",
+        title: "RepEngine",
+        description: `Freelance marketplace and reputation-weighted DAO built to price trust cryptographically instead of trusting a profile nobody verified. Job access and voting power are both gated on on-chain reputation through the FairScale API, so a new wallet cannot buy its way into governance. Full-stack with a live deployment.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/RepEngine",
+        alt: "RepEngine marketplace",
+        tags: ["C#", "Web3", "DAO", "Reputation"],
+        links: [
+            { href: "https://github.com/Ksschkw/RepEngine", icon: "fab fa-github", text: "Code" },
+            { href: "https://p01--repengine--qw5xhkblp8hy.code.run/", icon: "fas fa-external-link-alt", text: "Live" }
+        ],
         delayClass: ""
     },
-    // 05 - Healthcare Diagnostic API
+    // 08 - Ginger Copilot
     {
-        rank: 5,
+        rank: 8,
+        category: "ai",
+        title: "Ginger Copilot",
+        description: `Agentic intent solver for the Injective chain with hardware-enforced execution. The intelligence layer reads live chain state, monitors staking rewards and builds CosmWasm payloads while holding no private keys at all. Each intent is handed to a Ledger device, reviewed and clear-signed by a human, and broadcast only after explicit approval on the hardware.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/Ginger-Copilot",
+        alt: "Ginger Copilot agent architecture",
+        tags: ["TypeScript", "Injective", "Ledger", "Agents"],
+        links: [
+            { href: "https://github.com/Ksschkw/Ginger-Copilot", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: "delay-1"
+    },
+    // 09 - Healthcare Diagnostic API
+    {
+        rank: 9,
         category: "web",
         title: "Healthcare Diagnostic API",
         description: `Multi-tenant FastAPI backend for healthcare records covering patients, test requests, and lab results. Authorization follows the AWS IAM shape, where atomic permissions compose into permission sets and then into roles. Records use soft deletes to keep an auditable history, and credentials are hashed with Argon2.`,
@@ -84,11 +146,11 @@ const projectsData = [
         links: [
             { href: "https://github.com/Ksschkw/healthcare-diagnostic-api", icon: "fab fa-github", text: "Code" }
         ],
-        delayClass: "delay-1"
+        delayClass: "delay-2"
     },
-    // 06 - LexAI
+    // 10 - LexAI
     {
-        rank: 6,
+        rank: 10,
         category: "ai",
         title: "LexAI",
         description: `Question answering over the Nigerian Constitution with a hybrid retriever that pairs FAISS vector search against BM25 keyword scoring, so exact statutory phrasing and paraphrased questions both retrieve the right passage.`,
@@ -98,26 +160,39 @@ const projectsData = [
         links: [
             { href: "https://github.com/Ksschkw/LexAI", icon: "fab fa-github", text: "Code" }
         ],
-        delayClass: "delay-2"
-    },
-    // 07 - kssrag
-    {
-        rank: 7,
-        category: "ai",
-        title: "kssrag",
-        description: `Retrieval-augmented generation framework published to PyPI. Ingestion, chunking, embedding, and retrieval are exposed as composable pieces instead of one fixed pipeline, and the package carries its own versioned release on the index.`,
-        image: "https://opengraph.githubassets.com/1/Ksschkw/kssrag",
-        alt: "kssrag package",
-        tags: ["RAG", "Python", "PyPI", "Library"],
-        links: [
-            { href: "https://github.com/Ksschkw/kssrag", icon: "fab fa-github", text: "Code" },
-            { href: "https://pypi.org/project/kssrag/0.1.2/", icon: "fab fa-python", text: "PyPI" }
-        ],
         delayClass: ""
     },
-    // 08 - MYRAGAGENTV2
+    // 11 - Patient Management Microservices
     {
-        rank: 8,
+        rank: 11,
+        category: "web",
+        title: "Patient Management Microservices",
+        description: `Patient management split into independent Spring Boot services for patients, authentication, appointments, billing, and analytics, communicating over Kafka events, REST, and gRPC where a synchronous call is the right shape. The whole environment is provisioned with AWS CDK against LocalStack to emulate ECS locally.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/Patient-Management_Microservicesyadayada",
+        alt: "Patient management microservices",
+        tags: ["Java", "Spring Boot", "Kafka", "gRPC"],
+        links: [
+            { href: "https://github.com/Ksschkw/Patient-Management_Microservicesyadayada", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: "delay-1"
+    },
+    // 12 - CIAP
+    {
+        rank: 12,
+        category: "data",
+        title: "CIAP",
+        description: `Creator analytics platform for the African creator economy. It aggregates cross-platform metrics into influence scores, then exposes creator discovery and campaign planning to the agencies and brands doing the hiring. FastAPI and PostgreSQL behind a typed client, with YouTube analytics as the first integration.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/CIAP",
+        alt: "CIAP analytics platform",
+        tags: ["FastAPI", "PostgreSQL", "Analytics", "OAuth"],
+        links: [
+            { href: "https://github.com/Ksschkw/CIAP", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: "delay-2"
+    },
+    // 13 - MYRAGAGENTV2
+    {
+        rank: 13,
         category: "ai",
         title: "MYRAGAGENTV2",
         description: `Retrieval agent built on the kssrag package, with query rewriting before search and a rejection path for questions the retrieved context cannot actually support.`,
@@ -128,11 +203,25 @@ const projectsData = [
             { href: "https://github.com/Ksschkw/MYRAGAGENTV2", icon: "fab fa-github", text: "Code" },
             { href: "https://agentkosi.onrender.com/", icon: "fas fa-external-link-alt", text: "Live" }
         ],
+        delayClass: ""
+    },
+    // 15 - Pharmacy AI Agent
+    {
+        rank: 15,
+        category: "ai",
+        title: "Pharmacy AI Agent",
+        description: `Prescription processing and inventory system. PaddleOCR extracts text from a photograph of a prescription, an LLM structures that text into validated fields and corrects what OCR got wrong, and the result feeds multi-tenant inventory with demand forecasting.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/pharmacy-ai-agent",
+        alt: "Pharmacy AI agent",
+        tags: ["OCR", "LLM", "FastAPI", "Healthcare"],
+        links: [
+            { href: "https://github.com/Ksschkw/pharmacy-ai-agent", icon: "fab fa-github", text: "Code" }
+        ],
         delayClass: "delay-1"
     },
-    // 10 - MYRAGAGENT
+    // 16 - MYRAGAGENT
     {
-        rank: 10,
+        rank: 16,
         category: "ai",
         title: "MYRAGAGENT",
         description: `Earlier retrieval agent that answers strictly from an indexed corpus. Superseded by MYRAGAGENTV2 and kept for reference.`,
@@ -145,9 +234,9 @@ const projectsData = [
         ],
         delayClass: "delay-2"
     },
-    // 11 - AI Copilot Agent
+    // 17 - AI Copilot Agent
     {
-        rank: 11,
+        rank: 17,
         category: "ai",
         title: "AI Copilot Agent",
         description: `FastAPI service that turns a rough brief into a structured innovation challenge definition. Model output is constrained to a schema the API validates before it is stored.`,
@@ -160,12 +249,12 @@ const projectsData = [
         ],
         delayClass: ""
     },
-    // 12 - Vybe Analytics Telegram Bot
+    // 18 - Vybe Analytics Telegram Bot
     {
-        rank: 12,
+        rank: 18,
         category: "telegram",
         title: "Vybe Analytics Bot",
-        description: `Telegram bot serving real-time Solana on-chain analytics through Vybe Network APIs, with responses shaped for reading on a phone.`,
+        description: `Telegram bot serving real-time Solana on-chain analytics through Vybe Network APIs, with wallet tracking and responses shaped for reading on a phone.`,
         image: "https://opengraph.githubassets.com/1/Ksschkw/vybe-telegram-bot",
         alt: "Vybe Analytics Telegram bot",
         tags: ["Telegram", "API", "Python", "Solana"],
@@ -175,12 +264,12 @@ const projectsData = [
         ],
         delayClass: "delay-1"
     },
-    // 13 - Bubblemaps Telegram Bot
+    // 19 - Bubblemaps Telegram Bot
     {
-        rank: 13,
+        rank: 19,
         category: "telegram",
         title: "Bubblemaps Bot",
-        description: `Token analysis bot that pulls holder-cluster data from Bubblemaps and reports concentration risk on demand.`,
+        description: `Token analysis bot that pulls holder-cluster data from Bubblemaps, renders the bubble map, and reports concentration risk and market context on demand.`,
         image: "https://opengraph.githubassets.com/1/Ksschkw/TheBubbleSnitchBot-2",
         alt: "Bubblemaps Telegram bot",
         tags: ["Telegram", "Python", "Crypto"],
@@ -190,9 +279,9 @@ const projectsData = [
         ],
         delayClass: "delay-2"
     },
-    // 14 - Kaggle dataset
+    // 20 - Kaggle dataset
     {
-        rank: 14,
+        rank: 20,
         category: "data",
         title: "UK Health & Environment Indicators",
         description: `Published Kaggle dataset joining PM2.5 air quality against avoidable mortality rates across 100 UK local authorities for 2022, built to make the two series directly comparable at authority level.`,
@@ -204,9 +293,9 @@ const projectsData = [
         ],
         delayClass: ""
     },
-    // 15 - HomeCredit
+    // 21 - HomeCredit
     {
-        rank: 15,
+        rank: 21,
         category: "data",
         title: "HomeCredit Data Alchemy",
         description: `Credit risk modelling on the Home Credit dataset, covering feature engineering across bureau and previous-application history through to model evaluation.`,
@@ -218,9 +307,9 @@ const projectsData = [
         ],
         delayClass: "delay-1"
     },
-    // 16 - Drugs RAG
+    // 22 - Drugs RAG
     {
-        rank: 16,
+        rank: 22,
         category: "ai",
         title: "Drugs RAG",
         description: `Retrieval system over scraped drug monographs that answers interaction and prescribing questions by citing the source text rather than generating from memory.`,
@@ -232,9 +321,9 @@ const projectsData = [
         ],
         delayClass: "delay-2"
     },
-    // 17 - Conditions data
+    // 23 - Conditions data
     {
-        rank: 17,
+        rank: 23,
         category: "data",
         title: "Conditions Data Pipeline",
         description: `Scraper that walks every condition page on ada.com and extracts each section heading with the content beneath it, covering symptoms and causes, then writes the result to JSON and CSV for downstream medical NLP work.`,
@@ -246,9 +335,9 @@ const projectsData = [
         ],
         delayClass: ""
     },
-    // 18 - Drugs data
+    // 24 - Drugs data
     {
-        rank: 18,
+        rank: 24,
         category: "data",
         title: "Drugs Data",
         description: `Scraper that pulls drug monographs from drugs.com into structured JSON, intended as source material for retrieval and interaction modelling.`,
@@ -260,9 +349,24 @@ const projectsData = [
         ],
         delayClass: "delay-1"
     },
-    // 19 - GRPGHT
+    // 25 - Gigr presentation deck
     {
-        rank: 19,
+        rank: 25,
+        category: "web",
+        title: "Gigr Pitch Deck",
+        description: `Animated single-page pitch deck for Gigr, written in vanilla ES modules with Three.js and no framework or build step. Nine full-screen slides run on a step-based reveal engine over a live 3D background with bloom post-processing and looping keyboard, scroll and swipe navigation.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/Gigr-presentation-website",
+        alt: "Gigr animated pitch deck",
+        tags: ["Three.js", "JavaScript", "WebGL"],
+        links: [
+            { href: "https://github.com/Ksschkw/Gigr-presentation-website", icon: "fab fa-github", text: "Code" },
+            { href: "https://gigr-presentation-website.vercel.app", icon: "fas fa-external-link-alt", text: "Live" }
+        ],
+        delayClass: "delay-2"
+    },
+    // 26 - GRPGHT
+    {
+        rank: 26,
         category: "web",
         title: "GRPGHT Event Platform",
         description: `Platform for competitive FPS players entering real-world events, covering registration, brackets, and scheduling.`,
@@ -273,11 +377,11 @@ const projectsData = [
             { href: "https://github.com/Ksschkw/GRPGHT", icon: "fab fa-github", text: "Code" },
             { href: "https://grpght.onrender.com", icon: "fas fa-external-link-alt", text: "Live" }
         ],
-        delayClass: "delay-2"
+        delayClass: ""
     },
-    // 20 - AI Chat Assistant
+    // 27 - AI Chat Assistant
     {
-        rank: 20,
+        rank: 27,
         category: "ai",
         title: "AI Chat Assistant",
         description: `Chat backend that runs a locally hosted PyTorch model by default and falls back to OpenRouter when the local path is unavailable.`,
@@ -287,11 +391,25 @@ const projectsData = [
         links: [
             { href: "https://github.com/Ksschkw/chatbot_and_backendformywebsite", icon: "fab fa-github", text: "Code" }
         ],
-        delayClass: ""
+        delayClass: "delay-1"
     },
-    // 21 - Multi-feature bot
+    // 28 - Acquisitions API
     {
-        rank: 21,
+        rank: 28,
+        category: "web",
+        title: "Acquisitions API",
+        description: `REST API for acquisitions and authentication with JWT sessions in HTTP-only cookies, role-based access control, Zod input validation, Drizzle over PostgreSQL, and Arcjet for rate limiting and bot defence. Documented with Swagger.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/acquisitions",
+        alt: "Acquisitions REST API",
+        tags: ["Node.js", "PostgreSQL", "REST", "Security"],
+        links: [
+            { href: "https://github.com/Ksschkw/acquisitions", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: "delay-2"
+    },
+    // 29 - Multi-feature bot
+    {
+        rank: 29,
         category: "telegram",
         title: "Multi-Feature Bot",
         description: `Telegram bot hosting a set of small utilities and mini-apps behind a single command interface.`,
@@ -302,11 +420,11 @@ const projectsData = [
             { href: "https://github.com/Ksschkw/KosiTGBot", icon: "fab fa-github", text: "Code" },
             { href: "https://t.me/k0s1bot", icon: "fab fa-telegram", text: "Bot" }
         ],
-        delayClass: "delay-1"
+        delayClass: ""
     },
-    // 22 - Client site
+    // 30 - Client site
     {
-        rank: 22,
+        rank: 30,
         category: "web",
         title: "Biochemistry Research Portfolio",
         description: `Portfolio site delivered for a biochemistry researcher, covering publications, current research, and a media gallery. Built to be edited without touching markup.`,
@@ -316,11 +434,25 @@ const projectsData = [
         links: [
             { href: "https://obianuju.onrender.com", icon: "fas fa-external-link-alt", text: "Live" }
         ],
+        delayClass: "delay-1"
+    },
+    // 31 - Creator portfolio and admin dashboard
+    {
+        rank: 31,
+        category: "web",
+        title: "Creator Portfolio & Admin Dashboard",
+        description: `Two halves of one platform for a content creator: a public editorial site, and a private dashboard that lets the owner rewrite copy, change colours, upload media, and reorder portfolio items without touching code. Next.js over Supabase, with media on Cloudinary.`,
+        image: "https://res.cloudinary.com/mydgb5tb/image/upload/f_auto,q_auto,w_900,c_fill,g_auto,ar_4:5/v1787531864/20260816_125436_ywujvc.jpg",
+        alt: "Creator portfolio and admin dashboard",
+        tags: ["Next.js", "Supabase", "Cloudinary", "CMS"],
+        links: [
+            { href: "https://chinonye.onrender.com/", icon: "fas fa-external-link-alt", text: "Live" }
+        ],
         delayClass: "delay-2"
     },
-    // 23 - Kolaborasi-Kosi
+    // 32 - Kolaborasi-Kosi
     {
-        rank: 23,
+        rank: 32,
         category: "web",
         title: "Kolaborasi-Kosi",
         description: `Shared drawing canvas where multiple clients paint on the same board in real time.`,
@@ -333,9 +465,9 @@ const projectsData = [
         ],
         delayClass: ""
     },
-    // 24 - Krypto-Kosi
+    // 33 - Krypto-Kosi
     {
-        rank: 24,
+        rank: 33,
         category: "web",
         title: "Krypto-Kosi",
         description: `Crypto price board with sorting by price and momentum, reading from a public market data API.`,
@@ -348,9 +480,9 @@ const projectsData = [
         ],
         delayClass: "delay-1"
     },
-    // 25 - Kosi Weather
+    // 34 - Kosi Weather
     {
-        rank: 25,
+        rank: 34,
         category: "web",
         title: "Kosi Weather",
         description: `Weather lookup by city with current conditions and a short forecast.`,
@@ -363,9 +495,23 @@ const projectsData = [
         ],
         delayClass: "delay-2"
     },
-    // 26 - MediaPipe experiments
+    // 35 - Project Ruggauard
     {
-        rank: 26,
+        rank: 35,
+        category: "telegram",
+        title: "Project Ruggauard Bot",
+        description: `X bot that watches for a command in replies, analyses the author of the tweet being replied to, and posts a trustworthiness report. Built around free-tier API limits with a modular command layer.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/project-ruggaurd-bot",
+        alt: "Project Ruggauard X bot",
+        tags: ["Python", "X API", "Bots"],
+        links: [
+            { href: "https://github.com/Ksschkw/project-ruggaurd-bot", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: ""
+    },
+    // 36 - MediaPipe experiments
+    {
+        rank: 36,
         category: "ai",
         title: "MediaPipe & OpenCV Experiments",
         description: `Computer vision exercises with MediaPipe and OpenCV covering hand pose and face mesh tracking.`,
@@ -375,11 +521,25 @@ const projectsData = [
         links: [
             { href: "https://github.com/Ksschkw/mediapipe-openCV-projects-n-stuff", icon: "fab fa-github", text: "Code" }
         ],
-        delayClass: ""
+        delayClass: "delay-1"
     },
-    // 27 - donotopen
+    // 37 - uptime bot
     {
-        rank: 27,
+        rank: 37,
+        category: "web",
+        title: "Uptime Bot",
+        description: `Small scheduled service that keeps free-tier hosts awake by polling them, so a demo link does not cold-start in front of whoever opens it.`,
+        image: "https://opengraph.githubassets.com/1/Ksschkw/uptime-bot",
+        alt: "Uptime bot",
+        tags: ["Automation", "Ops"],
+        links: [
+            { href: "https://github.com/Ksschkw/uptime-bot", icon: "fab fa-github", text: "Code" }
+        ],
+        delayClass: "delay-2"
+    },
+    // 38 - donotopen
+    {
+        rank: 38,
         category: "web",
         title: "donotopen",
         description: `Archive of earlier creative-coding work: fractal trees, small neural-network ecosystems, WebGL shaders, and a rule-manipulation puzzle.`,
@@ -389,11 +549,11 @@ const projectsData = [
         links: [
             { href: "https://github.com/Ksschkw/donotopen", icon: "fab fa-github", text: "Code" }
         ],
-        delayClass: "delay-1"
+        delayClass: ""
     },
-    // 28 - Previous portfolio
+    // 39 - Previous portfolio
     {
-        rank: 28,
+        rank: 39,
         category: "web",
         title: "First Portfolio",
         description: `The first version of this site, kept for reference. Replaced by the current build.`,
@@ -404,7 +564,7 @@ const projectsData = [
             { href: "https://github.com/Ksschkw/kosip", icon: "fab fa-github", text: "Code" },
             { href: "http://okaforkosisochukwu.onrender.com", icon: "fas fa-external-link-alt", text: "Live" }
         ],
-        delayClass: "delay-2"
+        delayClass: "delay-1"
     }
 ];
 
@@ -412,6 +572,12 @@ const projectsData = [
 function renderProjects() {
     const grid = document.getElementById('projectsGrid');
     if (!grid) return;
+
+    // Cards already present in the markup (the live object-detection demo) carry
+    // their rank in data-rank, so the grid needs no special case for them.
+    grid.querySelectorAll('.project-card[data-rank]').forEach(card => {
+        card.style.order = card.getAttribute('data-rank');
+    });
 
     const ordered = [...projectsData].sort((a, b) => (a.rank || 999) - (b.rank || 999));
 
@@ -730,8 +896,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
         setInputState(false);
 
+        let messageDiv = null;
+        let accumulatedText = '';
+        let typingIndicator = null;
+        let abortTimer = null;
+
         try {
-            const typingIndicator = showTypingIndicator();
+            typingIndicator = showTypingIndicator();
 
             const requestBody = {
                 query: message,
@@ -743,10 +914,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 requestBody.session_id = sessionId + '-roast';
             }
 
+            const controller = new AbortController();
+            abortTimer = setTimeout(() => controller.abort(), 120000);
+
             const response = await fetch('https://p01--ragkss--qw5xhkblp8hy.code.run/stream', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(requestBody)
+                body: JSON.stringify(requestBody),
+                signal: controller.signal
             });
 
             if (!response.ok) {
@@ -754,8 +929,9 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             typingIndicator.remove();
+            typingIndicator = null;
 
-            const messageDiv = document.createElement('div');
+            messageDiv = document.createElement('div');
             messageDiv.className = 'chat-message bot-message streaming-message';
             chatContainer.appendChild(messageDiv);
 
@@ -763,7 +939,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const decoder = new TextDecoder();
 
             let buffer = '';
-            let accumulatedText = '';
             let streamDone = false;
 
             while (!streamDone) {
@@ -789,31 +964,69 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
 
                     if (data.chunk) {
+                        // Only follow the stream if the reader is already at the
+                        // bottom. Yanking the view down mid-answer is what made
+                        // long replies impossible to finish reading.
+                        const following = isNearBottom();
                         accumulatedText += data.chunk;
                         messageDiv.innerHTML = DOMPurify.sanitize(
                             marked.parse(accumulatedText)
                         );
-                        chatContainer.scrollTop = chatContainer.scrollHeight;
+                        if (following) scrollToLatest();
+                        else showJumpButton();
                     }
 
                     if (data.done) {
                         streamDone = true;
-                        messageDiv.classList.remove('streaming-message');
                         break;
                     }
                 }
             }
 
+            // However the stream ended, the answer stays and stops looking live.
+            messageDiv.classList.remove('streaming-message');
+            if (isNearBottom()) scrollToLatest();
+            else showJumpButton();
+
         } catch (error) {
             console.error('Stream error:', error);
 
-            const typingIndicator = document.querySelector('.typing-indicator');
             if (typingIndicator) typingIndicator.remove();
 
-            addMessage("Sorry, I'm having trouble connecting to the AI service. Please try again later.", 'bot');
+            if (messageDiv && accumulatedText.trim()) {
+                // Keep what did arrive instead of discarding a half-read answer.
+                messageDiv.classList.remove('streaming-message');
+                messageDiv.insertAdjacentHTML('beforeend',
+                    '<p class="chat-note">The connection dropped before this finished.</p>');
+            } else {
+                if (messageDiv) messageDiv.remove();
+                addMessage("The assistant is unreachable right now. Try again in a moment.", 'bot');
+            }
         } finally {
+            clearTimeout(abortTimer);
             setInputState(true);
         }
+    }
+
+    // Reading comfort: never pull the view away from text someone is reading.
+    function isNearBottom() {
+        return chatContainer.scrollHeight - chatContainer.scrollTop - chatContainer.clientHeight < 90;
+    }
+
+    function scrollToLatest() {
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+        hideJumpButton();
+    }
+
+    function showJumpButton() {
+        if (!jumpButton) return;
+        // Re-append so the sticky control stays at the end of the transcript.
+        chatContainer.appendChild(jumpButton);
+        jumpButton.hidden = false;
+    }
+
+    function hideJumpButton() {
+        if (jumpButton) jumpButton.hidden = true;
     }
 
     function showTypingIndicator() {
@@ -837,7 +1050,7 @@ document.addEventListener('DOMContentLoaded', function () {
         sendButton.disabled = !enabled;
 
         if (enabled) {
-            chatInput.placeholder = "Ask me anything...";
+            chatInput.placeholder = "Ask a question...";
             sendButton.innerHTML = 'Send';
         } else {
             chatInput.placeholder = "AI is thinking...";
@@ -845,13 +1058,23 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    const jumpButton = document.createElement('button');
+    jumpButton.type = 'button';
+    jumpButton.className = 'chat-jump';
+    jumpButton.textContent = 'Jump to latest';
+    jumpButton.hidden = true;
+    jumpButton.addEventListener('click', scrollToLatest);
+    chatContainer.addEventListener('scroll', () => {
+        if (isNearBottom()) hideJumpButton();
+    });
+
     function addMessage(text, sender) {
         const messageDiv = document.createElement('div');
         messageDiv.className = `chat-message ${sender}-message`;
         const sanitizedHTML = DOMPurify.sanitize(marked.parse(text));
         messageDiv.innerHTML = sanitizedHTML;
         chatContainer.appendChild(messageDiv);
-        chatContainer.scrollTop = chatContainer.scrollHeight;
+        scrollToLatest();
     }
 
     sendButton.addEventListener('click', sendMessage);
@@ -869,7 +1092,8 @@ document.addEventListener('DOMContentLoaded', function () {
         sessionId = "portfolio-" + Date.now() + "-" + Math.random().toString(36).substr(2, 9);
         localStorage.setItem("portfolio-session", sessionId);
 
-        chatContainer.innerHTML = '<div class="chat-message bot-message">🤖 Hello! I\'m an AI assistant powered by Kosisochukwu\'s RAG system. How can I help you today?</div>';
+        chatContainer.innerHTML = '<div class="chat-message bot-message">Retrieval service online. Ask about my work, stack, or background.</div>';
+        hideJumpButton();
 
         showToast('New chat session started!');
     });
@@ -1001,27 +1225,77 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Project filtering
+    // Project filtering and the scroll budget. The grid holds every project, but
+    // only the highest-ranked ones are shown until the reader asks for the rest,
+    // which is what keeps this section from being a forty-card scroll on a phone.
     function initProjectFiltering() {
         const tabButtons = document.querySelectorAll('.tab-button');
-        const projectCards = document.querySelectorAll('.project-card');
+        const grid = document.getElementById('projectsGrid');
+        const toggle = document.getElementById('projectsToggle');
+        if (!grid) return;
+
+        let category = 'all';
+        let expanded = false;
+
+        const pageSize = () => (window.innerWidth <= 860 ? 6 : 9);
+
+        const ranked = () => [...grid.querySelectorAll('.project-card')]
+            .sort((a, b) => (Number(a.dataset.rank) || 999) - (Number(b.dataset.rank) || 999));
+
+        function apply() {
+            const limit = pageSize();
+            let matching = 0;
+            let shown = 0;
+
+            ranked().forEach(card => {
+                const matches = category === 'all' || card.dataset.category === category;
+                if (!matches) {
+                    card.style.display = 'none';
+                    return;
+                }
+                matching += 1;
+                const visible = expanded || shown < limit;
+                card.style.display = visible ? '' : 'none';
+                if (visible) shown += 1;
+            });
+
+            if (!toggle) return;
+            if (matching <= limit) {
+                toggle.hidden = true;
+            } else {
+                toggle.hidden = false;
+                toggle.textContent = expanded
+                    ? `Show top ${limit}`
+                    : `Show all ${matching} projects`;
+            }
+        }
 
         tabButtons.forEach(button => {
             button.addEventListener('click', () => {
                 tabButtons.forEach(btn => btn.classList.remove('active'));
                 button.classList.add('active');
-
-                const category = button.getAttribute('data-category');
-
-                projectCards.forEach(card => {
-                    if (category === 'all' || card.getAttribute('data-category') === category) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+                category = button.getAttribute('data-category');
+                expanded = false;
+                apply();
             });
         });
+
+        if (toggle) {
+            toggle.addEventListener('click', () => {
+                expanded = !expanded;
+                apply();
+                const target = expanded ? toggle : grid;
+                target.scrollIntoView({ behavior: 'smooth', block: expanded ? 'nearest' : 'start' });
+            });
+        }
+
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(apply, 150);
+        });
+
+        apply();
     }
 
     // Initialize skill animations
@@ -2178,21 +2452,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     } else {
                         addCLIOutput('Projects, ranked. Run "projects --all" for descriptions.');
                         addCLIOutput('');
+                        // The live object-detection demo is markup rather than data,
+                        // so its rank is stated here and in index.html.
+                        const STATIC_RANK = 14;
                         const ranked = [...projectsData].sort((a, b) => (a.rank || 999) - (b.rank || 999));
                         const line = p => `  ${String(p.rank).padStart(2, '0')}  ${p.title} [${p.category.toUpperCase()}]`;
-                        ranked.filter(p => p.rank < 9).forEach(p => addCLIOutput(line(p)));
-                        addCLIOutput('  09  Real-Time Object Detection [AI]');
-                        ranked.filter(p => p.rank > 9 && p.rank <= 12).forEach(p => addCLIOutput(line(p)));
+                        ranked.filter(p => p.rank < STATIC_RANK).forEach(p => addCLIOutput(line(p)));
+                        addCLIOutput(`  ${String(STATIC_RANK).padStart(2, '0')}  Real-Time Object Detection [AI]  (runs on this page)`);
+                        ranked.filter(p => p.rank > STATIC_RANK && p.rank <= STATIC_RANK + 1).forEach(p => addCLIOutput(line(p)));
                     }
                     break;
                 case 'skills':
                     addCLIOutput('Capabilities:');
-                    addCLIOutput('  Systems      API and service design, data modelling, authorization, failure handling');
+                    addCLIOutput('  Systems      API and service design, data modelling, concurrency, failure handling');
                     addCLIOutput('  Delivery     scoping, review, observability, cost tradeoffs, release and rollback');
-                    addCLIOutput('  Applied AI   retrieval, agent guardrails, evaluation, PyTorch, TensorFlow');
-                    addCLIOutput('  Cloud        AWS, Azure, Docker, GitHub Actions, configuration management');
-                    addCLIOutput('  Data         PostgreSQL, PostGIS, CosmosDB, Hadoop, extraction pipelines');
-                    addCLIOutput('  Languages    Python, TypeScript, C#, Go, SQL, C++');
+                    addCLIOutput('  Applied AI   retrieval, agent guardrails, evaluation, provider-agnostic models');
+                    addCLIOutput('  Platforms    AWS, Azure, containers, CI/CD, PostgreSQL, PostGIS, Hadoop');
+                    addCLIOutput('  Security     deny-by-default authz, tenant isolation, audit trails, secrets');
+                    addCLIOutput('  Product      requirement to shipped feature, interface design, documentation');
                     break;
                 case 'contact':
                     addCLIOutput('Contact details:');
