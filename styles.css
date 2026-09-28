@@ -2277,6 +2277,14 @@ footer .container {
     opacity: 1;
 }
 
+/* The reveal animation must never hold the page hostage: if the app could not
+   boot (a stalled CDN, JS blocked), the head's safety net sets this and every
+   hidden element is shown as-is. */
+html[data-degraded] .fade-in {
+    opacity: 1 !important;
+    transition: none !important;
+}
+
 .delay-1 {
     transition-delay: 0.08s;
 }

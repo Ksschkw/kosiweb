@@ -741,43 +741,22 @@ window.addEventListener('appinstalled', () => {
     console.log('PWA was installed');
 });
 
-// Service Worker Registration for PWA
+// Service Worker registration. Freshness does not depend on this: sw.js fetches
+// network-first, activates immediately, and claims open clients, so a deploy is
+// picked up on the next visit without the visitor clearing anything. There is
+// deliberately no "update available, click to reload" prompt and no forced
+// reload on controllerchange, because either would discard half-typed form
+// input to gain nothing.
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js').then((registration) => {
-            console.log('SW registered: ', registration);
-
-            // Check for updates
-            registration.addEventListener('updatefound', () => {
-                const newWorker = registration.installing;
-                newWorker.addEventListener('statechange', () => {
-                    if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                        // New version available
-                        showToast('New version available! Updating...', 'info');
-                        // Optional: Automated update or ask user
-                        // For now, we auto-update after a delay or let the user click a toast action
-                        // But let's just show a toast and reload if user clicks "Update" (simulated here by reload after toast)
-
-                        const toast = document.getElementById('toast');
-                        toast.innerHTML = 'Update available! <button id="pwaUpdateBtn" style="background:transparent;border:1px solid currentColor;border-radius:4px;padding:2px 5px;cursor:pointer;">Update</button>';
-                        toast.classList.add('show');
-
-                        document.getElementById('pwaUpdateBtn').addEventListener('click', () => {
-                            if (registration.waiting) {
-                                registration.waiting.postMessage({ type: 'SKIP_WAITING' });
-                            }
-                        });
-                    }
-                });
+        navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+                // Ask the browser to check for a new worker on every visit.
+                registration.update().catch(() => { });
+            })
+            .catch((error) => {
+                console.log('SW registration failed: ', error);
             });
-        }).catch((registrationError) => {
-            console.log('SW registration failed: ', registrationError);
-        });
-
-        // Ensure controller change reloads page
-        navigator.serviceWorker.addEventListener('controllerchange', () => {
-            window.location.reload();
-        });
     });
 }
 
@@ -870,6 +849,10 @@ marked.setOptions({
 });
 
 document.addEventListener('DOMContentLoaded', function () {
+    // Tell the head's safety net that the app booted, so it does not strip the
+    // reveal animations out from under us.
+    document.documentElement.setAttribute('data-app-ready', '');
+
     // --- RENDER PROJECTS FIRST (before filtering) ---
     renderProjects();
 
@@ -1206,21 +1189,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Animation on scroll
-    const fadeElems = document.querySelectorAll('.fade-in');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = 1;
-            }
-        });
-    }, { threshold: 0.1 });
+    // Animation on scroll. If the head's safety net already revealed the page
+    // (a stalled CDN delayed this script past the timeout), leave it alone:
+    // hiding it now would flash the content out and back in.
+    if (!document.documentElement.hasAttribute('data-degraded')) {
+        const fadeElems = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                }
+            });
+        }, { threshold: 0.1 });
 
-    fadeElems.forEach(elem => {
-        elem.style.opacity = 0;
-        elem.style.transition = 'opacity 0.5s ease-in-out';
-        observer.observe(elem);
-    });
+        fadeElems.forEach(elem => {
+            elem.style.opacity = 0;
+            elem.style.transition = 'opacity 0.5s ease-in-out';
+            observer.observe(elem);
+        });
+    }
 
     // Mobile menu functionality
     function initMobileMenu() {

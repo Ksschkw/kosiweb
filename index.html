@@ -14,8 +14,18 @@
     <meta property="og:description"
         content="Backend services, cloud infrastructure, and AI systems. AWS Certified Generative AI Developer - Professional.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="imagesnshii/web.png">
-    <meta name="twitter:image" content="imagesnshii/web.png">
+    <!-- Link previews need an absolute URL, and a landscape image: platforms
+         crop to roughly 1.91:1, which would cut a portrait's subject out of
+         frame. og-card.jpg is generated from kosi.jpeg by
+         tools/make-og-card.py. -->
+    <meta property="og:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
+    <meta property="og:image:secure_url" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Kosisochukwu Okafor, software engineer">
+    <meta name="twitter:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
+    <meta name="twitter:image:alt" content="Kosisochukwu Okafor, software engineer">
     <meta property="og:url" content="https://kss-venv.onrender.com">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Kosisochukwu Okafor | Software Engineer">
@@ -32,7 +42,21 @@
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <!-- The ?v= token must be bumped together with CACHE_NAME in sw.js whenever
+         styles.css or script.js change. It gives the browser a new URL to fetch,
+         which is what stops a deploy being served from the HTTP cache. -->
+    <link rel="stylesheet" href="styles.css?v=7">
+    <!-- Safety net. The reveal animations start elements at opacity 0, and
+         script.js is deferred behind four CDN libraries, so a stalled CDN would
+         otherwise leave the page permanently invisible. If the app has not
+         booted within a few seconds, reveal everything unconditionally. -->
+    <script>
+        window.setTimeout(function () {
+            if (!document.documentElement.hasAttribute('data-app-ready')) {
+                document.documentElement.setAttribute('data-degraded', '');
+            }
+        }, 2500);
+    </script>
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/png" href="/icons/icon-192.png">
     <!-- Deferred so a slow CDN delays the enhancements, never the page itself.
@@ -111,7 +135,7 @@
                     </div>
                     <div class="hero-image fade-in delay-2">
                         <div class="profile-frame">
-                            <img src="imagesnshii/IMG-20251209-WA0027(1).png" alt="Kosisochukwu Okafor"
+                            <img src="imagesnshii/kosi.jpeg" alt="Kosisochukwu Okafor"
                                 class="profile-photo">
                             <span class="frame-corner tl"></span>
                             <span class="frame-corner tr"></span>
@@ -829,7 +853,7 @@
         <i class="fas fa-robot"></i>
     </div>
 
-    <script defer src="script.js"></script>
+    <script defer src="script.js?v=7"></script>
 
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
