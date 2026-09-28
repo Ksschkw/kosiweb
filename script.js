@@ -39,6 +39,7 @@ const projectsData = [
         tags: ["RAG", "FastAPI", "PyPI"],
         links: [
             { href: "https://github.com/Ksschkw/kssrag", icon: "fab fa-github", text: "Code" },
+            { href: "https://youtu.be/TP9VK2Bw63s?si=rIhyyGc_fMO-LsVq", icon: "fab fa-youtube", text: "Watch" },
             { href: "https://pypi.org/project/kssrag/", icon: "fab fa-python", text: "PyPI" },
             { href: "https://github.com/Ksschkw/kssrag/releases/tag/v0.4.0", icon: "fas fa-tag", text: "v0.4.0" }
         ],
@@ -56,6 +57,7 @@ const projectsData = [
         tags: ["Solana", "PostGIS", "AI"],
         links: [
             { href: "https://github.com/Ksschkw/BAROS", icon: "fab fa-github", text: "Code" },
+            { href: "https://youtu.be/i21snLQ9OlM?si=1N8TtDQ9n-uvv2m7", icon: "fab fa-youtube", text: "Watch" },
             { href: "https://gigrr.vercel.app/", icon: "fas fa-external-link-alt", text: "Live" }
         ],
         delayClass: "delay-2"
@@ -71,7 +73,8 @@ const projectsData = [
         alt: "CongestIQ reinforcement learning simulations",
         tags: ["Reinforcement Learning", "Networking", "ns-3"],
         links: [
-            { href: "https://github.com/Ksschkw/CongestIQ-FYP", icon: "fab fa-github", text: "Code" }
+            { href: "https://github.com/Ksschkw/CongestIQ-FYP", icon: "fab fa-github", text: "Code" },
+            { href: "https://www.youtube.com/playlist?list=PLhU0J79Smu6kmr6QNJgd0cFa2f-UCwU1K", icon: "fab fa-youtube", text: "Playlist" }
         ],
         delayClass: ""
     },
@@ -87,6 +90,7 @@ const projectsData = [
         tags: ["DevTooling", "GitHub Actions", "LLM"],
         links: [
             { href: "https://github.com/Ksschkw/driftlock", icon: "fab fa-github", text: "Code" },
+            { href: "https://youtu.be/o-Ox7lnqHxs?si=oI0QfPPR9V6O8zL4", icon: "fab fa-youtube", text: "Watch" },
             { href: "https://github.com/Ksschkw/driftlock/releases/tag/v0.4.0", icon: "fas fa-tag", text: "v0.4.0" }
         ],
         delayClass: "delay-1"
@@ -101,7 +105,8 @@ const projectsData = [
         alt: "AutoSig agent guardrail architecture",
         tags: ["Solana", "Agents", "Testing"],
         links: [
-            { href: "https://github.com/Ksschkw/AutoSig", icon: "fab fa-github", text: "Code" }
+            { href: "https://github.com/Ksschkw/AutoSig", icon: "fab fa-github", text: "Code" },
+            { href: "https://youtu.be/aMRaKPWyCAc?si=CpERpiQxlxkHyZ15", icon: "fab fa-youtube", text: "Watch" }
         ],
         delayClass: "delay-2"
     },
@@ -116,6 +121,7 @@ const projectsData = [
         tags: ["Web3", "DAO", "Reputation"],
         links: [
             { href: "https://github.com/Ksschkw/RepEngine", icon: "fab fa-github", text: "Code" },
+            { href: "https://youtu.be/CjmJntGi6Xo?si=l7llqu901zav-kFS", icon: "fab fa-youtube", text: "Watch" },
             { href: "https://p01--repengine--qw5xhkblp8hy.code.run/", icon: "fas fa-external-link-alt", text: "Live" }
         ],
         delayClass: ""

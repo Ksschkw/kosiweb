@@ -35,10 +35,13 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/png" href="/icons/icon-192.png">
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Deferred so a slow CDN delays the enhancements, never the page itself.
+         Deferred scripts still execute in document order, so script.js below
+         always sees marked, DOMPurify, tf and coco-ssd. -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0/dist/tf.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.2"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-G9DHRE55WW"></script>
     <script>
@@ -94,11 +97,11 @@
                         <dl class="hero-facts">
                             <div>
                                 <dt>Focus</dt>
-                                <dd>Backend and distributed systems</dd>
+                                <dd>Backend, infrastructure, applied AI</dd>
                             </div>
                             <div>
-                                <dt>Currently</dt>
-                                <dd>Building AHIA, a multi-tenant retail platform</dd>
+                                <dt>Shipped</dt>
+                                <dd>AHIA &middot; BAROS &middot; kssrag</dd>
                             </div>
                             <div>
                                 <dt>Credential</dt>
@@ -826,7 +829,7 @@
         <i class="fas fa-robot"></i>
     </div>
 
-    <script src="script.js"></script>
+    <script defer src="script.js"></script>
 
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">

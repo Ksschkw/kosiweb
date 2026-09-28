@@ -1,4 +1,4 @@
-const CACHE_NAME = 'kss-portfolio-v5';
+const CACHE_NAME = 'kss-portfolio-v6';
 const urlsToCache = [
   '/',
   '/index.html',
