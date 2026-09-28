@@ -7,7 +7,7 @@ instead: the site's near-black surface, the name set in the same monospace
 voice as the page, and the portrait on the right, cropped to keep the face in
 frame.
 
-Re-run it whenever imagesnshii/kosi.jpeg changes:
+Re-run it whenever imagesnshii/kosii.jpeg changes:
 
     python3 tools/make-og-card.py
 
@@ -18,7 +18,7 @@ from PIL import Image, ImageDraw, ImageFont
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SOURCE = ROOT / "imagesnshii" / "kosi.jpeg"
+SOURCE = ROOT / "imagesnshii" / "kosii.jpeg"
 TARGET = ROOT / "imagesnshii" / "og-card.jpg"
 
 W, H = 1200, 630
@@ -37,9 +37,10 @@ MONO = "/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf"
 PANEL_W = 472
 PANEL_X = W - PANEL_W - 48
 
-# Crop window into the 756x1008 portrait: trims the empty wall above and to the
-# left so the subject fills the panel rather than sitting in a corner.
-CROP = (60, 380, 530, 1008)
+# Crop window into the portrait: trims the empty wall above so the subject
+# fills the panel rather than sitting in a corner. Width is derived from the
+# panel's own ratio (472/630), so the resize never squashes the image.
+CROP = (225, 100, 1309, 1547)
 
 
 def main():

@@ -574,138 +574,159 @@ const projectsData = [
     }
 ];
 
-// ---------- FUNCTION TO RENDER PROJECTS DYNAMICALLY ----------
-function renderProjects() {
-    const grid = document.getElementById('projectsGrid');
-    if (!grid) return;
+// ---------- PROJECT CARDS ----------
+// Cards are normally pre-rendered into index.html by tools/generate-seo.mjs so
+// that crawlers and AI agents see every project without executing JavaScript.
+// The runtime builds them only when that markup is missing, and wires the
+// interactive behaviour in both cases.
 
-    // Cards already present in the markup (the live object-detection demo) carry
-    // their rank in data-rank, so the grid needs no special case for them.
-    grid.querySelectorAll('.project-card[data-rank]').forEach(card => {
-        card.style.order = card.getAttribute('data-rank');
-    });
+function wireProjectCard(card) {
+    const desc = card.querySelector('.project-desc');
+    const toggle = card.querySelector('.desc-toggle');
+    if (!desc || !toggle) return;
 
-    const ordered = [...projectsData].sort((a, b) => (a.rank || 999) - (b.rank || 999));
-
-    ordered.forEach(proj => {
-        const card = document.createElement('article');
-        card.className = `project-card fade-in ${proj.delayClass || ''}`.trim();
-        card.setAttribute('data-category', proj.category);
-        card.setAttribute('data-rank', proj.rank);
-        card.style.order = proj.rank;
-        if (proj.featured) card.classList.add('is-featured');
-
-        // Image. When a project has a live deployment, the picture is itself the
-        // link to it, because that is the thing people reach for.
-        const imgDiv = document.createElement('div');
-        imgDiv.className = 'project-image';
-        const img = document.createElement('img');
-        img.src = proj.image;
-        img.alt = proj.alt;
-        img.loading = 'lazy';
-        img.decoding = 'async';
-
-        const liveLink = (proj.links || []).find(l => l.text === 'Live');
-        if (liveLink) {
-            const a = document.createElement('a');
-            a.className = 'project-image-link';
-            a.href = liveLink.href;
-            a.target = '_blank';
-            a.rel = 'noopener noreferrer';
-            a.setAttribute('aria-label', `${proj.title}: open the live site`);
-            a.appendChild(img);
-            const badge = document.createElement('span');
-            badge.className = 'project-image-badge';
-            badge.textContent = 'Live';
-            a.appendChild(badge);
-            imgDiv.appendChild(a);
-        } else {
-            imgDiv.appendChild(img);
-        }
-
-        // Content
-        const contentDiv = document.createElement('div');
-        contentDiv.className = 'project-content';
-
-        const meta = document.createElement('div');
-        meta.className = 'project-meta';
-
-        const rank = document.createElement('span');
-        rank.className = 'project-rank';
-        rank.textContent = String(proj.rank).padStart(2, '0');
-        meta.appendChild(rank);
-
-        if (proj.featured) {
-            const flag = document.createElement('span');
-            flag.className = 'project-flag';
-            flag.textContent = 'Flagship';
-            meta.appendChild(flag);
-        }
-
-        const title = document.createElement('h3');
-        title.textContent = proj.title;
-
-        const desc = document.createElement('p');
-        desc.className = 'project-desc';
-        desc.innerHTML = proj.description; // HTML allowed
-
-        // Tags
-        const tagsDiv = document.createElement('div');
-        tagsDiv.className = 'project-tags';
-        proj.tags.forEach(tag => {
-            const span = document.createElement('span');
-            span.className = 'project-tag';
-            span.textContent = tag;
-            tagsDiv.appendChild(span);
-        });
-
-        // Links
-        const linksDiv = document.createElement('div');
-        linksDiv.className = 'project-links';
-        proj.links.forEach(link => {
-            const a = document.createElement('a');
-            a.href = link.href;
-            a.className = 'project-link';
-            a.target = '_blank';
-            a.rel = 'noopener noreferrer';
-            a.innerHTML = `<i class="${link.icon}"></i> ${link.text}`;
-            linksDiv.appendChild(a);
-        });
-
-        contentDiv.appendChild(meta);
-        contentDiv.appendChild(title);
-        contentDiv.appendChild(desc);
-
-        // Long descriptions collapse so cards stay scannable. The toggle is only
-        // revealed once layout proves the text actually overflows.
-        const toggle = document.createElement('button');
-        toggle.type = 'button';
-        toggle.className = 'desc-toggle';
-        toggle.textContent = 'Read more';
-        toggle.setAttribute('aria-expanded', 'false');
-        toggle.hidden = true;
-
+    if (!toggle.dataset.wired) {
+        toggle.dataset.wired = '1';
         toggle.addEventListener('click', () => {
             const collapsed = desc.classList.toggle('is-collapsed');
             toggle.textContent = collapsed ? 'Read more' : 'Read less';
             toggle.setAttribute('aria-expanded', String(!collapsed));
         });
+    }
 
-        contentDiv.appendChild(toggle);
-        contentDiv.appendChild(tagsDiv);
-        contentDiv.appendChild(linksDiv);
+    // Only offer the toggle when the text actually overflows the clamp.
+    desc.classList.add('is-collapsed');
+    if (desc.scrollHeight - desc.clientHeight > 2) {
+        toggle.hidden = false;
+    } else {
+        toggle.hidden = true;
+        desc.classList.remove('is-collapsed');
+    }
+}
 
-        card.appendChild(imgDiv);
-        card.appendChild(contentDiv);
+function buildProjectCard(proj) {
+    const card = document.createElement('article');
+    card.className = `project-card fade-in ${proj.delayClass || ''}`.trim();
+    card.setAttribute('data-category', proj.category);
+    card.setAttribute('data-rank', proj.rank);
+    card.style.order = proj.rank;
+    if (proj.featured) card.classList.add('is-featured');
 
-        grid.appendChild(card);
+    // Image. When a project has a live deployment, the picture is itself the
+    // link to it, because that is the thing people reach for.
+    const imgDiv = document.createElement('div');
+    imgDiv.className = 'project-image';
+    const img = document.createElement('img');
+    img.src = proj.image;
+    img.alt = proj.alt;
+    img.loading = 'lazy';
+    img.decoding = 'async';
 
-        desc.classList.add('is-collapsed');
-        if (desc.scrollHeight - desc.clientHeight > 2) {
-            toggle.hidden = false;
-        } else {
-            desc.classList.remove('is-collapsed');
-        }
+    const liveLink = (proj.links || []).find(l => l.text === 'Live');
+    if (liveLink) {
+        const a = document.createElement('a');
+        a.className = 'project-image-link';
+        a.href = liveLink.href;
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.setAttribute('aria-label', `${proj.title}: open the live site`);
+        a.appendChild(img);
+        const badge = document.createElement('span');
+        badge.className = 'project-image-badge';
+        badge.textContent = 'Live';
+        a.appendChild(badge);
+        imgDiv.appendChild(a);
+    } else {
+        imgDiv.appendChild(img);
+    }
+
+    // Content
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'project-content';
+
+    const meta = document.createElement('div');
+    meta.className = 'project-meta';
+
+    const rank = document.createElement('span');
+    rank.className = 'project-rank';
+    rank.textContent = String(proj.rank).padStart(2, '0');
+    meta.appendChild(rank);
+
+    if (proj.featured) {
+        const flag = document.createElement('span');
+        flag.className = 'project-flag';
+        flag.textContent = 'Flagship';
+        meta.appendChild(flag);
+    }
+
+    const title = document.createElement('h3');
+    title.textContent = proj.title;
+
+    const desc = document.createElement('p');
+    desc.className = 'project-desc';
+    desc.innerHTML = proj.description; // HTML allowed
+
+    // Tags
+    const tagsDiv = document.createElement('div');
+    tagsDiv.className = 'project-tags';
+    proj.tags.forEach(tag => {
+        const span = document.createElement('span');
+        span.className = 'project-tag';
+        span.textContent = tag;
+        tagsDiv.appendChild(span);
+    });
+
+    // Links
+    const linksDiv = document.createElement('div');
+    linksDiv.className = 'project-links';
+    proj.links.forEach(link => {
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.className = 'project-link';
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.innerHTML = `<i class="${link.icon}"></i> ${link.text}`;
+        linksDiv.appendChild(a);
+    });
+
+    contentDiv.appendChild(meta);
+    contentDiv.appendChild(title);
+    contentDiv.appendChild(desc);
+
+    // Long descriptions collapse so cards stay scannable. The toggle is only
+    // revealed once layout proves the text actually overflows.
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'desc-toggle';
+    toggle.textContent = 'Read more';
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.hidden = true;
+
+    contentDiv.appendChild(toggle);
+    contentDiv.appendChild(tagsDiv);
+    contentDiv.appendChild(linksDiv);
+
+    card.appendChild(imgDiv);
+    card.appendChild(contentDiv);
+
+    return card;
+}
+
+function renderProjects() {
+    const grid = document.getElementById('projectsGrid');
+    if (!grid) return;
+
+    const existing = grid.querySelectorAll('.project-card[data-rank]');
+    // The pre-rendered page always holds more than the single live demo card.
+    if (existing.length <= 1) {
+        [...projectsData]
+            .sort((a, b) => (a.rank || 999) - (b.rank || 999))
+            .forEach(proj => grid.appendChild(buildProjectCard(proj)));
+    }
+
+    grid.querySelectorAll('.project-card[data-rank]').forEach(card => {
+        card.style.order = card.getAttribute('data-rank');
+        wireProjectCard(card);
     });
 }
 

@@ -1,0 +1,69 @@
+# Kosisochukwu Okafor
+
+> Software engineer based in Lagos, Nigeria. Builds backend services, cloud
+> infrastructure and applied AI systems. Holds the AWS Certified Generative AI
+> Developer - Professional credential.
+
+Open to roles and contract work, remote across Nigeria (Lagos, Owerri, Anambra,
+Abuja) and worldwide. English and Igbo.
+
+Contact: kookafor893@gmail.com
+Portfolio: https://kss-venv.onrender.com/
+Project index: https://kss-venv.onrender.com/projects.html
+Machine-readable projects: https://kss-venv.onrender.com/projects.json
+
+## Profiles
+
+- [GitHub](https://github.com/Ksschkw): source for the projects below
+- [LinkedIn](https://linkedin.com/in/okafor-kosisochukwu-65a256384)
+- [Credly](https://www.credly.com/users/kosisochukwu-okafor.4ba3b5f3): verified credentials
+
+## Capabilities
+
+- Systems and correctness: service and API design, data modelling, concurrency, failure behaviour, transactional integrity, testing strategy
+- Delivery and operations: scoping, code review, observability, cost and performance tradeoffs, release and rollback
+- Applied AI: retrieval over private corpora, agent tooling with hard guardrails, evaluation, hybrid vector and keyword retrieval, reinforcement learning
+- Platforms and data: cloud architecture, containerised deployments, release automation, relational and geospatial modelling, distributed batch processing
+- Security and tenancy: deny-by-default authorization, tenant isolation and row-level security, append-only audit trails, secret handling
+
+## Projects
+
+- [AHIA](https://kss-venv.onrender.com/projects/ahia.html): Multi-tenant retail platform for small traders, delivered as a FastAPI backend, a Next.js web app, and an offline-first mobile client. Every business-owned table carries a row-level security policy bound per transaction, so a missing filter returns nothing rather than another shop's data. Sales, payments, stock movements, expenses and audit events are append-only ledgers committed together, and a device that goes offline pushes idempotent operations through a sync service that cannot apply a sale twice. Customers build a list from a public link with no account, the trader prices and sources it, and dispatch records the waybill. The suite runs past two thousand tests, including architecture contracts that fail the build on a layering violation.
+- [kssrag](https://kss-venv.onrender.com/projects/kssrag.html): Retrieval-augmented generation framework published on PyPI, built around one command: point the CLI at a document and it loads, chunks, indexes, and serves a FastAPI endpoint with token-by-token SSE streaming and per-session conversation memory. Six vector stores and two retrievers are chosen by config or replaced with your own classes by import path, and any hosted or local model provider can be swapped with a single flag, with automatic fallback when one is unavailable.
+- [BAROS (Gigr)](https://kss-venv.onrender.com/projects/baros-gigr.html): Neighborhood marketplace on Solana with on-chain escrow and PostGIS-backed local matching. Reputation is minted as compressed NFTs, so a vouch cannot be quietly edited or deleted later, and wallets are provisioned at registration to keep seed phrases out of the user's path. An AI assistant can post jobs and negotiate on the user's behalf, while disputes route to a community jury. Currently in pilot.
+- [CongestIQ](https://kss-venv.onrender.com/projects/congestiq.html): Multi-agent reinforcement learning for adaptive TCP congestion control. The agents learn to trade throughput against fairness per flow rather than applying one fixed loss-based rule, and the policies are evaluated against standard congestion control inside ns-3 with netanim traces.
+- [driftlock](https://kss-venv.onrender.com/projects/driftlock.html): Commit-time gatekeeper that catches documentation drift before it lands. It parses staged diffs, detects API-surface and structural changes across languages, then either blocks the commit or rewrites the affected docs through an LLM. Ships as a standalone CLI, a pre-commit hook, and a GitHub Action, with optional anchoring of each doc-sync check to Solana for a tamper-evident audit trail.
+- [AutoSig](https://kss-venv.onrender.com/projects/autosig.html): Multi-agent trading system for Solana, built for Superteam Nigeria's Agentic Wallets challenge. LLM agents propose trades, but nothing reaches the chain until it clears three independent gates: hard limits no model can override, deterministic policy checks, and a second model acting as reviewer. An adversarial test suite verifies the guardrails still hold when the proposing agent is actively trying to break them.
+- [RepEngine](https://kss-venv.onrender.com/projects/repengine.html): Freelance marketplace and reputation-weighted DAO built to price trust cryptographically instead of trusting a profile nobody verified. Job access and voting power are both gated on on-chain reputation through the FairScale API, so a new wallet cannot buy its way into governance. Full-stack with a live deployment.
+- [Ginger Copilot](https://kss-venv.onrender.com/projects/ginger-copilot.html): Agentic intent solver for the Injective chain with hardware-enforced execution. The intelligence layer reads live chain state, monitors staking rewards and builds CosmWasm payloads while holding no private keys at all. Each intent is handed to a Ledger device, reviewed and clear-signed by a human, and broadcast only after explicit approval on the hardware.
+- [Healthcare Diagnostic API](https://kss-venv.onrender.com/projects/healthcare-diagnostic-api.html): Multi-tenant FastAPI backend for healthcare records covering patients, test requests, and lab results. Authorization follows the AWS IAM shape, where atomic permissions compose into permission sets and then into roles. Records use soft deletes to keep an auditable history, and credentials are hashed with Argon2.
+- [LexAI](https://kss-venv.onrender.com/projects/lexai.html): Question answering over the Nigerian Constitution with a hybrid retriever that pairs FAISS vector search against BM25 keyword scoring, so exact statutory phrasing and paraphrased questions both retrieve the right passage.
+- [Patient Management Microservices](https://kss-venv.onrender.com/projects/patient-management-microservices.html): Patient management split into independent Spring Boot services for patients, authentication, appointments, billing, and analytics, communicating over Kafka events, REST, and gRPC where a synchronous call is the right shape. The whole environment is provisioned with AWS CDK against LocalStack to emulate ECS locally.
+- [CIAP](https://kss-venv.onrender.com/projects/ciap.html): Creator analytics platform for the African creator economy. It aggregates cross-platform metrics into influence scores, then exposes creator discovery and campaign planning to the agencies and brands doing the hiring. FastAPI and PostgreSQL behind a typed client, with YouTube analytics as the first integration.
+- [MYRAGAGENTV2](https://kss-venv.onrender.com/projects/myragagentv2.html): Retrieval agent built on the kssrag package, with query rewriting before search and a rejection path for questions the retrieved context cannot actually support.
+- [Real-Time Object Detection](https://kss-venv.onrender.com/projects/real-time-object-detection.html): Detection running in the browser over your webcam with TensorFlow.js and a COCO-SSD model. Class filtering and the confidence threshold are applied client side, and no frame leaves the device.
+- [Pharmacy AI Agent](https://kss-venv.onrender.com/projects/pharmacy-ai-agent.html): Prescription processing and inventory system. PaddleOCR extracts text from a photograph of a prescription, an LLM structures that text into validated fields and corrects what OCR got wrong, and the result feeds multi-tenant inventory with demand forecasting.
+- [MYRAGAGENT](https://kss-venv.onrender.com/projects/myragagent.html): Earlier retrieval agent that answers strictly from an indexed corpus. Superseded by MYRAGAGENTV2 and kept for reference.
+- [AI Copilot Agent](https://kss-venv.onrender.com/projects/ai-copilot-agent.html): FastAPI service that turns a rough brief into a structured innovation challenge definition. Model output is constrained to a schema the API validates before it is stored.
+- [Vybe Analytics Bot](https://kss-venv.onrender.com/projects/vybe-analytics-bot.html): Telegram bot serving real-time Solana on-chain analytics through Vybe Network APIs, with wallet tracking and responses shaped for reading on a phone.
+- [Bubblemaps Bot](https://kss-venv.onrender.com/projects/bubblemaps-bot.html): Token analysis bot that pulls holder-cluster data from Bubblemaps, renders the bubble map, and reports concentration risk and market context on demand.
+- [UK Health & Environment Indicators](https://kss-venv.onrender.com/projects/uk-health-and-environment-indicators.html): Published Kaggle dataset joining PM2.5 air quality against avoidable mortality rates across 100 UK local authorities for 2022, built to make the two series directly comparable at authority level.
+- [HomeCredit Data Alchemy](https://kss-venv.onrender.com/projects/homecredit-data-alchemy.html): Credit risk modelling on the Home Credit dataset, covering feature engineering across bureau and previous-application history through to model evaluation.
+- [Drugs RAG](https://kss-venv.onrender.com/projects/drugs-rag.html): Retrieval system over scraped drug monographs that answers interaction and prescribing questions by citing the source text rather than generating from memory.
+- [Conditions Data Pipeline](https://kss-venv.onrender.com/projects/conditions-data-pipeline.html): Scraper that walks every condition page on ada.com and extracts each section heading with the content beneath it, covering symptoms and causes, then writes the result to JSON and CSV for downstream medical NLP work.
+- [Drugs Data](https://kss-venv.onrender.com/projects/drugs-data.html): Scraper that pulls drug monographs from drugs.com into structured JSON, intended as source material for retrieval and interaction modelling.
+- [Gigr Pitch Deck](https://kss-venv.onrender.com/projects/gigr-pitch-deck.html): Animated single-page pitch deck for Gigr, written in vanilla ES modules with Three.js and no framework or build step. Nine full-screen slides run on a step-based reveal engine over a live 3D background with bloom post-processing and looping keyboard, scroll and swipe navigation.
+- [GRPGHT Event Platform](https://kss-venv.onrender.com/projects/grpght-event-platform.html): Platform for competitive FPS players entering real-world events, covering registration, brackets, and scheduling.
+- [AI Chat Assistant](https://kss-venv.onrender.com/projects/ai-chat-assistant.html): Chat backend that runs a locally hosted PyTorch model by default and falls back to OpenRouter when the local path is unavailable.
+- [Acquisitions API](https://kss-venv.onrender.com/projects/acquisitions-api.html): REST API for acquisitions and authentication with JWT sessions in HTTP-only cookies, role-based access control, Zod input validation, Drizzle over PostgreSQL, and Arcjet for rate limiting and bot defence. Documented with Swagger.
+- [Multi-Feature Bot](https://kss-venv.onrender.com/projects/multi-feature-bot.html): Telegram bot hosting a set of small utilities and mini-apps behind a single command interface.
+- [Biochemistry Research Portfolio](https://kss-venv.onrender.com/projects/biochemistry-research-portfolio.html): Portfolio site delivered for a biochemistry researcher, covering publications, current research, and a media gallery. Built to be edited without touching markup.
+- [Creator Portfolio & Admin Dashboard](https://kss-venv.onrender.com/projects/creator-portfolio-and-admin-dashboard.html): Two halves of one platform for a content creator: a public editorial site, and a private dashboard that lets the owner rewrite copy, change colours, upload media, and reorder portfolio items without touching code. Next.js over Supabase, with media on Cloudinary.
+- [Kolaborasi-Kosi](https://kss-venv.onrender.com/projects/kolaborasi-kosi.html): Shared drawing canvas where multiple clients paint on the same board in real time.
+- [Krypto-Kosi](https://kss-venv.onrender.com/projects/krypto-kosi.html): Crypto price board with sorting by price and momentum, reading from a public market data API.
+- [Kosi Weather](https://kss-venv.onrender.com/projects/kosi-weather.html): Weather lookup by city with current conditions and a short forecast.
+- [Project Ruggauard Bot](https://kss-venv.onrender.com/projects/project-ruggauard-bot.html): X bot that watches for a command in replies, analyses the author of the tweet being replied to, and posts a trustworthiness report. Built around free-tier API limits with a modular command layer.
+- [MediaPipe & OpenCV Experiments](https://kss-venv.onrender.com/projects/mediapipe-and-opencv-experiments.html): Computer vision exercises with MediaPipe and OpenCV covering hand pose and face mesh tracking.
+- [Uptime Bot](https://kss-venv.onrender.com/projects/uptime-bot.html): Small scheduled service that keeps free-tier hosts awake by polling them, so a demo link does not cold-start in front of whoever opens it.
+- [donotopen](https://kss-venv.onrender.com/projects/donotopen.html): Archive of earlier creative-coding work: fractal trees, small neural-network ecosystems, WebGL shaders, and a rule-manipulation puzzle.
+- [First Portfolio](https://kss-venv.onrender.com/projects/first-portfolio.html): The first version of this site, kept for reference. Replaced by the current build.

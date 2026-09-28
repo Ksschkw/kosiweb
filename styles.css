@@ -593,6 +593,11 @@ header {
     margin-bottom: 3rem;
 }
 
+.section-lede a {
+    color: var(--accent);
+    text-underline-offset: 3px;
+}
+
 /* ---------------------------------------------------------------------
    Profile / about
    --------------------------------------------------------------------- */
@@ -2002,6 +2007,24 @@ footer .container {
     font-size: 0.74rem;
     color: var(--text-faint);
     letter-spacing: 0.04em;
+}
+
+.footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.2rem;
+}
+
+.footer-nav a {
+    font-size: 0.72rem;
+    color: var(--text-faint);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.footer-nav a:hover {
+    color: var(--accent);
 }
 
 /* ---------------------------------------------------------------------

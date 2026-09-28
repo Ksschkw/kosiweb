@@ -1,0 +1,85 @@
+# Kosisochukwu Okafor, software engineer in Lagos, Nigeria.
+# Everything on this site is public, and meant to be read, indexed and quoted.
+# No page is disallowed.
+
+User-agent: *
+Allow: /
+
+# Search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+# AI assistants, agents and answer engines. The portfolio is deliberately
+# readable without JavaScript: the project cards are in the HTML, llms.txt is a
+# concise brief, and projects.json carries the same data in full.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: YouBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Agents: start here.
+#   Brief for language models : https://kss-venv.onrender.com/llms.txt
+#   Structured project data   : https://kss-venv.onrender.com/projects.json
+
+Sitemap: https://kss-venv.onrender.com/sitemap.xml

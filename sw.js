@@ -2,13 +2,13 @@
 // caches. Freshness does NOT depend on bumping it: every request is
 // network-first, so a deploy is picked up on the next visit. Bumping it is
 // still worth doing when the pre-cache list itself changes.
-const CACHE_NAME = 'kss-portfolio-v7';
+const CACHE_NAME = 'kss-portfolio-v8';
 
 const PRECACHE = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/imagesnshii/kosi.jpeg',
+  '/imagesnshii/kosii.jpeg',
   '/imagesnshii/og-card.jpg',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap',
