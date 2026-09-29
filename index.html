@@ -49,7 +49,7 @@
     <!-- The ?v= token must be bumped together with CACHE_NAME in sw.js whenever
          styles.css or script.js change. It gives the browser a new URL to fetch,
          which is what stops a deploy being served from the HTTP cache. -->
-    <link rel="stylesheet" href="styles.css?v=8">
+    <link rel="stylesheet" href="styles.css?v=9">
     <!-- Safety net. The reveal animations start elements at opacity 0, and
          script.js is deferred behind four CDN libraries, so a stalled CDN would
          otherwise leave the page permanently invisible. If the app has not
@@ -129,7 +129,9 @@
                             </div>
                             <div>
                                 <dt>Shipped</dt>
-                                <dd>AHIA &middot; BAROS &middot; kssrag</dd>
+                                <dd><a href="/projects/ahia.html">AHIA</a> &middot; <a href="/projects/gigr.html">Gigr</a>
+                                    &middot; <a href="/projects/kssrag.html">kssrag</a> &middot; <a
+                                        href="/projects/driftlock.html">driftlock</a></dd>
                             </div>
                             <div>
                                 <dt>Credential</dt>
@@ -307,7 +309,7 @@
 
                 <!-- Every project card is pre-rendered below by
                      tools/generate-seo.mjs so crawlers and AI agents read the
-                     whole portfolio without executing JavaScript. Do not edit
+                     whole portfolio without running scripts. Do not edit
                      between the SEO:CARDS markers by hand: edit projectsData in
                      script.js and re-run the generator. -->
                 <div class="projects-grid" id="projectsGrid">
@@ -360,14 +362,14 @@
                         </div>
                     </article>
                     <article class="project-card fade-in delay-2 is-featured" data-category="web" data-rank="3" style="order: 3;" itemscope itemtype="https://schema.org/SoftwareSourceCode">
-                        <div class="project-image"><a class="project-image-link" href="https://gigrr.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="BAROS (Gigr): open the live site"><img src="https://gigrr.vercel.app/icon.png" alt="BAROS (Gigr) interface" loading="lazy" decoding="async"><span class="project-image-badge">Live</span></a></div>
+                        <div class="project-image"><a class="project-image-link" href="https://gigrr.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="Gigr: open the live site"><img src="https://gigrr.vercel.app/icon.png" alt="Gigr marketplace interface" loading="lazy" decoding="async"><span class="project-image-badge">Live</span></a></div>
                         <div class="project-content">
                             <div class="project-meta">
                                 <span class="project-rank">03</span>
                                 <span class="project-flag">Flagship</span>
                             </div>
-                            <h3 itemprop="name">BAROS (Gigr)</h3>
-                            <p class="project-desc" itemprop="description">Neighborhood marketplace on Solana with on-chain escrow and PostGIS-backed local matching. Reputation is minted as compressed NFTs, so a vouch cannot be quietly edited or deleted later, and wallets are provisioned at registration to keep seed phrases out of the user's path. An AI assistant can post jobs and negotiate on the user's behalf, while disputes route to a community jury. Currently in pilot.</p>
+                            <h3 itemprop="name">Gigr</h3>
+                            <p class="project-desc" itemprop="description">Neighborhood marketplace on Solana, built as the repository BAROS. On-chain escrow and PostGIS-backed local matching, with reputation minted as compressed NFTs so a vouch cannot be quietly edited or deleted later. Wallets are provisioned at registration to keep seed phrases out of the user's path, and an AI assistant can post jobs and negotiate on the user's behalf. Currently in pilot.</p>
                             <button type="button" class="desc-toggle" aria-expanded="false" hidden>Read more</button>
                             <div class="project-tags">
                                 <span class="project-tag">Solana</span>
@@ -378,7 +380,7 @@
                                 <a href="https://github.com/Ksschkw/BAROS" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
                                 <a href="https://youtu.be/i21snLQ9OlM?si=1N8TtDQ9n-uvv2m7" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i> Watch</a>
                                 <a href="https://gigrr.vercel.app/" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Live</a>
-                            <a class="project-link" href="/projects/baros-gigr.html">Details</a>
+                            <a class="project-link" href="/projects/gigr.html">Details</a>
                             </div>
                         </div>
                     </article>
@@ -1498,7 +1500,8 @@
         <section id="contact">
             <div class="container">
                 <h2 class="section-title"><span class="section-index">07</span>Contact</h2>
-                <p class="section-lede">Direct is fine. Email gets a reply.</p>
+                <p class="section-lede">Open to engineering roles and contract work, on site in Lagos or remote.
+                    Email reaches me fastest.</p>
                 <div class="contact-grid">
                     <div class="contact-info">
                         <a class="contact-item" href="mailto:kookafor893@gmail.com">
@@ -1641,7 +1644,7 @@
         <i class="fas fa-robot"></i>
     </div>
 
-    <script defer src="script.js?v=8"></script>
+    <script defer src="script.js?v=9"></script>
 
     <!-- Structured Data. Identity, credentials and coverage are static; the
          project list further down is generated by tools/generate-seo.mjs. -->
@@ -1821,13 +1824,13 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "BAROS (Gigr)",
-      "url": "https://kss-venv.onrender.com/projects/baros-gigr.html",
+      "name": "Gigr",
+      "url": "https://kss-venv.onrender.com/projects/gigr.html",
       "item": {
         "@type": "SoftwareSourceCode",
-        "name": "BAROS (Gigr)",
-        "description": "Neighborhood marketplace on Solana with on-chain escrow and PostGIS-backed local matching. Reputation is minted as compressed NFTs, so a vouch cannot be quietly edited or deleted later, and wallets are provisioned at registration to keep seed phrases out of the user's path. An AI assistant can post jobs and negotiate on the user's behalf, while disputes route to a community jury. Currently in pilot.",
-        "url": "https://kss-venv.onrender.com/projects/baros-gigr.html",
+        "name": "Gigr",
+        "description": "Neighborhood marketplace on Solana, built as the repository BAROS. On-chain escrow and PostGIS-backed local matching, with reputation minted as compressed NFTs so a vouch cannot be quietly edited or deleted later. Wallets are provisioned at registration to keep seed phrases out of the user's path, and an AI assistant can post jobs and negotiate on the user's behalf. Currently in pilot.",
+        "url": "https://kss-venv.onrender.com/projects/gigr.html",
         "keywords": "Solana, PostGIS, AI",
         "author": {
           "@id": "https://kss-venv.onrender.com/#person"

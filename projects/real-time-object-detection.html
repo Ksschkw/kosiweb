@@ -6,25 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#08090a">
     <title>Real-Time Object Detection | Kosisochukwu Okafor, Software Engineer</title>
-    <meta name="description" content="Detection running in the browser over your webcam with TensorFlow.js and a COCO-SSD model. Class filtering and the confidence threshold are applied client side, and no frame leaves the device.">
+    <meta name="description" content="A live demonstration that runs in this page. A model loads in the browser and detects objects through the webcam, with no server involved.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://kss-venv.onrender.com/projects/real-time-object-detection.html">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Real-Time Object Detection | Kosisochukwu Okafor, Software Engineer">
-    <meta property="og:description" content="Detection running in the browser over your webcam with TensorFlow.js and a COCO-SSD model. Class filtering and the confidence threshold are applied client side, and no frame leaves the device.">
+    <meta property="og:description" content="A live demonstration that runs in this page. A model loads in the browser and detects objects through the webcam, with no server involved.">
     <meta property="og:url" content="https://kss-venv.onrender.com/projects/real-time-object-detection.html">
     <meta property="og:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Real-Time Object Detection | Kosisochukwu Okafor, Software Engineer">
-    <meta name="twitter:description" content="Detection running in the browser over your webcam with TensorFlow.js and a COCO-SSD model. Class filtering and the confidence threshold are applied client side, and no frame leaves the device.">
+    <meta name="twitter:description" content="A live demonstration that runs in this page. A model loads in the browser and detects objects through the webcam, with no server involved.">
     <meta name="twitter:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/styles.css?v=8">
+    <link rel="stylesheet" href="/styles.css?v=9">
     <link rel="icon" type="image/png" href="/icons/icon-192.png">
     <script type="application/ld+json">
 {
@@ -103,7 +103,29 @@
 
         <section>
             <div class="container">
-                <div class="project-image" style="max-width:640px;margin-bottom:2rem"><img src="/imagesnshii/object-detection-thumb.png" alt="Real-Time Object Detection running in the browser" loading="lazy" decoding="async"></div>
+                <h2 class="section-title"><span class="section-index">01</span>Overview</h2>
+                <div class="prose">
+                    <p>A live demonstration that runs in this page. A model loads in the browser and detects objects through the webcam, with no server involved.</p>
+                    <p>Classification and the confidence threshold are applied client side, and no frame leaves the device.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="section-index">02</span>How it is built</h2>
+                <ul class="detail-list">
+                    <li>Runs entirely in the browser, so there is no round trip per frame and nothing to upload.</li>
+                    <li>Individual object classes can be filtered out, which is what makes the output readable on a busy image.</li>
+                    <li>The confidence threshold is adjustable while the camera is running.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="section-index">03</span>Screens</h2>
+                <div class="project-image detail-figure"><img src="/imagesnshii/object-detection-thumb.png" alt="Real-Time Object Detection running in the browser" loading="lazy" decoding="async"></div>
                 <h2 class="section-title"><span class="section-index">&#8592;&#8594;</span>Keep reading</h2>
                 <div class="project-links">
                     <a class="project-link" href="/projects/myragagentv2.html">Previous: MYRAGAGENTV2</a>

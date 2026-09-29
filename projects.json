@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-28",
+  "generated": "2026-09-29",
   "site": "https://kss-venv.onrender.com",
   "owner": {
     "name": "Kosisochukwu Okafor",
@@ -88,12 +88,12 @@
     },
     {
       "rank": 3,
-      "title": "BAROS (Gigr)",
-      "slug": "baros-gigr",
-      "url": "https://kss-venv.onrender.com/projects/baros-gigr.html",
+      "title": "Gigr",
+      "slug": "gigr",
+      "url": "https://kss-venv.onrender.com/projects/gigr.html",
       "category": "web",
       "featured": true,
-      "description": "Neighborhood marketplace on Solana with on-chain escrow and PostGIS-backed local matching. Reputation is minted as compressed NFTs, so a vouch cannot be quietly edited or deleted later, and wallets are provisioned at registration to keep seed phrases out of the user's path. An AI assistant can post jobs and negotiate on the user's behalf, while disputes route to a community jury. Currently in pilot.",
+      "description": "Neighborhood marketplace on Solana, built as the repository BAROS. On-chain escrow and PostGIS-backed local matching, with reputation minted as compressed NFTs so a vouch cannot be quietly edited or deleted later. Wallets are provisioned at registration to keep seed phrases out of the user's path, and an AI assistant can post jobs and negotiate on the user's behalf. Currently in pilot.",
       "tags": [
         "Solana",
         "PostGIS",

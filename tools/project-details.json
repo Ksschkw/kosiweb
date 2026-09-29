@@ -1,0 +1,447 @@
+{
+  "_comment": "Long-form project copy for projects/<slug>.html. Read by tools/generate-seo.mjs. Slugs match the generated pages. Keep it free of em dashes, hype and programming-language names, in line with the rest of the site.",
+  "ahia": {
+    "overview": [
+      "A multi-tenant retail platform for small traders, delivered as a backend service, a web application and an offline-first mobile client. The problem is a counter sale: a trader needs to record what left the shelf, what was paid and what is still owed, on a phone, often with no signal.",
+      "Every business-owned table carries a row-level security policy that is bound into the transaction, so a query that forgets its tenant filter returns nothing rather than another shop's data."
+    ],
+    "highlights": [
+      "Sales, payments, stock movements, expenses and audit events are append-only ledgers committed together, so a failure part-way through leaves no half-recorded money.",
+      "Offline devices queue operations and push them through a sync service keyed on an operation identifier, so a retry after a lost reply cannot book the same sale twice.",
+      "Authorization is deny-by-default: atomic permissions compose into roles, and a caller cannot grant a permission they do not hold themselves.",
+      "Customers build a list from a public link without an account. The trader prices it, sources what is missing, packs it, and dispatch records the transporter and waybill.",
+      "Storage and media run behind a provider-neutral port with server-side validation and per-tenant quota accounting that survives concurrent uploads.",
+      "Roughly two thousand tests, including architecture contracts that fail the build when a layer is imported from the wrong direction."
+    ]
+  },
+  "kssrag": {
+    "overview": [
+      "A retrieval-augmented generation framework published on PyPI, built around one idea: getting from a document to a live streaming question-answering API should take a single command.",
+      "Point the CLI at a source-of-truth document, hand it a system prompt, and it loads, chunks, indexes and serves a FastAPI endpoint with token-by-token server-sent events and per-session conversation memory."
+    ],
+    "highlights": [
+      "Six vector stores and two retrievers are chosen by configuration, or replaced entirely with your own classes through an import path, without forking the package.",
+      "Any hosted or local model provider can be swapped with one flag, with automatic fallback to a backup model when one is unavailable.",
+      "Rolling conversation memory compresses history into running summaries, so context stays bounded across a long session.",
+      "Marker-aware buffering stops partially formed markup from reaching the client mid-stream.",
+      "The same pipeline is available as a programmatic API and as a one-shot CLI query when a server is not needed."
+    ]
+  },
+  "gigr": {
+    "overview": [
+      "A hyper-local services marketplace with a cryptographic trust and escrow layer, built in the repository named BAROS. Clients hold money in escrow until a job is completed to satisfaction, and providers build a reputation that cannot be quietly edited later.",
+      "All chain interaction is hidden behind an ordinary web experience, so neither side has to understand wallets or gas to use it."
+    ],
+    "highlights": [
+      "Escrow releases on completion, which removes the risk of non-payment for providers and of non-delivery for clients.",
+      "Reputation is minted as compressed NFTs, so a vouch is permanent and attributable to the person who gave it.",
+      "PostgreSQL with PostGIS handles proximity matching, so local work reaches the people who can actually reach it.",
+      "An AI assistant can post jobs and negotiate on the user's behalf, and disputes route to a community jury.",
+      "The front end is a progressive web app with a backend orchestrator, and the product is currently in pilot."
+    ]
+  },
+  "congestiq": {
+    "overview": [
+      "A simulation research platform that asks whether multi-agent reinforcement learning can learn better TCP congestion control than the established algorithms.",
+      "The work runs entirely inside ns-3 rather than modifying a live kernel, so every experiment starts from an identical controlled environment and an untrained policy cannot damage a real network."
+    ],
+    "highlights": [
+      "Agents learn to trade throughput against fairness per flow instead of applying one fixed loss-based rule.",
+      "Behaviour is measured against the mainstream congestion control algorithms under the same conditions.",
+      "Simulation traces are captured with netanim, so a result can be watched rather than only read as a number.",
+      "Reproducibility is the point of the simulator choice: any experiment can be re-run and compared."
+    ]
+  },
+  "driftlock": {
+    "overview": [
+      "A commit-time gatekeeper that stops documentation from drifting away from the code it describes. It watches what a commit actually changes, detects when a structural change is not reflected in the Markdown docs, and either blocks the commit or rewrites the affected documentation to match.",
+      "Stale documentation becomes a build failure rather than a promise to fix it later."
+    ],
+    "highlights": [
+      "Detects structural change, including function signatures, class methods and exported types, rather than comparing prose.",
+      "Ships three ways: a standalone CLI, a pre-commit hook, and a GitHub Action, so the check follows the workflow a team already has.",
+      "Can anchor each documentation-sync check to Solana, producing an immutable record that the docs matched the code at the moment of a commit.",
+      "Version 0.4.0 is the current release, and the walkthrough is on YouTube."
+    ]
+  },
+  "autosig": {
+    "overview": [
+      "An autonomous trading system where agents manage a Solana treasury through a multi-agent consensus loop, built for the Agentic Wallets challenge run by Superteam Nigeria.",
+      "Four agents run in sequence on a fixed interval: one reads live market data, one proposes a trade, one grades the proposal, and one signs and submits it."
+    ],
+    "highlights": [
+      "A proposal has to clear three independent gates before anything reaches the chain: hard limits that no model can override, deterministic policy checks, and a second model acting as an independent reviewer.",
+      "The reviewer is a separate agent from the proposer, so a single bad generation cannot approve itself.",
+      "An adversarial test suite verifies the guardrails hold when the proposing agent is actively trying to defeat them.",
+      "Real chain, real market data, no simulated balances in the execution path."
+    ]
+  },
+  "repengine": {
+    "overview": [
+      "A freelance marketplace and reputation-weighted governance platform built to price trust cryptographically instead of trusting a profile that nobody verified.",
+      "Job access and voting power are both gated on an on-chain reputation score, so a new wallet cannot buy its way into governance on day one."
+    ],
+    "highlights": [
+      "Clients can require a minimum reputation score for a listing, which makes the gate enforceable rather than advisory.",
+      "Escrow backs the contract between both sides, so payment and delivery are linked.",
+      "Governance weight follows reputation, so influence has to be earned through completed work.",
+      "Full-stack, deployed, and built with mobile use in mind."
+    ]
+  },
+  "ginger-copilot": {
+    "overview": [
+      "An agentic intent solver for the Injective ecosystem with hardware-enforced execution, built as a bounty submission. The design separates intelligence from execution on principle: the part that reasons holds no keys.",
+      "The intelligence layer reads live chain state, watches pending staking rewards and constructs the payload, then hands it to a Ledger device where a person reviews and clear-signs before anything is broadcast."
+    ],
+    "highlights": [
+      "Zero private keys in the agent process, so a compromised model cannot move funds on its own.",
+      "Human approval happens on the hardware device rather than in the application, which is the difference between a prompt and a guarantee.",
+      "Includes a staking auto-compounder that withdraws and re-delegates rewards, and a buy-back trigger that constructs a commitment payload.",
+      "Built against the Injective MCP servers for live chain queries."
+    ]
+  },
+  "healthcare-diagnostic-api": {
+    "overview": [
+      "A multi-tenant backend for healthcare organisations such as hospitals, clinics and diagnostic laboratories, covering patient records, test requests and results.",
+      "The standout piece is the permission model, which borrows its shape from AWS IAM: atomic permissions compose into permission sets, and permission sets compose into roles."
+    ],
+    "highlights": [
+      "Tenant isolation between facilities is structural rather than a convention, so a clinic cannot reach another clinic's records.",
+      "Authorization is data rather than hardcoded checks, so a facility can define what a role means without a code change.",
+      "Records use soft deletes, which keeps an auditable history instead of destroying it.",
+      "Credentials are hashed with Argon2."
+    ]
+  },
+  "lexai": {
+    "overview": [
+      "A legal assistant that answers questions about the Nigerian Constitution, aimed at people who need an answer and do not have a lawyer to hand.",
+      "Retrieval is hybrid on purpose: vector search over embeddings is paired with keyword scoring, so exact statutory phrasing and paraphrased questions both find the right passage."
+    ],
+    "highlights": [
+      "Hybrid FAISS and BM25 retrieval, because statute text is full of precise phrases that pure vector search blurs.",
+      "Answers are grounded in retrieved passages rather than generated from memory.",
+      "Built to run on modest hosting, so the cost of answering a question stays close to zero."
+    ]
+  },
+  "patient-management-microservices": {
+    "overview": [
+      "A patient management system split into independent services for patients, authentication, appointments, billing and analytics.",
+      "Services communicate over Kafka events where the work is asynchronous, REST where a request needs a reply, and gRPC for the calls that need to be fast and typed."
+    ],
+    "highlights": [
+      "The environment is provisioned with AWS CDK against LocalStack, so the cloud topology can be brought up and torn down locally.",
+      "Redis backs caching and rate limiting across services.",
+      "Observability runs through Prometheus, Grafana and service health endpoints.",
+      "Container images are built in multiple stages, so the runtime image carries only what it needs."
+    ]
+  },
+  "ciap": {
+    "overview": [
+      "An analytics platform for the African creator economy. It aggregates cross-platform metrics into an influence score, then exposes creator discovery and campaign planning to the agencies and brands doing the hiring.",
+      "The first integration is YouTube analytics, covering engagement, reach and audience demographics."
+    ],
+    "highlights": [
+      "Influence scoring is heuristic and documented, so a ranking can be explained rather than asserted.",
+      "A normalisation layer sits between the platforms, so adding a source does not change the scoring code.",
+      "Authentication uses short-lived sessions in HTTP-only cookies.",
+      "Built as a typed API with a separate front end."
+    ]
+  },
+  "myragagentv2": {
+    "overview": [
+      "A retrieval agent built on the kssrag framework, written to exercise the published package in real use rather than in a test harness.",
+      "It rewrites a question before searching and declines to answer when the retrieved context does not support one."
+    ],
+    "highlights": [
+      "Serves as the working proof that the packaged framework behaves the same way when installed from the index.",
+      "Carries a rejection path, which matters more than the answering path for a retrieval system."
+    ]
+  },
+  "real-time-object-detection": {
+    "overview": [
+      "A live demonstration that runs in this page. A model loads in the browser and detects objects through the webcam, with no server involved.",
+      "Classification and the confidence threshold are applied client side, and no frame leaves the device."
+    ],
+    "highlights": [
+      "Runs entirely in the browser, so there is no round trip per frame and nothing to upload.",
+      "Individual object classes can be filtered out, which is what makes the output readable on a busy image.",
+      "The confidence threshold is adjustable while the camera is running."
+    ]
+  },
+  "pharmacy-ai-agent": {
+    "overview": [
+      "A prescription processing system for pharmacies. A photograph of a prescription goes in; structured, validated medication data comes out.",
+      "Optical character recognition extracts the raw text, and a language model structures it into fields and corrects what recognition got wrong, which is the failure mode that matters on handwriting."
+    ],
+    "highlights": [
+      "Multi-tenant inventory, so separate pharmacies keep separate stock.",
+      "Demand forecasting on top of dispensing history, aimed at ordering rather than reporting.",
+      "Validation sits between recognition and storage, so a misread does not silently become a record."
+    ]
+  },
+  "myragagent": {
+    "overview": [
+      "The first version of the retrieval agent, kept for reference. It answers questions about skills, database usage, deployment platforms and background from an indexed corpus.",
+      "Superseded by the second version, which was rebuilt on the packaged framework."
+    ],
+    "highlights": [
+      "Chunking for large documents so context stays within the window.",
+      "Session-based conversation, so follow-up questions have something to refer to.",
+      "Kept as the record of how the approach developed."
+    ]
+  },
+  "ai-copilot-agent": {
+    "overview": [
+      "A service that turns a vague ambition into a structured specification. A person describes what they want to build, and the agent runs a scoping dialogue that narrows it into goals, feasibility and a challenge definition.",
+      "It loads platform-specific schemas dynamically, so the same agent can produce a definition for a different platform without a code change."
+    ],
+    "highlights": [
+      "Model output is constrained to a schema the API validates before it is stored.",
+      "Retrieval over similar past challenges informs the questions it asks.",
+      "The scoping dialogue adapts to earlier answers rather than following a fixed script."
+    ]
+  },
+  "vybe-analytics-bot": {
+    "overview": [
+      "A Telegram bot that reports Solana on-chain activity using the Vybe Network APIs. Wallet balances, token prices, whale movements and charts, in a conversation.",
+      "Replies are shaped for a phone screen, because that is where the question is being asked."
+    ],
+    "highlights": [
+      "Wallet balance lookup for any Solana address.",
+      "Price charts over selectable timeframes.",
+      "Whale and activity monitoring delivered as a message rather than a dashboard."
+    ]
+  },
+  "bubblemaps-bot": {
+    "overview": [
+      "A Telegram bot that analyses a token's holder structure using Bubblemaps data, renders the bubble map, and reports concentration risk.",
+      "The point is to answer whether a small number of wallets control a token, without the user opening a block explorer."
+    ],
+    "highlights": [
+      "Holder cluster analysis, so connected wallets are treated as one position.",
+      "Risk assessment reported alongside the map rather than left to interpretation.",
+      "Written up as a case study alongside the code."
+    ]
+  },
+  "uk-health-and-environment-indicators": {
+    "overview": [
+      "A published dataset joining air quality against avoidable mortality across 100 UK local authorities for 2022.",
+      "The two series come from different sources with different geographic conventions, so the work is in making them directly comparable at authority level."
+    ],
+    "highlights": [
+      "Published and downloadable on Kaggle.",
+      "Built for environmental health analysis rather than as a demonstration.",
+      "Documents the join so the result can be reproduced or challenged."
+    ]
+  },
+  "homecredit-data-alchemy": {
+    "overview": [
+      "A data preparation pipeline for the Home Credit default risk problem, turning seven raw relational tables into six domain-specific datasets built for modelling.",
+      "Most of the work is in the transformation: relational history becomes behaviour a model can actually use."
+    ],
+    "highlights": [
+      "Feature engineering driven by what the data means for credit risk rather than by what is easy to compute.",
+      "Memory footprint reduced substantially without discarding information.",
+      "Behavioural signals derived from mobile usage and application history."
+    ]
+  },
+  "drugs-rag": {
+    "overview": [
+      "A retrieval system built over scraped drug monographs. Ask about an interaction or a dosage and it answers from the source text rather than from model memory.",
+      "The scraper had to move from simple requests to a full browser engine, because the source renders content after load and a plain fetch returns an empty shell."
+    ],
+    "highlights": [
+      "Answers cite the passage they came from, which is the only defensible way to answer a medical question.",
+      "Handles the awkward parts of the source, including dosage tables that do not follow the page's usual structure.",
+      "The companion scraper produces the corpus this system reads."
+    ]
+  },
+  "conditions-data-pipeline": {
+    "overview": [
+      "A scraper that walks every condition page on ada.com and extracts each section heading together with the content beneath it, covering symptoms, causes and types.",
+      "The extraction follows the page's own structure: headings mark the boundaries, and the blocks between them are the content."
+    ],
+    "highlights": [
+      "Outputs JSON and CSV, so the result is usable for analysis and for medical language processing.",
+      "Structure is preserved rather than flattened, so a symptom stays attached to its condition.",
+      "Built as source material for retrieval and modelling work."
+    ]
+  },
+  "drugs-data": {
+    "overview": [
+      "The scraper that produces the drug corpus: monographs from drugs.com, extracted into structured JSON.",
+      "Intended as source material for retrieval and interaction modelling rather than as a finished product."
+    ],
+    "highlights": [
+      "Structured output keyed for downstream retrieval.",
+      "Handles the pagination and lazy loading of the source.",
+      "Companion to the retrieval system built on top of it."
+    ]
+  },
+  "gigr-pitch-deck": {
+    "overview": [
+      "An animated single-page pitch deck for Gigr, written in plain browser modules with Three.js and no framework or bundler.",
+      "Nine full-screen slides run on a step-based reveal engine over a live 3D background, with bloom post-processing and transitions that behave the same going forwards and backwards."
+    ],
+    "highlights": [
+      "Navigation loops, so the deck can be driven with a clicker without hitting a dead end.",
+      "Content reveals a step at a time, which keeps attention on the point being made.",
+      "Keyboard, scroll, swipe and click all drive the same state machine.",
+      "No build step: the repository is the deployed artefact."
+    ]
+  },
+  "grpght-event-platform": {
+    "overview": [
+      "A platform for competitive FPS players entering real-world events, covering registration, brackets and scheduling in one place.",
+      "Built for events that happen in a room rather than online, so the schedule is the part people actually depend on."
+    ],
+    "highlights": [
+      "Team and player registration for an event.",
+      "Bracket and match scheduling.",
+      "Deployed and usable from a phone on event day."
+    ]
+  },
+  "ai-chat-assistant": {
+    "overview": [
+      "The chat backend behind the assistant on this site. It runs a locally hosted model by default, and falls back to a hosted provider when the local path is unavailable.",
+      "Keeping a local path first means the common case does not depend on someone else's uptime."
+    ],
+    "highlights": [
+      "Local model by default, hosted provider as fallback.",
+      "Session handling so a conversation has continuity.",
+      "Streams replies rather than waiting for a complete answer."
+    ]
+  },
+  "acquisitions-api": {
+    "overview": [
+      "A REST API for acquisitions and authentication, built with sessions in HTTP-only cookies and role-based access control.",
+      "Security is treated as the feature rather than an afterthought: rate limiting and bot defence at the edge, strict input validation, and security headers on every response."
+    ],
+    "highlights": [
+      "Role-based access control across user and administrator actions.",
+      "Typed database access with migrations rather than ad-hoc queries.",
+      "Rate limiting and bot protection in front of the API.",
+      "Interactive API documentation kept alongside the code."
+    ]
+  },
+  "multi-feature-bot": {
+    "overview": [
+      "A Telegram bot that gathers several small utilities behind one command interface, so a single conversation handles several unrelated jobs.",
+      "The value is convenience: one place to reach for instead of four."
+    ],
+    "highlights": [
+      "A single command surface over several independent tools.",
+      "Built to stay within the free tier of the messaging platform."
+    ]
+  },
+  "biochemistry-research-portfolio": {
+    "overview": [
+      "A portfolio site delivered for a biochemistry researcher, covering publications, current research and a media gallery.",
+      "Built so the owner can update it without touching markup, which for an academic is the difference between a site that stays current and one that does not."
+    ],
+    "highlights": [
+      "Publications and research presented as the primary content rather than an afterthought.",
+      "Media gallery for lab and fieldwork images.",
+      "Content is editable without a developer."
+    ]
+  },
+  "creator-portfolio-and-admin-dashboard": {
+    "overview": [
+      "Two halves of one platform for a content creator: a public editorial site, and a private dashboard that lets the owner rewrite copy, change colours, upload media and reorder work without touching code.",
+      "The requirement was concrete. The person using it does not write code, so every piece of content and presentation had to be reachable from the dashboard."
+    ],
+    "highlights": [
+      "A public site designed to read as editorial rather than as a template.",
+      "A private dashboard covering copy, palette, media and ordering.",
+      "Media hosted on a delivery network with server-side upload handling.",
+      "Runs entirely on free tiers of the hosting, database and media services."
+    ]
+  },
+  "kolaborasi-kosi": {
+    "overview": [
+      "A shared drawing canvas where several people paint on the same board at the same time.",
+      "Built to explore real-time state synchronisation: what happens when two people draw in the same place at the same instant."
+    ],
+    "highlights": [
+      "Multiple concurrent clients on one canvas.",
+      "Realtime updates rather than a refresh to see someone else's strokes."
+    ]
+  },
+  "krypto-kosi": {
+    "overview": [
+      "A price board for crypto assets with sorting by price and by recent momentum, reading from a public market data API.",
+      "The interesting part is the sort: ranking by change rather than by market cap changes what the list is actually telling you."
+    ],
+    "highlights": [
+      "Sorting by price and by momentum.",
+      "Live data from a public market API.",
+      "Runs without a backend."
+    ]
+  },
+  "kosi-weather": {
+    "overview": [
+      "A weather lookup by city, with current conditions and a short forecast.",
+      "Built as a small, focused piece of interface rather than a dashboard."
+    ],
+    "highlights": [
+      "Search by city name.",
+      "Current conditions and a short forecast.",
+      "No backend: the browser talks to the weather API directly."
+    ]
+  },
+  "project-ruggauard-bot": {
+    "overview": [
+      "A bot for X that watches for a command in replies, analyses the author of the tweet being replied to, and posts a trustworthiness report.",
+      "Built around the constraints of a free API tier, which shaped both the polling model and the amount of state it keeps."
+    ],
+    "highlights": [
+      "Answers on demand rather than monitoring continuously, which fits inside the rate limits.",
+      "Modular command handling, so adding an analysis is a new module rather than a change to the core.",
+      "Reports the reasoning alongside the verdict."
+    ]
+  },
+  "mediapipe-and-opencv-experiments": {
+    "overview": [
+      "A set of computer vision exercises covering hand pose and face mesh tracking, built while learning how the tracking pipelines behave on real input.",
+      "Kept because the notes on what fails, and why, are more useful than the demos themselves."
+    ],
+    "highlights": [
+      "Hand pose tracking from a live camera feed.",
+      "Face mesh detection and landmark extraction.",
+      "Frame-by-frame processing with the results drawn back onto the image."
+    ]
+  },
+  "uptime-bot": {
+    "overview": [
+      "A small scheduled service that keeps free-tier hosts from falling asleep by polling them.",
+      "It exists so that a demo link does not cold-start in front of whoever opens it, which is a real cost when the first impression is a loading spinner."
+    ],
+    "highlights": [
+      "Scheduled polling on a fixed interval.",
+      "Keeps demonstration deployments warm.",
+      "Deliberately tiny."
+    ]
+  },
+  "donotopen": {
+    "overview": [
+      "An archive of older creative-coding work, kept because the experiments are still interesting even where the code is not.",
+      "It includes fractal trees grown from L-systems, small simulated ecosystems, shader work, and a puzzle built on rule manipulation."
+    ],
+    "highlights": [
+      "Fractal generation from L-systems.",
+      "Small neural ecosystems where simple agents are given simple drives.",
+      "Shader and rendering experiments in the browser.",
+      "A puzzle game built around rewriting its own rules."
+    ]
+  },
+  "first-portfolio": {
+    "overview": [
+      "The first version of this site, kept for reference.",
+      "It was replaced by the current build, which is a different thing entirely rather than a restyle."
+    ],
+    "highlights": [
+      "The original design and project list.",
+      "Kept as a record of where the work started."
+    ]
+  }
+}

@@ -6,25 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#08090a">
     <title>AI Chat Assistant | Kosisochukwu Okafor, Software Engineer</title>
-    <meta name="description" content="Chat backend that runs a locally hosted PyTorch model by default and falls back to OpenRouter when the local path is unavailable.">
+    <meta name="description" content="The chat backend behind the assistant on this site. It runs a locally hosted model by default, and falls back to a hosted provider when the local path is unavailable.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://kss-venv.onrender.com/projects/ai-chat-assistant.html">
     <meta property="og:type" content="article">
     <meta property="og:title" content="AI Chat Assistant | Kosisochukwu Okafor, Software Engineer">
-    <meta property="og:description" content="Chat backend that runs a locally hosted PyTorch model by default and falls back to OpenRouter when the local path is unavailable.">
+    <meta property="og:description" content="The chat backend behind the assistant on this site. It runs a locally hosted model by default, and falls back to a hosted provider when the local path is unavailable.">
     <meta property="og:url" content="https://kss-venv.onrender.com/projects/ai-chat-assistant.html">
     <meta property="og:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AI Chat Assistant | Kosisochukwu Okafor, Software Engineer">
-    <meta name="twitter:description" content="Chat backend that runs a locally hosted PyTorch model by default and falls back to OpenRouter when the local path is unavailable.">
+    <meta name="twitter:description" content="The chat backend behind the assistant on this site. It runs a locally hosted model by default, and falls back to a hosted provider when the local path is unavailable.">
     <meta name="twitter:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/styles.css?v=8">
+    <link rel="stylesheet" href="/styles.css?v=9">
     <link rel="icon" type="image/png" href="/icons/icon-192.png">
     <script type="application/ld+json">
 {
@@ -102,7 +102,29 @@
 
         <section>
             <div class="container">
-                <div class="project-image" style="max-width:640px;margin-bottom:2rem"><img src="/imagesnshii/aiassistant.png" alt="AI chat assistant" loading="lazy" decoding="async"></div>
+                <h2 class="section-title"><span class="section-index">01</span>Overview</h2>
+                <div class="prose">
+                    <p>The chat backend behind the assistant on this site. It runs a locally hosted model by default, and falls back to a hosted provider when the local path is unavailable.</p>
+                    <p>Keeping a local path first means the common case does not depend on someone else's uptime.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="section-index">02</span>How it is built</h2>
+                <ul class="detail-list">
+                    <li>Local model by default, hosted provider as fallback.</li>
+                    <li>Session handling so a conversation has continuity.</li>
+                    <li>Streams replies rather than waiting for a complete answer.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="section-index">03</span>Screens</h2>
+                <div class="project-image detail-figure"><img src="/imagesnshii/aiassistant.png" alt="AI chat assistant" loading="lazy" decoding="async"></div>
                 <h2 class="section-title"><span class="section-index">&#8592;&#8594;</span>Keep reading</h2>
                 <div class="project-links">
                     <a class="project-link" href="/projects/grpght-event-platform.html">Previous: GRPGHT Event Platform</a>

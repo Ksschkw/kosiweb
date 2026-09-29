@@ -6,25 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#08090a">
     <title>kssrag | Kosisochukwu Okafor, Software Engineer</title>
-    <meta name="description" content="Retrieval-augmented generation framework published on PyPI, built around one command: point the CLI at a document and it loads, chunks, indexes, and serves a FastAPI endpoint with token-by-token SSE streaming and per-session conversation memory. Six vector stores and two retrievers are chosen by con">
+    <meta name="description" content="A retrieval-augmented generation framework published on PyPI, built around one idea: getting from a document to a live streaming question-answering API should take a single command.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://kss-venv.onrender.com/projects/kssrag.html">
     <meta property="og:type" content="article">
     <meta property="og:title" content="kssrag | Kosisochukwu Okafor, Software Engineer">
-    <meta property="og:description" content="Retrieval-augmented generation framework published on PyPI, built around one command: point the CLI at a document and it loads, chunks, indexes, and serves a FastAPI endpoint with token-by-token SSE streaming and per-session conversation memory. Six vector stores and two retrievers are chosen by con">
+    <meta property="og:description" content="A retrieval-augmented generation framework published on PyPI, built around one idea: getting from a document to a live streaming question-answering API should take a single command.">
     <meta property="og:url" content="https://kss-venv.onrender.com/projects/kssrag.html">
     <meta property="og:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="kssrag | Kosisochukwu Okafor, Software Engineer">
-    <meta name="twitter:description" content="Retrieval-augmented generation framework published on PyPI, built around one command: point the CLI at a document and it loads, chunks, indexes, and serves a FastAPI endpoint with token-by-token SSE streaming and per-session conversation memory. Six vector stores and two retrievers are chosen by con">
+    <meta name="twitter:description" content="A retrieval-augmented generation framework published on PyPI, built around one idea: getting from a document to a live streaming question-answering API should take a single command.">
     <meta name="twitter:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/styles.css?v=8">
+    <link rel="stylesheet" href="/styles.css?v=9">
     <link rel="icon" type="image/png" href="/icons/icon-192.png">
     <script type="application/ld+json">
 {
@@ -106,11 +106,35 @@
 
         <section>
             <div class="container">
-                <div class="project-image" style="max-width:640px;margin-bottom:2rem"><img src="https://opengraph.githubassets.com/1/Ksschkw/kssrag" alt="kssrag retrieval framework" loading="lazy" decoding="async"></div>
+                <h2 class="section-title"><span class="section-index">01</span>Overview</h2>
+                <div class="prose">
+                    <p>A retrieval-augmented generation framework published on PyPI, built around one idea: getting from a document to a live streaming question-answering API should take a single command.</p>
+                    <p>Point the CLI at a source-of-truth document, hand it a system prompt, and it loads, chunks, indexes and serves a FastAPI endpoint with token-by-token server-sent events and per-session conversation memory.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="section-index">02</span>How it is built</h2>
+                <ul class="detail-list">
+                    <li>Six vector stores and two retrievers are chosen by configuration, or replaced entirely with your own classes through an import path, without forking the package.</li>
+                    <li>Any hosted or local model provider can be swapped with one flag, with automatic fallback to a backup model when one is unavailable.</li>
+                    <li>Rolling conversation memory compresses history into running summaries, so context stays bounded across a long session.</li>
+                    <li>Marker-aware buffering stops partially formed markup from reaching the client mid-stream.</li>
+                    <li>The same pipeline is available as a programmatic API and as a one-shot CLI query when a server is not needed.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="section-index">03</span>Screens</h2>
+                <div class="project-image detail-figure"><img src="https://opengraph.githubassets.com/1/Ksschkw/kssrag" alt="kssrag retrieval framework" loading="lazy" decoding="async"></div>
                 <h2 class="section-title"><span class="section-index">&#8592;&#8594;</span>Keep reading</h2>
                 <div class="project-links">
                     <a class="project-link" href="/projects/ahia.html">Previous: AHIA</a>
-                    <a class="project-link" href="/projects/baros-gigr.html">Next: BAROS (Gigr)</a>
+                    <a class="project-link" href="/projects/gigr.html">Next: Gigr</a>
                     <a class="project-link" href="/projects.html">All 39 projects</a>
                     <a class="project-link" href="/">Kosisochukwu Okafor</a>
                 </div>

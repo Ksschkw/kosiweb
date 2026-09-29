@@ -6,25 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#08090a">
     <title>Ginger Copilot | Kosisochukwu Okafor, Software Engineer</title>
-    <meta name="description" content="Agentic intent solver for the Injective chain with hardware-enforced execution. The intelligence layer reads live chain state, monitors staking rewards and builds CosmWasm payloads while holding no private keys at all. Each intent is handed to a Ledger device, reviewed and clear-signed by a human, a">
+    <meta name="description" content="An agentic intent solver for the Injective ecosystem with hardware-enforced execution, built as a bounty submission. The design separates intelligence from execution on principle: the part that reasons holds no keys.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://kss-venv.onrender.com/projects/ginger-copilot.html">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Ginger Copilot | Kosisochukwu Okafor, Software Engineer">
-    <meta property="og:description" content="Agentic intent solver for the Injective chain with hardware-enforced execution. The intelligence layer reads live chain state, monitors staking rewards and builds CosmWasm payloads while holding no private keys at all. Each intent is handed to a Ledger device, reviewed and clear-signed by a human, a">
+    <meta property="og:description" content="An agentic intent solver for the Injective ecosystem with hardware-enforced execution, built as a bounty submission. The design separates intelligence from execution on principle: the part that reasons holds no keys.">
     <meta property="og:url" content="https://kss-venv.onrender.com/projects/ginger-copilot.html">
     <meta property="og:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Ginger Copilot | Kosisochukwu Okafor, Software Engineer">
-    <meta name="twitter:description" content="Agentic intent solver for the Injective chain with hardware-enforced execution. The intelligence layer reads live chain state, monitors staking rewards and builds CosmWasm payloads while holding no private keys at all. Each intent is handed to a Ledger device, reviewed and clear-signed by a human, a">
+    <meta name="twitter:description" content="An agentic intent solver for the Injective ecosystem with hardware-enforced execution, built as a bounty submission. The design separates intelligence from execution on principle: the part that reasons holds no keys.">
     <meta name="twitter:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/styles.css?v=8">
+    <link rel="stylesheet" href="/styles.css?v=9">
     <link rel="icon" type="image/png" href="/icons/icon-192.png">
     <script type="application/ld+json">
 {
@@ -103,7 +103,30 @@
 
         <section>
             <div class="container">
-                <div class="project-image" style="max-width:640px;margin-bottom:2rem"><img src="https://opengraph.githubassets.com/1/Ksschkw/Ginger-Copilot" alt="Ginger Copilot agent architecture" loading="lazy" decoding="async"></div>
+                <h2 class="section-title"><span class="section-index">01</span>Overview</h2>
+                <div class="prose">
+                    <p>An agentic intent solver for the Injective ecosystem with hardware-enforced execution, built as a bounty submission. The design separates intelligence from execution on principle: the part that reasons holds no keys.</p>
+                    <p>The intelligence layer reads live chain state, watches pending staking rewards and constructs the payload, then hands it to a Ledger device where a person reviews and clear-signs before anything is broadcast.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="section-index">02</span>How it is built</h2>
+                <ul class="detail-list">
+                    <li>Zero private keys in the agent process, so a compromised model cannot move funds on its own.</li>
+                    <li>Human approval happens on the hardware device rather than in the application, which is the difference between a prompt and a guarantee.</li>
+                    <li>Includes a staking auto-compounder that withdraws and re-delegates rewards, and a buy-back trigger that constructs a commitment payload.</li>
+                    <li>Built against the Injective MCP servers for live chain queries.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="section-index">03</span>Screens</h2>
+                <div class="project-image detail-figure"><img src="https://opengraph.githubassets.com/1/Ksschkw/Ginger-Copilot" alt="Ginger Copilot agent architecture" loading="lazy" decoding="async"></div>
                 <h2 class="section-title"><span class="section-index">&#8592;&#8594;</span>Keep reading</h2>
                 <div class="project-links">
                     <a class="project-link" href="/projects/repengine.html">Previous: RepEngine</a>

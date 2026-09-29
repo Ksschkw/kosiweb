@@ -50,10 +50,10 @@ const projectsData = [
         rank: 3,
         featured: true,
         category: "web",
-        title: "BAROS (Gigr)",
-        description: `Neighborhood marketplace on Solana with on-chain escrow and PostGIS-backed local matching. Reputation is minted as compressed NFTs, so a vouch cannot be quietly edited or deleted later, and wallets are provisioned at registration to keep seed phrases out of the user's path. An AI assistant can post jobs and negotiate on the user's behalf, while disputes route to a community jury. Currently in pilot.`,
+        title: "Gigr",
+        description: `Neighborhood marketplace on Solana, built as the repository BAROS. On-chain escrow and PostGIS-backed local matching, with reputation minted as compressed NFTs so a vouch cannot be quietly edited or deleted later. Wallets are provisioned at registration to keep seed phrases out of the user's path, and an AI assistant can post jobs and negotiate on the user's behalf. Currently in pilot.`,
         image: "https://gigrr.vercel.app/icon.png",
-        alt: "BAROS (Gigr) interface",
+        alt: "Gigr marketplace interface",
         tags: ["Solana", "PostGIS", "AI"],
         links: [
             { href: "https://github.com/Ksschkw/BAROS", icon: "fab fa-github", text: "Code" },

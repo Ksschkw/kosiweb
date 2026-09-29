@@ -66,6 +66,9 @@ const end = scriptSrc.indexOf('\n];', start) + 3;
 // The array is pure data, so it can be evaluated directly.
 const projectsData = eval(`(() => { ${scriptSrc.slice(start, end)} return projectsData; })()`);
 
+// Long-form copy for the individual project pages, keyed by slug.
+const DETAILS = JSON.parse(fs.readFileSync(path.join(ROOT, 'tools', 'project-details.json'), 'utf8'));
+
 // The live object-detection demo is markup rather than data; it belongs in the
 // index and the item list all the same.
 const STATIC_PROJECT = {
@@ -83,12 +86,18 @@ const STATIC_PROJECT = {
 
 const projects = [...projectsData, STATIC_PROJECT]
     .sort((a, b) => a.rank - b.rank)
-    .map((project, index) => ({
-        ...project,
-        position: index + 1,
-        slug: slugify(project.title),
-        plainDescription: plain(project.description),
-    }));
+    .map((project, index) => {
+        const slug = slugify(project.title);
+        return {
+            ...project,
+            position: index + 1,
+            slug,
+            plainDescription: plain(project.description),
+            details: DETAILS[slug] || null,
+        };
+    });
+
+const missingDetails = projects.filter((project) => !project.details).map((project) => project.slug);
 
 const CATEGORY_LABEL = {
     ai: 'AI systems',
@@ -239,7 +248,7 @@ const pageShell = ({ title, description, canonical, body, jsonLd, robots = 'inde
     <meta name="twitter:image" content="${SITE}/imagesnshii/og-card.jpg">
     ${FONTS}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/styles.css?v=8">
+    <link rel="stylesheet" href="/styles.css?v=9">
     <link rel="icon" type="image/png" href="/icons/icon-192.png">
     <script type="application/ld+json">
 ${JSON.stringify(jsonLd, null, 2)}
@@ -260,8 +269,29 @@ ${body}
 // ----------------------------------------------------------- project pages
 
 function projectPage(project, prev, next) {
-    const live = (project.links || []).find((link) => link.text === 'Live');
     const image = `<img src="${project.image.startsWith('http') ? project.image : '/' + project.image}" alt="${esc(project.alt)}" loading="lazy" decoding="async">`;
+    const details = project.details || { overview: [project.plainDescription], highlights: [] };
+
+    const overview = `        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="section-index">01</span>Overview</h2>
+                <div class="prose">
+${details.overview.map((para) => `                    <p>${esc(para)}</p>`).join('\n')}
+                </div>
+            </div>
+        </section>`;
+
+    const highlights = details.highlights && details.highlights.length
+        ? `
+        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="section-index">02</span>How it is built</h2>
+                <ul class="detail-list">
+${details.highlights.map((item) => `                    <li>${esc(item)}</li>`).join('\n')}
+                </ul>
+            </div>
+        </section>`
+        : '';
 
     const body = `        <section class="hero">
             <div class="container">
@@ -277,9 +307,13 @@ ${project.links.map((link) => `                    <a href="${esc(link.href)}" c
             </div>
         </section>
 
+${overview}
+${highlights}
+
         <section>
             <div class="container">
-                <div class="project-image" style="max-width:640px;margin-bottom:2rem">${image}</div>
+                <h2 class="section-title"><span class="section-index">03</span>Screens</h2>
+                <div class="project-image detail-figure">${image}</div>
                 <h2 class="section-title"><span class="section-index">&#8592;&#8594;</span>Keep reading</h2>
                 <div class="project-links">
                     <a class="project-link" href="/projects/${prev.slug}.html">Previous: ${esc(prev.title)}</a>
@@ -305,9 +339,13 @@ ${project.links.map((link) => `                    <a href="${esc(link.href)}" c
         ],
     };
 
+    // Prefer the long-form opening for the meta description: it says more than
+    // the card blurb and is unique to this page.
+    const metaDescription = (details.overview[0] || project.plainDescription).slice(0, 300);
+
     return pageShell({
         title: `${project.title} | Kosisochukwu Okafor, Software Engineer`,
-        description: project.plainDescription.slice(0, 300),
+        description: metaDescription,
         canonical: `${SITE}/projects/${project.slug}.html`,
         body,
         jsonLd,
@@ -440,6 +478,15 @@ function llmsTxt() {
 
 const written = [];
 written.push(write(path.join(ROOT, 'projects.html'), hubPage()));
+fs.mkdirSync(OUT_DIR, { recursive: true });
+
+// Drop pages for slugs that no longer exist, so renaming a project does not
+// leave a stale page and a dead entry in the sitemap.
+const keep = new Set(projects.map((project) => `${project.slug}.html`));
+const removed = fs.readdirSync(OUT_DIR)
+    .filter((file) => file.endsWith('.html') && !keep.has(file))
+    .filter((file) => { fs.unlinkSync(path.join(OUT_DIR, file)); return true; });
+
 for (const [index, project] of projects.entries()) {
     const prev = projects[(index - 1 + projects.length) % projects.length];
     const next = projects[(index + 1) % projects.length];
@@ -490,3 +537,9 @@ console.log(`projects: ${projects.length} (${injection.cards} cards injected int
 console.log(`files: ${written.length + 1} written`);
 console.log(`  index.html (cards + ItemList)`);
 for (const file of written) console.log(`  ${file}`);
+if (removed.length) console.log(`removed stale pages: ${removed.join(', ')}`);
+if (missingDetails.length) {
+    console.log(`WARNING: no long-form details for: ${missingDetails.join(', ')}`);
+} else {
+    console.log(`long-form details: all ${projects.length} projects`);
+}
