@@ -6,25 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#08090a">
     <title>Gigr | Kosisochukwu Okafor, Software Engineer</title>
-    <meta name="description" content="A hyper-local services marketplace with a cryptographic trust and escrow layer, built in the repository named BAROS. Clients hold money in escrow until a job is completed to satisfaction, and providers build a reputation that cannot be quietly edited later.">
+    <meta name="description" content="A hyper-local services marketplace for Nigerian university towns and residential communities, where the tradespeople people actually need (electricians, plumbers, welders, tailors) are found today by asking around. It replaces that with a verifiable local directory, an escrow contract and a reputati">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://kss-venv.onrender.com/projects/gigr.html">
     <meta property="og:type" content="article">
     <meta property="og:title" content="Gigr | Kosisochukwu Okafor, Software Engineer">
-    <meta property="og:description" content="A hyper-local services marketplace with a cryptographic trust and escrow layer, built in the repository named BAROS. Clients hold money in escrow until a job is completed to satisfaction, and providers build a reputation that cannot be quietly edited later.">
+    <meta property="og:description" content="A hyper-local services marketplace for Nigerian university towns and residential communities, where the tradespeople people actually need (electricians, plumbers, welders, tailors) are found today by asking around. It replaces that with a verifiable local directory, an escrow contract and a reputati">
     <meta property="og:url" content="https://kss-venv.onrender.com/projects/gigr.html">
     <meta property="og:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Gigr | Kosisochukwu Okafor, Software Engineer">
-    <meta name="twitter:description" content="A hyper-local services marketplace with a cryptographic trust and escrow layer, built in the repository named BAROS. Clients hold money in escrow until a job is completed to satisfaction, and providers build a reputation that cannot be quietly edited later.">
+    <meta name="twitter:description" content="A hyper-local services marketplace for Nigerian university towns and residential communities, where the tradespeople people actually need (electricians, plumbers, welders, tailors) are found today by asking around. It replaces that with a verifiable local directory, an escrow contract and a reputati">
     <meta name="twitter:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/styles.css?v=9">
+    <link rel="stylesheet" href="/styles.css?v=10">
     <link rel="icon" type="image/png" href="/icons/icon-192.png">
     <script type="application/ld+json">
 {
@@ -93,6 +93,11 @@
                 <p class="eyebrow">Project 03 of 39 &middot; Backend and web &middot; Flagship</p>
                 <h1>Gigr</h1>
                 <p class="hero-statement">Neighborhood marketplace on Solana, built as the repository BAROS. On-chain escrow and PostGIS-backed local matching, with reputation minted as compressed NFTs so a vouch cannot be quietly edited or deleted later. Wallets are provisioned at registration to keep seed phrases out of the user's path, and an AI assistant can post jobs and negotiate on the user's behalf. Currently in pilot.</p>
+                <a class="live-link" href="https://gigrr.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    <span class="live-link-pill">Live</span>
+                    <span class="live-link-url">gigrr.vercel.app</span>
+                    <span class="live-link-go">Visit site &#8599;</span>
+                </a>
                 <div class="project-tags">
                     <span class="project-tag">Solana</span>
                     <span class="project-tag">PostGIS</span>
@@ -110,8 +115,8 @@
             <div class="container">
                 <h2 class="section-title"><span class="section-index">01</span>Overview</h2>
                 <div class="prose">
-                    <p>A hyper-local services marketplace with a cryptographic trust and escrow layer, built in the repository named BAROS. Clients hold money in escrow until a job is completed to satisfaction, and providers build a reputation that cannot be quietly edited later.</p>
-                    <p>All chain interaction is hidden behind an ordinary web experience, so neither side has to understand wallets or gas to use it.</p>
+                    <p>A hyper-local services marketplace for Nigerian university towns and residential communities, where the tradespeople people actually need (electricians, plumbers, welders, tailors) are found today by asking around. It replaces that with a verifiable local directory, an escrow contract and a reputation that cannot be discarded.</p>
+                    <p>The design problem is leakage: the first transaction tends to leave the platform. GigR answers it structurally rather than by policy. A client stays because the money is held until the finished work is inspected. A tradesperson stays because a vouch is only minted by a settled escrow transaction, so taking the deal off-platform costs them the credential they need to win the next, better-paying client.</p>
                 </div>
             </div>
         </section>
@@ -120,11 +125,15 @@
             <div class="container">
                 <h2 class="section-title"><span class="section-index">02</span>How it is built</h2>
                 <ul class="detail-list">
-                    <li>Escrow releases on completion, which removes the risk of non-payment for providers and of non-delivery for clients.</li>
-                    <li>Reputation is minted as compressed NFTs, so a vouch is permanent and attributable to the person who gave it.</li>
-                    <li>PostgreSQL with PostGIS handles proximity matching, so local work reaches the people who can actually reach it.</li>
-                    <li>An AI assistant can post jobs and negotiate on the user's behalf, and disputes route to a community jury.</li>
-                    <li>The front end is a progressive web app with a backend orchestrator, and the product is currently in pilot.</li>
+                    <li>Four failure points it is built against: requests that go unanswered during a night-time emergency, verbal referrals with no record of past work, advance payments of half to four-fifths of a job with no recourse, and an identity that consists of a phone number somebody can simply block.</li>
+                    <li>Discovery evaluates physical distance directly instead of administrative boundaries, with graduated 5, 10, 25 and 50 kilometre search radii and exact proximity shown per listing. A provider registers from live device coordinates or drops a pin on a fixed workshop.</li>
+                    <li>A single profile holds symmetric rights: the same account can post a job and publish a service listing, so a user can offer electrical work while hiring a chef.</li>
+                    <li>Escrow releases on confirmed completion, with milestone tranches for work delivered in stages. A provider who never accepts an assigned task has the deposit returned automatically by timeout.</li>
+                    <li>Reputation is minted as compressed tokens at the moment escrow settles, using Merkle summaries to keep on-chain storage in fractions of a kobo. A vouch cannot exist without economic value having moved, which removes fake reviews rather than policing them.</li>
+                    <li>Disputes route to a community courtroom instead of central moderation. The evidence bundle (contract room messages, agreed terms, photographic proof) goes to platform users on jury duty, and a majority decides whether funds go to the worker, back to the client, or split proportionally.</li>
+                    <li>An assistant called GigidyAI takes spoken commands through one global microphone button and extracts intent, category, radius and price constraints from plain speech. A deterministic parser takes over when the model is slow or unreachable, so the feature degrades rather than disappearing.</li>
+                    <li>Agent autonomy is a setting the user owns: off, auto-reply, auto-negotiation, auto-apply, or full autonomous job hunting, with a server-enforced ceiling of twenty autonomous operations per account per day so nothing runs away at scale.</li>
+                    <li>The agent can also place an outbound telephone call with a spoken summary when it finds a match, which means an alert does not require somebody to be looking at a screen.</li>
                 </ul>
             </div>
         </section>
@@ -132,7 +141,39 @@
         <section>
             <div class="container">
                 <h2 class="section-title"><span class="section-index">03</span>Screens</h2>
-                <div class="project-image detail-figure"><img src="https://gigrr.vercel.app/icon.png" alt="Gigr marketplace interface" loading="lazy" decoding="async"></div>
+                <div class="screens-wide">
+                    <figure class="screen">
+                        <img src="/imagesnshii/imagesforviews/gigrmaps1.png" alt="Gigr map view with nearby jobs" width="1366" height="768" loading="lazy" decoding="async" style="aspect-ratio:1366/768">
+                        <figcaption>Distance-based discovery, with exact proximity per listing</figcaption>
+                    </figure>
+                    <figure class="screen">
+                        <img src="/imagesnshii/imagesforviews/gigrmaps2.png" alt="Gigr map view with radius control" width="1366" height="768" loading="lazy" decoding="async" style="aspect-ratio:1366/768">
+                        <figcaption>Graduated search radius across a neighbourhood</figcaption>
+                    </figure>
+                    <figure class="screen">
+                        <img src="/imagesnshii/imagesforviews/gigrservicedetailppage.png" alt="Gigr service detail page" width="1366" height="768" loading="lazy" decoding="async" style="aspect-ratio:1366/768">
+                        <figcaption>A service listing, with the contract entry point</figcaption>
+                    </figure>
+                </div>
+                <div class="screens-tall">
+                    <figure class="screen">
+                        <img src="/imagesnshii/imagesforviews/gigr_onboarding.png" alt="Gigr onboarding on a phone" width="363" height="704" loading="lazy" decoding="async" style="aspect-ratio:363/704">
+                        <figcaption>Onboarding, where the key pair is created</figcaption>
+                    </figure>
+                    <figure class="screen">
+                        <img src="/imagesnshii/imagesforviews/gigraiagent.png" alt="GigidyAI assistant on a phone" width="369" height="708" loading="lazy" decoding="async" style="aspect-ratio:369/708">
+                        <figcaption>GigidyAI, the spoken agent interface</figcaption>
+                    </figure>
+                    <figure class="screen">
+                        <img src="/imagesnshii/imagesforviews/gigrpublicprofile.png" alt="Gigr public profile with vouches" width="403" height="767" loading="lazy" decoding="async" style="aspect-ratio:403/767">
+                        <figcaption>A public profile, with the vouches earned</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
                 <h2 class="section-title"><span class="section-index">&#8592;&#8594;</span>Keep reading</h2>
                 <div class="project-links">
                     <a class="project-link" href="/projects/kssrag.html">Previous: kssrag</a>

@@ -51,7 +51,30 @@
           "url": "https://useahia-hazel.vercel.app/"
         }
       ],
-      "image": "https://useahia-hazel.vercel.app/icon-192.png"
+      "live": "https://useahia-hazel.vercel.app/",
+      "image": "https://useahia-hazel.vercel.app/icon-192.png",
+      "screens": [
+        {
+          "url": "https://kss-venv.onrender.com/imagesnshii/imagesforviews/ahia_landing.png",
+          "caption": "Public landing page"
+        },
+        {
+          "url": "https://kss-venv.onrender.com/imagesnshii/imagesforviews/ahia_catalog.png",
+          "caption": "Catalogue, with the category hierarchy and dual pricing"
+        },
+        {
+          "url": "https://kss-venv.onrender.com/imagesnshii/imagesforviews/ahia_shop_customization.png",
+          "caption": "Storefront studio, where a merchant sets branding and theme"
+        },
+        {
+          "url": "https://kss-venv.onrender.com/imagesnshii/imagesforviews/ahia_team_management.png",
+          "caption": "Team, roles and staff access"
+        },
+        {
+          "url": "https://kss-venv.onrender.com/imagesnshii/imagesforviews/ahia_public_shop_page.png",
+          "caption": "The public shopfront a customer receives"
+        }
+      ]
     },
     {
       "rank": 2,
@@ -84,7 +107,9 @@
           "url": "https://github.com/Ksschkw/kssrag/releases/tag/v0.4.0"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/kssrag"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/kssrag",
+      "screens": []
     },
     {
       "rank": 3,
@@ -113,7 +138,34 @@
           "url": "https://gigrr.vercel.app/"
         }
       ],
-      "image": "https://gigrr.vercel.app/icon.png"
+      "live": "https://gigrr.vercel.app/",
+      "image": "https://gigrr.vercel.app/icon.png",
+      "screens": [
+        {
+          "url": "https://kss-venv.onrender.com/imagesnshii/imagesforviews/gigrmaps1.png",
+          "caption": "Distance-based discovery, with exact proximity per listing"
+        },
+        {
+          "url": "https://kss-venv.onrender.com/imagesnshii/imagesforviews/gigrmaps2.png",
+          "caption": "Graduated search radius across a neighbourhood"
+        },
+        {
+          "url": "https://kss-venv.onrender.com/imagesnshii/imagesforviews/gigrservicedetailppage.png",
+          "caption": "A service listing, with the contract entry point"
+        },
+        {
+          "url": "https://kss-venv.onrender.com/imagesnshii/imagesforviews/gigr_onboarding.png",
+          "caption": "Onboarding, where the key pair is created"
+        },
+        {
+          "url": "https://kss-venv.onrender.com/imagesnshii/imagesforviews/gigraiagent.png",
+          "caption": "GigidyAI, the spoken agent interface"
+        },
+        {
+          "url": "https://kss-venv.onrender.com/imagesnshii/imagesforviews/gigrpublicprofile.png",
+          "caption": "A public profile, with the vouches earned"
+        }
+      ]
     },
     {
       "rank": 4,
@@ -138,7 +190,9 @@
           "url": "https://www.youtube.com/playlist?list=PLhU0J79Smu6kmr6QNJgd0cFa2f-UCwU1K"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/CongestIQ-FYP"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/CongestIQ-FYP",
+      "screens": []
     },
     {
       "rank": 5,
@@ -167,7 +221,9 @@
           "url": "https://github.com/Ksschkw/driftlock/releases/tag/v0.4.0"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/driftlock"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/driftlock",
+      "screens": []
     },
     {
       "rank": 6,
@@ -192,7 +248,9 @@
           "url": "https://youtu.be/aMRaKPWyCAc?si=CpERpiQxlxkHyZ15"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/AutoSig"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/AutoSig",
+      "screens": []
     },
     {
       "rank": 7,
@@ -221,7 +279,9 @@
           "url": "https://p01--repengine--qw5xhkblp8hy.code.run/"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/RepEngine"
+      "live": "https://p01--repengine--qw5xhkblp8hy.code.run/",
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/RepEngine",
+      "screens": []
     },
     {
       "rank": 8,
@@ -242,7 +302,9 @@
           "url": "https://github.com/Ksschkw/Ginger-Copilot"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/Ginger-Copilot"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/Ginger-Copilot",
+      "screens": []
     },
     {
       "rank": 9,
@@ -263,7 +325,9 @@
           "url": "https://github.com/Ksschkw/healthcare-diagnostic-api"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/healthcare-diagnostic-api"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/healthcare-diagnostic-api",
+      "screens": []
     },
     {
       "rank": 10,
@@ -284,7 +348,9 @@
           "url": "https://github.com/Ksschkw/LexAI"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/LexAI"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/LexAI",
+      "screens": []
     },
     {
       "rank": 11,
@@ -305,7 +371,9 @@
           "url": "https://github.com/Ksschkw/Patient-Management_Microservicesyadayada"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/Patient-Management_Microservicesyadayada"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/Patient-Management_Microservicesyadayada",
+      "screens": []
     },
     {
       "rank": 12,
@@ -327,7 +395,9 @@
           "url": "https://github.com/Ksschkw/CIAP"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/CIAP"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/CIAP",
+      "screens": []
     },
     {
       "rank": 13,
@@ -351,7 +421,9 @@
           "url": "https://agentkosi.onrender.com/"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENTV2"
+      "live": "https://agentkosi.onrender.com/",
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENTV2",
+      "screens": []
     },
     {
       "rank": 14,
@@ -372,7 +444,9 @@
           "url": "https://github.com/Ksschkw/myWebsite"
         }
       ],
-      "image": "https://kss-venv.onrender.com/imagesnshii/object-detection-thumb.png"
+      "live": null,
+      "image": "https://kss-venv.onrender.com/imagesnshii/object-detection-thumb.png",
+      "screens": []
     },
     {
       "rank": 15,
@@ -394,7 +468,9 @@
           "url": "https://github.com/Ksschkw/pharmacy-ai-agent"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/pharmacy-ai-agent"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/pharmacy-ai-agent",
+      "screens": []
     },
     {
       "rank": 16,
@@ -418,7 +494,9 @@
           "url": "https://agentkosi.onrender.com/"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENT"
+      "live": "https://agentkosi.onrender.com/",
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENT",
+      "screens": []
     },
     {
       "rank": 17,
@@ -442,7 +520,9 @@
           "url": "https://ai-copilot-agent-1.onrender.com/"
         }
       ],
-      "image": "https://kss-venv.onrender.com/imagesnshii/image.png"
+      "live": "https://ai-copilot-agent-1.onrender.com/",
+      "image": "https://kss-venv.onrender.com/imagesnshii/image.png",
+      "screens": []
     },
     {
       "rank": 18,
@@ -467,7 +547,9 @@
           "url": "https://t.me/VybeVigil_bot"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/vybe-telegram-bot"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/vybe-telegram-bot",
+      "screens": []
     },
     {
       "rank": 19,
@@ -491,7 +573,9 @@
           "url": "https://t.me/TheBubbleSnitch_bot"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/TheBubbleSnitchBot-2"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/TheBubbleSnitchBot-2",
+      "screens": []
     },
     {
       "rank": 20,
@@ -512,7 +596,9 @@
           "url": "https://www.kaggle.com/datasets/okaforkosisochukwujp/uk-local-authority-health-and-environment-indicators"
         }
       ],
-      "image": "https://www.kaggle.com/static/images/site-logo.png"
+      "live": null,
+      "image": "https://www.kaggle.com/static/images/site-logo.png",
+      "screens": []
     },
     {
       "rank": 21,
@@ -532,7 +618,9 @@
           "url": "https://github.com/Ksschkw/HomeCredit-Data-Alchemy"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/HomeCredit-Data-Alchemy"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/HomeCredit-Data-Alchemy",
+      "screens": []
     },
     {
       "rank": 22,
@@ -552,7 +640,9 @@
           "url": "https://github.com/Ksschkw/drugs"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/drugs"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/drugs",
+      "screens": []
     },
     {
       "rank": 23,
@@ -572,7 +662,9 @@
           "url": "https://github.com/Ksschkw/ScrapeddashiiAlchemy"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/ScrapeddashiiAlchemy"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/ScrapeddashiiAlchemy",
+      "screens": []
     },
     {
       "rank": 24,
@@ -592,7 +684,9 @@
           "url": "https://github.com/Ksschkw/drugs"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/drugs"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/drugs",
+      "screens": []
     },
     {
       "rank": 25,
@@ -616,7 +710,9 @@
           "url": "https://gigr-presentation-website.vercel.app"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/Gigr-presentation-website"
+      "live": "https://gigr-presentation-website.vercel.app",
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/Gigr-presentation-website",
+      "screens": []
     },
     {
       "rank": 26,
@@ -640,7 +736,9 @@
           "url": "https://grpght.onrender.com"
         }
       ],
-      "image": "https://kss-venv.onrender.com/imagesnshii/gaming.png"
+      "live": "https://grpght.onrender.com",
+      "image": "https://kss-venv.onrender.com/imagesnshii/gaming.png",
+      "screens": []
     },
     {
       "rank": 27,
@@ -660,7 +758,9 @@
           "url": "https://github.com/Ksschkw/chatbot_and_backendformywebsite"
         }
       ],
-      "image": "https://kss-venv.onrender.com/imagesnshii/aiassistant.png"
+      "live": null,
+      "image": "https://kss-venv.onrender.com/imagesnshii/aiassistant.png",
+      "screens": []
     },
     {
       "rank": 28,
@@ -682,7 +782,9 @@
           "url": "https://github.com/Ksschkw/acquisitions"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/acquisitions"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/acquisitions",
+      "screens": []
     },
     {
       "rank": 29,
@@ -706,7 +808,9 @@
           "url": "https://t.me/k0s1bot"
         }
       ],
-      "image": "https://kss-venv.onrender.com/imagesnshii/telegram-bot-thumb2.jpg"
+      "live": null,
+      "image": "https://kss-venv.onrender.com/imagesnshii/telegram-bot-thumb2.jpg",
+      "screens": []
     },
     {
       "rank": 30,
@@ -726,7 +830,9 @@
           "url": "https://obianuju.onrender.com"
         }
       ],
-      "image": "https://obianuju.onrender.com/gallery/justmehehe.jpeg"
+      "live": "https://obianuju.onrender.com",
+      "image": "https://obianuju.onrender.com/gallery/justmehehe.jpeg",
+      "screens": []
     },
     {
       "rank": 31,
@@ -748,7 +854,9 @@
           "url": "https://chinonye.onrender.com/"
         }
       ],
-      "image": "https://res.cloudinary.com/mydgb5tb/image/upload/f_auto,q_auto,w_900,c_fill,g_auto,ar_4:5/v1787531864/20260816_125436_ywujvc.jpg"
+      "live": "https://chinonye.onrender.com/",
+      "image": "https://res.cloudinary.com/mydgb5tb/image/upload/f_auto,q_auto,w_900,c_fill,g_auto,ar_4:5/v1787531864/20260816_125436_ywujvc.jpg",
+      "screens": []
     },
     {
       "rank": 32,
@@ -772,7 +880,9 @@
           "url": "https://kolaborasi-kosi.onrender.com"
         }
       ],
-      "image": "https://kss-venv.onrender.com/imagesnshii/kolabrasi.png"
+      "live": "https://kolaborasi-kosi.onrender.com",
+      "image": "https://kss-venv.onrender.com/imagesnshii/kolabrasi.png",
+      "screens": []
     },
     {
       "rank": 33,
@@ -796,7 +906,9 @@
           "url": "https://krypto-kosi.onrender.com"
         }
       ],
-      "image": "https://kss-venv.onrender.com/imagesnshii/kryptokosi.png"
+      "live": "https://krypto-kosi.onrender.com",
+      "image": "https://kss-venv.onrender.com/imagesnshii/kryptokosi.png",
+      "screens": []
     },
     {
       "rank": 34,
@@ -820,7 +932,9 @@
           "url": "https://kosi-weather.onrender.com"
         }
       ],
-      "image": "https://kss-venv.onrender.com/imagesnshii/weather.png"
+      "live": "https://kosi-weather.onrender.com",
+      "image": "https://kss-venv.onrender.com/imagesnshii/weather.png",
+      "screens": []
     },
     {
       "rank": 35,
@@ -840,7 +954,9 @@
           "url": "https://github.com/Ksschkw/project-ruggaurd-bot"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/project-ruggaurd-bot"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/project-ruggaurd-bot",
+      "screens": []
     },
     {
       "rank": 36,
@@ -860,7 +976,9 @@
           "url": "https://github.com/Ksschkw/mediapipe-openCV-projects-n-stuff"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/mediapipe-openCV-projects-n-stuff"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/mediapipe-openCV-projects-n-stuff",
+      "screens": []
     },
     {
       "rank": 37,
@@ -880,7 +998,9 @@
           "url": "https://github.com/Ksschkw/uptime-bot"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/uptime-bot"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/uptime-bot",
+      "screens": []
     },
     {
       "rank": 38,
@@ -900,7 +1020,9 @@
           "url": "https://github.com/Ksschkw/donotopen"
         }
       ],
-      "image": "https://opengraph.githubassets.com/1/Ksschkw/donotopen"
+      "live": null,
+      "image": "https://opengraph.githubassets.com/1/Ksschkw/donotopen",
+      "screens": []
     },
     {
       "rank": 39,
@@ -924,7 +1046,9 @@
           "url": "http://okaforkosisochukwu.onrender.com"
         }
       ],
-      "image": "https://kss-venv.onrender.com/imagesnshii/first.png"
+      "live": "http://okaforkosisochukwu.onrender.com",
+      "image": "https://kss-venv.onrender.com/imagesnshii/first.png",
+      "screens": []
     }
   ]
 }

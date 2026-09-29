@@ -6,25 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#08090a">
     <title>AHIA | Kosisochukwu Okafor, Software Engineer</title>
-    <meta name="description" content="A multi-tenant retail platform for small traders, delivered as a backend service, a web application and an offline-first mobile client. The problem is a counter sale: a trader needs to record what left the shelf, what was paid and what is still owed, on a phone, often with no signal.">
+    <meta name="description" content="A multi-tenant retail platform for small traders, built for how trade actually happens: a counter sale, a market run, a customer who sends a list and pays on delivery. It ships as a backend service, a web application and an offline-first mobile client.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://kss-venv.onrender.com/projects/ahia.html">
     <meta property="og:type" content="article">
     <meta property="og:title" content="AHIA | Kosisochukwu Okafor, Software Engineer">
-    <meta property="og:description" content="A multi-tenant retail platform for small traders, delivered as a backend service, a web application and an offline-first mobile client. The problem is a counter sale: a trader needs to record what left the shelf, what was paid and what is still owed, on a phone, often with no signal.">
+    <meta property="og:description" content="A multi-tenant retail platform for small traders, built for how trade actually happens: a counter sale, a market run, a customer who sends a list and pays on delivery. It ships as a backend service, a web application and an offline-first mobile client.">
     <meta property="og:url" content="https://kss-venv.onrender.com/projects/ahia.html">
     <meta property="og:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="AHIA | Kosisochukwu Okafor, Software Engineer">
-    <meta name="twitter:description" content="A multi-tenant retail platform for small traders, delivered as a backend service, a web application and an offline-first mobile client. The problem is a counter sale: a trader needs to record what left the shelf, what was paid and what is still owed, on a phone, often with no signal.">
+    <meta name="twitter:description" content="A multi-tenant retail platform for small traders, built for how trade actually happens: a counter sale, a market run, a customer who sends a list and pays on delivery. It ships as a backend service, a web application and an offline-first mobile client.">
     <meta name="twitter:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/styles.css?v=9">
+    <link rel="stylesheet" href="/styles.css?v=10">
     <link rel="icon" type="image/png" href="/icons/icon-192.png">
     <script type="application/ld+json">
 {
@@ -93,6 +93,11 @@
                 <p class="eyebrow">Project 01 of 39 &middot; Backend and web &middot; Flagship</p>
                 <h1>AHIA</h1>
                 <p class="hero-statement">Multi-tenant retail platform for small traders, delivered as a FastAPI backend, a Next.js web app, and an offline-first mobile client. Every business-owned table carries a row-level security policy bound per transaction, so a missing filter returns nothing rather than another shop's data. Sales, payments, stock movements, expenses and audit events are append-only ledgers committed together, and a device that goes offline pushes idempotent operations through a sync service that cannot apply a sale twice. Customers build a list from a public link with no account, the trader prices and sources it, and dispatch records the waybill. The suite runs past two thousand tests, including architecture contracts that fail the build on a layering violation.</p>
+                <a class="live-link" href="https://useahia-hazel.vercel.app/" target="_blank" rel="noopener noreferrer">
+                    <span class="live-link-pill">Live</span>
+                    <span class="live-link-url">useahia-hazel.vercel.app</span>
+                    <span class="live-link-go">Visit site &#8599;</span>
+                </a>
                 <div class="project-tags">
                     <span class="project-tag">FastAPI</span>
                     <span class="project-tag">Next.js</span>
@@ -110,8 +115,8 @@
             <div class="container">
                 <h2 class="section-title"><span class="section-index">01</span>Overview</h2>
                 <div class="prose">
-                    <p>A multi-tenant retail platform for small traders, delivered as a backend service, a web application and an offline-first mobile client. The problem is a counter sale: a trader needs to record what left the shelf, what was paid and what is still owed, on a phone, often with no signal.</p>
-                    <p>Every business-owned table carries a row-level security policy that is bound into the transaction, so a query that forgets its tenant filter returns nothing rather than another shop's data.</p>
+                    <p>A multi-tenant retail platform for small traders, built for how trade actually happens: a counter sale, a market run, a customer who sends a list and pays on delivery. It ships as a backend service, a web application and an offline-first mobile client.</p>
+                    <p>The engineering spine is a five-layer architecture with enforced import contracts: entities, schemas, persistence, services and transport. No outward imports, no logic in transport, no database driver outside the persistence boundary, and the build fails on a violation rather than a reviewer catching it.</p>
                 </div>
             </div>
         </section>
@@ -120,12 +125,17 @@
             <div class="container">
                 <h2 class="section-title"><span class="section-index">02</span>How it is built</h2>
                 <ul class="detail-list">
-                    <li>Sales, payments, stock movements, expenses and audit events are append-only ledgers committed together, so a failure part-way through leaves no half-recorded money.</li>
-                    <li>Offline devices queue operations and push them through a sync service keyed on an operation identifier, so a retry after a lost reply cannot book the same sale twice.</li>
-                    <li>Authorization is deny-by-default: atomic permissions compose into roles, and a caller cannot grant a permission they do not hold themselves.</li>
-                    <li>Customers build a list from a public link without an account. The trader prices it, sources what is missing, packs it, and dispatch records the transporter and waybill.</li>
-                    <li>Storage and media run behind a provider-neutral port with server-side validation and per-tenant quota accounting that survives concurrent uploads.</li>
-                    <li>Roughly two thousand tests, including architecture contracts that fail the build when a layer is imported from the wrong direction.</li>
+                    <li>Every business-owned table carries a row-level security policy bound into the transaction, so a query that forgets its tenant filter returns nothing rather than another shop's data. A missing scope fails closed.</li>
+                    <li>Sales, payments, stock movements, expenses, audit events and the ledger are append-only and committed together, so a failure part-way through cannot leave half-recorded money. The rule is enforced by database triggers, not by convention.</li>
+                    <li>Money is never floating point. A price arriving as a float is refused rather than rounded, prices carry at most two decimal places, and they travel the wire as decimal strings so no client passes money through a binary float.</li>
+                    <li>Offline devices queue operations under a stable operation identifier and push them through a sync service, so a retry after a lost reply cannot book the same sale twice. Inventory merges additively, catalogue edits resolve last-writer-wins, and a customer draft conflict is surfaced rather than silently resolved.</li>
+                    <li>Authorization is data. Atomic permissions compose into permission sets and then roles, resolved deny-by-default, and a caller cannot grant a permission they do not hold. The interface hides what a role cannot do instead of offering a button that fails.</li>
+                    <li>The catalogue is an arbitrarily deep category tree with price inheritance, so a grade carries one price and only the exceptions are listed by name. A customer can add an item the shop has never stocked, leaving the price for the trader to set.</li>
+                    <li>A customer builds a list from a public link without an account and is remembered by phone number. The list is shared as a generated image or a multi-page PDF, because a typed list arrives truncated on a phone and cannot be forwarded as a list.</li>
+                    <li>Dispatch records the transporter, the waybill number, the trip cost and a tracking link, so a parcel on a road is attributable and the cost of the run comes off what the list made.</li>
+                    <li>Storage and media sit behind a provider-neutral port with two interchangeable adapters, server-side validation and optimisation, and per-tenant quota accounting that holds under concurrent uploads.</li>
+                    <li>Deployment is one push: the image is built in CI and addressed by commit, a migration job runs before traffic moves, and a rollback is a pointer at an earlier tag rather than a rebuild.</li>
+                    <li>Roughly two thousand tests, including architecture contracts, an ASCII guard, secret scanning and a dependency audit gate that fails the build on a critical finding.</li>
                 </ul>
             </div>
         </section>
@@ -133,7 +143,35 @@
         <section>
             <div class="container">
                 <h2 class="section-title"><span class="section-index">03</span>Screens</h2>
-                <div class="project-image detail-figure"><img src="https://useahia-hazel.vercel.app/icon-192.png" alt="AHIA retail platform" loading="lazy" decoding="async"></div>
+                <div class="screens-wide">
+                    <figure class="screen">
+                        <img src="/imagesnshii/imagesforviews/ahia_landing.png" alt="AHIA public landing page" width="1366" height="768" loading="lazy" decoding="async" style="aspect-ratio:1366/768">
+                        <figcaption>Public landing page</figcaption>
+                    </figure>
+                    <figure class="screen">
+                        <img src="/imagesnshii/imagesforviews/ahia_catalog.png" alt="AHIA catalogue with hierarchical categories" width="1366" height="768" loading="lazy" decoding="async" style="aspect-ratio:1366/768">
+                        <figcaption>Catalogue, with the category hierarchy and dual pricing</figcaption>
+                    </figure>
+                    <figure class="screen">
+                        <img src="/imagesnshii/imagesforviews/ahia_shop_customization.png" alt="AHIA storefront customisation studio" width="1366" height="768" loading="lazy" decoding="async" style="aspect-ratio:1366/768">
+                        <figcaption>Storefront studio, where a merchant sets branding and theme</figcaption>
+                    </figure>
+                    <figure class="screen">
+                        <img src="/imagesnshii/imagesforviews/ahia_team_management.png" alt="AHIA team and role management" width="1366" height="768" loading="lazy" decoding="async" style="aspect-ratio:1366/768">
+                        <figcaption>Team, roles and staff access</figcaption>
+                    </figure>
+                </div>
+                <div class="screens-tall">
+                    <figure class="screen">
+                        <img src="/imagesnshii/imagesforviews/ahia_public_shop_page.png" alt="AHIA public shopfront on a phone" width="540" height="650" loading="lazy" decoding="async" style="aspect-ratio:540/650">
+                        <figcaption>The public shopfront a customer receives</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
                 <h2 class="section-title"><span class="section-index">&#8592;&#8594;</span>Keep reading</h2>
                 <div class="project-links">
                     <a class="project-link" href="/projects/first-portfolio.html">Previous: First Portfolio</a>

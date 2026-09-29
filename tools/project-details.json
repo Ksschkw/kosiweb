@@ -2,16 +2,48 @@
   "_comment": "Long-form project copy for projects/<slug>.html. Read by tools/generate-seo.mjs. Slugs match the generated pages. Keep it free of em dashes, hype and programming-language names, in line with the rest of the site.",
   "ahia": {
     "overview": [
-      "A multi-tenant retail platform for small traders, delivered as a backend service, a web application and an offline-first mobile client. The problem is a counter sale: a trader needs to record what left the shelf, what was paid and what is still owed, on a phone, often with no signal.",
-      "Every business-owned table carries a row-level security policy that is bound into the transaction, so a query that forgets its tenant filter returns nothing rather than another shop's data."
+      "A multi-tenant retail platform for small traders, built for how trade actually happens: a counter sale, a market run, a customer who sends a list and pays on delivery. It ships as a backend service, a web application and an offline-first mobile client.",
+      "The engineering spine is a five-layer architecture with enforced import contracts: entities, schemas, persistence, services and transport. No outward imports, no logic in transport, no database driver outside the persistence boundary, and the build fails on a violation rather than a reviewer catching it."
     ],
     "highlights": [
-      "Sales, payments, stock movements, expenses and audit events are append-only ledgers committed together, so a failure part-way through leaves no half-recorded money.",
-      "Offline devices queue operations and push them through a sync service keyed on an operation identifier, so a retry after a lost reply cannot book the same sale twice.",
-      "Authorization is deny-by-default: atomic permissions compose into roles, and a caller cannot grant a permission they do not hold themselves.",
-      "Customers build a list from a public link without an account. The trader prices it, sources what is missing, packs it, and dispatch records the transporter and waybill.",
-      "Storage and media run behind a provider-neutral port with server-side validation and per-tenant quota accounting that survives concurrent uploads.",
-      "Roughly two thousand tests, including architecture contracts that fail the build when a layer is imported from the wrong direction."
+      "Every business-owned table carries a row-level security policy bound into the transaction, so a query that forgets its tenant filter returns nothing rather than another shop's data. A missing scope fails closed.",
+      "Sales, payments, stock movements, expenses, audit events and the ledger are append-only and committed together, so a failure part-way through cannot leave half-recorded money. The rule is enforced by database triggers, not by convention.",
+      "Money is never floating point. A price arriving as a float is refused rather than rounded, prices carry at most two decimal places, and they travel the wire as decimal strings so no client passes money through a binary float.",
+      "Offline devices queue operations under a stable operation identifier and push them through a sync service, so a retry after a lost reply cannot book the same sale twice. Inventory merges additively, catalogue edits resolve last-writer-wins, and a customer draft conflict is surfaced rather than silently resolved.",
+      "Authorization is data. Atomic permissions compose into permission sets and then roles, resolved deny-by-default, and a caller cannot grant a permission they do not hold. The interface hides what a role cannot do instead of offering a button that fails.",
+      "The catalogue is an arbitrarily deep category tree with price inheritance, so a grade carries one price and only the exceptions are listed by name. A customer can add an item the shop has never stocked, leaving the price for the trader to set.",
+      "A customer builds a list from a public link without an account and is remembered by phone number. The list is shared as a generated image or a multi-page PDF, because a typed list arrives truncated on a phone and cannot be forwarded as a list.",
+      "Dispatch records the transporter, the waybill number, the trip cost and a tracking link, so a parcel on a road is attributable and the cost of the run comes off what the list made.",
+      "Storage and media sit behind a provider-neutral port with two interchangeable adapters, server-side validation and optimisation, and per-tenant quota accounting that holds under concurrent uploads.",
+      "Deployment is one push: the image is built in CI and addressed by commit, a migration job runs before traffic moves, and a rollback is a pointer at an earlier tag rather than a rebuild.",
+      "Roughly two thousand tests, including architecture contracts, an ASCII guard, secret scanning and a dependency audit gate that fails the build on a critical finding."
+    ],
+    "screens": [
+      {
+        "src": "imagesnshii/imagesforviews/ahia_landing.png",
+        "alt": "AHIA public landing page",
+        "caption": "Public landing page"
+      },
+      {
+        "src": "imagesnshii/imagesforviews/ahia_catalog.png",
+        "alt": "AHIA catalogue with hierarchical categories",
+        "caption": "Catalogue, with the category hierarchy and dual pricing"
+      },
+      {
+        "src": "imagesnshii/imagesforviews/ahia_shop_customization.png",
+        "alt": "AHIA storefront customisation studio",
+        "caption": "Storefront studio, where a merchant sets branding and theme"
+      },
+      {
+        "src": "imagesnshii/imagesforviews/ahia_team_management.png",
+        "alt": "AHIA team and role management",
+        "caption": "Team, roles and staff access"
+      },
+      {
+        "src": "imagesnshii/imagesforviews/ahia_public_shop_page.png",
+        "alt": "AHIA public shopfront on a phone",
+        "caption": "The public shopfront a customer receives"
+      }
     ]
   },
   "kssrag": {
@@ -29,15 +61,51 @@
   },
   "gigr": {
     "overview": [
-      "A hyper-local services marketplace with a cryptographic trust and escrow layer, built in the repository named BAROS. Clients hold money in escrow until a job is completed to satisfaction, and providers build a reputation that cannot be quietly edited later.",
-      "All chain interaction is hidden behind an ordinary web experience, so neither side has to understand wallets or gas to use it."
+      "A hyper-local services marketplace for Nigerian university towns and residential communities, where the tradespeople people actually need (electricians, plumbers, welders, tailors) are found today by asking around. It replaces that with a verifiable local directory, an escrow contract and a reputation that cannot be discarded.",
+      "The design problem is leakage: the first transaction tends to leave the platform. GigR answers it structurally rather than by policy. A client stays because the money is held until the finished work is inspected. A tradesperson stays because a vouch is only minted by a settled escrow transaction, so taking the deal off-platform costs them the credential they need to win the next, better-paying client."
     ],
     "highlights": [
-      "Escrow releases on completion, which removes the risk of non-payment for providers and of non-delivery for clients.",
-      "Reputation is minted as compressed NFTs, so a vouch is permanent and attributable to the person who gave it.",
-      "PostgreSQL with PostGIS handles proximity matching, so local work reaches the people who can actually reach it.",
-      "An AI assistant can post jobs and negotiate on the user's behalf, and disputes route to a community jury.",
-      "The front end is a progressive web app with a backend orchestrator, and the product is currently in pilot."
+      "Four failure points it is built against: requests that go unanswered during a night-time emergency, verbal referrals with no record of past work, advance payments of half to four-fifths of a job with no recourse, and an identity that consists of a phone number somebody can simply block.",
+      "Discovery evaluates physical distance directly instead of administrative boundaries, with graduated 5, 10, 25 and 50 kilometre search radii and exact proximity shown per listing. A provider registers from live device coordinates or drops a pin on a fixed workshop.",
+      "A single profile holds symmetric rights: the same account can post a job and publish a service listing, so a user can offer electrical work while hiring a chef.",
+      "Escrow releases on confirmed completion, with milestone tranches for work delivered in stages. A provider who never accepts an assigned task has the deposit returned automatically by timeout.",
+      "Reputation is minted as compressed tokens at the moment escrow settles, using Merkle summaries to keep on-chain storage in fractions of a kobo. A vouch cannot exist without economic value having moved, which removes fake reviews rather than policing them.",
+      "Disputes route to a community courtroom instead of central moderation. The evidence bundle (contract room messages, agreed terms, photographic proof) goes to platform users on jury duty, and a majority decides whether funds go to the worker, back to the client, or split proportionally.",
+      "An assistant called GigidyAI takes spoken commands through one global microphone button and extracts intent, category, radius and price constraints from plain speech. A deterministic parser takes over when the model is slow or unreachable, so the feature degrades rather than disappearing.",
+      "Agent autonomy is a setting the user owns: off, auto-reply, auto-negotiation, auto-apply, or full autonomous job hunting, with a server-enforced ceiling of twenty autonomous operations per account per day so nothing runs away at scale.",
+      "The agent can also place an outbound telephone call with a spoken summary when it finds a match, which means an alert does not require somebody to be looking at a screen."
+    ],
+    "screens": [
+      {
+        "src": "imagesnshii/imagesforviews/gigrmaps1.png",
+        "alt": "Gigr map view with nearby jobs",
+        "caption": "Distance-based discovery, with exact proximity per listing"
+      },
+      {
+        "src": "imagesnshii/imagesforviews/gigrmaps2.png",
+        "alt": "Gigr map view with radius control",
+        "caption": "Graduated search radius across a neighbourhood"
+      },
+      {
+        "src": "imagesnshii/imagesforviews/gigrservicedetailppage.png",
+        "alt": "Gigr service detail page",
+        "caption": "A service listing, with the contract entry point"
+      },
+      {
+        "src": "imagesnshii/imagesforviews/gigr_onboarding.png",
+        "alt": "Gigr onboarding on a phone",
+        "caption": "Onboarding, where the key pair is created"
+      },
+      {
+        "src": "imagesnshii/imagesforviews/gigraiagent.png",
+        "alt": "GigidyAI assistant on a phone",
+        "caption": "GigidyAI, the spoken agent interface"
+      },
+      {
+        "src": "imagesnshii/imagesforviews/gigrpublicprofile.png",
+        "alt": "Gigr public profile with vouches",
+        "caption": "A public profile, with the vouches earned"
+      }
     ]
   },
   "congestiq": {

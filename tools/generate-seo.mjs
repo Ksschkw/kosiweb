@@ -57,6 +57,18 @@ const write = (target, contents) => {
     return path.relative(ROOT, target);
 };
 
+// Read a PNG's intrinsic size straight out of the IHDR chunk, so screenshots are
+// laid out from their real dimensions with no image library and no guessing.
+function pngSize(file) {
+    const buffer = fs.readFileSync(file);
+    const isPng = buffer.length > 24 && buffer.toString('ascii', 1, 4) === 'PNG';
+    if (!isPng) throw new Error(`not a PNG: ${file}`);
+    return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+}
+
+// A destination as a person would read it, not as a URL.
+const prettyUrl = (href) => String(href).replace(/^https?:\/\//, '').replace(/\/$/, '');
+
 // ------------------------------------------------------------- project data
 
 const scriptSrc = fs.readFileSync(path.join(ROOT, 'script.js'), 'utf8');
@@ -248,7 +260,7 @@ const pageShell = ({ title, description, canonical, body, jsonLd, robots = 'inde
     <meta name="twitter:image" content="${SITE}/imagesnshii/og-card.jpg">
     ${FONTS}
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/styles.css?v=9">
+    <link rel="stylesheet" href="/styles.css?v=10">
     <link rel="icon" type="image/png" href="/icons/icon-192.png">
     <script type="application/ld+json">
 ${JSON.stringify(jsonLd, null, 2)}
@@ -268,8 +280,49 @@ ${body}
 
 // ----------------------------------------------------------- project pages
 
+// Screens are laid out from their real dimensions: wide captures tile at their
+// own aspect ratio, phone captures line up at a shared height so a portrait
+// screenshot is never stretched into a landscape box.
+function screensSection(project) {
+    const screens = (project.details && project.details.screens) || [];
+
+    if (!screens.length) {
+        const src = project.image.startsWith('http') ? project.image : '/' + project.image;
+        return `        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="section-index">03</span>Screens</h2>
+                <div class="project-image detail-figure"><img src="${esc(src)}" alt="${esc(project.alt)}" loading="lazy" decoding="async"></div>
+            </div>
+        </section>`;
+    }
+
+    const measured = screens.map((screen) => {
+        const { width, height } = pngSize(path.join(ROOT, screen.src));
+        return { ...screen, width, height, wide: width / height >= 1.2 };
+    });
+
+    const figure = (screen) => `                    <figure class="screen">
+                        <img src="/${esc(screen.src)}" alt="${esc(screen.alt)}" width="${screen.width}" height="${screen.height}" loading="lazy" decoding="async" style="aspect-ratio:${screen.width}/${screen.height}">
+                        <figcaption>${esc(screen.caption || '')}</figcaption>
+                    </figure>`;
+
+    const wide = measured.filter((screen) => screen.wide);
+    const tall = measured.filter((screen) => !screen.wide);
+
+    return `        <section>
+            <div class="container">
+                <h2 class="section-title"><span class="section-index">03</span>Screens</h2>
+${wide.length ? `                <div class="screens-wide">
+${wide.map(figure).join('\n')}
+                </div>
+` : ''}${tall.length ? `                <div class="screens-tall">
+${tall.map(figure).join('\n')}
+                </div>` : ''}
+            </div>
+        </section>`;
+}
+
 function projectPage(project, prev, next) {
-    const image = `<img src="${project.image.startsWith('http') ? project.image : '/' + project.image}" alt="${esc(project.alt)}" loading="lazy" decoding="async">`;
     const details = project.details || { overview: [project.plainDescription], highlights: [] };
 
     const overview = `        <section>
@@ -293,11 +346,23 @@ ${details.highlights.map((item) => `                    <li>${esc(item)}</li>`).
         </section>`
         : '';
 
+    // The destination, given the weight it deserves: a live product is the
+    // single most useful thing a visitor can click on this page.
+    const live = (project.links || []).find((link) => link.text === 'Live');
+    const liveBanner = live
+        ? `
+                <a class="live-link" href="${esc(live.href)}" target="_blank" rel="noopener noreferrer">
+                    <span class="live-link-pill">Live</span>
+                    <span class="live-link-url">${esc(prettyUrl(live.href))}</span>
+                    <span class="live-link-go">Visit site &#8599;</span>
+                </a>`
+        : '';
+
     const body = `        <section class="hero">
             <div class="container">
                 <p class="eyebrow">Project ${String(project.position).padStart(2, '0')} of ${projects.length} &middot; ${esc(CATEGORY_LABEL[project.category] || project.category)}${project.featured ? ' &middot; Flagship' : ''}</p>
                 <h1>${esc(project.title)}</h1>
-                <p class="hero-statement">${esc(project.plainDescription)}</p>
+                <p class="hero-statement">${esc(project.plainDescription)}</p>${liveBanner}
                 <div class="project-tags">
                     ${project.tags.map((tag) => `<span class="project-tag">${esc(tag)}</span>`).join('\n                    ')}
                 </div>
@@ -310,10 +375,10 @@ ${project.links.map((link) => `                    <a href="${esc(link.href)}" c
 ${overview}
 ${highlights}
 
+${screensSection(project)}
+
         <section>
             <div class="container">
-                <h2 class="section-title"><span class="section-index">03</span>Screens</h2>
-                <div class="project-image detail-figure">${image}</div>
                 <h2 class="section-title"><span class="section-index">&#8592;&#8594;</span>Keep reading</h2>
                 <div class="project-links">
                     <a class="project-link" href="/projects/${prev.slug}.html">Previous: ${esc(prev.title)}</a>
@@ -525,7 +590,12 @@ written.push(write(path.join(ROOT, 'projects.json'), JSON.stringify({
         description: project.plainDescription,
         tags: project.tags,
         links: project.links.map((link) => ({ label: link.text, url: link.href })),
+        live: (project.links.find((link) => link.text === 'Live') || {}).href || null,
         image: project.image.startsWith('http') ? project.image : `${SITE}/${project.image}`,
+        screens: ((project.details && project.details.screens) || []).map((screen) => ({
+            url: `${SITE}/${screen.src}`,
+            caption: screen.caption || null,
+        })),
     })),
 }, null, 2) + '\n'));
 
