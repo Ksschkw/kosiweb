@@ -368,7 +368,7 @@ ${details.highlights.map((item) => `                    <li>${esc(item)}</li>`).
                         <i class="${esc(download.icon)}" aria-hidden="true"></i>
                         <span class="download-link-text">
                             <span class="download-link-label">${esc(download.text)}</span>
-                            <span class="download-link-file">${esc(prettyUrl(download.href).split('/').pop())}</span>
+                            <span class="download-link-file">${esc(download.detail || prettyUrl(download.href).split('/').pop())}</span>
                         </span>
                     </a>` : ''}
                 </div>`

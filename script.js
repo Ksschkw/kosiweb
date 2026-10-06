@@ -24,7 +24,7 @@ const projectsData = [
         links: [
             { href: "https://github.com/Ksschkw/AHIA", icon: "fab fa-github", text: "Code" },
             { href: "https://useahia-hazel.vercel.app/", icon: "fas fa-external-link-alt", text: "Live" },
-            { href: "https://github.com/Ksschkw/AHIA/releases/latest/download/AHIA-android.apk", icon: "fab fa-android", text: "APK" }
+            { href: "https://github.com/Ksschkw/AHIA/releases/latest", icon: "fab fa-android", text: "APK", detail: "Android build" }
         ],
         delayClass: ""
     },

@@ -53,11 +53,11 @@
         },
         {
           "label": "APK",
-          "url": "https://github.com/Ksschkw/AHIA/releases/latest/download/AHIA-android.apk"
+          "url": "https://github.com/Ksschkw/AHIA/releases/latest"
         }
       ],
       "live": "https://useahia-hazel.vercel.app/",
-      "download": "https://github.com/Ksschkw/AHIA/releases/latest/download/AHIA-android.apk",
+      "download": "https://github.com/Ksschkw/AHIA/releases/latest",
       "image": "https://useahia-hazel.vercel.app/icon-192.png",
       "screens": [
         {
