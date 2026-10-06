@@ -17,13 +17,14 @@ const projectsData = [
         featured: true,
         category: "web",
         title: "AHIA",
-        description: `Multi-tenant retail platform for small traders, delivered as a FastAPI backend, a Next.js web app, and an offline-first mobile client. Every business-owned table carries a row-level security policy bound per transaction, so a missing filter returns nothing rather than another shop's data. Sales, payments, stock movements, expenses and audit events are append-only ledgers committed together, and a device that goes offline pushes idempotent operations through a sync service that cannot apply a sale twice. Customers build a list from a public link with no account, the trader prices and sources it, and dispatch records the waybill. The suite runs past two thousand tests, including architecture contracts that fail the build on a layering violation.`,
+        description: `Multi-tenant retail platform for small traders, delivered as a FastAPI backend, a Next.js web app, and an offline-first mobile client that ships as an installable Android build. Every business-owned table carries a row-level security policy bound per transaction, so a missing filter returns nothing rather than another shop's data. Sales, payments, stock movements, expenses and audit events are append-only ledgers committed together, and a device that goes offline pushes idempotent operations through a sync service that cannot apply a sale twice. Customers build a list from a public link with no account, the trader prices and sources it, and dispatch records the waybill. The suite runs past two thousand tests, including architecture contracts that fail the build on a layering violation.`,
         image: "https://useahia-hazel.vercel.app/icon-192.png",
         alt: "AHIA retail platform",
-        tags: ["FastAPI", "Next.js", "PostgreSQL", "Offline First"],
+        tags: ["FastAPI", "Next.js", "PostgreSQL", "Offline First", "Android"],
         links: [
             { href: "https://github.com/Ksschkw/AHIA", icon: "fab fa-github", text: "Code" },
-            { href: "https://useahia-hazel.vercel.app/", icon: "fas fa-external-link-alt", text: "Live" }
+            { href: "https://useahia-hazel.vercel.app/", icon: "fas fa-external-link-alt", text: "Live" },
+            { href: "https://github.com/Ksschkw/AHIA/releases/latest/download/AHIA-android.apk", icon: "fab fa-android", text: "APK" }
         ],
         delayClass: ""
     },
@@ -68,10 +69,10 @@ const projectsData = [
         featured: true,
         category: "ai",
         title: "CongestIQ",
-        description: `Multi-agent reinforcement learning for adaptive TCP congestion control. The agents learn to trade throughput against fairness per flow rather than applying one fixed loss-based rule, and the policies are evaluated against standard congestion control inside ns-3 with netanim traces.`,
+        description: `Multi-agent reinforcement learning for adaptive congestion control. Several flows learn to share a bottleneck under centralised training and decentralised execution, with a cooperative reward that charges queueing delay, loss and window growth so no agent simply fills the buffer. The policies are developed against ns-3 and benchmarked against Reno, CUBIC and BBR on the same two-flow dumbbell topology.`,
         image: "https://opengraph.githubassets.com/1/Ksschkw/CongestIQ-FYP",
         alt: "CongestIQ reinforcement learning simulations",
-        tags: ["Reinforcement Learning", "Networking", "ns-3"],
+        tags: ["Reinforcement Learning", "CTDE", "ns-3", "Networking"],
         links: [
             { href: "https://github.com/Ksschkw/CongestIQ-FYP", icon: "fab fa-github", text: "Code" },
             { href: "https://www.youtube.com/playlist?list=PLhU0J79Smu6kmr6QNJgd0cFa2f-UCwU1K", icon: "fab fa-youtube", text: "Playlist" }

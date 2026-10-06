@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-29",
+  "generated": "2026-10-06",
   "site": "https://kss-venv.onrender.com",
   "owner": {
     "name": "Kosisochukwu Okafor",
@@ -34,12 +34,13 @@
       "url": "https://kss-venv.onrender.com/projects/ahia.html",
       "category": "web",
       "featured": true,
-      "description": "Multi-tenant retail platform for small traders, delivered as a FastAPI backend, a Next.js web app, and an offline-first mobile client. Every business-owned table carries a row-level security policy bound per transaction, so a missing filter returns nothing rather than another shop's data. Sales, payments, stock movements, expenses and audit events are append-only ledgers committed together, and a device that goes offline pushes idempotent operations through a sync service that cannot apply a sale twice. Customers build a list from a public link with no account, the trader prices and sources it, and dispatch records the waybill. The suite runs past two thousand tests, including architecture contracts that fail the build on a layering violation.",
+      "description": "Multi-tenant retail platform for small traders, delivered as a FastAPI backend, a Next.js web app, and an offline-first mobile client that ships as an installable Android build. Every business-owned table carries a row-level security policy bound per transaction, so a missing filter returns nothing rather than another shop's data. Sales, payments, stock movements, expenses and audit events are append-only ledgers committed together, and a device that goes offline pushes idempotent operations through a sync service that cannot apply a sale twice. Customers build a list from a public link with no account, the trader prices and sources it, and dispatch records the waybill. The suite runs past two thousand tests, including architecture contracts that fail the build on a layering violation.",
       "tags": [
         "FastAPI",
         "Next.js",
         "PostgreSQL",
-        "Offline First"
+        "Offline First",
+        "Android"
       ],
       "links": [
         {
@@ -49,9 +50,14 @@
         {
           "label": "Live",
           "url": "https://useahia-hazel.vercel.app/"
+        },
+        {
+          "label": "APK",
+          "url": "https://github.com/Ksschkw/AHIA/releases/latest/download/AHIA-android.apk"
         }
       ],
       "live": "https://useahia-hazel.vercel.app/",
+      "download": "https://github.com/Ksschkw/AHIA/releases/latest/download/AHIA-android.apk",
       "image": "https://useahia-hazel.vercel.app/icon-192.png",
       "screens": [
         {
@@ -108,6 +114,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/kssrag",
       "screens": []
     },
@@ -139,6 +146,7 @@
         }
       ],
       "live": "https://gigrr.vercel.app/",
+      "download": null,
       "image": "https://gigrr.vercel.app/icon.png",
       "screens": [
         {
@@ -174,11 +182,12 @@
       "url": "https://kss-venv.onrender.com/projects/congestiq.html",
       "category": "ai",
       "featured": true,
-      "description": "Multi-agent reinforcement learning for adaptive TCP congestion control. The agents learn to trade throughput against fairness per flow rather than applying one fixed loss-based rule, and the policies are evaluated against standard congestion control inside ns-3 with netanim traces.",
+      "description": "Multi-agent reinforcement learning for adaptive congestion control. Several flows learn to share a bottleneck under centralised training and decentralised execution, with a cooperative reward that charges queueing delay, loss and window growth so no agent simply fills the buffer. The policies are developed against ns-3 and benchmarked against Reno, CUBIC and BBR on the same two-flow dumbbell topology.",
       "tags": [
         "Reinforcement Learning",
-        "Networking",
-        "ns-3"
+        "CTDE",
+        "ns-3",
+        "Networking"
       ],
       "links": [
         {
@@ -191,6 +200,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/CongestIQ-FYP",
       "screens": []
     },
@@ -222,6 +232,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/driftlock",
       "screens": []
     },
@@ -249,6 +260,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/AutoSig",
       "screens": []
     },
@@ -280,6 +292,7 @@
         }
       ],
       "live": "https://p01--repengine--qw5xhkblp8hy.code.run/",
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/RepEngine",
       "screens": []
     },
@@ -303,6 +316,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/Ginger-Copilot",
       "screens": []
     },
@@ -326,6 +340,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/healthcare-diagnostic-api",
       "screens": []
     },
@@ -349,6 +364,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/LexAI",
       "screens": []
     },
@@ -372,6 +388,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/Patient-Management_Microservicesyadayada",
       "screens": []
     },
@@ -396,6 +413,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/CIAP",
       "screens": []
     },
@@ -422,6 +440,7 @@
         }
       ],
       "live": "https://agentkosi.onrender.com/",
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENTV2",
       "screens": []
     },
@@ -445,6 +464,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://kss-venv.onrender.com/imagesnshii/object-detection-thumb.png",
       "screens": []
     },
@@ -469,6 +489,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/pharmacy-ai-agent",
       "screens": []
     },
@@ -495,6 +516,7 @@
         }
       ],
       "live": "https://agentkosi.onrender.com/",
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/MYRAGAGENT",
       "screens": []
     },
@@ -521,6 +543,7 @@
         }
       ],
       "live": "https://ai-copilot-agent-1.onrender.com/",
+      "download": null,
       "image": "https://kss-venv.onrender.com/imagesnshii/image.png",
       "screens": []
     },
@@ -548,6 +571,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/vybe-telegram-bot",
       "screens": []
     },
@@ -574,6 +598,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/TheBubbleSnitchBot-2",
       "screens": []
     },
@@ -597,6 +622,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://www.kaggle.com/static/images/site-logo.png",
       "screens": []
     },
@@ -619,6 +645,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/HomeCredit-Data-Alchemy",
       "screens": []
     },
@@ -641,6 +668,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/drugs",
       "screens": []
     },
@@ -663,6 +691,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/ScrapeddashiiAlchemy",
       "screens": []
     },
@@ -685,6 +714,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/drugs",
       "screens": []
     },
@@ -711,6 +741,7 @@
         }
       ],
       "live": "https://gigr-presentation-website.vercel.app",
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/Gigr-presentation-website",
       "screens": []
     },
@@ -737,6 +768,7 @@
         }
       ],
       "live": "https://grpght.onrender.com",
+      "download": null,
       "image": "https://kss-venv.onrender.com/imagesnshii/gaming.png",
       "screens": []
     },
@@ -759,6 +791,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://kss-venv.onrender.com/imagesnshii/aiassistant.png",
       "screens": []
     },
@@ -783,6 +816,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/acquisitions",
       "screens": []
     },
@@ -809,6 +843,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://kss-venv.onrender.com/imagesnshii/telegram-bot-thumb2.jpg",
       "screens": []
     },
@@ -831,6 +866,7 @@
         }
       ],
       "live": "https://obianuju.onrender.com",
+      "download": null,
       "image": "https://obianuju.onrender.com/gallery/justmehehe.jpeg",
       "screens": []
     },
@@ -855,6 +891,7 @@
         }
       ],
       "live": "https://chinonye.onrender.com/",
+      "download": null,
       "image": "https://res.cloudinary.com/mydgb5tb/image/upload/f_auto,q_auto,w_900,c_fill,g_auto,ar_4:5/v1787531864/20260816_125436_ywujvc.jpg",
       "screens": []
     },
@@ -881,6 +918,7 @@
         }
       ],
       "live": "https://kolaborasi-kosi.onrender.com",
+      "download": null,
       "image": "https://kss-venv.onrender.com/imagesnshii/kolabrasi.png",
       "screens": []
     },
@@ -907,6 +945,7 @@
         }
       ],
       "live": "https://krypto-kosi.onrender.com",
+      "download": null,
       "image": "https://kss-venv.onrender.com/imagesnshii/kryptokosi.png",
       "screens": []
     },
@@ -933,6 +972,7 @@
         }
       ],
       "live": "https://kosi-weather.onrender.com",
+      "download": null,
       "image": "https://kss-venv.onrender.com/imagesnshii/weather.png",
       "screens": []
     },
@@ -955,6 +995,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/project-ruggaurd-bot",
       "screens": []
     },
@@ -977,6 +1018,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/mediapipe-openCV-projects-n-stuff",
       "screens": []
     },
@@ -999,6 +1041,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/uptime-bot",
       "screens": []
     },
@@ -1021,6 +1064,7 @@
         }
       ],
       "live": null,
+      "download": null,
       "image": "https://opengraph.githubassets.com/1/Ksschkw/donotopen",
       "screens": []
     },
@@ -1047,6 +1091,7 @@
         }
       ],
       "live": "http://okaforkosisochukwu.onrender.com",
+      "download": null,
       "image": "https://kss-venv.onrender.com/imagesnshii/first.png",
       "screens": []
     }

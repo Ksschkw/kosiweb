@@ -1067,6 +1067,19 @@ header {
 
 /* The live destination, given the weight it deserves ---------------------- */
 
+.cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0.9rem;
+    margin: 2rem 0 1.9rem;
+}
+
+.cta-row .live-link {
+    flex: 1 1 340px;
+    margin: 0;
+}
+
 .live-link {
     display: flex;
     align-items: center;
@@ -1084,6 +1097,51 @@ header {
 .live-link:hover {
     background: rgba(255, 45, 32, 0.13);
     border-color: var(--accent);
+}
+
+/* A downloadable build is a second action, not a footnote ---------------- */
+
+.download-link {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    flex: 0 1 auto;
+    padding: 1.1rem 1.35rem;
+    border: 1px solid var(--line);
+    background: transparent;
+    text-decoration: none;
+    transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.download-link:hover {
+    border-color: var(--accent);
+    background: rgba(255, 45, 32, 0.08);
+}
+
+.download-link i {
+    font-size: 1.35rem;
+    color: var(--accent);
+}
+
+.download-link-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+}
+
+.download-link-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-dim);
+}
+
+.download-link-file {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+    word-break: break-all;
 }
 
 .live-link-pill {

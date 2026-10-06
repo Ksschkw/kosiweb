@@ -2,7 +2,7 @@
   "_comment": "Long-form project copy for projects/<slug>.html. Read by tools/generate-seo.mjs. Slugs match the generated pages. Keep it free of em dashes, hype and programming-language names, in line with the rest of the site.",
   "ahia": {
     "overview": [
-      "A multi-tenant retail platform for small traders, built for how trade actually happens: a counter sale, a market run, a customer who sends a list and pays on delivery. It ships as a backend service, a web application and an offline-first mobile client.",
+      "A multi-tenant retail platform for small traders, built for how trade actually happens: a counter sale, a market run, a customer who sends a list and pays on delivery. It ships as a backend service, a web application and an offline-first mobile client, the last of these as an installable Android build.",
       "The engineering spine is a five-layer architecture with enforced import contracts: entities, schemas, persistence, services and transport. No outward imports, no logic in transport, no database driver outside the persistence boundary, and the build fails on a violation rather than a reviewer catching it."
     ],
     "highlights": [
@@ -11,6 +11,8 @@
       "Money is never floating point. A price arriving as a float is refused rather than rounded, prices carry at most two decimal places, and they travel the wire as decimal strings so no client passes money through a binary float.",
       "Offline devices queue operations under a stable operation identifier and push them through a sync service, so a retry after a lost reply cannot book the same sale twice. Inventory merges additively, catalogue edits resolve last-writer-wins, and a customer draft conflict is surfaced rather than silently resolved.",
       "Authorization is data. Atomic permissions compose into permission sets and then roles, resolved deny-by-default, and a caller cannot grant a permission they do not hold. The interface hides what a role cannot do instead of offering a button that fails.",
+      "The mobile client ships as a downloadable Android build. Offline sales queue in a local store with durable retry bookkeeping, so a trader who has sold twelve things with no signal can see which have reached the shop and which are still in his hand.",
+      "Reconciliation is decided per data type rather than by one global rule: transactional facts are append-only and merge cleanly, stock merges additively as deltas, catalogue edits resolve last-writer-wins on a timestamp, and a customer draft conflict is shown to the person rather than resolved behind them.",
       "The catalogue is an arbitrarily deep category tree with price inheritance, so a grade carries one price and only the exceptions are listed by name. A customer can add an item the shop has never stocked, leaving the price for the trader to set.",
       "A customer builds a list from a public link without an account and is remembered by phone number. The list is shared as a generated image or a multi-page PDF, because a typed list arrives truncated on a phone and cannot be forwarded as a list.",
       "Dispatch records the transporter, the waybill number, the trip cost and a tracking link, so a parcel on a road is attributable and the cost of the run comes off what the list made.",
@@ -110,14 +112,17 @@
   },
   "congestiq": {
     "overview": [
-      "A simulation research platform that asks whether multi-agent reinforcement learning can learn better TCP congestion control than the established algorithms.",
-      "The work runs entirely inside ns-3 rather than modifying a live kernel, so every experiment starts from an identical controlled environment and an untrained policy cannot damage a real network."
+      "A simulation-based research platform asking whether a learned policy can beat the standard congestion control algorithms. Each flow is an agent that adjusts its congestion window every 100 milliseconds, choosing from five discrete actions, trained together but executed independently with no shared state at decision time.",
+      "The work happens in simulation rather than against a live kernel, for three deliberate reasons: an untrained policy can crash a real network, a simulator gives byte-identical reproducibility, and training runs in accelerated time instead of at real acknowledgement intervals."
     ],
     "highlights": [
-      "Agents learn to trade throughput against fairness per flow instead of applying one fixed loss-based rule.",
-      "Behaviour is measured against the mainstream congestion control algorithms under the same conditions.",
-      "Simulation traces are captured with netanim, so a result can be watched rather than only read as a number.",
-      "Reproducibility is the point of the simulator choice: any experiment can be re-run and compared."
+      "The first multi-agent evaluation matched CUBIC's numbers exactly, which was the tell rather than the result. The no-op congestion control had been configured before the transport protocol object existed, so the configuration call matched nothing and every socket quietly ran the default CUBIC. The corrected environment attaches the override after the internet stack installs and aborts on a miss.",
+      "Two earlier bugs surfaced the same way. The environment reported throughput as the sum of in-flight byte snapshots rather than actual delivery at the sink, and the action was applied as an absolute window value instead of a multiplier. Every reward function had been failing to push past roughly 200 kbps because of them; after the fix the same setup reached 8,565 kbps.",
+      "The reward is cooperative and charged: throughput and fairness are rewarded while queueing delay, loss and window growth are penalised, which is what stops both agents from settling into a permanently full buffer.",
+      "The final policy came from an imitation warm start followed by PPO. On a two-flow dumbbell it holds the window near the bandwidth-delay product: 8,696 kbps, 22.80 ms delay, zero measured loss and a Jain fairness index of 1.0000.",
+      "The baselines were re-run on the same topology rather than quoted from literature. CUBIC wins on raw throughput at 5,331 kbps against Reno's 4,611, and both pay for it with roughly 61 ms of bufferbloat on a 20 ms path. The learned policy uses 87 percent of the link at a third of CUBIC's delay, and the write-up states plainly that it sits below CUBIC on throughput.",
+      "Fairness and latency are measured rather than asserted: Jain's index, per-flow delay and loss come out of the simulator's own flow monitor and are plotted per milestone. Each of the six milestone folders carries its code, its results and its experiment log.",
+      "Every milestone has a written as-built narrative recording what actually happened, including the parts that were wrong, alongside a walkthrough video and the final report and defence material."
     ]
   },
   "driftlock": {

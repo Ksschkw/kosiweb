@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#08090a">
     <title>CongestIQ | Kosisochukwu Okafor, Software Engineer</title>
-    <meta name="description" content="A simulation research platform that asks whether multi-agent reinforcement learning can learn better TCP congestion control than the established algorithms.">
+    <meta name="description" content="A simulation-based research platform asking whether a learned policy can beat the standard congestion control algorithms. Each flow is an agent that adjusts its congestion window every 100 milliseconds, choosing from five discrete actions, trained together but executed independently with no shared s">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://kss-venv.onrender.com/projects/congestiq.html">
     <meta property="og:type" content="article">
     <meta property="og:title" content="CongestIQ | Kosisochukwu Okafor, Software Engineer">
-    <meta property="og:description" content="A simulation research platform that asks whether multi-agent reinforcement learning can learn better TCP congestion control than the established algorithms.">
+    <meta property="og:description" content="A simulation-based research platform asking whether a learned policy can beat the standard congestion control algorithms. Each flow is an agent that adjusts its congestion window every 100 milliseconds, choosing from five discrete actions, trained together but executed independently with no shared s">
     <meta property="og:url" content="https://kss-venv.onrender.com/projects/congestiq.html">
     <meta property="og:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="CongestIQ | Kosisochukwu Okafor, Software Engineer">
-    <meta name="twitter:description" content="A simulation research platform that asks whether multi-agent reinforcement learning can learn better TCP congestion control than the established algorithms.">
+    <meta name="twitter:description" content="A simulation-based research platform asking whether a learned policy can beat the standard congestion control algorithms. Each flow is an agent that adjusts its congestion window every 100 milliseconds, choosing from five discrete actions, trained together but executed independently with no shared s">
     <meta name="twitter:image" content="https://kss-venv.onrender.com/imagesnshii/og-card.jpg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -33,9 +33,9 @@
     {
       "@type": "SoftwareSourceCode",
       "name": "CongestIQ",
-      "description": "Multi-agent reinforcement learning for adaptive TCP congestion control. The agents learn to trade throughput against fairness per flow rather than applying one fixed loss-based rule, and the policies are evaluated against standard congestion control inside ns-3 with netanim traces.",
+      "description": "Multi-agent reinforcement learning for adaptive congestion control. Several flows learn to share a bottleneck under centralised training and decentralised execution, with a cooperative reward that charges queueing delay, loss and window growth so no agent simply fills the buffer. The policies are developed against ns-3 and benchmarked against Reno, CUBIC and BBR on the same two-flow dumbbell topology.",
       "url": "https://kss-venv.onrender.com/projects/congestiq.html",
-      "keywords": "Reinforcement Learning, Networking, ns-3",
+      "keywords": "Reinforcement Learning, CTDE, ns-3, Networking",
       "author": {
         "@id": "https://kss-venv.onrender.com/#person"
       },
@@ -89,11 +89,12 @@
             <div class="container">
                 <p class="eyebrow">Project 04 of 39 &middot; AI systems &middot; Flagship</p>
                 <h1>CongestIQ</h1>
-                <p class="hero-statement">Multi-agent reinforcement learning for adaptive TCP congestion control. The agents learn to trade throughput against fairness per flow rather than applying one fixed loss-based rule, and the policies are evaluated against standard congestion control inside ns-3 with netanim traces.</p>
+                <p class="hero-statement">Multi-agent reinforcement learning for adaptive congestion control. Several flows learn to share a bottleneck under centralised training and decentralised execution, with a cooperative reward that charges queueing delay, loss and window growth so no agent simply fills the buffer. The policies are developed against ns-3 and benchmarked against Reno, CUBIC and BBR on the same two-flow dumbbell topology.</p>
                 <div class="project-tags">
                     <span class="project-tag">Reinforcement Learning</span>
-                    <span class="project-tag">Networking</span>
+                    <span class="project-tag">CTDE</span>
                     <span class="project-tag">ns-3</span>
+                    <span class="project-tag">Networking</span>
                 </div>
                 <div class="project-links">
                     <a href="https://github.com/Ksschkw/CongestIQ-FYP" class="project-link" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Code</a>
@@ -106,8 +107,8 @@
             <div class="container">
                 <h2 class="section-title"><span class="section-index">01</span>Overview</h2>
                 <div class="prose">
-                    <p>A simulation research platform that asks whether multi-agent reinforcement learning can learn better TCP congestion control than the established algorithms.</p>
-                    <p>The work runs entirely inside ns-3 rather than modifying a live kernel, so every experiment starts from an identical controlled environment and an untrained policy cannot damage a real network.</p>
+                    <p>A simulation-based research platform asking whether a learned policy can beat the standard congestion control algorithms. Each flow is an agent that adjusts its congestion window every 100 milliseconds, choosing from five discrete actions, trained together but executed independently with no shared state at decision time.</p>
+                    <p>The work happens in simulation rather than against a live kernel, for three deliberate reasons: an untrained policy can crash a real network, a simulator gives byte-identical reproducibility, and training runs in accelerated time instead of at real acknowledgement intervals.</p>
                 </div>
             </div>
         </section>
@@ -116,10 +117,13 @@
             <div class="container">
                 <h2 class="section-title"><span class="section-index">02</span>How it is built</h2>
                 <ul class="detail-list">
-                    <li>Agents learn to trade throughput against fairness per flow instead of applying one fixed loss-based rule.</li>
-                    <li>Behaviour is measured against the mainstream congestion control algorithms under the same conditions.</li>
-                    <li>Simulation traces are captured with netanim, so a result can be watched rather than only read as a number.</li>
-                    <li>Reproducibility is the point of the simulator choice: any experiment can be re-run and compared.</li>
+                    <li>The first multi-agent evaluation matched CUBIC's numbers exactly, which was the tell rather than the result. The no-op congestion control had been configured before the transport protocol object existed, so the configuration call matched nothing and every socket quietly ran the default CUBIC. The corrected environment attaches the override after the internet stack installs and aborts on a miss.</li>
+                    <li>Two earlier bugs surfaced the same way. The environment reported throughput as the sum of in-flight byte snapshots rather than actual delivery at the sink, and the action was applied as an absolute window value instead of a multiplier. Every reward function had been failing to push past roughly 200 kbps because of them; after the fix the same setup reached 8,565 kbps.</li>
+                    <li>The reward is cooperative and charged: throughput and fairness are rewarded while queueing delay, loss and window growth are penalised, which is what stops both agents from settling into a permanently full buffer.</li>
+                    <li>The final policy came from an imitation warm start followed by PPO. On a two-flow dumbbell it holds the window near the bandwidth-delay product: 8,696 kbps, 22.80 ms delay, zero measured loss and a Jain fairness index of 1.0000.</li>
+                    <li>The baselines were re-run on the same topology rather than quoted from literature. CUBIC wins on raw throughput at 5,331 kbps against Reno's 4,611, and both pay for it with roughly 61 ms of bufferbloat on a 20 ms path. The learned policy uses 87 percent of the link at a third of CUBIC's delay, and the write-up states plainly that it sits below CUBIC on throughput.</li>
+                    <li>Fairness and latency are measured rather than asserted: Jain's index, per-flow delay and loss come out of the simulator's own flow monitor and are plotted per milestone. Each of the six milestone folders carries its code, its results and its experiment log.</li>
+                    <li>Every milestone has a written as-built narrative recording what actually happened, including the parts that were wrong, alongside a walkthrough video and the final report and defence material.</li>
                 </ul>
             </div>
         </section>

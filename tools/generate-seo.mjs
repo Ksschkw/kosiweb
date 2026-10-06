@@ -183,6 +183,8 @@ function projectSchema(project) {
     if (repo) schema.codeRepository = repo.href;
     const live = (project.links || []).find((link) => link.text === 'Live');
     if (live) schema.sameAs = [live.href];
+    const download = (project.links || []).find((link) => /^(apk|download|install)$/i.test(link.text.trim()));
+    if (download) schema.installUrl = download.href;
     return schema;
 }
 
@@ -347,27 +349,41 @@ ${details.highlights.map((item) => `                    <li>${esc(item)}</li>`).
         : '';
 
     // The destination, given the weight it deserves: a live product is the
-    // single most useful thing a visitor can click on this page.
-    const live = (project.links || []).find((link) => link.text === 'Live');
-    const liveBanner = live
+    // single most useful thing a visitor can click here, and a downloadable
+    // build sits beside it as the second.
+    const links = project.links || [];
+    const isDownload = (link) => /^(apk|download|install)$/i.test(link.text.trim());
+    const live = links.find((link) => link.text === 'Live');
+    const download = links.find(isDownload);
+
+    const ctaRow = live || download
         ? `
-                <a class="live-link" href="${esc(live.href)}" target="_blank" rel="noopener noreferrer">
-                    <span class="live-link-pill">Live</span>
-                    <span class="live-link-url">${esc(prettyUrl(live.href))}</span>
-                    <span class="live-link-go">Visit site &#8599;</span>
-                </a>`
+                <div class="cta-row">${live ? `
+                    <a class="live-link" href="${esc(live.href)}" target="_blank" rel="noopener noreferrer">
+                        <span class="live-link-pill">Live</span>
+                        <span class="live-link-url">${esc(prettyUrl(live.href))}</span>
+                        <span class="live-link-go">Visit site &#8599;</span>
+                    </a>` : ''}${download ? `
+                    <a class="download-link" href="${esc(download.href)}" target="_blank" rel="noopener noreferrer" download>
+                        <i class="${esc(download.icon)}" aria-hidden="true"></i>
+                        <span class="download-link-text">
+                            <span class="download-link-label">${esc(download.text)}</span>
+                            <span class="download-link-file">${esc(prettyUrl(download.href).split('/').pop())}</span>
+                        </span>
+                    </a>` : ''}
+                </div>`
         : '';
 
     const body = `        <section class="hero">
             <div class="container">
                 <p class="eyebrow">Project ${String(project.position).padStart(2, '0')} of ${projects.length} &middot; ${esc(CATEGORY_LABEL[project.category] || project.category)}${project.featured ? ' &middot; Flagship' : ''}</p>
                 <h1>${esc(project.title)}</h1>
-                <p class="hero-statement">${esc(project.plainDescription)}</p>${liveBanner}
+                <p class="hero-statement">${esc(project.plainDescription)}</p>${ctaRow}
                 <div class="project-tags">
                     ${project.tags.map((tag) => `<span class="project-tag">${esc(tag)}</span>`).join('\n                    ')}
                 </div>
                 <div class="project-links">
-${project.links.map((link) => `                    <a href="${esc(link.href)}" class="project-link" target="_blank" rel="noopener noreferrer"><i class="${esc(link.icon)}"></i> ${esc(link.text)}</a>`).join('\n')}
+${links.filter((link) => link !== live && link !== download).map((link) => `                    <a href="${esc(link.href)}" class="project-link" target="_blank" rel="noopener noreferrer"><i class="${esc(link.icon)}"></i> ${esc(link.text)}</a>`).join('\n')}
                 </div>
             </div>
         </section>
@@ -591,6 +607,7 @@ written.push(write(path.join(ROOT, 'projects.json'), JSON.stringify({
         tags: project.tags,
         links: project.links.map((link) => ({ label: link.text, url: link.href })),
         live: (project.links.find((link) => link.text === 'Live') || {}).href || null,
+        download: (project.links.find((link) => /^(apk|download|install)$/i.test(link.text.trim())) || {}).href || null,
         image: project.image.startsWith('http') ? project.image : `${SITE}/${project.image}`,
         screens: ((project.details && project.details.screens) || []).map((screen) => ({
             url: `${SITE}/${screen.src}`,
